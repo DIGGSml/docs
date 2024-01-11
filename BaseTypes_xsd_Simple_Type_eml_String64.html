@@ -1,0 +1,434 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component eml:String64</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var facetsBoxes= new Array('facets_String64');
+var usedByBoxes= new Array('usedBy_String64');
+var sourceBoxes= new Array('source_String64');
+var diagramBoxes= new Array('diagram_String64');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="String64"></a><div class="componentTitle">Simple Type <span class="qname">eml:String64</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_String64" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_String64');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_String64" style="display:block"><img alt="Diagram" border="0" src="img/BaseTypes_xsd_Simple_Type_eml_String64.png" usemap="#BaseTypes_xsd_Simple_Type_eml_String64" /><map name="BaseTypes_xsd_Simple_Type_eml_String64" id="BaseTypes_xsd_Simple_Type_eml_String64"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractString.tmp#AbstractString" href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" coords="129,0,284,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_String64" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_String64');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_String64" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_String64" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_String64');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_String64" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Simple Types </td>
+                                    <td><b><a href="BaseTypes_xsd_Simple_Type_eml_TimeZone.html#TimeZone" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimeZone')">eml:TimeZone</a></b>, <b><a href="BaseTypes_xsd_Simple_Type_eml_TypeEnum.html#TypeEnum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TypeEnum')">eml:TypeEnum</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Attributes </td>
+                                    <td><b><a href="Abstract_xsd_Complex_Type_eml_AbstractObject.html#http___www.energistics.org_energyml_data_commonv2_AbstractObject_objectVersion" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:AbstractObject/@objectVersion')">eml:AbstractObject/@objectVersion</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_AbstractObject.html#http___www.energistics.org_energyml_data_commonv2_AbstractObject_schemaVersion" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:AbstractObject/@schemaVersion')">eml:AbstractObject/@schemaVersion</a></b>, <b><a href="BaseTypes_xsd_Complex_Type_eml_AuthorityQualifiedName.html#AuthorityQualifiedName_authority" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:AuthorityQualifiedName/@authority')">eml:AuthorityQualifiedName/@authority</a></b>, <b><a href="BaseTypes_xsd_Complex_Type_eml_AuthorityQualifiedName.html#AuthorityQualifiedName_code" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:AuthorityQualifiedName/@code')">eml:AuthorityQualifiedName/@code</a></b>, <b><a href="BaseTypes_xsd_Complex_Type_eml_MdInterval.html#MdInterval_datum" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:MdInterval/@datum')">eml:MdInterval/@datum</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ObjectAlias.html#ObjectAlias_authority" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:ObjectAlias/@authority')">eml:ObjectAlias/@authority</a></b>, <b><a href="BaseTypes_xsd_Complex_Type_eml_TvdInterval.html#TvdInterval_datum" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component eml:TvdInterval/@datum')">eml:TvdInterval/@datum</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Bend.html#Bend_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:Bend/@uid')">witsml:Bend/@uid</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/@uid')">witsml:BitRecord/@uid</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Connection.html#Connection_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:Connection/@uid')">witsml:Connection/@uid</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_Cost.html#Cost_currency" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:Cost/@currency')">witsml:Cost/@currency</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_LogChannelAxis.html#LogChannelAxis_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:LogChannelAxis/@uid')">witsml:LogChannelAxis/@uid</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_MeasuredDepthCoord.html#MeasuredDepthCoord_datum" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:MeasuredDepthCoord/@datum')">witsml:MeasuredDepthCoord/@datum</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:NameTag/@uid')">witsml:NameTag/@uid</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Nozzle.html#Nozzle_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:Nozzle/@uid')">witsml:Nozzle/@uid</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:Sensor/@uid')">witsml:Sensor/@uid</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Stabilizer.html#Stabilizer_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:Stabilizer/@uid')">witsml:Stabilizer/@uid</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/@uid')">witsml:TubularComponent/@uid</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_WellVerticalDepthCoord.html#WellVerticalDepthCoord_datum" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component witsml:WellVerticalDepthCoord/@datum')">witsml:WellVerticalDepthCoord/@datum</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Elements </td>
+                                    <td><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Editor" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation/eml:Editor')">eml:Citation/eml:Editor</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Originator" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation/eml:Originator')">eml:Citation/eml:Originator</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_VersionString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation/eml:VersionString')">eml:Citation/eml:VersionString</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_DataAssuranceRecord.html#http___www.energistics.org_energyml_data_commonv2_DataAssuranceRecord_PolicyId" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataAssuranceRecord/eml:PolicyId')">eml:DataAssuranceRecord/eml:PolicyId</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_DataAssuranceRecord.html#http___www.energistics.org_energyml_data_commonv2_DataAssuranceRecord_ReferencedElementName" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataAssuranceRecord/eml:ReferencedElementName')">eml:DataAssuranceRecord/eml:ReferencedElementName</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_DataAssuranceRecord.html#http___www.energistics.org_energyml_data_commonv2_DataAssuranceRecord_ReferencedElementUid" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataAssuranceRecord/eml:ReferencedElementUid')">eml:DataAssuranceRecord/eml:ReferencedElementUid</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_UuidAuthority" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataObjectReference/eml:UuidAuthority')">eml:DataObjectReference/eml:UuidAuthority</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_VersionString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataObjectReference/eml:VersionString')">eml:DataObjectReference/eml:VersionString</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExtensionNameValue/eml:Name')">eml:ExtensionNameValue/eml:Name</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_FailingRule.html#FailingRule_RuleId" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:FailingRule/eml:RuleId')">eml:FailingRule/eml:RuleId</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_FailingRule.html#FailingRule_Severity" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:FailingRule/eml:Severity')">eml:FailingRule/eml:Severity</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_IndexRange.html#IndexRange_IndexMaximum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:IndexRange/eml:IndexMaximum')">eml:IndexRange/eml:IndexMaximum</a></b>, <b><a href="DataAssurance_xsd_Complex_Type_eml_IndexRange.html#IndexRange_IndexMinimum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:IndexRange/eml:IndexMinimum')">eml:IndexRange/eml:IndexMinimum</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ObjectAlias.html#ObjectAlias_Identifier" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ObjectAlias/eml:Identifier')">eml:ObjectAlias/eml:Identifier</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_BitClass" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:BitClass')">witsml:BitRecord/witsml:BitClass</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CodeIADC" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CodeIADC')">witsml:BitRecord/witsml:CodeIADC</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CodeMfg" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CodeMfg')">witsml:BitRecord/witsml:CodeMfg</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CondFinalGauge" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CondFinalGauge')">witsml:BitRecord/witsml:CondFinalGauge</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CondFinalLocation" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CondFinalLocation')">witsml:BitRecord/witsml:CondFinalLocation</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CondFinalOther" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CondFinalOther')">witsml:BitRecord/witsml:CondFinalOther</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CondInitGauge" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CondInitGauge')">witsml:BitRecord/witsml:CondInitGauge</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CondInitLocation" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CondInitLocation')">witsml:BitRecord/witsml:CondInitLocation</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_CondInitOther" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:CondInitOther')">witsml:BitRecord/witsml:CondInitOther</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_Drive" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:Drive')">witsml:BitRecord/witsml:Drive</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_Manufacturer" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:Manufacturer')">witsml:BitRecord/witsml:Manufacturer</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_BitRecord.html#BitRecord_NumBit" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:BitRecord/witsml:NumBit')">witsml:BitRecord/witsml:NumBit</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_Channel.html#http___www.energistics.org_energyml_data_witsmlv2_Channel_Mnemonic" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Channel/witsml:Mnemonic')">witsml:Channel/witsml:Mnemonic</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_Channel.html#http___www.energistics.org_energyml_data_witsmlv2_Channel_Source" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Channel/witsml:Source')">witsml:Channel/witsml:Source</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_ChannelIndex.html#ChannelIndex_DatumReference" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelIndex/witsml:DatumReference')">witsml:ChannelIndex/witsml:DatumReference</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_ChannelIndex.html#ChannelIndex_Mnemonic" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelIndex/witsml:Mnemonic')">witsml:ChannelIndex/witsml:Mnemonic</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_LoggingCompanyCode" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:LoggingCompanyCode')">witsml:ChannelMetadata/witsml:LoggingCompanyCode</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_LoggingCompanyName" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:LoggingCompanyName')">witsml:ChannelMetadata/witsml:LoggingCompanyName</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_PassNumber" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:PassNumber')">witsml:ChannelMetadata/witsml:PassNumber</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_RunNumber" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:RunNumber')">witsml:ChannelMetadata/witsml:RunNumber</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_TimeDepth" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:TimeDepth')">witsml:ChannelMetadata/witsml:TimeDepth</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_ToolClass" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:ToolClass')">witsml:ChannelMetadata/witsml:ToolClass</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelMetadata.html#ChannelMetadata_ToolName" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelMetadata/witsml:ToolName')">witsml:ChannelMetadata/witsml:ToolName</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_LoggingCompanyCode" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:LoggingCompanyCode')">witsml:ChannelSetMetadata/witsml:LoggingCompanyCode</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_LoggingCompanyName" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:LoggingCompanyName')">witsml:ChannelSetMetadata/witsml:LoggingCompanyName</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_PassNumber" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:PassNumber')">witsml:ChannelSetMetadata/witsml:PassNumber</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_RunNumber" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:RunNumber')">witsml:ChannelSetMetadata/witsml:RunNumber</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_TimeDepth" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:TimeDepth')">witsml:ChannelSetMetadata/witsml:TimeDepth</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_ToolClass" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:ToolClass')">witsml:ChannelSetMetadata/witsml:ToolClass</a></b>, <b><a href="Log_xsd_Element_Group_witsml_ChannelSetMetadata.html#ChannelSetMetadata_ToolName" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ChannelSetMetadata/witsml:ToolName')">witsml:ChannelSetMetadata/witsml:ToolName</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Connection.html#Connection_TypeThread" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Connection/witsml:TypeThread')">witsml:Connection/witsml:TypeThread</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_HoleOpener.html#HoleOpener_Manufacturer" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:HoleOpener/witsml:Manufacturer')">witsml:HoleOpener/witsml:Manufacturer</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_LogChannelAxis.html#LogChannelAxis_AxisName" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:LogChannelAxis/witsml:AxisName')">witsml:LogChannelAxis/witsml:AxisName</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_LogChannelAxis.html#LogChannelAxis_AxisPropertyKind" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:LogChannelAxis/witsml:AxisPropertyKind')">witsml:LogChannelAxis/witsml:AxisPropertyKind</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationCompany" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag/witsml:InstallationCompany')">witsml:NameTag/witsml:InstallationCompany</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_MountingCode" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag/witsml:MountingCode')">witsml:NameTag/witsml:MountingCode</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag/witsml:Name')">witsml:NameTag/witsml:Name</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Nozzle.html#Nozzle_Orientation" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Nozzle/witsml:Orientation')">witsml:Nozzle/witsml:Orientation</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_ObjectContext.html#ObjectContext_SubObjectReference" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ObjectContext/witsml:SubObjectReference')">witsml:ObjectContext/witsml:SubObjectReference</a></b>, <b><a href="Log_xsd_Complex_Type_witsml_PointMetadata.html#PointMetadata_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:PointMetadata/witsml:Name')">witsml:PointMetadata/witsml:Name</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_ClassService" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/witsml:ClassService')">witsml:TubularComponent/witsml:ClassService</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_Grade" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/witsml:Grade')">witsml:TubularComponent/witsml:Grade</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_Model" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/witsml:Model')">witsml:TubularComponent/witsml:Model</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_Vendor" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/witsml:Vendor')">witsml:TubularComponent/witsml:Vendor</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Complex Types </td>
+                                    <td><b><a href="BaseTypes_xsd_Complex_Type_eml_AuthorityQualifiedName.html#AuthorityQualifiedName" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AuthorityQualifiedName')">eml:AuthorityQualifiedName</a></b>, <b><a href="BaseTypes_xsd_Complex_Type_eml_StringMeasure.html#StringMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:StringMeasure')">eml:StringMeasure</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_String64" type="image" src="img/btM.gif" value="-" onclick="switchState('source_String64');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_String64" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:simpleType</span><span class="tAN"> name=</span><span class="tAV">"String64"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"eml:AbstractString"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:maxLength</span><span class="tAN"> value=</span><span class="tAV">"64"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:simpleType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

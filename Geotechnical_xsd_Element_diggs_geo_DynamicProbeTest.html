@@ -1,0 +1,591 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs_geo:DynamicProbeTest</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_DynamicProbeTest');
+var sourceBoxes= new Array('source_DynamicProbeTest');
+var instanceBoxes= new Array('instance_DynamicProbeTest');
+var diagramBoxes= new Array('diagram_DynamicProbeTest');
+var annotationBoxes= new Array('annotations_DynamicProbeTest');
+var attributesBoxes= new Array('attributes_DynamicProbeTest');
+var modelBoxes= new Array('model_DynamicProbeTest');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="DynamicProbeTest"></a><div class="componentTitle">Element <span class="qname">diggs_geo:DynamicProbeTest</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DynamicProbeTest" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">An object describing a driven penetration test procedure. The Driven Penetration Test includes all methods that involve driving a</span><span class="tI">
+</span><span class="tT">rod (with or without a sampler) by impact hammer. The most common test of this type</span><span class="tI">
+</span><span class="tT">inclue the Standard Penetration Test and the Becker Hammer Test.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DynamicProbeTest" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Element_diggs_geo_DynamicProbeTest.png" usemap="#Geotechnical_xsd_Element_diggs_geo_DynamicProbeTest" /><map name="Geotechnical_xsd_Element_diggs_geo_DynamicProbeTest" id="Geotechnical_xsd_Element_diggs_geo_DynamicProbeTest"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="305,358,386,382" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="468,499,583,523" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="468,589,636,613" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="468,666,570,690" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="468,756,551,780" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="365,458,581,484" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="280,283,541,305" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#http___www.opengis.net_gml_3.2_AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" coords="266,243,547,265" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="277,990,358,1014" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="334,1074,449,1098" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="334,1164,436,1188" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="252,203,564,225" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="263,1299,357,1323" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="341,1396,424,1420" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_internalIdentifier" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" coords="341,1486,461,1510" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" coords="341,1563,405,1587" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_implementationStatus" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" coords="341,1653,488,1677" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_associatedFile" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" coords="341,1730,447,1754" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_role" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" coords="341,1820,393,1844" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" coords="341,1910,410,1934" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" coords="238,163,526,185" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractProcedureType.tmp#AbstractProcedureType" href="Kernel_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" coords="224,123,527,145" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureMethod" href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" coords="313,2043,459,2067" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureEquipment" href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" coords="313,2120,476,2144" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testingEnvironment" href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" coords="313,2197,449,2221" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_otherTestProperty" href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" coords="313,2274,442,2298" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType" href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" coords="210,83,536,105" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType_testEvent" href="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" coords="299,2319,379,2343" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType" href="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" coords="196,43,552,65" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_penetrationTestType" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_penetrationTestType" coords="264,2416,406,2440" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_hammerType" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerType" coords="264,2493,365,2517" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_hammerMass" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerMass" coords="264,2583,366,2607" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_hammerDropHeight" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerDropHeight" coords="264,2647,401,2671" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_hammerEfficiency" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerEfficiency" coords="264,2711,390,2735" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_samplerLength" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerLength" coords="264,2788,375,2812" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_samplerInternalDiameter" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerInternalDiameter" coords="264,2852,427,2876" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_samplerLinerDescription" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerLinerDescription" coords="264,2916,427,2940" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_samplerRetainerDescription" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerRetainerDescription" coords="264,2980,444,3004" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_rodType" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodType" coords="264,3044,340,3068" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_rodExternalDiameter" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodExternalDiameter" coords="264,3108,406,3132" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_rodSectionLength" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodSectionLength" coords="264,3172,390,3196" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_rodWeight" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodWeight" coords="264,3236,350,3260" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_depthCasing" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_depthCasing" coords="264,3300,363,3324" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_selfWeightPenetration" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_selfWeightPenetration" coords="264,3364,411,3388" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_waterDepth" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_waterDepth" coords="264,3441,356,3465" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType_totalPenetration" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_totalPenetration" coords="264,3505,380,3529" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.tmp#DynamicProbeTestType" href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType" coords="182,3,418,25" /><area alt="Kernel_xsd_Element_diggs_AbstractInsituTestProcedure.tmp#AbstractInsituTestProcedure" href="Kernel_xsd_Element_diggs_AbstractInsituTestProcedure.html#AbstractInsituTestProcedure" coords="193,3627,378,3651" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:DynamicProbeTestType')">diggs_geo:DynamicProbeTestType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProcedureType')">diggs:AbstractProcedureType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractTestProcedureType')">diggs:AbstractTestProcedureType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedureType')">diggs:AbstractInsituTestProcedureType</a></b><ul class="internal">
+                                                                        <li class="internal"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:DynamicProbeTestType')">diggs_geo:DynamicProbeTestType</a></b></li>
+                                                                     </ul>
+                                                                  </li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DynamicProbeTest" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">abstract</td>
+                                    <td><b>false</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Substitution Group Affiliation</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="Kernel_xsd_Element_diggs_AbstractInsituTestProcedure.html#AbstractInsituTestProcedure" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedure')">diggs:AbstractInsituTestProcedure</a></b></li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DynamicProbeTest" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod*')">diggs:testProcedureMethod*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment*')">diggs:testProcedureEquipment*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment*')">diggs:testingEnvironment*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty*')">diggs:otherTestProperty*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testEvent*')">diggs:testEvent*</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_penetrationTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:penetrationTestType')">diggs_geo:penetrationTestType</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerType{0,1}')">diggs_geo:hammerType{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerMass" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerMass{0,1}')">diggs_geo:hammerMass{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerDropHeight" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerDropHeight{0,1}')">diggs_geo:hammerDropHeight{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerEfficiency" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerEfficiency{0,1}')">diggs_geo:hammerEfficiency{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerLength" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerLength{0,1}')">diggs_geo:samplerLength{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerInternalDiameter" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerInternalDiameter{0,1}')">diggs_geo:samplerInternalDiameter{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerLinerDescription" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerLinerDescription{0,1}')">diggs_geo:samplerLinerDescription{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerRetainerDescription" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerRetainerDescription{0,1}')">diggs_geo:samplerRetainerDescription{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodType{0,1}')">diggs_geo:rodType{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodExternalDiameter" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodExternalDiameter{0,1}')">diggs_geo:rodExternalDiameter{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodSectionLength" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodSectionLength{0,1}')">diggs_geo:rodSectionLength{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodWeight" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodWeight{0,1}')">diggs_geo:rodWeight{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_depthCasing" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:depthCasing{0,1}')">diggs_geo:depthCasing{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_selfWeightPenetration" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:selfWeightPenetration{0,1}')">diggs_geo:selfWeightPenetration{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_waterDepth" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:waterDepth{0,1}')">diggs_geo:waterDepth{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_totalPenetration" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:totalPenetration{0,1}')">diggs_geo:totalPenetration{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty')">diggs:otherTestProperty</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testEvent')">diggs:testEvent</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment')">diggs:testProcedureEquipment</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod')">diggs:testProcedureMethod</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment')">diggs:testingEnvironment</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_depthCasing" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:depthCasing')">diggs_geo:depthCasing</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerDropHeight" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerDropHeight')">diggs_geo:hammerDropHeight</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerEfficiency" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerEfficiency')">diggs_geo:hammerEfficiency</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerMass" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerMass')">diggs_geo:hammerMass</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_hammerType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:hammerType')">diggs_geo:hammerType</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_penetrationTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:penetrationTestType')">diggs_geo:penetrationTestType</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodExternalDiameter" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodExternalDiameter')">diggs_geo:rodExternalDiameter</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodSectionLength" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodSectionLength')">diggs_geo:rodSectionLength</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodType')">diggs_geo:rodType</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_rodWeight" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:rodWeight')">diggs_geo:rodWeight</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerInternalDiameter" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerInternalDiameter')">diggs_geo:samplerInternalDiameter</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerLength" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerLength')">diggs_geo:samplerLength</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerLinerDescription" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerLinerDescription')">diggs_geo:samplerLinerDescription</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_samplerRetainerDescription" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:samplerRetainerDescription')">diggs_geo:samplerRetainerDescription</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_selfWeightPenetration" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:selfWeightPenetration')">diggs_geo:selfWeightPenetration</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_totalPenetration" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:totalPenetration')">diggs_geo:totalPenetration</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_DynamicProbeTestType.html#DynamicProbeTestType_waterDepth" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:waterDepth')">diggs_geo:waterDepth</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DynamicProbeTest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs_geo:DynamicProbeTest</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs_geo=</span><span class="tAV">"http://diggsml.org/schemas/2.6/geotechnical"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:description</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:description&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:identifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:identifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:name</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/gml:name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:internalIdentifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:internalIdentifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:status</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:status&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:implementationStatus</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:implementationStatus&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:associatedFile</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:associatedFile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:role</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:role&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:remark</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:remark&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testProcedureMethod</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testProcedureMethod&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testProcedureEquipment</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testProcedureEquipment&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testingEnvironment</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testingEnvironment&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:otherTestProperty</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:otherTestProperty&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testEvent</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testEvent&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:penetrationTestType</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs_geo:penetrationTestType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:hammerType</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:hammerType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:hammerMass</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:hammerMass&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:hammerDropHeight</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:hammerDropHeight&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:hammerEfficiency</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:hammerEfficiency&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:samplerLength</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:samplerLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:samplerInternalDiameter</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:samplerInternalDiameter&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:samplerLinerDescription</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:samplerLinerDescription&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:samplerRetainerDescription</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:samplerRetainerDescription&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:rodType</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:rodType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:rodExternalDiameter</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:rodExternalDiameter&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:rodSectionLength</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:rodSectionLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:rodWeight</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:rodWeight&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:depthCasing</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:depthCasing&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:selfWeightPenetration</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:selfWeightPenetration&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:waterDepth</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:waterDepth&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs_geo:totalPenetration</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs_geo:totalPenetration&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs_geo:DynamicProbeTest&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_DynamicProbeTest" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DynamicProbeTest" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DynamicProbeTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DynamicProbeTest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"DynamicProbeTest"</span><span class="tAN"> type=</span><span class="tAV">"diggs_geo:DynamicProbeTestType"</span><span class="tAN"> abstract=</span><span class="tAV">"false"</span><span class="tAN"> substitutionGroup=</span><span class="tAV">"diggs:AbstractInsituTestProcedure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An object describing a driven penetration test procedure. The Driven Penetration Test includes all methods that involve driving a rod (with or without a sampler) by impact hammer. The most common test of this type inclue the Standard Penetration Test and the Becker Hammer Test.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

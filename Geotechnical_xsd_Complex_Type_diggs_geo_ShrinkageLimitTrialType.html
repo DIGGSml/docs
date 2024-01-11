@@ -1,0 +1,1116 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs_geo:trialNo</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_ShrinkageLimitTrialType_trialNo', 
+				'properties_ShrinkageLimitTrialType_waterContentWetSoil', 
+				'properties_ShrinkageLimitTrialType_volumeWetSoil', 
+				'properties_ShrinkageLimitTrialType_volumeDrySoil', 
+				'properties_ShrinkageLimitTrialType_massDrySoil');
+var facetsBoxes= new Array('facets_ShrinkageLimitTrialType_trialNo');
+var usedByBoxes= new Array('usedBy_ShrinkageLimitTrialType');
+var sourceBoxes= new Array('source_ShrinkageLimitTrialType_trialNo', 
+				'source_ShrinkageLimitTrialType_waterContentWetSoil', 
+				'source_ShrinkageLimitTrialType_volumeWetSoil', 
+				'source_ShrinkageLimitTrialType_volumeDrySoil', 
+				'source_ShrinkageLimitTrialType_massDrySoil', 
+				'source_ShrinkageLimitTrialType');
+var diagramBoxes= new Array('diagram_ShrinkageLimitTrialType_trialNo', 
+				'diagram_ShrinkageLimitTrialType_waterContentWetSoil', 
+				'diagram_ShrinkageLimitTrialType_volumeWetSoil', 
+				'diagram_ShrinkageLimitTrialType_volumeDrySoil', 
+				'diagram_ShrinkageLimitTrialType_massDrySoil', 
+				'diagram_ShrinkageLimitTrialType');
+var annotationBoxes= new Array('annotations_ShrinkageLimitTrialType_waterContentWetSoil');
+var attributesBoxes= new Array('attributes_ShrinkageLimitTrialType_waterContentWetSoil', 
+				'attributes_ShrinkageLimitTrialType_volumeWetSoil', 
+				'attributes_ShrinkageLimitTrialType_volumeDrySoil', 
+				'attributes_ShrinkageLimitTrialType_massDrySoil', 
+				'attributes_ShrinkageLimitTrialType');
+var modelBoxes= new Array('model_ShrinkageLimitTrialType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ShrinkageLimitTrialType_trialNo"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrialType')">diggs_geo:ShrinkageLimitTrialType</a></b> / diggs_geo:trialNo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ShrinkageLimitTrialType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ShrinkageLimitTrialType_trialNo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ShrinkageLimitTrialType_trialNo" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Element_diggs_geo_trialNo_3.png" usemap="#Geotechnical_xsd_Element_diggs_geo_trialNo_3" /><map name="Geotechnical_xsd_Element_diggs_geo_trialNo_3" id="Geotechnical_xsd_Element_diggs_geo_trialNo_3"><area alt="BaseTypes_xsd_Simple_Type_eml_PositiveLong.tmp#PositiveLong" href="BaseTypes_xsd_Simple_Type_eml_PositiveLong.html#PositiveLong" coords="95,0,240,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_PositiveLong.html#PositiveLong" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PositiveLong')">eml:PositiveLong</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ShrinkageLimitTrialType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ShrinkageLimitTrialType_trialNo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ShrinkageLimitTrialType_trialNo" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ShrinkageLimitTrialType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ShrinkageLimitTrialType_trialNo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ShrinkageLimitTrialType_trialNo" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">minInclusive</td>
+                                    <td width="30%"><b>1</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ShrinkageLimitTrialType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ShrinkageLimitTrialType_trialNo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ShrinkageLimitTrialType_trialNo" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"trialNo"</span><span class="tAN"> type=</span><span class="tAV">"eml:PositiveLong"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ShrinkageLimitTrialType_waterContentWetSoil"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrialType')">diggs_geo:ShrinkageLimitTrialType</a></b> / diggs_geo:waterContentWetSoil</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ShrinkageLimitTrialType_waterContentWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ShrinkageLimitTrialType_waterContentWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ShrinkageLimitTrialType_waterContentWetSoil" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Moisture content for the wet soil paste</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ShrinkageLimitTrialType_waterContentWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ShrinkageLimitTrialType_waterContentWetSoil');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ShrinkageLimitTrialType_waterContentWetSoil" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Element_diggs_geo_waterContentWetSoil.png" usemap="#Geotechnical_xsd_Element_diggs_geo_waterContentWetSoil" /><map name="Geotechnical_xsd_Element_diggs_geo_waterContentWetSoil" id="Geotechnical_xsd_Element_diggs_geo_waterContentWetSoil"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="217,80,385,106" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerVolumeMeasure.tmp#VolumePerVolumeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_VolumePerVolumeMeasure.html#VolumePerVolumeMeasure_uom" coords="231,197,303,221" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerVolumeMeasure.tmp#VolumePerVolumeMeasure" href="MeasureType_xsd_Complex_Type_eml_VolumePerVolumeMeasure.html#VolumePerVolumeMeasure" coords="206,43,513,65" /><area alt="Kernel_xsd_Complex_Type_diggs_WaterContentType.tmp#WaterContentType_derivedFrom" href="Kernel_xsd_Complex_Type_diggs_WaterContentType.html#WaterContentType_derivedFrom" coords="217,283,333,307" /><area alt="Kernel_xsd_Complex_Type_diggs_WaterContentType.tmp#WaterContentType" href="Kernel_xsd_Complex_Type_diggs_WaterContentType.html#WaterContentType" coords="192,3,375,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_WaterContentType.html#WaterContentType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:WaterContentType')">diggs:WaterContentType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerVolumeMeasure.html#VolumePerVolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerVolumeMeasure')">eml:VolumePerVolumeMeasure</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_WaterContentType.html#WaterContentType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:WaterContentType')">diggs:WaterContentType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ShrinkageLimitTrialType_waterContentWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ShrinkageLimitTrialType_waterContentWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ShrinkageLimitTrialType_waterContentWetSoil" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ShrinkageLimitTrialType_waterContentWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ShrinkageLimitTrialType_waterContentWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ShrinkageLimitTrialType_waterContentWetSoil" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Kernel_xsd_Complex_Type_diggs_WaterContentType.html#WaterContentType_derivedFrom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component derivedFrom')">derivedFrom</a></b></td>
+                                    <td><b><a href="Kernel_xsd_Simple_Type_diggs_WaterContentMethodType.html#WaterContentMethodType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:WaterContentMethodType')">diggs:WaterContentMethodType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerVolumeMeasure.html#VolumePerVolumeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerVolumeUom.html#VolumePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerVolumeUom')">eml:VolumePerVolumeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ShrinkageLimitTrialType_waterContentWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ShrinkageLimitTrialType_waterContentWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ShrinkageLimitTrialType_waterContentWetSoil" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"waterContentWetSoil"</span><span class="tAN"> type=</span><span class="tAV">"diggs:WaterContentType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Moisture content for the wet soil paste</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ShrinkageLimitTrialType_volumeWetSoil"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrialType')">diggs_geo:ShrinkageLimitTrialType</a></b> / diggs_geo:volumeWetSoil</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ShrinkageLimitTrialType_volumeWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ShrinkageLimitTrialType_volumeWetSoil');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ShrinkageLimitTrialType_volumeWetSoil" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Element_diggs_geo_volumeWetSoil.png" usemap="#Geotechnical_xsd_Element_diggs_geo_volumeWetSoil" /><map name="Geotechnical_xsd_Element_diggs_geo_volumeWetSoil" id="Geotechnical_xsd_Element_diggs_geo_volumeWetSoil"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="150,40,318,66" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.tmp#VolumeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure_uom" coords="164,157,236,181" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.tmp#VolumeMeasure" href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" coords="139,3,297,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeMeasure')">eml:VolumeMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeMeasure')">eml:VolumeMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ShrinkageLimitTrialType_volumeWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ShrinkageLimitTrialType_volumeWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ShrinkageLimitTrialType_volumeWetSoil" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ShrinkageLimitTrialType_volumeWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ShrinkageLimitTrialType_volumeWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ShrinkageLimitTrialType_volumeWetSoil" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumeUom.html#VolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeUom')">eml:VolumeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ShrinkageLimitTrialType_volumeWetSoil" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ShrinkageLimitTrialType_volumeWetSoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ShrinkageLimitTrialType_volumeWetSoil" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"volumeWetSoil"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumeMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ShrinkageLimitTrialType_volumeDrySoil"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrialType')">diggs_geo:ShrinkageLimitTrialType</a></b> / diggs_geo:volumeDrySoil</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ShrinkageLimitTrialType_volumeDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ShrinkageLimitTrialType_volumeDrySoil');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ShrinkageLimitTrialType_volumeDrySoil" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Element_diggs_geo_volumeDrySoil.png" usemap="#Geotechnical_xsd_Element_diggs_geo_volumeDrySoil" /><map name="Geotechnical_xsd_Element_diggs_geo_volumeDrySoil" id="Geotechnical_xsd_Element_diggs_geo_volumeDrySoil"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="150,40,318,66" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.tmp#VolumeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure_uom" coords="164,157,236,181" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.tmp#VolumeMeasure" href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" coords="139,3,297,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeMeasure')">eml:VolumeMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeMeasure')">eml:VolumeMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ShrinkageLimitTrialType_volumeDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ShrinkageLimitTrialType_volumeDrySoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ShrinkageLimitTrialType_volumeDrySoil" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ShrinkageLimitTrialType_volumeDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ShrinkageLimitTrialType_volumeDrySoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ShrinkageLimitTrialType_volumeDrySoil" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumeUom.html#VolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeUom')">eml:VolumeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ShrinkageLimitTrialType_volumeDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ShrinkageLimitTrialType_volumeDrySoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ShrinkageLimitTrialType_volumeDrySoil" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"volumeDrySoil"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumeMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ShrinkageLimitTrialType_massDrySoil"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrialType')">diggs_geo:ShrinkageLimitTrialType</a></b> / diggs_geo:massDrySoil</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ShrinkageLimitTrialType_massDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ShrinkageLimitTrialType_massDrySoil');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ShrinkageLimitTrialType_massDrySoil" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Element_diggs_geo_massDrySoil.png" usemap="#Geotechnical_xsd_Element_diggs_geo_massDrySoil" /><map name="Geotechnical_xsd_Element_diggs_geo_massDrySoil" id="Geotechnical_xsd_Element_diggs_geo_massDrySoil"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="139,40,307,66" /><area alt="MeasureType_xsd_Complex_Type_eml_MassMeasure.tmp#MassMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_MassMeasure.html#MassMeasure_uom" coords="153,157,225,181" /><area alt="MeasureType_xsd_Complex_Type_eml_MassMeasure.tmp#MassMeasure" href="MeasureType_xsd_Complex_Type_eml_MassMeasure.html#MassMeasure" coords="128,3,273,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_MassMeasure.html#MassMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassMeasure')">eml:MassMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_MassMeasure.html#MassMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassMeasure')">eml:MassMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ShrinkageLimitTrialType_massDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ShrinkageLimitTrialType_massDrySoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ShrinkageLimitTrialType_massDrySoil" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ShrinkageLimitTrialType_massDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ShrinkageLimitTrialType_massDrySoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ShrinkageLimitTrialType_massDrySoil" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_MassMeasure.html#MassMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_MassUom.html#MassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassUom')">eml:MassUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ShrinkageLimitTrialType_massDrySoil" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ShrinkageLimitTrialType_massDrySoil');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ShrinkageLimitTrialType_massDrySoil" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"massDrySoil"</span><span class="tAN"> type=</span><span class="tAV">"eml:MassMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ShrinkageLimitTrialType"></a><div class="componentTitle">Complex Type <span class="qname">diggs_geo:ShrinkageLimitTrialType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ShrinkageLimitTrialType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ShrinkageLimitTrialType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ShrinkageLimitTrialType" style="display:block"><img alt="Diagram" border="0" src="img/Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.png" usemap="#Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType" /><map name="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType" id="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="268,158,349,182" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="431,299,546,323" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="431,389,599,413" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="431,466,533,490" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="431,556,514,580" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="328,258,544,284" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="243,83,507,105" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="254,698,335,722" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="311,795,426,819" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="311,885,413,909" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="229,43,536,65" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="240,1020,334,1044" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="318,1117,401,1141" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" coords="318,1207,382,1231" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" coords="318,1297,387,1321" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" coords="215,3,498,25" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.tmp#ShrinkageLimitTrialType_trialNo" href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_trialNo" coords="283,1394,350,1418" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.tmp#ShrinkageLimitTrialType_waterContentWetSoil" href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_waterContentWetSoil" coords="283,1428,424,1452" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.tmp#ShrinkageLimitTrialType_volumeWetSoil" href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_volumeWetSoil" coords="283,1492,391,1516" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.tmp#ShrinkageLimitTrialType_volumeDrySoil" href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_volumeDrySoil" coords="283,1526,391,1550" /><area alt="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.tmp#ShrinkageLimitTrialType_massDrySoil" href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_massDrySoil" coords="283,1560,380,1584" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrialType')">diggs_geo:ShrinkageLimitTrialType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_ShrinkageLimitTrialType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_ShrinkageLimitTrialType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_ShrinkageLimitTrialType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Geotechnical_xsd_Element_diggs_geo_ShrinkageLimitTrial.html#ShrinkageLimitTrial" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:ShrinkageLimitTrial')">diggs_geo:ShrinkageLimitTrial</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ShrinkageLimitTrialType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_ShrinkageLimitTrialType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ShrinkageLimitTrialType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_trialNo" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:trialNo{0,1}')">diggs_geo:trialNo{0,1}</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_waterContentWetSoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:waterContentWetSoil')">diggs_geo:waterContentWetSoil</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_volumeWetSoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:volumeWetSoil')">diggs_geo:volumeWetSoil</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_volumeDrySoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:volumeDrySoil')">diggs_geo:volumeDrySoil</a></b> , <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_massDrySoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:massDrySoil')">diggs_geo:massDrySoil</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_massDrySoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:massDrySoil')">diggs_geo:massDrySoil</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_trialNo" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:trialNo')">diggs_geo:trialNo</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_volumeDrySoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:volumeDrySoil')">diggs_geo:volumeDrySoil</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_volumeWetSoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:volumeWetSoil')">diggs_geo:volumeWetSoil</a></b>, <b><a href="Geotechnical_xsd_Complex_Type_diggs_geo_ShrinkageLimitTrialType.html#ShrinkageLimitTrialType_waterContentWetSoil" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:waterContentWetSoil')">diggs_geo:waterContentWetSoil</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ShrinkageLimitTrialType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ShrinkageLimitTrialType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ShrinkageLimitTrialType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ShrinkageLimitTrialType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ShrinkageLimitTrialType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ShrinkageLimitTrialType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"ShrinkageLimitTrialType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"trialNo"</span><span class="tAN"> type=</span><span class="tAV">"eml:PositiveLong"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"waterContentWetSoil"</span><span class="tAN"> type=</span><span class="tAV">"diggs:WaterContentType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Moisture content for the wet soil paste</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"volumeWetSoil"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumeMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"volumeDrySoil"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumeMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"massDrySoil"</span><span class="tAN"> type=</span><span class="tAV">"eml:MassMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:DesignGroutMix</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_DesignGroutMix');
+var usedByBoxes= new Array('usedBy_DesignGroutMix');
+var sourceBoxes= new Array('source_DesignGroutMix');
+var instanceBoxes= new Array('instance_DesignGroutMix');
+var diagramBoxes= new Array('diagram_DesignGroutMix');
+var annotationBoxes= new Array('annotations_DesignGroutMix');
+var attributesBoxes= new Array('attributes_DesignGroutMix');
+var modelBoxes= new Array('model_DesignGroutMix');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="DesignGroutMix"></a><div class="componentTitle">Element <span class="qname">diggs:DesignGroutMix</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DesignGroutMix" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">An object that contains properites describing the characteristics of a</span><span class="tI">
+</span><span class="tT">batch of grout. This object optionally can reference a DesignGroutMix object defined</span><span class="tI">
+</span><span class="tT">within the GroutingProgram feature</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DesignGroutMix" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Element_diggs_DesignGroutMix.png" usemap="#Construction_xsd_Element_diggs_DesignGroutMix" /><map name="Construction_xsd_Element_diggs_DesignGroutMix" id="Construction_xsd_Element_diggs_DesignGroutMix"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="264,278,345,302" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="427,419,542,443" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="427,509,595,533" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="427,586,529,610" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="427,676,510,700" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="324,378,540,404" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="239,203,500,225" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#http___www.opengis.net_gml_3.2_AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" coords="225,163,506,185" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="236,910,317,934" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="293,994,408,1018" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="293,1084,395,1108" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="211,123,523,145" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="222,1219,316,1243" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="300,1316,383,1340" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_internalIdentifier" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" coords="300,1406,420,1430" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" coords="300,1483,364,1507" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_implementationStatus" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" coords="300,1573,447,1597" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_associatedFile" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" coords="300,1650,406,1674" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_role" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" coords="300,1740,352,1764" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" coords="300,1830,369,1854" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" coords="197,83,485,105" /><area alt="Construction_xsd_Complex_Type_diggs_AbstractProgramDesignType.tmp#AbstractProgramDesignType" href="Construction_xsd_Complex_Type_diggs_AbstractProgramDesignType.html#AbstractProgramDesignType" coords="183,43,514,65" /><area alt="Construction_xsd_Element_diggs_groutSpecificationRef.tmp#groutSpecificationRef" href="Construction_xsd_Element_diggs_groutSpecificationRef.html#groutSpecificationRef" coords="251,1921,430,1945" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_placementDescription" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_placementDescription" coords="251,1998,399,2022" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_trialGroutBatchRef" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_trialGroutBatchRef" coords="322,2062,451,2086" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_admixture" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_admixture" coords="414,2139,500,2163" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_binder" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_binder" coords="414,2216,480,2240" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_cement" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_cement" coords="414,2306,484,2330" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_chemical" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_chemical" coords="414,2383,492,2407" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_filler" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_filler" coords="414,2460,469,2484" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_theoreticalYield" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_theoreticalYield" coords="414,2537,528,2561" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_typeMix" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_typeMix" coords="414,2614,487,2638" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_volumeWater" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_volumeWater" coords="414,2704,514,2728" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_waterCementRatio" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_waterCementRatio" coords="414,2768,542,2792" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_wtCementPerGalH2O" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_wtCementPerGalH2O" coords="414,2832,556,2856" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_bleedDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_bleedDesign" coords="251,2896,348,2920" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_filtrateVolumeDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_filtrateVolumeDesign" coords="251,2960,394,2984" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_gelTimeDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_gelTimeDesign" coords="251,3024,361,3048" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_marshFunnelTimeDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_marshFunnelTimeDesign" coords="251,3088,415,3112" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_mudBalanceDensityDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_mudBalanceDensityDesign" coords="251,3152,423,3176" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_pressureFiltrationValueDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_pressureFiltrationValueDesign" coords="251,3216,444,3240" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_shrinkageDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_shrinkageDesign" coords="251,3280,372,3304" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_slumpDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_slumpDesign" coords="251,3344,352,3368" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_specificGravityMixDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_specificGravityMixDesign" coords="251,3408,417,3432" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_strengthDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_strengthDesign" coords="251,3472,365,3496" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType_syneresisDesign" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_syneresisDesign" coords="251,3536,370,3560" /><area alt="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.tmp#DesignGroutMixType" href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType" coords="169,3,366,25" /><area alt="Construction_xsd_Element_diggs_AbstractProgramDesign.tmp#AbstractProgramDesign" href="Construction_xsd_Element_diggs_AbstractProgramDesign.html#AbstractProgramDesign" coords="180,3645,340,3669" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DesignGroutMixType')">diggs:DesignGroutMixType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="Construction_xsd_Complex_Type_diggs_AbstractProgramDesignType.html#AbstractProgramDesignType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramDesignType')">diggs:AbstractProgramDesignType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DesignGroutMixType')">diggs:DesignGroutMixType</a></b></li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DesignGroutMix" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Substitution Group Affiliation</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="Construction_xsd_Element_diggs_AbstractProgramDesign.html#AbstractProgramDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramDesign')">diggs:AbstractProgramDesign</a></b></li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DesignGroutMix" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixPropertyType.html#DesignGroutMixPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DesignGroutMixPropertyType')">diggs:DesignGroutMixPropertyType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DesignGroutMix" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Construction_xsd_Element_diggs_groutSpecificationRef.html#groutSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:groutSpecificationRef{0,1}')">diggs:groutSpecificationRef{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_placementDescription" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:placementDescription{0,1}')">diggs:placementDescription{0,1}</a></b> , (<b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_trialGroutBatchRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:trialGroutBatchRef')">diggs:trialGroutBatchRef</a></b> | (<b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_admixture" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:admixture*')">diggs:admixture*</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_binder" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:binder*')">diggs:binder*</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_cement" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:cement*')">diggs:cement*</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_chemical" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:chemical*')">diggs:chemical*</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_filler" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:filler*')">diggs:filler*</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_theoreticalYield" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:theoreticalYield{0,1}')">diggs:theoreticalYield{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_typeMix" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:typeMix{0,1}')">diggs:typeMix{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_volumeWater" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:volumeWater{0,1}')">diggs:volumeWater{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_waterCementRatio" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:waterCementRatio{0,1}')">diggs:waterCementRatio{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_wtCementPerGalH2O" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:wtCementPerGalH2O{0,1}')">diggs:wtCementPerGalH2O{0,1}</a></b>)) , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_bleedDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:bleedDesign{0,1}')">diggs:bleedDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_filtrateVolumeDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:filtrateVolumeDesign{0,1}')">diggs:filtrateVolumeDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_gelTimeDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:gelTimeDesign{0,1}')">diggs:gelTimeDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_marshFunnelTimeDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:marshFunnelTimeDesign{0,1}')">diggs:marshFunnelTimeDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_mudBalanceDensityDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:mudBalanceDensityDesign{0,1}')">diggs:mudBalanceDensityDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_pressureFiltrationValueDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:pressureFiltrationValueDesign{0,1}')">diggs:pressureFiltrationValueDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_shrinkageDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:shrinkageDesign{0,1}')">diggs:shrinkageDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_slumpDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:slumpDesign{0,1}')">diggs:slumpDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_specificGravityMixDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:specificGravityMixDesign{0,1}')">diggs:specificGravityMixDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_strengthDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:strengthDesign{0,1}')">diggs:strengthDesign{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_syneresisDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:syneresisDesign{0,1}')">diggs:syneresisDesign{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_admixture" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:admixture')">diggs:admixture</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_binder" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:binder')">diggs:binder</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_bleedDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:bleedDesign')">diggs:bleedDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_cement" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:cement')">diggs:cement</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_chemical" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:chemical')">diggs:chemical</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_filler" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:filler')">diggs:filler</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_filtrateVolumeDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:filtrateVolumeDesign')">diggs:filtrateVolumeDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_gelTimeDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:gelTimeDesign')">diggs:gelTimeDesign</a></b>, <b><a href="Construction_xsd_Element_diggs_groutSpecificationRef.html#groutSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:groutSpecificationRef')">diggs:groutSpecificationRef</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_marshFunnelTimeDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:marshFunnelTimeDesign')">diggs:marshFunnelTimeDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_mudBalanceDensityDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:mudBalanceDensityDesign')">diggs:mudBalanceDensityDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_placementDescription" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:placementDescription')">diggs:placementDescription</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_pressureFiltrationValueDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:pressureFiltrationValueDesign')">diggs:pressureFiltrationValueDesign</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_shrinkageDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:shrinkageDesign')">diggs:shrinkageDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_slumpDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:slumpDesign')">diggs:slumpDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_specificGravityMixDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:specificGravityMixDesign')">diggs:specificGravityMixDesign</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_strengthDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:strengthDesign')">diggs:strengthDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_syneresisDesign" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:syneresisDesign')">diggs:syneresisDesign</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_theoreticalYield" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:theoreticalYield')">diggs:theoreticalYield</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_trialGroutBatchRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:trialGroutBatchRef')">diggs:trialGroutBatchRef</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_typeMix" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:typeMix')">diggs:typeMix</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_volumeWater" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:volumeWater')">diggs:volumeWater</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_waterCementRatio" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:waterCementRatio')">diggs:waterCementRatio</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_DesignGroutMixType.html#DesignGroutMixType_wtCementPerGalH2O" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:wtCementPerGalH2O')">diggs:wtCementPerGalH2O</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DesignGroutMix" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:DesignGroutMix</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:description</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:description&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:identifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:identifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:name</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/gml:name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:internalIdentifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:internalIdentifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:status</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:status&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:implementationStatus</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:implementationStatus&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:associatedFile</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:associatedFile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:role</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:role&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:remark</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:remark&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:groutSpecificationRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:groutSpecificationRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:placementDescription</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:placementDescription&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:trialGroutBatchRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:trialGroutBatchRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:admixture</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:admixture&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:binder</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:binder&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:cement</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:cement&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:chemical</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:chemical&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:filler</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:filler&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:theoreticalYield</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:theoreticalYield&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:typeMix</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:typeMix&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:volumeWater</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:volumeWater&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:waterCementRatio</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:waterCementRatio&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:wtCementPerGalH2O</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:wtCementPerGalH2O&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:bleedDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:bleedDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:filtrateVolumeDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:filtrateVolumeDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:gelTimeDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:gelTimeDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:marshFunnelTimeDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:marshFunnelTimeDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:mudBalanceDensityDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:mudBalanceDensityDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:pressureFiltrationValueDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:pressureFiltrationValueDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:shrinkageDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:shrinkageDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:slumpDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:slumpDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:specificGravityMixDesign</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">waterTemperature=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:specificGravityMixDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:strengthDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:strengthDesign&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:syneresisDesign</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:syneresisDesign&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:DesignGroutMix&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_DesignGroutMix" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DesignGroutMix" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DesignGroutMix');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DesignGroutMix" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"DesignGroutMix"</span><span class="tAN"> substitutionGroup=</span><span class="tAV">"diggs:AbstractProgramDesign"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DesignGroutMixType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An object that contains properites describing the characteristics of a batch of grout. This object optionally can reference a DesignGroutMix object defined within the GroutingProgram feature</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

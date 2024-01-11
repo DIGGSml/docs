@@ -1,0 +1,1698 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:documentInformation</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_DiggsType_documentInformation', 
+				'properties_DiggsType_project', 
+				'properties_DiggsType_program', 
+				'properties_DiggsType_samplingFeature', 
+				'properties_DiggsType_samplingActivity', 
+				'properties_DiggsType_sample', 
+				'properties_DiggsType_observation', 
+				'properties_DiggsType_measurement', 
+				'properties_DiggsType_constructionActivity', 
+				'properties_DiggsType_group');
+var usedByBoxes= new Array('usedBy_DiggsType');
+var sourceBoxes= new Array('source_DiggsType_documentInformation', 
+				'source_DiggsType_project', 
+				'source_DiggsType_program', 
+				'source_DiggsType_samplingFeature', 
+				'source_DiggsType_samplingActivity', 
+				'source_DiggsType_sample', 
+				'source_DiggsType_observation', 
+				'source_DiggsType_measurement', 
+				'source_DiggsType_constructionActivity', 
+				'source_DiggsType_group', 
+				'source_DiggsType');
+var instanceBoxes= new Array('instance_DiggsType_documentInformation', 
+				'instance_DiggsType_project', 
+				'instance_DiggsType_program', 
+				'instance_DiggsType_samplingFeature', 
+				'instance_DiggsType_samplingActivity', 
+				'instance_DiggsType_sample', 
+				'instance_DiggsType_observation', 
+				'instance_DiggsType_measurement', 
+				'instance_DiggsType_constructionActivity', 
+				'instance_DiggsType_group');
+var diagramBoxes= new Array('diagram_DiggsType_documentInformation', 
+				'diagram_DiggsType_project', 
+				'diagram_DiggsType_program', 
+				'diagram_DiggsType_samplingFeature', 
+				'diagram_DiggsType_samplingActivity', 
+				'diagram_DiggsType_sample', 
+				'diagram_DiggsType_observation', 
+				'diagram_DiggsType_measurement', 
+				'diagram_DiggsType_constructionActivity', 
+				'diagram_DiggsType_group', 
+				'diagram_DiggsType');
+var attributesBoxes= new Array('attributes_DiggsType_documentInformation', 
+				'attributes_DiggsType');
+var modelBoxes= new Array('model_DiggsType_documentInformation', 
+				'model_DiggsType_project', 
+				'model_DiggsType_program', 
+				'model_DiggsType_samplingFeature', 
+				'model_DiggsType_samplingActivity', 
+				'model_DiggsType_sample', 
+				'model_DiggsType_observation', 
+				'model_DiggsType_measurement', 
+				'model_DiggsType_constructionActivity', 
+				'model_DiggsType_group', 
+				'model_DiggsType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="DiggsType_documentInformation"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:documentInformation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_documentInformation" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_documentInformation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_documentInformation" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_documentInformation.png" usemap="#Kernel_xsd_Element_diggs_documentInformation" /><map name="Kernel_xsd_Element_diggs_documentInformation" id="Kernel_xsd_Element_diggs_documentInformation"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="221,121,439,147" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractMetadataPropertyType.tmp#AbstractMetadataPropertyType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractMetadataPropertyType.html#AbstractMetadataPropertyType" coords="193,43,525,65" /><area alt="Kernel_xsd_Element_diggs_DocumentInformation.tmp#DocumentInformation" href="Kernel_xsd_Element_diggs_DocumentInformation.html#DocumentInformation" coords="261,308,443,332" /><area alt="Kernel_xsd_Complex_Type_diggs_DocumentInformationPropertyType.tmp#DocumentInformationPropertyType" href="Kernel_xsd_Complex_Type_diggs_DocumentInformationPropertyType.html#DocumentInformationPropertyType" coords="179,3,453,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DocumentInformationPropertyType.html#DocumentInformationPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DocumentInformationPropertyType')">diggs:DocumentInformationPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractMetadataPropertyType.html#AbstractMetadataPropertyType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractMetadataPropertyType')">gml:AbstractMetadataPropertyType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_DocumentInformationPropertyType.html#DocumentInformationPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DocumentInformationPropertyType')">diggs:DocumentInformationPropertyType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_documentInformation" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_documentInformation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_documentInformation" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_documentInformation" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_documentInformation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_documentInformation" style="display:block"><b><a href="Kernel_xsd_Element_diggs_DocumentInformation.html#DocumentInformation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DocumentInformation')">diggs:DocumentInformation</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_DocumentInformation.html#DocumentInformation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DocumentInformation')">diggs:DocumentInformation</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_documentInformation" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_documentInformation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_documentInformation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:documentInformation</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:DocumentInformation</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:DocumentInformation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:documentInformation&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_DiggsType_documentInformation" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_DiggsType_documentInformation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_DiggsType_documentInformation" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="10%">Default</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_documentInformation" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_documentInformation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_documentInformation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"documentInformation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DocumentInformationPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_project"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:project</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_project" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_project');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_project" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_project.png" usemap="#Kernel_xsd_Element_diggs_project" /><map name="Kernel_xsd_Element_diggs_project" id="Kernel_xsd_Element_diggs_project"><area alt="Kernel_xsd_Element_diggs_AbstractProject.tmp#AbstractProject" href="Kernel_xsd_Element_diggs_AbstractProject.html#AbstractProject" coords="182,44,329,68" /><area alt="Kernel_xsd_Complex_Type_diggs_ProjectPropertyType.tmp#ProjectPropertyType" href="Kernel_xsd_Complex_Type_diggs_ProjectPropertyType.html#ProjectPropertyType" coords="100,3,293,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_ProjectPropertyType.html#ProjectPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ProjectPropertyType')">diggs:ProjectPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_project" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_project');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_project" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_project" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_project');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_project" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractProject.html#AbstractProject" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProject')">diggs:AbstractProject</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractProject.html#AbstractProject" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProject')">diggs:AbstractProject</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_project" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_project');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_project" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:project</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractProject</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractProject&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:project&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_project" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_project');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_project" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"project"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ProjectPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_program"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:program</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_program" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_program');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_program" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_program.png" usemap="#Kernel_xsd_Element_diggs_program" /><map name="Kernel_xsd_Element_diggs_program" id="Kernel_xsd_Element_diggs_program"><area alt="Kernel_xsd_Element_diggs_AbstractProgram.tmp#AbstractProgram" href="Kernel_xsd_Element_diggs_AbstractProgram.html#AbstractProgram" coords="191,44,347,68" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractProgramPropertyType.tmp#AbstractProgramPropertyType" href="Kernel_xsd_Complex_Type_diggs_AbstractProgramPropertyType.html#AbstractProgramPropertyType" coords="109,3,357,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractProgramPropertyType.html#AbstractProgramPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramPropertyType')">diggs:AbstractProgramPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_program" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_program');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_program" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_program" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_program');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_program" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractProgram.html#AbstractProgram" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgram')">diggs:AbstractProgram</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractProgram.html#AbstractProgram" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgram')">diggs:AbstractProgram</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_program" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_program');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_program" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:program</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractProgram</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractProgram&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:program&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_program" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_program');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_program" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"program"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractProgramPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_samplingFeature"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:samplingFeature</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_samplingFeature" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_samplingFeature');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_samplingFeature" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_samplingFeature.png" usemap="#Kernel_xsd_Element_diggs_samplingFeature" /><map name="Kernel_xsd_Element_diggs_samplingFeature" id="Kernel_xsd_Element_diggs_samplingFeature"><area alt="Kernel_xsd_Element_diggs_AbstractSamplingFeature.tmp#AbstractSamplingFeature" href="Kernel_xsd_Element_diggs_AbstractSamplingFeature.html#AbstractSamplingFeature" coords="233,44,432,68" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeaturePropertyType.tmp#AbstractSamplingFeaturePropertyType" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeaturePropertyType.html#AbstractSamplingFeaturePropertyType" coords="151,3,442,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeaturePropertyType.html#AbstractSamplingFeaturePropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingFeaturePropertyType')">diggs:AbstractSamplingFeaturePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_samplingFeature" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_samplingFeature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_samplingFeature" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_samplingFeature" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_samplingFeature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_samplingFeature" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractSamplingFeature.html#AbstractSamplingFeature" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingFeature')">diggs:AbstractSamplingFeature</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractSamplingFeature.html#AbstractSamplingFeature" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingFeature')">diggs:AbstractSamplingFeature</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_samplingFeature" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_samplingFeature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_samplingFeature" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:samplingFeature</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractSamplingFeature</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractSamplingFeature&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:samplingFeature&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_samplingFeature" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_samplingFeature');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_samplingFeature" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingFeature"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractSamplingFeaturePropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_samplingActivity"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:samplingActivity</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_samplingActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_samplingActivity');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_samplingActivity" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_samplingActivity.png" usemap="#Kernel_xsd_Element_diggs_samplingActivity" /><map name="Kernel_xsd_Element_diggs_samplingActivity" id="Kernel_xsd_Element_diggs_samplingActivity"><area alt="Kernel_xsd_Element_diggs_AbstractSamplingActivity.tmp#AbstractSamplingActivity" href="Kernel_xsd_Element_diggs_AbstractSamplingActivity.html#AbstractSamplingActivity" coords="233,44,432,68" /><area alt="Kernel_xsd_Complex_Type_diggs_SamplingActivityPropertyType.tmp#SamplingActivityPropertyType" href="Kernel_xsd_Complex_Type_diggs_SamplingActivityPropertyType.html#SamplingActivityPropertyType" coords="151,3,396,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_SamplingActivityPropertyType.html#SamplingActivityPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:SamplingActivityPropertyType')">diggs:SamplingActivityPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_samplingActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_samplingActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_samplingActivity" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_samplingActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_samplingActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_samplingActivity" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractSamplingActivity.html#AbstractSamplingActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingActivity')">diggs:AbstractSamplingActivity</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractSamplingActivity.html#AbstractSamplingActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingActivity')">diggs:AbstractSamplingActivity</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_samplingActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_samplingActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_samplingActivity" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:samplingActivity</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractSamplingActivity</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractSamplingActivity&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:samplingActivity&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_samplingActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_samplingActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_samplingActivity" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingActivity"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SamplingActivityPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_sample"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:sample</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_sample" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_sample');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_sample" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_sample.png" usemap="#Kernel_xsd_Element_diggs_sample" /><map name="Kernel_xsd_Element_diggs_sample" id="Kernel_xsd_Element_diggs_sample"><area alt="Kernel_xsd_Element_diggs_AbstractSample.tmp#AbstractSample" href="Kernel_xsd_Element_diggs_AbstractSample.html#AbstractSample" coords="182,44,330,68" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplePropertyType.tmp#AbstractSamplePropertyType" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplePropertyType.html#AbstractSamplePropertyType" coords="100,3,340,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplePropertyType.html#AbstractSamplePropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplePropertyType')">diggs:AbstractSamplePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_sample" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_sample');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_sample" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_sample" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_sample');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_sample" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractSample.html#AbstractSample" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSample')">diggs:AbstractSample</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractSample.html#AbstractSample" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSample')">diggs:AbstractSample</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_sample" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_sample');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_sample" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:sample</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractSample</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractSample&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:sample&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_sample" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_sample');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_sample" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"sample"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractSamplePropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_observation"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:observation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_observation" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_observation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_observation" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_observation_1.png" usemap="#Kernel_xsd_Element_diggs_observation_1" /><map name="Kernel_xsd_Element_diggs_observation_1" id="Kernel_xsd_Element_diggs_observation_1"><area alt="Kernel_xsd_Element_diggs_AbstractObservationSystem.tmp#AbstractObservationSystem" href="Kernel_xsd_Element_diggs_AbstractObservationSystem.html#AbstractObservationSystem" coords="208,44,422,68" /><area alt="Kernel_xsd_Complex_Type_diggs_ObservationSystemPropertyType.tmp#ObservationSystemPropertyType" href="Kernel_xsd_Complex_Type_diggs_ObservationSystemPropertyType.html#ObservationSystemPropertyType" coords="126,3,386,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_ObservationSystemPropertyType.html#ObservationSystemPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ObservationSystemPropertyType')">diggs:ObservationSystemPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_observation" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_observation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_observation" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_observation" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_observation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_observation" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractObservationSystem.html#AbstractObservationSystem" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObservationSystem')">diggs:AbstractObservationSystem</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractObservationSystem.html#AbstractObservationSystem" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObservationSystem')">diggs:AbstractObservationSystem</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_observation" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_observation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_observation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:observation</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractObservationSystem</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractObservationSystem&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:observation&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_observation" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_observation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_observation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"observation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ObservationSystemPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_measurement"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:measurement</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_measurement" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_measurement');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_measurement" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_measurement.png" usemap="#Kernel_xsd_Element_diggs_measurement" /><map name="Kernel_xsd_Element_diggs_measurement" id="Kernel_xsd_Element_diggs_measurement"><area alt="Kernel_xsd_Element_diggs_AbstractMeasurement.tmp#AbstractMeasurement" href="Kernel_xsd_Element_diggs_AbstractMeasurement.html#AbstractMeasurement" coords="217,44,399,68" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementPropertyType.tmp#AbstractMeasurementPropertyType" href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementPropertyType.html#AbstractMeasurementPropertyType" coords="135,3,409,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementPropertyType.html#AbstractMeasurementPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractMeasurementPropertyType')">diggs:AbstractMeasurementPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_measurement" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_measurement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_measurement" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_measurement" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_measurement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_measurement" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractMeasurement.html#AbstractMeasurement" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractMeasurement')">diggs:AbstractMeasurement</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractMeasurement.html#AbstractMeasurement" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractMeasurement')">diggs:AbstractMeasurement</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_measurement" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_measurement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_measurement" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:measurement</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractMeasurement</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractMeasurement&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:measurement&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_measurement" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_measurement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_measurement" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"measurement"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractMeasurementPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_constructionActivity"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:constructionActivity</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_constructionActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_constructionActivity');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_constructionActivity" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_constructionActivity.png" usemap="#Kernel_xsd_Element_diggs_constructionActivity" /><map name="Kernel_xsd_Element_diggs_constructionActivity" id="Kernel_xsd_Element_diggs_constructionActivity"><area alt="Kernel_xsd_Element_diggs_AbstractConstructionActivity.tmp#AbstractConstructionActivity" href="Kernel_xsd_Element_diggs_AbstractConstructionActivity.html#AbstractConstructionActivity" coords="253,44,474,68" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractConstructionActivityPropertyType.tmp#AbstractConstructionActivityPropertyType" href="Kernel_xsd_Complex_Type_diggs_AbstractConstructionActivityPropertyType.html#AbstractConstructionActivityPropertyType" coords="171,3,484,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractConstructionActivityPropertyType.html#AbstractConstructionActivityPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityPropertyType')">diggs:AbstractConstructionActivityPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_constructionActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_constructionActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_constructionActivity" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_constructionActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_constructionActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_constructionActivity" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractConstructionActivity.html#AbstractConstructionActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivity')">diggs:AbstractConstructionActivity</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractConstructionActivity.html#AbstractConstructionActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivity')">diggs:AbstractConstructionActivity</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_constructionActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_constructionActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_constructionActivity" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:constructionActivity</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractConstructionActivity</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractConstructionActivity&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:constructionActivity&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_constructionActivity" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_constructionActivity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_constructionActivity" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"constructionActivity"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractConstructionActivityPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType_group"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b> / diggs:group</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType_group" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType_group');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType_group" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_group.png" usemap="#Kernel_xsd_Element_diggs_group" /><map name="Kernel_xsd_Element_diggs_group" id="Kernel_xsd_Element_diggs_group"><area alt="Kernel_xsd_Element_diggs_AbstractGroup.tmp#AbstractGroup" href="Kernel_xsd_Element_diggs_AbstractGroup.html#AbstractGroup" coords="177,44,321,68" /><area alt="Kernel_xsd_Complex_Type_diggs_GroupPropertyType.tmp#GroupPropertyType" href="Kernel_xsd_Complex_Type_diggs_GroupPropertyType.html#GroupPropertyType" coords="95,3,285,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_GroupPropertyType.html#GroupPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:GroupPropertyType')">diggs:GroupPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiggsType_group" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_DiggsType_group');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiggsType_group" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType_group" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType_group');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType_group" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractGroup.html#AbstractGroup" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractGroup')">diggs:AbstractGroup</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractGroup.html#AbstractGroup" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractGroup')">diggs:AbstractGroup</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiggsType_group" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_DiggsType_group');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiggsType_group" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:group</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractGroup</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractGroup&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:group&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType_group" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType_group');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType_group" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"group"</span><span class="tAN"> type=</span><span class="tAV">"diggs:GroupPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiggsType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:DiggsType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiggsType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_DiggsType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiggsType" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Complex_Type_diggs_DiggsType.png" usemap="#Kernel_xsd_Complex_Type_diggs_DiggsType" /><map name="Kernel_xsd_Complex_Type_diggs_DiggsType" id="Kernel_xsd_Complex_Type_diggs_DiggsType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="182,118,263,142" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="345,259,460,283" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="345,349,513,373" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="345,426,447,450" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="345,516,428,540" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="242,218,458,244" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="157,43,418,65" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#http___www.opengis.net_gml_3.2_AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" coords="143,3,421,25" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="154,750,248,774" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_documentInformation" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_documentInformation" coords="232,847,380,871" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_project" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_project" coords="232,881,301,905" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_program" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_program" coords="232,915,310,939" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_samplingFeature" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_samplingFeature" coords="232,949,352,973" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_samplingActivity" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_samplingActivity" coords="232,983,352,1007" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_sample" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_sample" coords="232,1017,301,1041" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_observation" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_observation" coords="232,1051,327,1075" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_measurement" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_measurement" coords="232,1085,336,1109" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_constructionActivity" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_constructionActivity" coords="232,1119,372,1143" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsType.tmp#DiggsType_group" href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_group" coords="232,1153,296,1177" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsType')">diggs:DiggsType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DiggsType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_DiggsType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DiggsType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Kernel_xsd_Element_diggs_Diggs.html#Diggs" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:Diggs')">diggs:Diggs</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiggsType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_DiggsType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiggsType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:descriptionReference{0,1}')">gml:descriptionReference{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_documentInformation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:documentInformation')">diggs:documentInformation</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_project" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:project*')">diggs:project*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_program" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:program*')">diggs:program*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_samplingFeature" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeature*')">diggs:samplingFeature*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_samplingActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingActivity*')">diggs:samplingActivity*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_sample" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sample*')">diggs:sample*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_observation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:observation*')">diggs:observation*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_measurement" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:measurement*')">diggs:measurement*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_constructionActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:constructionActivity*')">diggs:constructionActivity*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_group" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:group*')">diggs:group*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_constructionActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:constructionActivity')">diggs:constructionActivity</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_documentInformation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:documentInformation')">diggs:documentInformation</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_group" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:group')">diggs:group</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_measurement" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:measurement')">diggs:measurement</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_observation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:observation')">diggs:observation</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_program" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:program')">diggs:program</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_project" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:project')">diggs:project</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_sample" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sample')">diggs:sample</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_samplingActivity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingActivity')">diggs:samplingActivity</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_DiggsType.html#DiggsType_samplingFeature" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeature')">diggs:samplingFeature</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:descriptionReference')">gml:descriptionReference</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_DiggsType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_DiggsType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_DiggsType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiggsType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_DiggsType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiggsType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"DiggsType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"gml:AbstractFeatureType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"documentInformation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DocumentInformationPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"project"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ProjectPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"program"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractProgramPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingFeature"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractSamplingFeaturePropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingActivity"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SamplingActivityPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"sample"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractSamplePropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"observation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ObservationSystemPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"measurement"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractMeasurementPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"constructionActivity"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AbstractConstructionActivityPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"group"</span><span class="tAN"> type=</span><span class="tAV">"diggs:GroupPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;attribute</span><span class="tAN"> ref=</span><span class="tAV">"xml:lang"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

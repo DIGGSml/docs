@@ -1,0 +1,2011 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:remark</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_PlatformType_remark', 
+				'properties_PlatformType_receiverType', 
+				'properties_PlatformType_noReceivers', 
+				'properties_PlatformType_receiverArrayOrientation', 
+				'properties_PlatformType_receiverInterval', 
+				'properties_PlatformType_sourceType', 
+				'properties_PlatformType_noSources', 
+				'properties_PlatformType_sourceReceiverOrientation', 
+				'properties_PlatformType_minSourceReceiverSpacing', 
+				'properties_PlatformType_maxSourceReceiverSpacing', 
+				'properties_PlatformType_platformVelocity', 
+				'properties_PlatformType_samplingRate', 
+				'properties_PlatformType_platformGeometry');
+var facetsBoxes= new Array('facets_PlatformType_receiverArrayOrientation', 
+				'facets_PlatformType_noSources', 
+				'facets_PlatformType_sourceReceiverOrientation');
+var usedByBoxes= new Array('usedBy_PlatformType');
+var sourceBoxes= new Array('source_PlatformType_remark', 
+				'source_PlatformType_receiverType', 
+				'source_PlatformType_noReceivers', 
+				'source_PlatformType_receiverArrayOrientation', 
+				'source_PlatformType_receiverInterval', 
+				'source_PlatformType_sourceType', 
+				'source_PlatformType_noSources', 
+				'source_PlatformType_sourceReceiverOrientation', 
+				'source_PlatformType_minSourceReceiverSpacing', 
+				'source_PlatformType_maxSourceReceiverSpacing', 
+				'source_PlatformType_platformVelocity', 
+				'source_PlatformType_samplingRate', 
+				'source_PlatformType_platformGeometry', 
+				'source_PlatformType');
+var instanceBoxes= new Array('instance_PlatformType_remark', 
+				'instance_PlatformType_platformGeometry');
+var diagramBoxes= new Array('diagram_PlatformType_remark', 
+				'diagram_PlatformType_receiverType', 
+				'diagram_PlatformType_noReceivers', 
+				'diagram_PlatformType_receiverArrayOrientation', 
+				'diagram_PlatformType_receiverInterval', 
+				'diagram_PlatformType_sourceType', 
+				'diagram_PlatformType_noSources', 
+				'diagram_PlatformType_sourceReceiverOrientation', 
+				'diagram_PlatformType_minSourceReceiverSpacing', 
+				'diagram_PlatformType_maxSourceReceiverSpacing', 
+				'diagram_PlatformType_platformVelocity', 
+				'diagram_PlatformType_samplingRate', 
+				'diagram_PlatformType_platformGeometry', 
+				'diagram_PlatformType');
+var annotationBoxes= new Array('annotations_PlatformType_receiverType', 
+				'annotations_PlatformType_receiverArrayOrientation', 
+				'annotations_PlatformType_sourceType', 
+				'annotations_PlatformType_sourceReceiverOrientation');
+var attributesBoxes= new Array('attributes_PlatformType_receiverInterval', 
+				'attributes_PlatformType_minSourceReceiverSpacing', 
+				'attributes_PlatformType_maxSourceReceiverSpacing', 
+				'attributes_PlatformType_platformVelocity', 
+				'attributes_PlatformType_samplingRate', 
+				'attributes_PlatformType');
+var modelBoxes= new Array('model_PlatformType_remark', 
+				'model_PlatformType_platformGeometry', 
+				'model_PlatformType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="PlatformType_remark"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:remark</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_remark');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_remark" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_remark_4.png" usemap="#Geophysics_xsd_Element_diggs_remark_4" /><map name="Geophysics_xsd_Element_diggs_remark_4" id="Geophysics_xsd_Element_diggs_remark_4"><area alt="Kernel_xsd_Element_diggs_Remark.tmp#Remark" href="Kernel_xsd_Element_diggs_Remark.html#Remark" coords="182,44,286,68" /><area alt="Kernel_xsd_Complex_Type_diggs_RemarkPropertyType.tmp#RemarkPropertyType" href="Kernel_xsd_Complex_Type_diggs_RemarkPropertyType.html#RemarkPropertyType" coords="100,3,296,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_RemarkPropertyType.html#RemarkPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:RemarkPropertyType')">diggs:RemarkPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_remark" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PlatformType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PlatformType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PlatformType_remark" style="display:block"><b><a href="Kernel_xsd_Element_diggs_Remark.html#Remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:Remark')">diggs:Remark</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_Remark.html#Remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:Remark')">diggs:Remark</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_PlatformType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_PlatformType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_PlatformType_remark" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:remark</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Remark</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Remark&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:remark&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_remark" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"remark"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RemarkPropertyType"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_receiverType"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:receiverType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlatformType_receiverType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlatformType_receiverType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlatformType_receiverType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The type of receiver used in this platform; from a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_receiverType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_receiverType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_receiverType" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_receiverType_2.png" usemap="#Geophysics_xsd_Element_diggs_receiverType_2" /><map name="Geophysics_xsd_Element_diggs_receiverType_2" id="Geophysics_xsd_Element_diggs_receiverType_2"><area alt="Geophysics_xsd_Simple_Type_diggs_receiverTypeEnumExtType.tmp#receiverTypeEnumExtType" href="Geophysics_xsd_Simple_Type_diggs_receiverTypeEnumExtType.html#receiverTypeEnumExtType" coords="148,0,378,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Geophysics_xsd_Simple_Type_diggs_receiverTypeEnumExtType.html#receiverTypeEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverTypeEnumExtType')">diggs:receiverTypeEnumExtType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_receiverType" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_receiverType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_receiverType" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_receiverType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_receiverType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_receiverType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"receiverType"</span><span class="tAN"> type=</span><span class="tAV">"diggs:receiverTypeEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The type of receiver used in this platform; from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_noReceivers"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:noReceivers</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_noReceivers" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_noReceivers');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_noReceivers" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_noReceivers_1.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>nonNegativeInteger</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_noReceivers" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_noReceivers');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_noReceivers" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_noReceivers" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_noReceivers');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_noReceivers" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"noReceivers"</span><span class="tAN"> type=</span><span class="tAV">"nonNegativeInteger"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_receiverArrayOrientation"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:receiverArrayOrientation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlatformType_receiverArrayOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlatformType_receiverArrayOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlatformType_receiverArrayOrientation" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The orientation of the receiver array relative to the direction of platform travel. From a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_receiverArrayOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_receiverArrayOrientation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_receiverArrayOrientation" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_receiverArrayOrientation.png" usemap="#Geophysics_xsd_Element_diggs_receiverArrayOrientation" /><map name="Geophysics_xsd_Element_diggs_receiverArrayOrientation" id="Geophysics_xsd_Element_diggs_receiverArrayOrientation"><area alt="Geophysics_xsd_Simple_Type_diggs_platformOrientationEnumType.tmp#platformOrientationEnumType" href="Geophysics_xsd_Simple_Type_diggs_platformOrientationEnumType.html#platformOrientationEnumType" coords="213,0,464,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Geophysics_xsd_Simple_Type_diggs_platformOrientationEnumType.html#platformOrientationEnumType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:platformOrientationEnumType')">diggs:platformOrientationEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_receiverArrayOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_receiverArrayOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_receiverArrayOrientation" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_PlatformType_receiverArrayOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_PlatformType_receiverArrayOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_PlatformType_receiverArrayOrientation" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>oblique</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>parallel</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>perpendicular</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_receiverArrayOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_receiverArrayOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_receiverArrayOrientation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"receiverArrayOrientation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:platformOrientationEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The orientation of the receiver array relative to the direction of platform travel. From a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_receiverInterval"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:receiverInterval</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_receiverInterval" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_receiverInterval');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_receiverInterval" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_receiverInterval.png" usemap="#Geophysics_xsd_Element_diggs_receiverInterval" /><map name="Geophysics_xsd_Element_diggs_receiverInterval" id="Geophysics_xsd_Element_diggs_receiverInterval"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="156,40,324,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="170,157,242,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="145,3,300,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_receiverInterval" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_receiverInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_receiverInterval" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlatformType_receiverInterval" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlatformType_receiverInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlatformType_receiverInterval" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_receiverInterval" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_receiverInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_receiverInterval" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"receiverInterval"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_sourceType"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:sourceType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlatformType_sourceType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlatformType_sourceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlatformType_sourceType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The type of source used for the platform; from a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_sourceType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_sourceType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_sourceType" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_sourceType_2.png" usemap="#Geophysics_xsd_Element_diggs_sourceType_2" /><map name="Geophysics_xsd_Element_diggs_sourceType_2" id="Geophysics_xsd_Element_diggs_sourceType_2"><area alt="Geophysics_xsd_Simple_Type_diggs_sourceTypeEnumExtType.tmp#sourceTypeEnumExtType" href="Geophysics_xsd_Simple_Type_diggs_sourceTypeEnumExtType.html#sourceTypeEnumExtType" coords="142,0,366,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Geophysics_xsd_Simple_Type_diggs_sourceTypeEnumExtType.html#sourceTypeEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sourceTypeEnumExtType')">diggs:sourceTypeEnumExtType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_sourceType" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_sourceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_sourceType" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_sourceType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_sourceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_sourceType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"sourceType"</span><span class="tAN"> type=</span><span class="tAV">"diggs:sourceTypeEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The type of source used for the platform; from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_noSources"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:noSources</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_noSources" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_noSources');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_noSources" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_noSources_1.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>nonNegativeInteger</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_noSources" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_noSources');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_noSources" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_PlatformType_noSources" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_PlatformType_noSources');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_PlatformType_noSources" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxInclusive</td>
+                                    <td width="30%"><b>1</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_noSources" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_noSources');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_noSources" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"noSources"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;simpleType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;restriction</span><span class="tAN"> base=</span><span class="tAV">"nonNegativeInteger"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;maxInclusive</span><span class="tAN"> value=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/restriction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/simpleType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_sourceReceiverOrientation"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:sourceReceiverOrientation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlatformType_sourceReceiverOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlatformType_sourceReceiverOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlatformType_sourceReceiverOrientation" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The orientation of the source receiver array relative to the direction of platform travel. From a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_sourceReceiverOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_sourceReceiverOrientation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_sourceReceiverOrientation" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_sourceReceiverOrientation.png" usemap="#Geophysics_xsd_Element_diggs_sourceReceiverOrientation" /><map name="Geophysics_xsd_Element_diggs_sourceReceiverOrientation" id="Geophysics_xsd_Element_diggs_sourceReceiverOrientation"><area alt="Geophysics_xsd_Simple_Type_diggs_platformOrientationEnumType.tmp#platformOrientationEnumType" href="Geophysics_xsd_Simple_Type_diggs_platformOrientationEnumType.html#platformOrientationEnumType" coords="222,0,473,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Geophysics_xsd_Simple_Type_diggs_platformOrientationEnumType.html#platformOrientationEnumType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:platformOrientationEnumType')">diggs:platformOrientationEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_sourceReceiverOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_sourceReceiverOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_sourceReceiverOrientation" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_PlatformType_sourceReceiverOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_PlatformType_sourceReceiverOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_PlatformType_sourceReceiverOrientation" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>oblique</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>parallel</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>perpendicular</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_sourceReceiverOrientation" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_sourceReceiverOrientation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_sourceReceiverOrientation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"sourceReceiverOrientation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:platformOrientationEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The orientation of the source receiver array relative to the direction of platform travel. From a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_minSourceReceiverSpacing"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:minSourceReceiverSpacing</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_minSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_minSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_minSourceReceiverSpacing" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_minSourceReceiverSpacing.png" usemap="#Geophysics_xsd_Element_diggs_minSourceReceiverSpacing" /><map name="Geophysics_xsd_Element_diggs_minSourceReceiverSpacing" id="Geophysics_xsd_Element_diggs_minSourceReceiverSpacing"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="217,40,385,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="231,157,303,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="206,3,361,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_minSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_minSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_minSourceReceiverSpacing" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlatformType_minSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlatformType_minSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlatformType_minSourceReceiverSpacing" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_minSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_minSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_minSourceReceiverSpacing" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"minSourceReceiverSpacing"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_maxSourceReceiverSpacing"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:maxSourceReceiverSpacing</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_maxSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_maxSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_maxSourceReceiverSpacing" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_maxSourceReceiverSpacing.png" usemap="#Geophysics_xsd_Element_diggs_maxSourceReceiverSpacing" /><map name="Geophysics_xsd_Element_diggs_maxSourceReceiverSpacing" id="Geophysics_xsd_Element_diggs_maxSourceReceiverSpacing"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="220,40,388,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="234,157,306,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="209,3,364,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_maxSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_maxSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_maxSourceReceiverSpacing" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlatformType_maxSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlatformType_maxSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlatformType_maxSourceReceiverSpacing" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_maxSourceReceiverSpacing" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_maxSourceReceiverSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_maxSourceReceiverSpacing" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"maxSourceReceiverSpacing"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_platformVelocity"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:platformVelocity</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_platformVelocity" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_platformVelocity');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_platformVelocity" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_platformVelocity.png" usemap="#Geophysics_xsd_Element_diggs_platformVelocity" /><map name="Geophysics_xsd_Element_diggs_platformVelocity" id="Geophysics_xsd_Element_diggs_platformVelocity"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="161,40,329,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.tmp#LengthPerTimeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.html#LengthPerTimeMeasure_uom" coords="175,157,247,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.tmp#LengthPerTimeMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.html#LengthPerTimeMeasure" coords="150,3,348,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.html#LengthPerTimeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerTimeMeasure')">eml:LengthPerTimeMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.html#LengthPerTimeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerTimeMeasure')">eml:LengthPerTimeMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_platformVelocity" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_platformVelocity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_platformVelocity" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlatformType_platformVelocity" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlatformType_platformVelocity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlatformType_platformVelocity" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthPerTimeMeasure.html#LengthPerTimeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerTimeUom.html#http___www.energistics.org_energyml_data_commonv2_LengthPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerTimeUom')">eml:LengthPerTimeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_platformVelocity" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_platformVelocity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_platformVelocity" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"platformVelocity"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthPerTimeMeasure"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_samplingRate"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:samplingRate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_samplingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_samplingRate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_samplingRate" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_samplingRate.png" usemap="#Geophysics_xsd_Element_diggs_samplingRate" /><map name="Geophysics_xsd_Element_diggs_samplingRate" id="Geophysics_xsd_Element_diggs_samplingRate"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="145,40,313,66" /><area alt="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.tmp#ReciprocalTimeMeasureExt_uom" href="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.html#ReciprocalTimeMeasureExt_uom" coords="159,157,231,181" /><area alt="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.tmp#ReciprocalTimeMeasureExt" href="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.html#ReciprocalTimeMeasureExt" coords="134,3,351,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.html#ReciprocalTimeMeasureExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalTimeMeasureExt')">eml:ReciprocalTimeMeasureExt</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.html#ReciprocalTimeMeasureExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalTimeMeasureExt')">eml:ReciprocalTimeMeasureExt</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_samplingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_samplingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_samplingRate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlatformType_samplingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlatformType_samplingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlatformType_samplingRate" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_ReciprocalTimeMeasureExt.html#ReciprocalTimeMeasureExt_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalTimeUomExt.html#ReciprocalTimeUomExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalTimeUomExt')">eml:ReciprocalTimeUomExt</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_samplingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_samplingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_samplingRate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingRate"</span><span class="tAN"> type=</span><span class="tAV">"eml:ReciprocalTimeMeasureExt"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType_platformGeometry"></a><div class="componentTitle">Element <span class="qname"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b> / diggs:platformGeometry</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType_platformGeometry" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType_platformGeometry');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType_platformGeometry" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Element_diggs_platformGeometry.png" usemap="#Geophysics_xsd_Element_diggs_platformGeometry" /><map name="Geophysics_xsd_Element_diggs_platformGeometry" id="Geophysics_xsd_Element_diggs_platformGeometry"><area alt="Geophysics_xsd_Element_diggs_PlatformGeometry.tmp#PlatformGeometry" href="Geophysics_xsd_Element_diggs_PlatformGeometry.html#PlatformGeometry" coords="263,44,424,68" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformGeometryArrayPropertyType.tmp#PlatformGeometryArrayPropertyType" href="Geophysics_xsd_Complex_Type_diggs_PlatformGeometryArrayPropertyType.html#PlatformGeometryArrayPropertyType" coords="181,3,464,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformGeometryArrayPropertyType.html#PlatformGeometryArrayPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformGeometryArrayPropertyType')">diggs:PlatformGeometryArrayPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlatformType_platformGeometry" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlatformType_platformGeometry');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlatformType_platformGeometry" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PlatformType_platformGeometry" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PlatformType_platformGeometry');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PlatformType_platformGeometry" style="display:block"><b><a href="Geophysics_xsd_Element_diggs_PlatformGeometry.html#PlatformGeometry" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformGeometry')">diggs:PlatformGeometry</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Geophysics_xsd_Element_diggs_PlatformGeometry.html#PlatformGeometry" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformGeometry')">diggs:PlatformGeometry</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_PlatformType_platformGeometry" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_PlatformType_platformGeometry');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_PlatformType_platformGeometry" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:platformGeometry</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:PlatformGeometry</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:PlatformGeometry&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:platformGeometry&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType_platformGeometry" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType_platformGeometry');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType_platformGeometry" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"platformGeometry"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlatformGeometryArrayPropertyType"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlatformType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:PlatformType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlatformType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlatformType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlatformType" style="display:block"><img alt="Diagram" border="0" src="img/Geophysics_xsd_Complex_Type_diggs_PlatformType.png" usemap="#Geophysics_xsd_Complex_Type_diggs_PlatformType" /><map name="Geophysics_xsd_Complex_Type_diggs_PlatformType" id="Geophysics_xsd_Complex_Type_diggs_PlatformType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="182,78,263,102" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.tmp#AbstractComponentObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" coords="157,3,527,25" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="246,224,361,248" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="246,314,329,338" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_remark" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_remark" coords="246,404,315,428" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_receiverType" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverType" coords="246,438,346,462" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_noReceivers" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_noReceivers" coords="246,515,342,539" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_receiverArrayOrientation" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverArrayOrientation" coords="246,549,411,573" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_receiverInterval" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverInterval" coords="246,626,360,650" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_sourceType" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_sourceType" coords="246,660,340,684" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_noSources" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_noSources" coords="246,737,334,761" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_sourceReceiverOrientation" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_sourceReceiverOrientation" coords="246,771,420,795" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_minSourceReceiverSpacing" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_minSourceReceiverSpacing" coords="246,848,421,872" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_maxSourceReceiverSpacing" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_maxSourceReceiverSpacing" coords="246,882,424,906" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_platformVelocity" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_platformVelocity" coords="246,916,365,940" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_samplingRate" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_samplingRate" coords="246,950,349,974" /><area alt="Geophysics_xsd_Complex_Type_diggs_PlatformType.tmp#PlatformType_platformGeometry" href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_platformGeometry" coords="246,984,375,1008" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlatformType')">diggs:PlatformType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_PlatformType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_PlatformType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_PlatformType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Geophysics_xsd_Element_diggs_Platform.html#Platform" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:Platform')">diggs:Platform</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PlatformType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PlatformType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PlatformType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverType')">diggs:receiverType</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_noReceivers" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:noReceivers{0,1}')">diggs:noReceivers{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverArrayOrientation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverArrayOrientation{0,1}')">diggs:receiverArrayOrientation{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverInterval{0,1}')">diggs:receiverInterval{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_sourceType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sourceType')">diggs:sourceType</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_noSources" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:noSources{0,1}')">diggs:noSources{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_sourceReceiverOrientation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sourceReceiverOrientation{0,1}')">diggs:sourceReceiverOrientation{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_minSourceReceiverSpacing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:minSourceReceiverSpacing{0,1}')">diggs:minSourceReceiverSpacing{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_maxSourceReceiverSpacing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:maxSourceReceiverSpacing{0,1}')">diggs:maxSourceReceiverSpacing{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_platformVelocity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:platformVelocity{0,1}')">diggs:platformVelocity{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_samplingRate" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingRate{0,1}')">diggs:samplingRate{0,1}</a></b> , <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_platformGeometry" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:platformGeometry{0,1}')">diggs:platformGeometry{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_maxSourceReceiverSpacing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:maxSourceReceiverSpacing')">diggs:maxSourceReceiverSpacing</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_minSourceReceiverSpacing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:minSourceReceiverSpacing')">diggs:minSourceReceiverSpacing</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_noReceivers" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:noReceivers')">diggs:noReceivers</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_noSources" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:noSources')">diggs:noSources</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_platformGeometry" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:platformGeometry')">diggs:platformGeometry</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_platformVelocity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:platformVelocity')">diggs:platformVelocity</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverArrayOrientation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverArrayOrientation')">diggs:receiverArrayOrientation</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverInterval')">diggs:receiverInterval</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_receiverType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:receiverType')">diggs:receiverType</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_samplingRate" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingRate')">diggs:samplingRate</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_sourceReceiverOrientation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sourceReceiverOrientation')">diggs:sourceReceiverOrientation</a></b>, <b><a href="Geophysics_xsd_Complex_Type_diggs_PlatformType.html#PlatformType_sourceType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sourceType')">diggs:sourceType</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlatformType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlatformType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlatformType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlatformType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlatformType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlatformType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"PlatformType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractComponentObjectBaseType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> ref=</span><span class="tAV">"gml:description"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> ref=</span><span class="tAV">"gml:name"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"remark"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RemarkPropertyType"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"receiverType"</span><span class="tAN"> type=</span><span class="tAV">"diggs:receiverTypeEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The type of receiver used in this platform; from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"noReceivers"</span><span class="tAN"> type=</span><span class="tAV">"nonNegativeInteger"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"receiverArrayOrientation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:platformOrientationEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The orientation of the receiver array relative to the direction of platform travel. From a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"receiverInterval"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"sourceType"</span><span class="tAN"> type=</span><span class="tAV">"diggs:sourceTypeEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The type of source used for the platform; from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"noSources"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;simpleType</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;restriction</span><span class="tAN"> base=</span><span class="tAV">"nonNegativeInteger"</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;maxInclusive</span><span class="tAN"> value=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/restriction&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/simpleType&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"sourceReceiverOrientation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:platformOrientationEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The orientation of the source receiver array relative to the direction of platform travel. From a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"minSourceReceiverSpacing"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"maxSourceReceiverSpacing"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"platformVelocity"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthPerTimeMeasure"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingRate"</span><span class="tAN"> type=</span><span class="tAV">"eml:ReciprocalTimeMeasureExt"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"platformGeometry"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlatformGeometryArrayPropertyType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

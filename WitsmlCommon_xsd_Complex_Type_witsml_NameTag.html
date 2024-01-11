@@ -1,0 +1,2090 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component witsml:Name</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_NameTag_Name', 
+				'properties_NameTag_NumberingScheme', 
+				'properties_NameTag_Technology', 
+				'properties_NameTag_Location', 
+				'properties_NameTag_InstallationDate', 
+				'properties_NameTag_InstallationCompany', 
+				'properties_NameTag_MountingCode', 
+				'properties_NameTag_Comment', 
+				'properties_NameTag_ExtensionNameValue', 
+				'properties_NameTag_uid');
+var facetsBoxes= new Array('facets_NameTag_Name', 
+				'facets_NameTag_NumberingScheme', 
+				'facets_NameTag_Technology', 
+				'facets_NameTag_Location', 
+				'facets_NameTag_InstallationDate', 
+				'facets_NameTag_InstallationCompany', 
+				'facets_NameTag_MountingCode', 
+				'facets_NameTag_Comment', 
+				'facets_NameTag_uid');
+var usedByBoxes= new Array('usedBy_NameTag', 
+				'usedBy_NameTag_uid');
+var sourceBoxes= new Array('source_NameTag_Name', 
+				'source_NameTag_NumberingScheme', 
+				'source_NameTag_Technology', 
+				'source_NameTag_Location', 
+				'source_NameTag_InstallationDate', 
+				'source_NameTag_InstallationCompany', 
+				'source_NameTag_MountingCode', 
+				'source_NameTag_Comment', 
+				'source_NameTag_ExtensionNameValue', 
+				'source_NameTag', 
+				'source_NameTag_uid');
+var instanceBoxes= new Array('instance_NameTag_ExtensionNameValue');
+var diagramBoxes= new Array('diagram_NameTag_Name', 
+				'diagram_NameTag_NumberingScheme', 
+				'diagram_NameTag_Technology', 
+				'diagram_NameTag_Location', 
+				'diagram_NameTag_InstallationDate', 
+				'diagram_NameTag_InstallationCompany', 
+				'diagram_NameTag_MountingCode', 
+				'diagram_NameTag_Comment', 
+				'diagram_NameTag_ExtensionNameValue', 
+				'diagram_NameTag');
+var annotationBoxes= new Array('annotations_NameTag_Name', 
+				'annotations_NameTag_NumberingScheme', 
+				'annotations_NameTag_Technology', 
+				'annotations_NameTag_Location', 
+				'annotations_NameTag_InstallationDate', 
+				'annotations_NameTag_InstallationCompany', 
+				'annotations_NameTag_MountingCode', 
+				'annotations_NameTag_Comment', 
+				'annotations_NameTag_ExtensionNameValue', 
+				'annotations_NameTag', 
+				'annotations_NameTag_uid');
+var attributesBoxes= new Array('attributes_NameTag');
+var modelBoxes= new Array('model_NameTag_ExtensionNameValue', 
+				'model_NameTag');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="NameTag_Name"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:Name</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_Name" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_Name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_Name" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The physical identification string of the equipment tag.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_Name" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_Name');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_Name" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_Name.png" usemap="#WitsmlCommon_xsd_Element_witsml_Name" /><map name="WitsmlCommon_xsd_Element_witsml_Name" id="WitsmlCommon_xsd_Element_witsml_Name"><area alt="BaseTypes_xsd_Simple_Type_eml_String64.tmp#String64" href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" coords="109,0,232,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_Name" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_Name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_Name" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_Name" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_Name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_Name" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_Name" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_Name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_Name" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Name"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The physical identification string of the equipment tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_NumberingScheme"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:NumberingScheme</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_NumberingScheme" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_NumberingScheme');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_NumberingScheme" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The format or encoding specification of the equipment tag. The tag may contain different pieces of information and knowledge of that information is inherent in the specification. The "identification string" is a mandatory part of the information in a tag.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_NumberingScheme" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_NumberingScheme');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_NumberingScheme" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_NumberingScheme.png" usemap="#WitsmlCommon_xsd_Element_witsml_NumberingScheme" /><map name="WitsmlCommon_xsd_Element_witsml_NumberingScheme" id="WitsmlCommon_xsd_Element_witsml_NumberingScheme"><area alt="WitsmlCommon_xsd_Simple_Type_witsml_NameTagNumberingScheme.tmp#NameTagNumberingScheme" href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagNumberingScheme.html#NameTagNumberingScheme" coords="180,0,423,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagNumberingScheme.html#NameTagNumberingScheme" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTagNumberingScheme')">witsml:NameTagNumberingScheme</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_TypeEnum.html#TypeEnum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TypeEnum')">eml:TypeEnum</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagNumberingScheme.html#NameTagNumberingScheme" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTagNumberingScheme')">witsml:NameTagNumberingScheme</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_NumberingScheme" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_NumberingScheme');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_NumberingScheme" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_NumberingScheme" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_NumberingScheme');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_NumberingScheme" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ANSI/AIM-BC10</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ANSI/AIM-BC2</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ANSI/AIM-BC6</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>EAN.UCC</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>EPC64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>EPC96</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>F2F</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>MFM</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>MSRCID</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>serial number</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_NumberingScheme" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_NumberingScheme');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_NumberingScheme" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"NumberingScheme"</span><span class="tAN"> type=</span><span class="tAV">"witsml:NameTagNumberingScheme"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The format or encoding specification of the equipment tag. The tag may contain different pieces of information and knowledge of that information is inherent in the specification. The "identification string" is a mandatory part of the information in a tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_Technology"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:Technology</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_Technology" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_Technology');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_Technology" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Identifies the general type of identifier on an item.  If multiple identifiers exist on an item, a separate description set for each identifier should be created.  For example, a joint of casing may have a barcode label on it along with a painted-on code and an RFID tag attached or embedded into the coupling.  The barcode label may in turn be an RFID-equipped label. This particular scenario would require populating five nameTags to fully describe and decode all the possible identifiers as follows: 'tagged' - RFID tag embedded in the coupling, 'label'  - Serial number printed on the label, 'tagged' - RFID tag embedded into the label, 'label'  - Barcode printed on the label, 'painted'- Mill number painted on the pipe body.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_Technology" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_Technology');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_Technology" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_Technology.png" usemap="#WitsmlCommon_xsd_Element_witsml_Technology" /><map name="WitsmlCommon_xsd_Element_witsml_Technology" id="WitsmlCommon_xsd_Element_witsml_Technology"><area alt="WitsmlCommon_xsd_Simple_Type_witsml_NameTagTechnology.tmp#NameTagTechnology" href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagTechnology.html#NameTagTechnology" coords="142,0,347,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagTechnology.html#NameTagTechnology" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTagTechnology')">witsml:NameTagTechnology</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_TypeEnum.html#TypeEnum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TypeEnum')">eml:TypeEnum</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagTechnology.html#NameTagTechnology" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTagTechnology')">witsml:NameTagTechnology</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_Technology" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_Technology');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_Technology" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_Technology" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_Technology');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_Technology" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>intrinsic</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>labeled</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>painted</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>stamped</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>tagged</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>temporary</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_Technology" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_Technology');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_Technology" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Technology"</span><span class="tAN"> type=</span><span class="tAV">"witsml:NameTagTechnology"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Identifies the general type of identifier on an item. If multiple identifiers exist on an item, a separate description set for each identifier should be created. For example, a joint of casing may have a barcode label on it along with a painted-on code and an RFID tag attached or embedded into the coupling. The barcode label may in turn be an RFID-equipped label. This particular scenario would require populating five nameTags to fully describe and decode all the possible identifiers as follows: 'tagged' - RFID tag embedded in the coupling, 'label' - Serial number printed on the label, 'tagged' - RFID tag embedded into the label, 'label' - Barcode printed on the label, 'painted'- Mill number painted on the pipe body.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_Location"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:Location</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_Location" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_Location');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_Location" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">An indicator of where the tag is attached to the item. This is used to assist the user in finding where an identifier is located on an item.  This optional field also helps to differentiate where an identifier is located when multiple identifiers exist on an item. Most downhole components have a box (female thread) and pin (male thread) end as well as a pipe body in between the ends. Where multiple identifiers are used on an item, it is convenient to have a reference as to which end, or somewhere in the middle, an identifier may be closer to. Some items may have an identifier on a non-standard location, such as on the arm of a hole opener.  'other', by exclusion, tells a user to look elsewhere than on the body or near the ends of an item.  Most non-downhole tools use either 'body', 'other' or not specified because the location tends to lose value with smaller or non threaded items.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_Location" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_Location');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_Location" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_Location.png" usemap="#WitsmlCommon_xsd_Element_witsml_Location" /><map name="WitsmlCommon_xsd_Element_witsml_Location" id="WitsmlCommon_xsd_Element_witsml_Location"><area alt="WitsmlCommon_xsd_Simple_Type_witsml_NameTagLocation.tmp#NameTagLocation" href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagLocation.html#NameTagLocation" coords="125,0,313,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagLocation.html#NameTagLocation" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTagLocation')">witsml:NameTagLocation</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_TypeEnum.html#TypeEnum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TypeEnum')">eml:TypeEnum</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="WitsmlCommon_xsd_Simple_Type_witsml_NameTagLocation.html#NameTagLocation" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTagLocation')">witsml:NameTagLocation</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_Location" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_Location');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_Location" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_Location" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_Location');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_Location" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>body</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>box</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>other</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>pin</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_Location" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_Location');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_Location" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Location"</span><span class="tAN"> type=</span><span class="tAV">"witsml:NameTagLocation"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An indicator of where the tag is attached to the item. This is used to assist the user in finding where an identifier is located on an item. This optional field also helps to differentiate where an identifier is located when multiple identifiers exist on an item. Most downhole components have a box (female thread) and pin (male thread) end as well as a pipe body in between the ends. Where multiple identifiers are used on an item, it is convenient to have a reference as to which end, or somewhere in the middle, an identifier may be closer to. Some items may have an identifier on a non-standard location, such as on the arm of a hole opener. 'other', by exclusion, tells a user to look elsewhere than on the body or near the ends of an item. Most non-downhole tools use either 'body', 'other' or not specified because the location tends to lose value with smaller or non threaded items.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_InstallationDate"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:InstallationDate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_InstallationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_InstallationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_InstallationDate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">When the tag was installed in or on the item.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_InstallationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_InstallationDate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_InstallationDate" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_InstallationDate.png" usemap="#WitsmlCommon_xsd_Element_witsml_InstallationDate" /><map name="WitsmlCommon_xsd_Element_witsml_InstallationDate" id="WitsmlCommon_xsd_Element_witsml_InstallationDate"><area alt="BaseTypes_xsd_Simple_Type_eml_TimeStamp.tmp#TimeStamp" href="BaseTypes_xsd_Simple_Type_eml_TimeStamp.html#TimeStamp" coords="162,0,298,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_TimeStamp.html#TimeStamp" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimeStamp')">eml:TimeStamp</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_TimeStamp.html#TimeStamp" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimeStamp')">eml:TimeStamp</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_InstallationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_InstallationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_InstallationDate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_InstallationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_InstallationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_InstallationDate" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">pattern</td>
+                                    <td width="30%"><b>.+T.+[Z+\-].*</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_InstallationDate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_InstallationDate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_InstallationDate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"InstallationDate"</span><span class="tAN"> type=</span><span class="tAV">"eml:TimeStamp"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">When the tag was installed in or on the item.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_InstallationCompany"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:InstallationCompany</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_InstallationCompany" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_InstallationCompany');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_InstallationCompany" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The name of the company that installed the tag.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_InstallationCompany" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_InstallationCompany');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_InstallationCompany" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_InstallationCompany.png" usemap="#WitsmlCommon_xsd_Element_witsml_InstallationCompany" /><map name="WitsmlCommon_xsd_Element_witsml_InstallationCompany" id="WitsmlCommon_xsd_Element_witsml_InstallationCompany"><area alt="BaseTypes_xsd_Simple_Type_eml_String64.tmp#String64" href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" coords="189,0,312,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_InstallationCompany" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_InstallationCompany');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_InstallationCompany" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_InstallationCompany" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_InstallationCompany');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_InstallationCompany" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_InstallationCompany" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_InstallationCompany');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_InstallationCompany" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"InstallationCompany"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the company that installed the tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_MountingCode"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:MountingCode</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_MountingCode" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_MountingCode');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_MountingCode" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Reference to a manufacturer's or installer's installation description, code, or method.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_MountingCode" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_MountingCode');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_MountingCode" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_MountingCode.png" usemap="#WitsmlCommon_xsd_Element_witsml_MountingCode" /><map name="WitsmlCommon_xsd_Element_witsml_MountingCode" id="WitsmlCommon_xsd_Element_witsml_MountingCode"><area alt="BaseTypes_xsd_Simple_Type_eml_String64.tmp#String64" href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" coords="158,0,281,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_MountingCode" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_MountingCode');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_MountingCode" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_MountingCode" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_MountingCode');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_MountingCode" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_MountingCode" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_MountingCode');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_MountingCode" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"MountingCode"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Reference to a manufacturer's or installer's installation description, code, or method.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_Comment"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:Comment</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_Comment" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_Comment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_Comment" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A comment or remark about the tag.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_Comment" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_Comment');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_Comment" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_Comment.png" usemap="#WitsmlCommon_xsd_Element_witsml_Comment" /><map name="WitsmlCommon_xsd_Element_witsml_Comment" id="WitsmlCommon_xsd_Element_witsml_Comment"><area alt="BaseTypes_xsd_Simple_Type_eml_String2000.tmp#String2000" href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" coords="131,0,268,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_Comment" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_Comment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_Comment" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_Comment" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_Comment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_Comment" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>2000</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_Comment" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_Comment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_Comment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Comment"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A comment or remark about the tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_ExtensionNameValue"></a><div class="componentTitle">Element <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / witsml:ExtensionNameValue</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_ExtensionNameValue" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_ExtensionNameValue');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_ExtensionNameValue" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Extensions to the schema based on a name-value construct.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag_ExtensionNameValue" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag_ExtensionNameValue');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag_ExtensionNameValue" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Element_witsml_ExtensionNameValue.png" usemap="#WitsmlCommon_xsd_Element_witsml_ExtensionNameValue" /><map name="WitsmlCommon_xsd_Element_witsml_ExtensionNameValue" id="WitsmlCommon_xsd_Element_witsml_ExtensionNameValue"><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue_Name" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Name" coords="276,40,337,64" /><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue_Value" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Value" coords="276,130,336,154" /><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue_MeasureClass" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_MeasureClass" coords="276,220,381,244" /><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue_DTim" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_DTim" coords="276,310,335,334" /><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue_Index" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Index" coords="276,374,337,398" /><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue_Description" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Description" coords="276,464,369,488" /><area alt="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.tmp#ExtensionNameValue" href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue" coords="194,3,379,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExtensionNameValue')">eml:ExtensionNameValue</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_ExtensionNameValue" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_ExtensionNameValue');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_ExtensionNameValue" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_NameTag_ExtensionNameValue" type="image" src="img/btM.gif" value="-" onclick="switchState('model_NameTag_ExtensionNameValue');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_NameTag_ExtensionNameValue" style="display:block"><b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Name')">eml:Name</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Value" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Value')">eml:Value</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_MeasureClass" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MeasureClass{0,1}')">eml:MeasureClass{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_DTim" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DTim{0,1}')">eml:DTim{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Index" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Index{0,1}')">eml:Index{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Description" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Description{0,1}')">eml:Description{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_DTim" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DTim')">eml:DTim</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Description" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Description')">eml:Description</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Index" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Index')">eml:Index</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_MeasureClass" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MeasureClass')">eml:MeasureClass</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Name')">eml:Name</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_ExtensionNameValue.html#ExtensionNameValue_Value" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Value')">eml:Value</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_NameTag_ExtensionNameValue" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_NameTag_ExtensionNameValue');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_NameTag_ExtensionNameValue" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;witsml:ExtensionNameValue</span><span class="tT"> </span><span class="tAN">xmlns:witsml=</span><span class="tAV">"http://www.energistics.org/energyml/data/witsmlv2"</span><span class="tT"> </span><span class="tAN">xmlns:eml=</span><span class="tAV">"http://www.energistics.org/energyml/data/commonv2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Name</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/eml:Name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Value</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/eml:Value&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:MeasureClass</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:MeasureClass&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:DTim</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:DTim&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Index</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:Index&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Description</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:Description&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/witsml:ExtensionNameValue&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_ExtensionNameValue" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_ExtensionNameValue');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_ExtensionNameValue" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"ExtensionNameValue"</span><span class="tAN"> type=</span><span class="tAV">"eml:ExtensionNameValue"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Extensions to the schema based on a name-value construct.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag"></a><div class="componentTitle">Complex Type <span class="qname">witsml:NameTag</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">WITSML - Equipment NameTag Schema.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_NameTag" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_NameTag');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_NameTag" style="display:block"><img alt="Diagram" border="0" src="img/WitsmlCommon_xsd_Complex_Type_witsml_NameTag.png" usemap="#WitsmlCommon_xsd_Complex_Type_witsml_NameTag" /><map name="WitsmlCommon_xsd_Complex_Type_witsml_NameTag" id="WitsmlCommon_xsd_Complex_Type_witsml_NameTag"><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_uid" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_uid" coords="167,38,235,62" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_Name" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Name" coords="245,109,306,133" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_NumberingScheme" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_NumberingScheme" coords="245,186,377,210" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_Technology" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Technology" coords="245,263,339,287" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_Location" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Location" coords="245,353,322,377" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_InstallationDate" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationDate" coords="245,443,359,467" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_InstallationCompany" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationCompany" coords="245,507,386,531" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_MountingCode" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_MountingCode" coords="245,571,355,595" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_Comment" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Comment" coords="245,648,328,672" /><area alt="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.tmp#NameTag_ExtensionNameValue" href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_ExtensionNameValue" coords="245,712,388,736" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_NameTag" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_NameTag');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_NameTag" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/witsml:NameTag')">witsml:TubularComponent/witsml:NameTag</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_NameTag" type="image" src="img/btM.gif" value="-" onclick="switchState('model_NameTag');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_NameTag" style="display:block"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Name')">witsml:Name</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_NumberingScheme" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NumberingScheme')">witsml:NumberingScheme</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Technology" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Technology{0,1}')">witsml:Technology{0,1}</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Location" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Location{0,1}')">witsml:Location{0,1}</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationDate" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:InstallationDate{0,1}')">witsml:InstallationDate{0,1}</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationCompany" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:InstallationCompany{0,1}')">witsml:InstallationCompany{0,1}</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_MountingCode" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MountingCode{0,1}')">witsml:MountingCode{0,1}</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Comment" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Comment{0,1}')">witsml:Comment{0,1}</a></b> , <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_ExtensionNameValue" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionNameValue*')">witsml:ExtensionNameValue*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Comment" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Comment')">witsml:Comment</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_ExtensionNameValue" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionNameValue')">witsml:ExtensionNameValue</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationCompany" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:InstallationCompany')">witsml:InstallationCompany</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_InstallationDate" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:InstallationDate')">witsml:InstallationDate</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Location" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Location')">witsml:Location</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_MountingCode" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MountingCode')">witsml:MountingCode</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Name" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Name')">witsml:Name</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_NumberingScheme" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NumberingScheme')">witsml:NumberingScheme</a></b>, <b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_Technology" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Technology')">witsml:Technology</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_NameTag" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_NameTag');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_NameTag" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uid')">uid</a></b></td>
+                                    <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Unique identifier for this instance of NameTag.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:complexType</span><span class="tAN"> name=</span><span class="tAV">"NameTag"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">WITSML - Equipment NameTag Schema.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Name"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The physical identification string of the equipment tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"NumberingScheme"</span><span class="tAN"> type=</span><span class="tAV">"witsml:NameTagNumberingScheme"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The format or encoding specification of the equipment tag. The tag may contain different pieces of information and knowledge of that information is inherent in the specification. The "identification string" is a mandatory part of the information in a tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Technology"</span><span class="tAN"> type=</span><span class="tAV">"witsml:NameTagTechnology"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Identifies the general type of identifier on an item. If multiple identifiers exist on an item, a separate description set for each identifier should be created. For example, a joint of casing may have a barcode label on it along with a painted-on code and an RFID tag attached or embedded into the coupling. The barcode label may in turn be an RFID-equipped label. This particular scenario would require populating five nameTags to fully describe and decode all the possible identifiers as follows: 'tagged' - RFID tag embedded in the coupling, 'label' - Serial number printed on the label, 'tagged' - RFID tag embedded into the label, 'label' - Barcode printed on the label, 'painted'- Mill number painted on the pipe body.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Location"</span><span class="tAN"> type=</span><span class="tAV">"witsml:NameTagLocation"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An indicator of where the tag is attached to the item. This is used to assist the user in finding where an identifier is located on an item. This optional field also helps to differentiate where an identifier is located when multiple identifiers exist on an item. Most downhole components have a box (female thread) and pin (male thread) end as well as a pipe body in between the ends. Where multiple identifiers are used on an item, it is convenient to have a reference as to which end, or somewhere in the middle, an identifier may be closer to. Some items may have an identifier on a non-standard location, such as on the arm of a hole opener. 'other', by exclusion, tells a user to look elsewhere than on the body or near the ends of an item. Most non-downhole tools use either 'body', 'other' or not specified because the location tends to lose value with smaller or non threaded items.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"InstallationDate"</span><span class="tAN"> type=</span><span class="tAV">"eml:TimeStamp"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">When the tag was installed in or on the item.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"InstallationCompany"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the company that installed the tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"MountingCode"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Reference to a manufacturer's or installer's installation description, code, or method.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Comment"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A comment or remark about the tag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"ExtensionNameValue"</span><span class="tAN"> type=</span><span class="tAV">"eml:ExtensionNameValue"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Extensions to the schema based on a name-value construct.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:sequence&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"uid"</span><span class="tAN"> use=</span><span class="tAV">"required"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Unique identifier for this instance of NameTag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:attribute&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="NameTag_uid"></a><div class="componentTitle">Attribute <span class="qname"><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b> / @uid</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_NameTag_uid" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_NameTag_uid');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_NameTag_uid" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Unique identifier for this instance of NameTag.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_NameTag_uid" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_NameTag_uid');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_NameTag_uid" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">use</td>
+                                    <td><b>required</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_NameTag_uid" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_NameTag_uid');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_NameTag_uid" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_NameTag_uid" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_NameTag_uid');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_NameTag_uid" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="WitsmlCommon_xsd_Complex_Type_witsml_NameTag.html#NameTag" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:NameTag')">witsml:NameTag</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_NameTag_uid" type="image" src="img/btM.gif" value="-" onclick="switchState('source_NameTag_uid');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_NameTag_uid" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"uid"</span><span class="tAN"> use=</span><span class="tAV">"required"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Unique identifier for this instance of NameTag.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attribute&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
