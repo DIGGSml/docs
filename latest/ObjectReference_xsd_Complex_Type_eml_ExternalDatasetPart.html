@@ -1,0 +1,888 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component eml:Count</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_ExternalDatasetPart_Count', 
+				'properties_ExternalDatasetPart_PathInExternalFile', 
+				'properties_ExternalDatasetPart_StartIndex', 
+				'properties_ExternalDatasetPart_EpcExternalPartReference');
+var facetsBoxes= new Array('facets_ExternalDatasetPart_Count', 
+				'facets_ExternalDatasetPart_PathInExternalFile', 
+				'facets_ExternalDatasetPart_StartIndex');
+var usedByBoxes= new Array('usedBy_ExternalDatasetPart');
+var sourceBoxes= new Array('source_ExternalDatasetPart_Count', 
+				'source_ExternalDatasetPart_PathInExternalFile', 
+				'source_ExternalDatasetPart_StartIndex', 
+				'source_ExternalDatasetPart_EpcExternalPartReference', 
+				'source_ExternalDatasetPart');
+var instanceBoxes= new Array('instance_ExternalDatasetPart_EpcExternalPartReference');
+var diagramBoxes= new Array('diagram_ExternalDatasetPart_Count', 
+				'diagram_ExternalDatasetPart_PathInExternalFile', 
+				'diagram_ExternalDatasetPart_StartIndex', 
+				'diagram_ExternalDatasetPart_EpcExternalPartReference', 
+				'diagram_ExternalDatasetPart');
+var annotationBoxes= new Array('annotations_ExternalDatasetPart_PathInExternalFile');
+var modelBoxes= new Array('model_ExternalDatasetPart_EpcExternalPartReference', 
+				'model_ExternalDatasetPart');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ExternalDatasetPart_Count"></a><div class="componentTitle">Element <span class="qname"><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExternalDatasetPart')">eml:ExternalDatasetPart</a></b> / eml:Count</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ExternalDatasetPart_Count" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ExternalDatasetPart_Count');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ExternalDatasetPart_Count" style="display:block"><img alt="Diagram" border="0" src="img/ObjectReference_xsd_Element_eml_Count.png" usemap="#ObjectReference_xsd_Element_eml_Count" /><map name="ObjectReference_xsd_Element_eml_Count" id="ObjectReference_xsd_Element_eml_Count"><area alt="BaseTypes_xsd_Simple_Type_eml_PositiveLong.tmp#PositiveLong" href="BaseTypes_xsd_Simple_Type_eml_PositiveLong.html#PositiveLong" coords="92,0,237,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_PositiveLong.html#PositiveLong" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PositiveLong')">eml:PositiveLong</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ExternalDatasetPart_Count" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ExternalDatasetPart_Count');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ExternalDatasetPart_Count" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ExternalDatasetPart_Count" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ExternalDatasetPart_Count');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ExternalDatasetPart_Count" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">minInclusive</td>
+                                    <td width="30%"><b>1</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ExternalDatasetPart_Count" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ExternalDatasetPart_Count');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ExternalDatasetPart_Count" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Count"</span><span class="tAN"> type=</span><span class="tAV">"eml:PositiveLong"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ExternalDatasetPart_PathInExternalFile"></a><div class="componentTitle">Element <span class="qname"><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExternalDatasetPart')">eml:ExternalDatasetPart</a></b> / eml:PathInExternalFile</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ExternalDatasetPart_PathInExternalFile" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ExternalDatasetPart_PathInExternalFile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ExternalDatasetPart_PathInExternalFile" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A string which is meaningful to the API which will store and retrieve data from the external file.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">For an HDF file this is the path of the referenced dataset in the external file. The separator between groups and final dataset is a slash '/' in an hdf file.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">For a LAS file this could be the list of mnemonics in the ~A block.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">For a SEG-Y file this could be a list of trace headers.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ExternalDatasetPart_PathInExternalFile" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ExternalDatasetPart_PathInExternalFile');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ExternalDatasetPart_PathInExternalFile" style="display:block"><img alt="Diagram" border="0" src="img/ObjectReference_xsd_Element_eml_PathInExternalFile.png" usemap="#ObjectReference_xsd_Element_eml_PathInExternalFile" /><map name="ObjectReference_xsd_Element_eml_PathInExternalFile" id="ObjectReference_xsd_Element_eml_PathInExternalFile"><area alt="BaseTypes_xsd_Simple_Type_eml_String2000.tmp#String2000" href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" coords="174,0,311,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ExternalDatasetPart_PathInExternalFile" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ExternalDatasetPart_PathInExternalFile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ExternalDatasetPart_PathInExternalFile" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ExternalDatasetPart_PathInExternalFile" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ExternalDatasetPart_PathInExternalFile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ExternalDatasetPart_PathInExternalFile" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>2000</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ExternalDatasetPart_PathInExternalFile" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ExternalDatasetPart_PathInExternalFile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ExternalDatasetPart_PathInExternalFile" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"PathInExternalFile"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A string which is meaningful to the API which will store and retrieve data from the external file. For an HDF file this is the path of the referenced dataset in the external file. The separator between groups and final dataset is a slash '/' in an hdf file. For a LAS file this could be the list of mnemonics in the ~A block. For a SEG-Y file this could be a list of trace headers.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ExternalDatasetPart_StartIndex"></a><div class="componentTitle">Element <span class="qname"><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExternalDatasetPart')">eml:ExternalDatasetPart</a></b> / eml:StartIndex</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ExternalDatasetPart_StartIndex" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ExternalDatasetPart_StartIndex');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ExternalDatasetPart_StartIndex" style="display:block"><img alt="Diagram" border="0" src="img/ObjectReference_xsd_Element_eml_StartIndex.png" usemap="#ObjectReference_xsd_Element_eml_StartIndex" /><map name="ObjectReference_xsd_Element_eml_StartIndex" id="ObjectReference_xsd_Element_eml_StartIndex"><area alt="BaseTypes_xsd_Simple_Type_eml_NonNegativeLong.tmp#NonNegativeLong" href="BaseTypes_xsd_Simple_Type_eml_NonNegativeLong.html#NonNegativeLong" coords="114,0,286,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_NonNegativeLong.html#NonNegativeLong" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:NonNegativeLong')">eml:NonNegativeLong</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ExternalDatasetPart_StartIndex" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ExternalDatasetPart_StartIndex');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ExternalDatasetPart_StartIndex" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ExternalDatasetPart_StartIndex" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_ExternalDatasetPart_StartIndex');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ExternalDatasetPart_StartIndex" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">minInclusive</td>
+                                    <td width="30%"><b>0</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ExternalDatasetPart_StartIndex" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ExternalDatasetPart_StartIndex');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ExternalDatasetPart_StartIndex" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"StartIndex"</span><span class="tAN"> type=</span><span class="tAV">"eml:NonNegativeLong"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ExternalDatasetPart_EpcExternalPartReference"></a><div class="componentTitle">Element <span class="qname"><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExternalDatasetPart')">eml:ExternalDatasetPart</a></b> / eml:EpcExternalPartReference</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ExternalDatasetPart_EpcExternalPartReference" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ExternalDatasetPart_EpcExternalPartReference');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ExternalDatasetPart_EpcExternalPartReference" style="display:block"><img alt="Diagram" border="0" src="img/ObjectReference_xsd_Element_eml_EpcExternalPartReference.png" usemap="#ObjectReference_xsd_Element_eml_EpcExternalPartReference" /><map name="ObjectReference_xsd_Element_eml_EpcExternalPartReference" id="ObjectReference_xsd_Element_eml_EpcExternalPartReference"><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference_ContentType" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_ContentType" coords="281,40,381,64" /><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference_Title" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Title" coords="281,104,335,128" /><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference_Uuid" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Uuid" coords="281,194,337,218" /><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference_UuidAuthority" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_UuidAuthority" coords="281,258,388,282" /><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference_Uri" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Uri" coords="281,335,332,359" /><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference_VersionString" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_VersionString" coords="281,425,385,449" /><area alt="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.tmp#DataObjectReference" href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference" coords="199,3,384,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataObjectReference')">eml:DataObjectReference</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ExternalDatasetPart_EpcExternalPartReference" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ExternalDatasetPart_EpcExternalPartReference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ExternalDatasetPart_EpcExternalPartReference" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ExternalDatasetPart_EpcExternalPartReference" type="image" src="img/btM.gif" value="-" onclick="switchState('model_ExternalDatasetPart_EpcExternalPartReference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ExternalDatasetPart_EpcExternalPartReference" style="display:block"><b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_ContentType" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ContentType')">eml:ContentType</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Title" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Title')">eml:Title</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Uuid" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Uuid')">eml:Uuid</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_UuidAuthority" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:UuidAuthority{0,1}')">eml:UuidAuthority{0,1}</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Uri" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Uri{0,1}')">eml:Uri{0,1}</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_VersionString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VersionString{0,1}')">eml:VersionString{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_ContentType" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ContentType')">eml:ContentType</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Title" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Title')">eml:Title</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Uri" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Uri')">eml:Uri</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_Uuid" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Uuid')">eml:Uuid</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_UuidAuthority" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:UuidAuthority')">eml:UuidAuthority</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_DataObjectReference.html#DataObjectReference_VersionString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VersionString')">eml:VersionString</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_ExternalDatasetPart_EpcExternalPartReference" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_ExternalDatasetPart_EpcExternalPartReference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_ExternalDatasetPart_EpcExternalPartReference" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;eml:EpcExternalPartReference</span><span class="tT"> </span><span class="tAN">xmlns:eml=</span><span class="tAV">"http://www.energistics.org/energyml/data/commonv2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:ContentType</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/eml:ContentType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Title</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/eml:Title&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Uuid</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/eml:Uuid&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:UuidAuthority</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:UuidAuthority&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:Uri</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:Uri&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;eml:VersionString</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/eml:VersionString&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/eml:EpcExternalPartReference&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ExternalDatasetPart_EpcExternalPartReference" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ExternalDatasetPart_EpcExternalPartReference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ExternalDatasetPart_EpcExternalPartReference" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"EpcExternalPartReference"</span><span class="tAN"> type=</span><span class="tAV">"eml:DataObjectReference"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ExternalDatasetPart"></a><div class="componentTitle">Complex Type <span class="qname">eml:ExternalDatasetPart</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ExternalDatasetPart" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ExternalDatasetPart');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ExternalDatasetPart" style="display:block"><img alt="Diagram" border="0" src="img/ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.png" usemap="#ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart" /><map name="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart" id="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart"><area alt="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.tmp#ExternalDatasetPart_Count" href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_Count" coords="259,0,323,24" /><area alt="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.tmp#ExternalDatasetPart_PathInExternalFile" href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_PathInExternalFile" coords="259,34,385,58" /><area alt="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.tmp#ExternalDatasetPart_StartIndex" href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_StartIndex" coords="259,111,345,135" /><area alt="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.tmp#ExternalDatasetPart_EpcExternalPartReference" href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_EpcExternalPartReference" coords="259,145,427,169" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_ExternalDatasetPart" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_ExternalDatasetPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_ExternalDatasetPart" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDataset.html#ExternalDataset_ExternalFileProxy" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ExternalDataset/eml:ExternalFileProxy')">eml:ExternalDataset/eml:ExternalFileProxy</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ExternalDatasetPart" type="image" src="img/btM.gif" value="-" onclick="switchState('model_ExternalDatasetPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ExternalDatasetPart" style="display:block"><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_Count" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Count')">eml:Count</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_PathInExternalFile" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PathInExternalFile')">eml:PathInExternalFile</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_StartIndex" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:StartIndex')">eml:StartIndex</a></b> , <b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_EpcExternalPartReference" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EpcExternalPartReference')">eml:EpcExternalPartReference</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_Count" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Count')">eml:Count</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_EpcExternalPartReference" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EpcExternalPartReference')">eml:EpcExternalPartReference</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_PathInExternalFile" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PathInExternalFile')">eml:PathInExternalFile</a></b>, <b><a href="ObjectReference_xsd_Complex_Type_eml_ExternalDatasetPart.html#ExternalDatasetPart_StartIndex" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:StartIndex')">eml:StartIndex</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ExternalDatasetPart" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ExternalDatasetPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ExternalDatasetPart" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:complexType</span><span class="tAN"> name=</span><span class="tAV">"ExternalDatasetPart"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Count"</span><span class="tAN"> type=</span><span class="tAV">"eml:PositiveLong"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"PathInExternalFile"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A string which is meaningful to the API which will store and retrieve data from the external file. For an HDF file this is the path of the referenced dataset in the external file. The separator between groups and final dataset is a slash '/' in an hdf file. For a LAS file this could be the list of mnemonics in the ~A block. For a SEG-Y file this could be a list of trace headers.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"StartIndex"</span><span class="tAN"> type=</span><span class="tAV">"eml:NonNegativeLong"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"EpcExternalPartReference"</span><span class="tAN"> type=</span><span class="tAV">"eml:DataObjectReference"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

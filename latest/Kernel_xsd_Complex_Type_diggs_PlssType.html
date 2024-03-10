@@ -1,0 +1,1660 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:township</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_PlssType_township', 
+				'properties_PlssType_range', 
+				'properties_PlssType_section', 
+				'properties_PlssType_aliquotPart', 
+				'properties_PlssType_governmentLot', 
+				'properties_PlssType_baseAndMeridian', 
+				'properties_PlssType_landGrant');
+var usedByBoxes= new Array('usedBy_PlssType');
+var sourceBoxes= new Array('source_PlssType_township', 
+				'source_PlssType_range', 
+				'source_PlssType_section', 
+				'source_PlssType_aliquotPart', 
+				'source_PlssType_governmentLot', 
+				'source_PlssType_baseAndMeridian', 
+				'source_PlssType_landGrant', 
+				'source_PlssType');
+var diagramBoxes= new Array('diagram_PlssType_township', 
+				'diagram_PlssType_range', 
+				'diagram_PlssType_section', 
+				'diagram_PlssType_aliquotPart', 
+				'diagram_PlssType_governmentLot', 
+				'diagram_PlssType_baseAndMeridian', 
+				'diagram_PlssType_landGrant', 
+				'diagram_PlssType');
+var annotationBoxes= new Array('annotations_PlssType_township', 
+				'annotations_PlssType_range', 
+				'annotations_PlssType_section', 
+				'annotations_PlssType_aliquotPart', 
+				'annotations_PlssType_governmentLot', 
+				'annotations_PlssType_baseAndMeridian', 
+				'annotations_PlssType_landGrant');
+var attributesBoxes= new Array('attributes_PlssType_township', 
+				'attributes_PlssType_range', 
+				'attributes_PlssType_section', 
+				'attributes_PlssType_aliquotPart', 
+				'attributes_PlssType_governmentLot', 
+				'attributes_PlssType_baseAndMeridian', 
+				'attributes_PlssType_landGrant', 
+				'attributes_PlssType');
+var modelBoxes= new Array('model_PlssType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="PlssType_township"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:township</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_township" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_township');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_township" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">An approximately 6-mile square area of land, containing</span><span class="tI">
+</span><span class="tT">36 sections. Also, a horizontal row of townships in the</span><span class="tI">
+</span><span class="tT">PLSS.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_township" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_township');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_township" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_township.png" usemap="#Kernel_xsd_Element_diggs_township" /><map name="Kernel_xsd_Element_diggs_township" id="Kernel_xsd_Element_diggs_township"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="156,157,250,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="131,3,304,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_township" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_township');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_township" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_township" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_township');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_township" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_township" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_township');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_township" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"township"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An approximately 6-mile square area of land, containing 36 sections. Also, a horizontal row of townships in the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType_range"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:range</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_range" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_range');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_range" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A vertical column of townships in the</span><span class="tI">
+</span><span class="tT">PLSS.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_range" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_range');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_range" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_range.png" usemap="#Kernel_xsd_Element_diggs_range" /><map name="Kernel_xsd_Element_diggs_range" id="Kernel_xsd_Element_diggs_range"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="138,157,232,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="113,3,286,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_range" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_range');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_range" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_range" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_range');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_range" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_range" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_range');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_range" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"range"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A vertical column of townships in the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType_section"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:section</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_section" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_section');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_section" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The name of the section; a one-square-mile block of land,</span><span class="tI">
+</span><span class="tT">containing 640 acres, or approximately one thirty-sixth of a</span><span class="tI">
+</span><span class="tT">township. Due to the curvature of the Earth, sections may</span><span class="tI">
+</span><span class="tT">occasionally be slightly smaller than one square</span><span class="tI">
+</span><span class="tT">mile.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_section" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_section');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_section" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_section.png" usemap="#Kernel_xsd_Element_diggs_section" /><map name="Kernel_xsd_Element_diggs_section" id="Kernel_xsd_Element_diggs_section"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="146,157,240,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="121,3,294,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_section" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_section');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_section" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_section" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_section');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_section" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_section" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_section');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_section" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"section"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the section; a one-square-mile block of land, containing 640 acres, or approximately one thirty-sixth of a township. Due to the curvature of the Earth, sections may occasionally be slightly smaller than one square mile.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType_aliquotPart"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:aliquotPart</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_aliquotPart" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_aliquotPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_aliquotPart" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The name of the standard subdivisions of a section, such</span><span class="tI">
+</span><span class="tT">as a half section, quarter section, or quarter-quarter</span><span class="tI">
+</span><span class="tT">section.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_aliquotPart" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_aliquotPart');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_aliquotPart" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_aliquotPart.png" usemap="#Kernel_xsd_Element_diggs_aliquotPart" /><map name="Kernel_xsd_Element_diggs_aliquotPart" id="Kernel_xsd_Element_diggs_aliquotPart"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="165,157,259,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="140,3,313,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_aliquotPart" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_aliquotPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_aliquotPart" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_aliquotPart" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_aliquotPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_aliquotPart" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_aliquotPart" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_aliquotPart');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_aliquotPart" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"aliquotPart"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the standard subdivisions of a section, such as a half section, quarter section, or quarter-quarter section.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType_governmentLot"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:governmentLot</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_governmentLot" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_governmentLot');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_governmentLot" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The name of a subpart of a section which is not described</span><span class="tI">
+</span><span class="tT">as an aliquot part of the section, but which is designated by</span><span class="tI">
+</span><span class="tT">number, for example, Lot 3. A lot may be regular or irregular in</span><span class="tI">
+</span><span class="tT">shape, and its acreage may vary from that of regular aliquot parts.</span><span class="tI">
+</span><span class="tT">These lots frequently border water areas excluded from the</span><span class="tI">
+</span><span class="tT">PLSS.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_governmentLot" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_governmentLot');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_governmentLot" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_governmentLot.png" usemap="#Kernel_xsd_Element_diggs_governmentLot" /><map name="Kernel_xsd_Element_diggs_governmentLot" id="Kernel_xsd_Element_diggs_governmentLot"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="189,157,283,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="164,3,337,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_governmentLot" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_governmentLot');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_governmentLot" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_governmentLot" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_governmentLot');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_governmentLot" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_governmentLot" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_governmentLot');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_governmentLot" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"governmentLot"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of a subpart of a section which is not described as an aliquot part of the section, but which is designated by number, for example, Lot 3. A lot may be regular or irregular in shape, and its acreage may vary from that of regular aliquot parts. These lots frequently border water areas excluded from the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType_baseAndMeridian"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:baseAndMeridian</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_baseAndMeridian" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_baseAndMeridian');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_baseAndMeridian" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The name of the point chosen as the starting point for</span><span class="tI">
+</span><span class="tT">all sectionalized land within a given area. Ths point is located at</span><span class="tI">
+</span><span class="tT">the intersection of a base line (parallel of latitude, or</span><span class="tI">
+</span><span class="tT">approximately a parallel of latitude), and a principal</span><span class="tI">
+</span><span class="tT">meridian.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_baseAndMeridian" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_baseAndMeridian');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_baseAndMeridian" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_baseAndMeridian.png" usemap="#Kernel_xsd_Element_diggs_baseAndMeridian" /><map name="Kernel_xsd_Element_diggs_baseAndMeridian" id="Kernel_xsd_Element_diggs_baseAndMeridian"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="200,157,294,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="175,3,348,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_baseAndMeridian" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_baseAndMeridian');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_baseAndMeridian" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_baseAndMeridian" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_baseAndMeridian');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_baseAndMeridian" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_baseAndMeridian" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_baseAndMeridian');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_baseAndMeridian" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"baseAndMeridian"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the point chosen as the starting point for all sectionalized land within a given area. Ths point is located at the intersection of a base line (parallel of latitude, or approximately a parallel of latitude), and a principal meridian.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType_landGrant"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b> / diggs:landGrant</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PlssType_landGrant" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PlssType_landGrant');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PlssType_landGrant" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The name of an area of land to which title was conferred</span><span class="tI">
+</span><span class="tT">by a predecessor government and confirmed by the U.S Government</span><span class="tI">
+</span><span class="tT">after the territory in which it is situated was acquired by the</span><span class="tI">
+</span><span class="tT">United States. These lands were never part of the original public</span><span class="tI">
+</span><span class="tT">domain and were not subject to subdivision by the</span><span class="tI">
+</span><span class="tT">PLSS.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType_landGrant" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType_landGrant');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType_landGrant" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_landGrant.png" usemap="#Kernel_xsd_Element_diggs_landGrant" /><map name="Kernel_xsd_Element_diggs_landGrant" id="Kernel_xsd_Element_diggs_landGrant"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="160,157,254,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="135,3,308,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PlssType_landGrant" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PlssType_landGrant');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PlssType_landGrant" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType_landGrant" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType_landGrant');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType_landGrant" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType_landGrant" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType_landGrant');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType_landGrant" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"landGrant"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of an area of land to which title was conferred by a predecessor government and confirmed by the U.S Government after the territory in which it is situated was acquired by the United States. These lands were never part of the original public domain and were not subject to subdivision by the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PlssType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:PlssType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PlssType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PlssType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PlssType" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Complex_Type_diggs_PlssType.png" usemap="#Kernel_xsd_Complex_Type_diggs_PlssType" /><map name="Kernel_xsd_Complex_Type_diggs_PlssType" id="Kernel_xsd_Complex_Type_diggs_PlssType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="186,158,267,182" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="349,299,464,323" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="349,389,517,413" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="349,466,451,490" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="349,556,432,580" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="246,258,462,284" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="161,83,425,105" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="172,698,253,722" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="229,795,344,819" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="229,885,331,909" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="147,43,454,65" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="158,1020,252,1044" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="236,1117,319,1141" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" coords="236,1207,300,1231" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" coords="236,1297,305,1321" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" coords="133,3,416,25" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_township" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_township" coords="201,1394,281,1418" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_range" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_range" coords="201,1484,263,1508" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_section" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_section" coords="201,1548,271,1572" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_aliquotPart" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_aliquotPart" coords="201,1638,290,1662" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_governmentLot" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_governmentLot" coords="201,1728,314,1752" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_baseAndMeridian" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_baseAndMeridian" coords="201,1818,325,1842" /><area alt="Kernel_xsd_Complex_Type_diggs_PlssType.tmp#PlssType_landGrant" href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_landGrant" coords="201,1895,285,1919" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PlssType')">diggs:PlssType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_PlssType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_PlssType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_PlssType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Kernel_xsd_Element_diggs_PLSS.html#PLSS" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:PLSS')">diggs:PLSS</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PlssType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PlssType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PlssType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_township" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:township{0,1}')">diggs:township{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_range" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:range{0,1}')">diggs:range{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_section" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:section{0,1}')">diggs:section{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_aliquotPart" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:aliquotPart{0,1}')">diggs:aliquotPart{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_governmentLot" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:governmentLot{0,1}')">diggs:governmentLot{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_baseAndMeridian" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:baseAndMeridian{0,1}')">diggs:baseAndMeridian{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_landGrant" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:landGrant{0,1}')">diggs:landGrant{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_aliquotPart" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:aliquotPart')">diggs:aliquotPart</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_baseAndMeridian" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:baseAndMeridian')">diggs:baseAndMeridian</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_governmentLot" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:governmentLot')">diggs:governmentLot</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_landGrant" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:landGrant')">diggs:landGrant</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_range" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:range')">diggs:range</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_section" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:section')">diggs:section</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_PlssType.html#PlssType_township" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:township')">diggs:township</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PlssType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PlssType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PlssType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PlssType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PlssType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PlssType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"PlssType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"township"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An approximately 6-mile square area of land, containing 36 sections. Also, a horizontal row of townships in the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"range"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A vertical column of townships in the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"section"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the section; a one-square-mile block of land, containing 640 acres, or approximately one thirty-sixth of a township. Due to the curvature of the Earth, sections may occasionally be slightly smaller than one square mile.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"aliquotPart"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the standard subdivisions of a section, such as a half section, quarter section, or quarter-quarter section.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"governmentLot"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of a subpart of a section which is not described as an aliquot part of the section, but which is designated by number, for example, Lot 3. A lot may be regular or irregular in shape, and its acreage may vary from that of regular aliquot parts. These lots frequently border water areas excluded from the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"baseAndMeridian"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of the point chosen as the starting point for all sectionalized land within a given area. Ths point is located at the intersection of a base line (parallel of latitude, or approximately a parallel of latitude), and a principal meridian.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"landGrant"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name of an area of land to which title was conferred by a predecessor government and confirmed by the U.S Government after the territory in which it is situated was acquired by the United States. These lands were never part of the original public domain and were not subject to subdivision by the PLSS.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

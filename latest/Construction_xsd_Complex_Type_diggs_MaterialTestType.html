@@ -1,0 +1,1349 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:samplingTime</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_MaterialTestType_samplingTime', 
+				'properties_MaterialTestType_resultTime', 
+				'properties_MaterialTestType_validTime', 
+				'properties_MaterialTestType_outcome', 
+				'properties_MaterialTestType_procedure');
+var usedByBoxes= new Array('usedBy_MaterialTestType');
+var sourceBoxes= new Array('source_MaterialTestType_samplingTime', 
+				'source_MaterialTestType_resultTime', 
+				'source_MaterialTestType_validTime', 
+				'source_MaterialTestType_outcome', 
+				'source_MaterialTestType_procedure', 
+				'source_MaterialTestType');
+var instanceBoxes= new Array('instance_MaterialTestType_samplingTime', 
+				'instance_MaterialTestType_resultTime', 
+				'instance_MaterialTestType_validTime', 
+				'instance_MaterialTestType_outcome', 
+				'instance_MaterialTestType_procedure');
+var diagramBoxes= new Array('diagram_MaterialTestType_samplingTime', 
+				'diagram_MaterialTestType_resultTime', 
+				'diagram_MaterialTestType_validTime', 
+				'diagram_MaterialTestType_outcome', 
+				'diagram_MaterialTestType_procedure', 
+				'diagram_MaterialTestType');
+var annotationBoxes= new Array('annotations_MaterialTestType_samplingTime', 
+				'annotations_MaterialTestType_resultTime', 
+				'annotations_MaterialTestType_validTime', 
+				'annotations_MaterialTestType_outcome');
+var attributesBoxes= new Array('attributes_MaterialTestType_procedure', 
+				'attributes_MaterialTestType');
+var modelBoxes= new Array('model_MaterialTestType_samplingTime', 
+				'model_MaterialTestType_resultTime', 
+				'model_MaterialTestType_validTime', 
+				'model_MaterialTestType_outcome', 
+				'model_MaterialTestType_procedure', 
+				'model_MaterialTestType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="MaterialTestType_samplingTime"></a><div class="componentTitle">Element <span class="qname"><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestType')">diggs:MaterialTestType</a></b> / diggs:samplingTime</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MaterialTestType_samplingTime" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MaterialTestType_samplingTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MaterialTestType_samplingTime" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Describes the time that the result applies to the</span><span class="tI">
+</span><span class="tT">property of the investigation target. This is often the time of</span><span class="tI">
+</span><span class="tT">interaction by a sampling activity or measurement procedure with a</span><span class="tI">
+</span><span class="tT">real-world feature.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MaterialTestType_samplingTime" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MaterialTestType_samplingTime');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MaterialTestType_samplingTime" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Element_diggs_samplingTime.png" usemap="#Construction_xsd_Element_diggs_samplingTime" /><map name="Construction_xsd_Element_diggs_samplingTime" id="Construction_xsd_Element_diggs_samplingTime"><area alt="Kernel_xsd_Element_diggs_TimeInterval.tmp#TimeInterval" href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" coords="239,40,369,64" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.tmp#TimeInstant" href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" coords="239,117,356,141" /><area alt="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.tmp#TimeIntervalOrInstantPropertyType" href="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.html#TimeIntervalOrInstantPropertyType" coords="157,3,430,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.html#TimeIntervalOrInstantPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeIntervalOrInstantPropertyType')">diggs:TimeIntervalOrInstantPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MaterialTestType_samplingTime" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MaterialTestType_samplingTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MaterialTestType_samplingTime" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MaterialTestType_samplingTime" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MaterialTestType_samplingTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MaterialTestType_samplingTime" style="display:block"><b><a href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b> | <b><a href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:TimeInstant')">gml:TimeInstant</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:TimeInstant')">gml:TimeInstant</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_MaterialTestType_samplingTime" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_MaterialTestType_samplingTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_MaterialTestType_samplingTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:samplingTime</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:TimeInterval</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:TimeInterval&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:TimeInstant</span><span class="tT"> </span><span class="tAN">frame=</span><span class="tAV">"#ISO-8601"</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/gml:TimeInstant&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:samplingTime&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MaterialTestType_samplingTime" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MaterialTestType_samplingTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MaterialTestType_samplingTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalOrInstantPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Describes the time that the result applies to the property of the investigation target. This is often the time of interaction by a sampling activity or measurement procedure with a real-world feature.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MaterialTestType_resultTime"></a><div class="componentTitle">Element <span class="qname"><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestType')">diggs:MaterialTestType</a></b> / diggs:resultTime</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MaterialTestType_resultTime" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MaterialTestType_resultTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MaterialTestType_resultTime" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Describes the time when the result became available,</span><span class="tI">
+</span><span class="tT">typically when the procedure associated with the observation was</span><span class="tI">
+</span><span class="tT">completed. For some observations this is identical to the</span><span class="tI">
+</span><span class="tT">samplingTime. However, there are important cases where they differ.</span><span class="tI">
+</span><span class="tT">Example: Where a measurement is made on a specimen in a</span><span class="tI">
+</span><span class="tT">laboratory,the samplingTime should record the time the specimen was</span><span class="tI">
+</span><span class="tT">retrieved from its host, while the resultTime should record the time</span><span class="tI">
+</span><span class="tT">the laboratory procedure was applied. Example: Where monitoring</span><span class="tI">
+</span><span class="tT">observation results are post-processed, the resultTime is the</span><span class="tI">
+</span><span class="tT">post-processing time, while the samplingTime preserves the time of</span><span class="tI">
+</span><span class="tT">initial interaction with the world.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MaterialTestType_resultTime" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MaterialTestType_resultTime');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MaterialTestType_resultTime" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Element_diggs_resultTime.png" usemap="#Construction_xsd_Element_diggs_resultTime" /><map name="Construction_xsd_Element_diggs_resultTime" id="Construction_xsd_Element_diggs_resultTime"><area alt="Kernel_xsd_Element_diggs_TimeInterval.tmp#TimeInterval" href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" coords="221,40,351,64" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.tmp#TimeInstant" href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" coords="221,117,338,141" /><area alt="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.tmp#TimeIntervalOrInstantPropertyType" href="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.html#TimeIntervalOrInstantPropertyType" coords="139,3,412,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.html#TimeIntervalOrInstantPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeIntervalOrInstantPropertyType')">diggs:TimeIntervalOrInstantPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MaterialTestType_resultTime" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MaterialTestType_resultTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MaterialTestType_resultTime" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MaterialTestType_resultTime" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MaterialTestType_resultTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MaterialTestType_resultTime" style="display:block"><b><a href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b> | <b><a href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:TimeInstant')">gml:TimeInstant</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:TimeInstant')">gml:TimeInstant</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_MaterialTestType_resultTime" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_MaterialTestType_resultTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_MaterialTestType_resultTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:resultTime</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:TimeInterval</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:TimeInterval&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:TimeInstant</span><span class="tT"> </span><span class="tAN">frame=</span><span class="tAV">"#ISO-8601"</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/gml:TimeInstant&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:resultTime&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MaterialTestType_resultTime" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MaterialTestType_resultTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MaterialTestType_resultTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"resultTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalOrInstantPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Describes the time when the result became available, typically when the procedure associated with the observation was completed. For some observations this is identical to the samplingTime. However, there are important cases where they differ. Example: Where a measurement is made on a specimen in a laboratory,the samplingTime should record the time the specimen was retrieved from its host, while the resultTime should record the time the laboratory procedure was applied. Example: Where monitoring observation results are post-processed, the resultTime is the post-processing time, while the samplingTime preserves the time of initial interaction with the world.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MaterialTestType_validTime"></a><div class="componentTitle">Element <span class="qname"><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestType')">diggs:MaterialTestType</a></b> / diggs:validTime</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MaterialTestType_validTime" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MaterialTestType_validTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MaterialTestType_validTime" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Describes the time period during which the result is</span><span class="tI">
+</span><span class="tT">intended to be used.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MaterialTestType_validTime" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MaterialTestType_validTime');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MaterialTestType_validTime" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Element_diggs_validTime.png" usemap="#Construction_xsd_Element_diggs_validTime" /><map name="Construction_xsd_Element_diggs_validTime" id="Construction_xsd_Element_diggs_validTime"><area alt="Kernel_xsd_Element_diggs_TimeInterval.tmp#TimeInterval" href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" coords="215,40,345,64" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.tmp#TimeInstant" href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" coords="215,117,332,141" /><area alt="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.tmp#TimeIntervalOrInstantPropertyType" href="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.html#TimeIntervalOrInstantPropertyType" coords="133,3,406,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_TimeIntervalOrInstantPropertyType.html#TimeIntervalOrInstantPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeIntervalOrInstantPropertyType')">diggs:TimeIntervalOrInstantPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MaterialTestType_validTime" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MaterialTestType_validTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MaterialTestType_validTime" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MaterialTestType_validTime" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MaterialTestType_validTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MaterialTestType_validTime" style="display:block"><b><a href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b> | <b><a href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:TimeInstant')">gml:TimeInstant</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_TimeInstant.html#TimeInstant" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:TimeInstant')">gml:TimeInstant</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_MaterialTestType_validTime" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_MaterialTestType_validTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_MaterialTestType_validTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:validTime</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:TimeInterval</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:TimeInterval&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:TimeInstant</span><span class="tT"> </span><span class="tAN">frame=</span><span class="tAV">"#ISO-8601"</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/gml:TimeInstant&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:validTime&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MaterialTestType_validTime" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MaterialTestType_validTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MaterialTestType_validTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"validTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalOrInstantPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Describes the time period during which the result is intended to be used.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MaterialTestType_outcome"></a><div class="componentTitle">Element <span class="qname"><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestType')">diggs:MaterialTestType</a></b> / diggs:outcome</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MaterialTestType_outcome" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MaterialTestType_outcome');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MaterialTestType_outcome" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A property that contains the information about what</span><span class="tI">
+</span><span class="tT">properties are being measured, the results of the measurement, and</span><span class="tI">
+</span><span class="tT">the associated locations that the measurement results relate</span><span class="tI">
+</span><span class="tT">to.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MaterialTestType_outcome" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MaterialTestType_outcome');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MaterialTestType_outcome" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Element_diggs_outcome.png" usemap="#Construction_xsd_Element_diggs_outcome" /><map name="Construction_xsd_Element_diggs_outcome" id="Construction_xsd_Element_diggs_outcome"><area alt="Construction_xsd_Element_diggs_MaterialTestResult.tmp#MaterialTestResult" href="Construction_xsd_Element_diggs_MaterialTestResult.html#MaterialTestResult" coords="211,44,373,68" /><area alt="Construction_xsd_Complex_Type_diggs_MaterialTestResultPropertyType.tmp#MaterialTestResultPropertyType" href="Construction_xsd_Complex_Type_diggs_MaterialTestResultPropertyType.html#MaterialTestResultPropertyType" coords="129,3,383,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestResultPropertyType.html#MaterialTestResultPropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestResultPropertyType')">diggs:MaterialTestResultPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MaterialTestType_outcome" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MaterialTestType_outcome');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MaterialTestType_outcome" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MaterialTestType_outcome" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MaterialTestType_outcome');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MaterialTestType_outcome" style="display:block"><b><a href="Construction_xsd_Element_diggs_MaterialTestResult.html#MaterialTestResult" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestResult')">diggs:MaterialTestResult</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Construction_xsd_Element_diggs_MaterialTestResult.html#MaterialTestResult" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestResult')">diggs:MaterialTestResult</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_MaterialTestType_outcome" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_MaterialTestType_outcome');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_MaterialTestType_outcome" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:outcome</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:MaterialTestResult</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:MaterialTestResult&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:outcome&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MaterialTestType_outcome" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MaterialTestType_outcome');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MaterialTestType_outcome" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"outcome"</span><span class="tAN"> type=</span><span class="tAV">"diggs:MaterialTestResultPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A property that contains the information about what properties are being measured, the results of the measurement, and the associated locations that the measurement results relate to.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MaterialTestType_procedure"></a><div class="componentTitle">Element <span class="qname"><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestType')">diggs:MaterialTestType</a></b> / diggs:procedure</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MaterialTestType_procedure" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MaterialTestType_procedure');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MaterialTestType_procedure" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Element_diggs_procedure.png" usemap="#Construction_xsd_Element_diggs_procedure" /><map name="Construction_xsd_Element_diggs_procedure" id="Construction_xsd_Element_diggs_procedure"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="146,81,369,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="146,181,364,207" /><area alt="Kernel_xsd_Element_diggs_AbstractProcedure.tmp#AbstractProcedure" href="Kernel_xsd_Element_diggs_AbstractProcedure.html#AbstractProcedure" coords="200,276,365,300" /><area alt="Kernel_xsd_Complex_Type_diggs_TestProcedurePropertyType.tmp#TestProcedurePropertyType" href="Kernel_xsd_Complex_Type_diggs_TestProcedurePropertyType.html#TestProcedurePropertyType" coords="118,3,352,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_TestProcedurePropertyType.html#TestProcedurePropertyType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TestProcedurePropertyType')">diggs:TestProcedurePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MaterialTestType_procedure" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MaterialTestType_procedure');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MaterialTestType_procedure" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MaterialTestType_procedure" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MaterialTestType_procedure');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MaterialTestType_procedure" style="display:block"><b><a href="Kernel_xsd_Element_diggs_AbstractProcedure.html#AbstractProcedure" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProcedure')">diggs:AbstractProcedure</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_AbstractProcedure.html#AbstractProcedure" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProcedure')">diggs:AbstractProcedure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_MaterialTestType_procedure" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_MaterialTestType_procedure');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_MaterialTestType_procedure" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:procedure</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractProcedure</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractProcedure&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:procedure&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MaterialTestType_procedure" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MaterialTestType_procedure');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MaterialTestType_procedure" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Fixed</th>
+                                       <th width="10%">Default</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_actuate.html#actuate" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:actuate')">xlink:actuate</a></b></td>
+                                    <td>restriction of <b>string</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">The 'actuate' attribute is used to communicate the desired timing </span><span class="tI">
+</span><span class="tT">of traversal from the starting resource to the ending resource; </span><span class="tI">
+</span><span class="tT">it's value should be treated as follows:</span><span class="tI">
+</span><span class="tT">onLoad - traverse to the ending resource immediately on loading </span><span class="tI">
+</span><span class="tT">         the starting resource </span><span class="tI">
+</span><span class="tT">onRequest - traverse from the starting resource to the ending </span><span class="tI">
+</span><span class="tT">            resource only on a post-loading event triggered for </span><span class="tI">
+</span><span class="tT">            this purpose </span><span class="tI">
+</span><span class="tT">other - behavior is unconstrained; examine other markup in link </span><span class="tI">
+</span><span class="tT">        for hints </span><span class="tI">
+</span><span class="tT">none - behavior is unconstrained</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_arcrole.html#arcrole" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:arcrole')">xlink:arcrole</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_role.html#role" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:role')">xlink:role</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_show.html#show" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:show')">xlink:show</a></b></td>
+                                    <td>restriction of <b>string</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">The 'show' attribute is used to communicate the desired presentation </span><span class="tI">
+</span><span class="tT">of the ending resource on traversal from the starting resource; it's </span><span class="tI">
+</span><span class="tT">value should be treated as follows: </span><span class="tI">
+</span><span class="tT">new - load ending resource in a new window, frame, pane, or other </span><span class="tI">
+</span><span class="tT">      presentation context</span><span class="tI">
+</span><span class="tT">replace - load the resource in the same window, frame, pane, or </span><span class="tI">
+</span><span class="tT">          other presentation context</span><span class="tI">
+</span><span class="tT">embed - load ending resource in place of the presentation of the </span><span class="tI">
+</span><span class="tT">        starting resource</span><span class="tI">
+</span><span class="tT">other - behavior is unconstrained; examine other markup in the </span><span class="tI">
+</span><span class="tT">        link for hints </span><span class="tI">
+</span><span class="tT">none - behavior is unconstrained</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_title.html#title" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:title')">xlink:title</a></b></td>
+                                    <td><b>string</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_Group_xlink_simpleLink.html#simpleLink_type" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:type')">xlink:type</a></b></td>
+                                    <td><b>string</b></td>
+                                    <td>simple</td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MaterialTestType_procedure" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MaterialTestType_procedure');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MaterialTestType_procedure" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"procedure"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TestProcedurePropertyType"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MaterialTestType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:MaterialTestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MaterialTestType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MaterialTestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MaterialTestType" style="display:block"><img alt="Diagram" border="0" src="img/Construction_xsd_Complex_Type_diggs_MaterialTestType.png" usemap="#Construction_xsd_Complex_Type_diggs_MaterialTestType" /><map name="Construction_xsd_Complex_Type_diggs_MaterialTestType" id="Construction_xsd_Complex_Type_diggs_MaterialTestType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="258,238,339,262" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="421,379,536,403" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="421,469,589,493" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="421,546,523,570" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="421,636,504,660" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="318,338,534,364" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="233,163,494,185" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#http___www.opengis.net_gml_3.2_AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" coords="219,123,500,145" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="230,870,311,894" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="287,954,402,978" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="287,1044,389,1068" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="205,83,517,105" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="216,1179,310,1203" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="294,1276,377,1300" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_internalIdentifier" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" coords="294,1366,414,1390" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" coords="294,1443,358,1467" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_implementationStatus" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" coords="294,1533,441,1557" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_associatedFile" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" coords="294,1610,400,1634" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_role" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" coords="294,1700,346,1724" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" coords="294,1790,363,1814" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" coords="191,43,479,65" /><area alt="Kernel_xsd_Element_diggs_investigationTarget.tmp#investigationTarget" href="Kernel_xsd_Element_diggs_investigationTarget.html#investigationTarget" coords="280,1874,448,1898" /><area alt="Kernel_xsd_Element_diggs_projectRef.tmp#projectRef" href="Kernel_xsd_Element_diggs_projectRef.html#projectRef" coords="280,1951,399,1975" /><area alt="Kernel_xsd_Element_diggs_programRef.tmp#programRef" href="Kernel_xsd_Element_diggs_programRef.html#programRef" coords="280,2028,408,2052" /><area alt="Kernel_xsd_Element_diggs_samplingFeatureRef.tmp#samplingFeatureRef" href="Kernel_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" coords="280,2092,450,2116" /><area alt="Kernel_xsd_Element_diggs_sampleRef.tmp#sampleRef" href="Kernel_xsd_Element_diggs_sampleRef.html#sampleRef" coords="280,2182,399,2206" /><area alt="Kernel_xsd_Element_diggs_constructionActivityRef.tmp#constructionActivityRef" href="Kernel_xsd_Element_diggs_constructionActivityRef.html#constructionActivityRef" coords="280,2259,470,2283" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.tmp#AbstractMeasurementType_otherMeasurementProperty" href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.html#AbstractMeasurementType_otherMeasurementProperty" coords="280,2293,458,2317" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.tmp#AbstractMeasurementType" href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.html#AbstractMeasurementType" coords="177,3,497,25" /><area alt="Construction_xsd_Complex_Type_diggs_MaterialTestType.tmp#MaterialTestType_samplingTime" href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_samplingTime" coords="266,2377,372,2401" /><area alt="Construction_xsd_Complex_Type_diggs_MaterialTestType.tmp#MaterialTestType_resultTime" href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_resultTime" coords="266,2454,354,2478" /><area alt="Construction_xsd_Complex_Type_diggs_MaterialTestType.tmp#MaterialTestType_validTime" href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_validTime" coords="266,2544,348,2568" /><area alt="Construction_xsd_Complex_Type_diggs_MaterialTestType.tmp#MaterialTestType_outcome" href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_outcome" coords="266,2621,344,2645" /><area alt="Construction_xsd_Complex_Type_diggs_MaterialTestType.tmp#MaterialTestType_procedure" href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_procedure" coords="266,2711,353,2735" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.html#AbstractMeasurementType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractMeasurementType')">diggs:AbstractMeasurementType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.html#AbstractMeasurementType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractMeasurementType')">diggs:AbstractMeasurementType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTestType')">diggs:MaterialTestType</a></b></li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_MaterialTestType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_MaterialTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_MaterialTestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Construction_xsd_Element_diggs_MaterialTest.html#MaterialTest" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:MaterialTest')">diggs:MaterialTest</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MaterialTestType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MaterialTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MaterialTestType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Kernel_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget+')">diggs:investigationTarget+</a></b> , <b><a href="Kernel_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b> , <b><a href="Kernel_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:programRef{0,1}')">diggs:programRef{0,1}</a></b> , <b><a href="Kernel_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef*')">diggs:samplingFeatureRef*</a></b> , <b><a href="Kernel_xsd_Element_diggs_sampleRef.html#sampleRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sampleRef*')">diggs:sampleRef*</a></b> , <b><a href="Kernel_xsd_Element_diggs_constructionActivityRef.html#constructionActivityRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:constructionActivityRef{0,1}')">diggs:constructionActivityRef{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.html#AbstractMeasurementType_otherMeasurementProperty" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:otherMeasurementProperty*')">diggs:otherMeasurementProperty*</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_samplingTime" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingTime{0,1}')">diggs:samplingTime{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_resultTime" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:resultTime{0,1}')">diggs:resultTime{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_validTime" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:validTime{0,1}')">diggs:validTime{0,1}</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_outcome" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:outcome')">diggs:outcome</a></b> , <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_procedure" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:procedure+')">diggs:procedure+</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="Kernel_xsd_Element_diggs_constructionActivityRef.html#constructionActivityRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:constructionActivityRef')">diggs:constructionActivityRef</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Kernel_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget')">diggs:investigationTarget</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractMeasurementType.html#AbstractMeasurementType_otherMeasurementProperty" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:otherMeasurementProperty')">diggs:otherMeasurementProperty</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_outcome" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:outcome')">diggs:outcome</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_procedure" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:procedure')">diggs:procedure</a></b>, <b><a href="Kernel_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:programRef')">diggs:programRef</a></b>, <b><a href="Kernel_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_resultTime" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:resultTime')">diggs:resultTime</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Kernel_xsd_Element_diggs_sampleRef.html#sampleRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:sampleRef')">diggs:sampleRef</a></b>, <b><a href="Kernel_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef')">diggs:samplingFeatureRef</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_samplingTime" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingTime')">diggs:samplingTime</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Construction_xsd_Complex_Type_diggs_MaterialTestType.html#MaterialTestType_validTime" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:validTime')">diggs:validTime</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MaterialTestType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MaterialTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MaterialTestType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MaterialTestType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MaterialTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MaterialTestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"MaterialTestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractMeasurementType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"samplingTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalOrInstantPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Describes the time that the result applies to the property of the investigation target. This is often the time of interaction by a sampling activity or measurement procedure with a real-world feature.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"resultTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalOrInstantPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Describes the time when the result became available, typically when the procedure associated with the observation was completed. For some observations this is identical to the samplingTime. However, there are important cases where they differ. Example: Where a measurement is made on a specimen in a laboratory,the samplingTime should record the time the specimen was retrieved from its host, while the resultTime should record the time the laboratory procedure was applied. Example: Where monitoring observation results are post-processed, the resultTime is the post-processing time, while the samplingTime preserves the time of initial interaction with the world.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"validTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalOrInstantPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Describes the time period during which the result is intended to be used.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"outcome"</span><span class="tAN"> type=</span><span class="tAV">"diggs:MaterialTestResultPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A property that contains the information about what properties are being measured, the results of the measurement, and the associated locations that the measurement results relate to.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"procedure"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TestProcedurePropertyType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

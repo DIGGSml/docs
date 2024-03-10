@@ -1,0 +1,1299 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component witsml:FlowrateMn</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_MwdTool_FlowrateMn', 
+				'properties_MwdTool_FlowrateMx', 
+				'properties_MwdTool_TempMx', 
+				'properties_MwdTool_IdEquv', 
+				'properties_MwdTool_ExtensionAny', 
+				'properties_MwdTool_Sensor');
+var usedByBoxes= new Array('usedBy_MwdTool');
+var sourceBoxes= new Array('source_MwdTool_FlowrateMn', 
+				'source_MwdTool_FlowrateMx', 
+				'source_MwdTool_TempMx', 
+				'source_MwdTool_IdEquv', 
+				'source_MwdTool_ExtensionAny', 
+				'source_MwdTool_Sensor', 
+				'source_MwdTool');
+var instanceBoxes= new Array('instance_MwdTool_Sensor');
+var diagramBoxes= new Array('diagram_MwdTool_FlowrateMn', 
+				'diagram_MwdTool_FlowrateMx', 
+				'diagram_MwdTool_TempMx', 
+				'diagram_MwdTool_IdEquv', 
+				'diagram_MwdTool_ExtensionAny', 
+				'diagram_MwdTool_Sensor', 
+				'diagram_MwdTool');
+var annotationBoxes= new Array('annotations_MwdTool_FlowrateMn', 
+				'annotations_MwdTool_FlowrateMx', 
+				'annotations_MwdTool_TempMx', 
+				'annotations_MwdTool_IdEquv', 
+				'annotations_MwdTool');
+var attributesBoxes= new Array('attributes_MwdTool_FlowrateMn', 
+				'attributes_MwdTool_FlowrateMx', 
+				'attributes_MwdTool_TempMx', 
+				'attributes_MwdTool_IdEquv', 
+				'attributes_MwdTool_Sensor');
+var modelBoxes= new Array('model_MwdTool_ExtensionAny', 
+				'model_MwdTool_Sensor', 
+				'model_MwdTool');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="MwdTool_FlowrateMn"></a><div class="componentTitle">Element <span class="qname"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MwdTool')">witsml:MwdTool</a></b> / witsml:FlowrateMn</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MwdTool_FlowrateMn" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MwdTool_FlowrateMn');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MwdTool_FlowrateMn" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Minimum flow rate.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool_FlowrateMn" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool_FlowrateMn');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool_FlowrateMn" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Element_witsml_FlowrateMn.png" usemap="#Tubular_xsd_Element_witsml_FlowrateMn" /><map name="Tubular_xsd_Element_witsml_FlowrateMn" id="Tubular_xsd_Element_witsml_FlowrateMn"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="154,40,322,66" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.tmp#VolumePerTimeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure_uom" coords="168,157,240,181" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.tmp#VolumePerTimeMeasure" href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure" coords="143,3,344,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeMeasure')">eml:VolumePerTimeMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeMeasure')">eml:VolumePerTimeMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MwdTool_FlowrateMn" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MwdTool_FlowrateMn');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MwdTool_FlowrateMn" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MwdTool_FlowrateMn" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MwdTool_FlowrateMn');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MwdTool_FlowrateMn" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimeUom.html#VolumePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeUom')">eml:VolumePerTimeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool_FlowrateMn" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool_FlowrateMn');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool_FlowrateMn" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"FlowrateMn"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumePerTimeMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Minimum flow rate.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MwdTool_FlowrateMx"></a><div class="componentTitle">Element <span class="qname"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MwdTool')">witsml:MwdTool</a></b> / witsml:FlowrateMx</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MwdTool_FlowrateMx" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MwdTool_FlowrateMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MwdTool_FlowrateMx" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Maximum flow rate.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool_FlowrateMx" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool_FlowrateMx');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool_FlowrateMx" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Element_witsml_FlowrateMx.png" usemap="#Tubular_xsd_Element_witsml_FlowrateMx" /><map name="Tubular_xsd_Element_witsml_FlowrateMx" id="Tubular_xsd_Element_witsml_FlowrateMx"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="154,40,322,66" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.tmp#VolumePerTimeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure_uom" coords="168,157,240,181" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.tmp#VolumePerTimeMeasure" href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure" coords="143,3,344,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeMeasure')">eml:VolumePerTimeMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeMeasure')">eml:VolumePerTimeMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MwdTool_FlowrateMx" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MwdTool_FlowrateMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MwdTool_FlowrateMx" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MwdTool_FlowrateMx" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MwdTool_FlowrateMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MwdTool_FlowrateMx" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasure.html#VolumePerTimeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimeUom.html#VolumePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeUom')">eml:VolumePerTimeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool_FlowrateMx" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool_FlowrateMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool_FlowrateMx" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"FlowrateMx"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumePerTimeMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Maximum flow rate.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MwdTool_TempMx"></a><div class="componentTitle">Element <span class="qname"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MwdTool')">witsml:MwdTool</a></b> / witsml:TempMx</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MwdTool_TempMx" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MwdTool_TempMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MwdTool_TempMx" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Maximum Temperature.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool_TempMx" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool_TempMx');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool_TempMx" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Element_witsml_TempMx.png" usemap="#Tubular_xsd_Element_witsml_TempMx" /><map name="Tubular_xsd_Element_witsml_TempMx" id="Tubular_xsd_Element_witsml_TempMx"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="139,40,307,66" /><area alt="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.tmp#ThermodynamicTemperatureMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.html#ThermodynamicTemperatureMeasure_uom" coords="153,157,225,181" /><area alt="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.tmp#ThermodynamicTemperatureMeasure" href="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.html#ThermodynamicTemperatureMeasure" coords="128,3,402,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.html#ThermodynamicTemperatureMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermodynamicTemperatureMeasure')">eml:ThermodynamicTemperatureMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.html#ThermodynamicTemperatureMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermodynamicTemperatureMeasure')">eml:ThermodynamicTemperatureMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MwdTool_TempMx" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MwdTool_TempMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MwdTool_TempMx" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MwdTool_TempMx" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MwdTool_TempMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MwdTool_TempMx" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_ThermodynamicTemperatureMeasure.html#ThermodynamicTemperatureMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_ThermodynamicTemperatureUom.html#ThermodynamicTemperatureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermodynamicTemperatureUom')">eml:ThermodynamicTemperatureUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool_TempMx" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool_TempMx');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool_TempMx" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"TempMx"</span><span class="tAN"> type=</span><span class="tAV">"eml:ThermodynamicTemperatureMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Maximum Temperature.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MwdTool_IdEquv"></a><div class="componentTitle">Element <span class="qname"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MwdTool')">witsml:MwdTool</a></b> / witsml:IdEquv</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MwdTool_IdEquv" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MwdTool_IdEquv');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MwdTool_IdEquv" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Equivalent inner diameter.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool_IdEquv" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool_IdEquv');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool_IdEquv" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Element_witsml_IdEquv.png" usemap="#Tubular_xsd_Element_witsml_IdEquv" /><map name="Tubular_xsd_Element_witsml_IdEquv" id="Tubular_xsd_Element_witsml_IdEquv"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="129,40,297,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="143,157,215,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="118,3,273,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MwdTool_IdEquv" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MwdTool_IdEquv');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MwdTool_IdEquv" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MwdTool_IdEquv" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MwdTool_IdEquv');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MwdTool_IdEquv" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool_IdEquv" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool_IdEquv');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool_IdEquv" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"IdEquv"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Equivalent inner diameter.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MwdTool_ExtensionAny"></a><div class="componentTitle">Element <span class="qname"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MwdTool')">witsml:MwdTool</a></b> / witsml:ExtensionAny</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool_ExtensionAny" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool_ExtensionAny');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool_ExtensionAny" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Element_witsml_ExtensionAny_2.png" usemap="#Tubular_xsd_Element_witsml_ExtensionAny_2" /><map name="Tubular_xsd_Element_witsml_ExtensionAny_2" id="Tubular_xsd_Element_witsml_ExtensionAny_2"><area alt="Abstract_xsd_Complex_Type_eml_CustomData.tmp#CustomData" href="Abstract_xsd_Complex_Type_eml_CustomData.html#CustomData" coords="136,3,275,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Abstract_xsd_Complex_Type_eml_CustomData.html#CustomData" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:CustomData')">eml:CustomData</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MwdTool_ExtensionAny" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MwdTool_ExtensionAny');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MwdTool_ExtensionAny" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MwdTool_ExtensionAny" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MwdTool_ExtensionAny');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MwdTool_ExtensionAny" style="display:block"><b>ANY element from ANY namespace</b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool_ExtensionAny" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool_ExtensionAny');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool_ExtensionAny" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"ExtensionAny"</span><span class="tAN"> type=</span><span class="tAV">"eml:CustomData"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MwdTool_Sensor"></a><div class="componentTitle">Element <span class="qname"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:MwdTool')">witsml:MwdTool</a></b> / witsml:Sensor</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool_Sensor" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool_Sensor');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool_Sensor" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Element_witsml_Sensor.png" usemap="#Tubular_xsd_Element_witsml_Sensor" /><map name="Tubular_xsd_Element_witsml_Sensor" id="Tubular_xsd_Element_witsml_Sensor"><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor_uid" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_uid" coords="124,78,192,102" /><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor_TypeMeasurement" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_TypeMeasurement" coords="202,149,331,173" /><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor_OffsetBot" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_OffsetBot" coords="202,213,283,237" /><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor_Comments" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_Comments" coords="202,277,291,301" /><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionNameValue" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionNameValue" coords="202,341,345,365" /><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionAny" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionAny" coords="202,405,307,429" /><area alt="Tubular_xsd_Complex_Type_witsml_Sensor.tmp#http___www.energistics.org_energyml_data_witsmlv2_Sensor" href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor" coords="99,3,224,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Sensor')">witsml:Sensor</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_MwdTool_Sensor" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_MwdTool_Sensor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_MwdTool_Sensor" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MwdTool_Sensor" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MwdTool_Sensor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MwdTool_Sensor" style="display:block"><b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_TypeMeasurement" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TypeMeasurement{0,1}')">witsml:TypeMeasurement{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_OffsetBot" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:OffsetBot{0,1}')">witsml:OffsetBot{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_Comments" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Comments{0,1}')">witsml:Comments{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionNameValue" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionNameValue*')">witsml:ExtensionNameValue*</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionAny" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionAny{0,1}')">witsml:ExtensionAny{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_Comments" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Comments')">witsml:Comments</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionAny" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionAny')">witsml:ExtensionAny</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_ExtensionNameValue" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionNameValue')">witsml:ExtensionNameValue</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_OffsetBot" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:OffsetBot')">witsml:OffsetBot</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_TypeMeasurement" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TypeMeasurement')">witsml:TypeMeasurement</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_MwdTool_Sensor" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_MwdTool_Sensor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_MwdTool_Sensor" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;witsml:Sensor</span><span class="tT"> </span><span class="tAN">uid=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:witsml=</span><span class="tAV">"http://www.energistics.org/energyml/data/witsmlv2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;witsml:TypeMeasurement</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/witsml:TypeMeasurement&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;witsml:OffsetBot</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/witsml:OffsetBot&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;witsml:Comments</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/witsml:Comments&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;witsml:ExtensionNameValue</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/witsml:ExtensionNameValue&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;witsml:ExtensionAny</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/witsml:ExtensionAny&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/witsml:Sensor&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_MwdTool_Sensor" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_MwdTool_Sensor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_MwdTool_Sensor" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Tubular_xsd_Complex_Type_witsml_Sensor.html#http___www.energistics.org_energyml_data_witsmlv2_Sensor_uid" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uid')">uid</a></b></td>
+                                    <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Unique identifier for this instance of Sensor.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool_Sensor" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool_Sensor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool_Sensor" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Sensor"</span><span class="tAN"> type=</span><span class="tAV">"witsml:Sensor"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="MwdTool"></a><div class="componentTitle">Complex Type <span class="qname">witsml:MwdTool</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/witsmlv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_MwdTool" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_MwdTool');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_MwdTool" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Tubular MWD Tool Component Schema. Used to capture operating parameters of the MWD tool.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_MwdTool" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_MwdTool');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_MwdTool" style="display:block"><img alt="Diagram" border="0" src="img/Tubular_xsd_Complex_Type_witsml_MwdTool.png" usemap="#Tubular_xsd_Complex_Type_witsml_MwdTool" /><map name="Tubular_xsd_Complex_Type_witsml_MwdTool" id="Tubular_xsd_Complex_Type_witsml_MwdTool"><area alt="Tubular_xsd_Complex_Type_witsml_MwdTool.tmp#MwdTool_FlowrateMn" href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_FlowrateMn" coords="243,0,335,24" /><area alt="Tubular_xsd_Complex_Type_witsml_MwdTool.tmp#MwdTool_FlowrateMx" href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_FlowrateMx" coords="243,64,335,88" /><area alt="Tubular_xsd_Complex_Type_witsml_MwdTool.tmp#MwdTool_TempMx" href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_TempMx" coords="243,128,320,152" /><area alt="Tubular_xsd_Complex_Type_witsml_MwdTool.tmp#MwdTool_IdEquv" href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_IdEquv" coords="243,192,310,216" /><area alt="Tubular_xsd_Complex_Type_witsml_MwdTool.tmp#MwdTool_ExtensionAny" href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_ExtensionAny" coords="243,256,348,280" /><area alt="Tubular_xsd_Complex_Type_witsml_MwdTool.tmp#MwdTool_Sensor" href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_Sensor" coords="243,290,311,314" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_MwdTool" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_MwdTool');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_MwdTool" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Tubular_xsd_Complex_Type_witsml_TubularComponent.html#TubularComponent_MwdTool" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TubularComponent/witsml:MwdTool')">witsml:TubularComponent/witsml:MwdTool</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_MwdTool" type="image" src="img/btM.gif" value="-" onclick="switchState('model_MwdTool');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_MwdTool" style="display:block"><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_FlowrateMn" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:FlowrateMn{0,1}')">witsml:FlowrateMn{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_FlowrateMx" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:FlowrateMx{0,1}')">witsml:FlowrateMx{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_TempMx" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TempMx{0,1}')">witsml:TempMx{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_IdEquv" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:IdEquv{0,1}')">witsml:IdEquv{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_ExtensionAny" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionAny{0,1}')">witsml:ExtensionAny{0,1}</a></b> , <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_Sensor" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Sensor*')">witsml:Sensor*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_ExtensionAny" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:ExtensionAny')">witsml:ExtensionAny</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_FlowrateMn" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:FlowrateMn')">witsml:FlowrateMn</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_FlowrateMx" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:FlowrateMx')">witsml:FlowrateMx</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_IdEquv" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:IdEquv')">witsml:IdEquv</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_Sensor" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:Sensor')">witsml:Sensor</a></b>, <b><a href="Tubular_xsd_Complex_Type_witsml_MwdTool.html#MwdTool_TempMx" target="mainFrame" title="http://www.energistics.org/energyml/data/witsmlv2" onclick="updatePageTitle('Schema documentation for component witsml:TempMx')">witsml:TempMx</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_MwdTool" type="image" src="img/btM.gif" value="-" onclick="switchState('source_MwdTool');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_MwdTool" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:complexType</span><span class="tAN"> name=</span><span class="tAV">"MwdTool"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Tubular MWD Tool Component Schema. Used to capture operating parameters of the MWD tool.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"FlowrateMn"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumePerTimeMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Minimum flow rate.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"FlowrateMx"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumePerTimeMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Maximum flow rate.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"TempMx"</span><span class="tAN"> type=</span><span class="tAV">"eml:ThermodynamicTemperatureMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Maximum Temperature.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"IdEquv"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Equivalent inner diameter.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"ExtensionAny"</span><span class="tAN"> type=</span><span class="tAV">"eml:CustomData"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Sensor"</span><span class="tAN"> type=</span><span class="tAV">"witsml:Sensor"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

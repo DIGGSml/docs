@@ -1,0 +1,1838 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:containerLabel</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_ContainerType_containerLabel', 
+				'properties_ContainerType_containerType', 
+				'properties_ContainerType_containerMaterial', 
+				'properties_ContainerType_containerHeight', 
+				'properties_ContainerType_containerLength', 
+				'properties_ContainerType_containerVolume', 
+				'properties_ContainerType_containerWeight', 
+				'properties_ContainerType_containerWidth', 
+				'properties_ContainerType_preservativeAdded');
+var usedByBoxes= new Array('usedBy_ContainerType');
+var sourceBoxes= new Array('source_ContainerType_containerLabel', 
+				'source_ContainerType_containerType', 
+				'source_ContainerType_containerMaterial', 
+				'source_ContainerType_containerHeight', 
+				'source_ContainerType_containerLength', 
+				'source_ContainerType_containerVolume', 
+				'source_ContainerType_containerWeight', 
+				'source_ContainerType_containerWidth', 
+				'source_ContainerType_preservativeAdded', 
+				'source_ContainerType');
+var diagramBoxes= new Array('diagram_ContainerType_containerLabel', 
+				'diagram_ContainerType_containerType', 
+				'diagram_ContainerType_containerMaterial', 
+				'diagram_ContainerType_containerHeight', 
+				'diagram_ContainerType_containerLength', 
+				'diagram_ContainerType_containerVolume', 
+				'diagram_ContainerType_containerWeight', 
+				'diagram_ContainerType_containerWidth', 
+				'diagram_ContainerType_preservativeAdded', 
+				'diagram_ContainerType');
+var annotationBoxes= new Array('annotations_ContainerType_containerLabel', 
+				'annotations_ContainerType_containerType', 
+				'annotations_ContainerType_containerMaterial', 
+				'annotations_ContainerType_containerHeight', 
+				'annotations_ContainerType_containerLength', 
+				'annotations_ContainerType_containerVolume', 
+				'annotations_ContainerType_containerWeight', 
+				'annotations_ContainerType_containerWidth', 
+				'annotations_ContainerType_preservativeAdded');
+var attributesBoxes= new Array('attributes_ContainerType_containerLabel', 
+				'attributes_ContainerType_containerType', 
+				'attributes_ContainerType_containerMaterial', 
+				'attributes_ContainerType_containerHeight', 
+				'attributes_ContainerType_containerLength', 
+				'attributes_ContainerType_containerVolume', 
+				'attributes_ContainerType_containerWeight', 
+				'attributes_ContainerType_containerWidth', 
+				'attributes_ContainerType_preservativeAdded', 
+				'attributes_ContainerType');
+var modelBoxes= new Array('model_ContainerType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ContainerType_containerLabel"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerLabel</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerLabel" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerLabel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerLabel" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Identifier listed on the container holding the sample.</span><span class="tI">
+</span><span class="tT">This might be a box number (if for core) or sample number, or the</span><span class="tI">
+</span><span class="tT">same value as the sample name</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerLabel" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerLabel');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerLabel" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerLabel.png" usemap="#Kernel_xsd_Element_diggs_containerLabel" /><map name="Kernel_xsd_Element_diggs_containerLabel" id="Kernel_xsd_Element_diggs_containerLabel"><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="186,157,280,181" /><area alt="Kernel_xsd_Complex_Type_diggs_DiggsStringType.tmp#DiggsStringType" href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" coords="161,3,334,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_DiggsStringType.html#DiggsStringType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:DiggsStringType')">diggs:DiggsStringType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerLabel" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerLabel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerLabel" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerLabel" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerLabel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerLabel" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerLabel" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerLabel');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerLabel" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerLabel"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Identifier listed on the container holding the sample. This might be a box number (if for core) or sample number, or the same value as the sample name</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerType"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Description of container for the sample; intended to be</span><span class="tI">
+</span><span class="tT">derived from a controlled list.</span><span class="tI">
+</span><span class="tT">Example:</span><span class="tT">Jar, Bucket, Vial, Bag, Box</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerType" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerType.png" usemap="#Kernel_xsd_Element_diggs_containerType" /><map name="Kernel_xsd_Element_diggs_containerType" id="Kernel_xsd_Element_diggs_containerType"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="184,157,289,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="159,3,287,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerType" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerType" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerType"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Description of container for the sample; intended to be derived from a controlled list. Example:</span><span class="tI">
+      </span><span class="tCD">&lt;![CDATA[</span><span class="tCD">Jar, Bucket, Vial, Bag, Box</span><span class="tCD">]]</span><span class="tCD">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerMaterial"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerMaterial</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerMaterial" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerMaterial');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerMaterial" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Description of the material that the container is made</span><span class="tI">
+</span><span class="tT">of.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerMaterial" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerMaterial');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerMaterial" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerMaterial.png" usemap="#Kernel_xsd_Element_diggs_containerMaterial" /><map name="Kernel_xsd_Element_diggs_containerMaterial" id="Kernel_xsd_Element_diggs_containerMaterial"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="200,157,305,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="175,3,303,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerMaterial" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerMaterial');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerMaterial" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerMaterial" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerMaterial');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerMaterial" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerMaterial" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerMaterial');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerMaterial" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerMaterial"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Description of the material that the container is made of.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerHeight"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerHeight</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerHeight" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerHeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerHeight" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Height of the container</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerHeight" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerHeight');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerHeight" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerHeight.png" usemap="#Kernel_xsd_Element_diggs_containerHeight" /><map name="Kernel_xsd_Element_diggs_containerHeight" id="Kernel_xsd_Element_diggs_containerHeight"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="179,40,347,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="193,157,265,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="168,3,323,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerHeight" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerHeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerHeight" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerHeight" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerHeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerHeight" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerHeight" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerHeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerHeight" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerHeight"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Height of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerLength"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerLength</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerLength" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerLength');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerLength" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Length of the container</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerLength" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerLength');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerLength" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerLength.png" usemap="#Kernel_xsd_Element_diggs_containerLength" /><map name="Kernel_xsd_Element_diggs_containerLength" id="Kernel_xsd_Element_diggs_containerLength"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="181,40,349,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="195,157,267,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="170,3,325,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerLength" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerLength');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerLength" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerLength" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerLength');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerLength" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerLength" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerLength');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerLength" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerLength"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Length of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerVolume"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerVolume</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerVolume" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerVolume');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerVolume" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Volume of the container</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerVolume" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerVolume');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerVolume" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerVolume.png" usemap="#Kernel_xsd_Element_diggs_containerVolume" /><map name="Kernel_xsd_Element_diggs_containerVolume" id="Kernel_xsd_Element_diggs_containerVolume"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="184,40,352,66" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.tmp#VolumeMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure_uom" coords="198,157,270,181" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.tmp#VolumeMeasure" href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" coords="173,3,331,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeMeasure')">eml:VolumeMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeMeasure')">eml:VolumeMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerVolume" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerVolume');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerVolume" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerVolume" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerVolume');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerVolume" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumeMeasure.html#VolumeMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumeUom.html#VolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeUom')">eml:VolumeUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerVolume" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerVolume');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerVolume" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerVolume"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumeMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Volume of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerWeight"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerWeight</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerWeight" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerWeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerWeight" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Weight of the container</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerWeight" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerWeight');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerWeight" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerWeight.png" usemap="#Kernel_xsd_Element_diggs_containerWeight" /><map name="Kernel_xsd_Element_diggs_containerWeight" id="Kernel_xsd_Element_diggs_containerWeight"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="180,40,348,66" /><area alt="MeasureType_xsd_Complex_Type_eml_ForceMeasure.tmp#ForceMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_ForceMeasure.html#ForceMeasure_uom" coords="194,157,266,181" /><area alt="MeasureType_xsd_Complex_Type_eml_ForceMeasure.tmp#ForceMeasure" href="MeasureType_xsd_Complex_Type_eml_ForceMeasure.html#ForceMeasure" coords="169,3,317,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_ForceMeasure.html#ForceMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForceMeasure')">eml:ForceMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_ForceMeasure.html#ForceMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForceMeasure')">eml:ForceMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerWeight" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerWeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerWeight" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerWeight" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerWeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerWeight" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_ForceMeasure.html#ForceMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_ForceUom.html#ForceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForceUom')">eml:ForceUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerWeight" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerWeight');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerWeight" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerWeight"</span><span class="tAN"> type=</span><span class="tAV">"eml:ForceMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Weight of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_containerWidth"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:containerWidth</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_containerWidth" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_containerWidth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_containerWidth" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Width of the container</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_containerWidth" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_containerWidth');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_containerWidth" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_containerWidth.png" usemap="#Kernel_xsd_Element_diggs_containerWidth" /><map name="Kernel_xsd_Element_diggs_containerWidth" id="Kernel_xsd_Element_diggs_containerWidth"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="174,40,342,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" coords="188,157,260,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasure.tmp#LengthMeasure" href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" coords="163,3,318,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasure')">eml:LengthMeasure</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_containerWidth" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_containerWidth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_containerWidth" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_containerWidth" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_containerWidth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_containerWidth" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasure.html#LengthMeasure_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_containerWidth" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_containerWidth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_containerWidth" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerWidth"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Width of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType_preservativeAdded"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b> / diggs:preservativeAdded</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ContainerType_preservativeAdded" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_ContainerType_preservativeAdded');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ContainerType_preservativeAdded" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Example:</span><span class="tT">The type of preservative added to sample, if any.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType_preservativeAdded" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType_preservativeAdded');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType_preservativeAdded" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_preservativeAdded.png" usemap="#Kernel_xsd_Element_diggs_preservativeAdded" /><map name="Kernel_xsd_Element_diggs_preservativeAdded" id="Kernel_xsd_Element_diggs_preservativeAdded"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="208,157,313,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="183,3,311,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ContainerType_preservativeAdded" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_ContainerType_preservativeAdded');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ContainerType_preservativeAdded" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType_preservativeAdded" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType_preservativeAdded');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType_preservativeAdded" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType_preservativeAdded" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType_preservativeAdded');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType_preservativeAdded" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"preservativeAdded"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Example:</span><span class="tI">
+      </span><span class="tCD">&lt;![CDATA[</span><span class="tCD">The type of preservative added to sample, if any.</span><span class="tCD">]]</span><span class="tCD">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ContainerType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:ContainerType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ContainerType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_ContainerType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ContainerType" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Complex_Type_diggs_ContainerType.png" usemap="#Kernel_xsd_Complex_Type_diggs_ContainerType" /><map name="Kernel_xsd_Complex_Type_diggs_ContainerType" id="Kernel_xsd_Complex_Type_diggs_ContainerType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="218,158,299,182" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="381,299,496,323" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="381,389,549,413" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="381,466,483,490" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="381,556,464,580" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="278,258,494,284" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="193,83,457,105" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="204,698,285,722" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="261,795,376,819" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="261,885,363,909" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="179,43,486,65" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="190,1020,284,1044" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="268,1117,351,1141" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" coords="268,1207,332,1231" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" coords="268,1297,337,1321" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" coords="165,3,448,25" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerLabel" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerLabel" coords="233,1394,343,1418" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerType" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerType" coords="233,1471,341,1495" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerMaterial" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerMaterial" coords="233,1561,357,1585" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerHeight" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerHeight" coords="233,1625,350,1649" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerLength" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerLength" coords="233,1689,352,1713" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerVolume" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerVolume" coords="233,1753,355,1777" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerWeight" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerWeight" coords="233,1817,351,1841" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_containerWidth" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerWidth" coords="233,1881,345,1905" /><area alt="Kernel_xsd_Complex_Type_diggs_ContainerType.tmp#ContainerType_preservativeAdded" href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_preservativeAdded" coords="233,1945,365,1969" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:ContainerType')">diggs:ContainerType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_ContainerType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_ContainerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_ContainerType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Kernel_xsd_Element_diggs_Container.html#Container" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:Container')">diggs:Container</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ContainerType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_ContainerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ContainerType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerLabel" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerLabel{0,1}')">diggs:containerLabel{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerType{0,1}')">diggs:containerType{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerMaterial" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerMaterial{0,1}')">diggs:containerMaterial{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerHeight" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerHeight{0,1}')">diggs:containerHeight{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerLength" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerLength{0,1}')">diggs:containerLength{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerVolume" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerVolume{0,1}')">diggs:containerVolume{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerWeight" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerWeight{0,1}')">diggs:containerWeight{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerWidth" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerWidth{0,1}')">diggs:containerWidth{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_preservativeAdded" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:preservativeAdded{0,1}')">diggs:preservativeAdded{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerHeight" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerHeight')">diggs:containerHeight</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerLabel" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerLabel')">diggs:containerLabel</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerLength" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerLength')">diggs:containerLength</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerMaterial" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerMaterial')">diggs:containerMaterial</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerType')">diggs:containerType</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerVolume" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerVolume')">diggs:containerVolume</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerWeight" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerWeight')">diggs:containerWeight</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_containerWidth" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:containerWidth')">diggs:containerWidth</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_ContainerType.html#ContainerType_preservativeAdded" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:preservativeAdded')">diggs:preservativeAdded</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ContainerType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_ContainerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ContainerType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ContainerType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_ContainerType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ContainerType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"ContainerType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerLabel"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DiggsStringType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Identifier listed on the container holding the sample. This might be a box number (if for core) or sample number, or the same value as the sample name</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerType"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Description of container for the sample; intended to be derived from a controlled list. Example:</span><span class="tI">
+              </span><span class="tCD">&lt;![CDATA[</span><span class="tCD">Jar, Bucket, Vial, Bag, Box</span><span class="tCD">]]</span><span class="tCD">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerMaterial"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Description of the material that the container is made of.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerHeight"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Height of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerLength"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Length of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerVolume"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumeMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Volume of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerWeight"</span><span class="tAN"> type=</span><span class="tAV">"eml:ForceMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Weight of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"containerWidth"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Width of the container</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"preservativeAdded"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Example:</span><span class="tI">
+              </span><span class="tCD">&lt;![CDATA[</span><span class="tCD">The type of preservative added to sample, if any.</span><span class="tCD">]]</span><span class="tCD">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

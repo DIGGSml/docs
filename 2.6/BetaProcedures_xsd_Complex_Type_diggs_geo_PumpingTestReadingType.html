@@ -1,0 +1,1039 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs_geo:trialNo</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_PumpingTestReadingType_trialNo', 
+				'properties_PumpingTestReadingType_dateTimeOfReading', 
+				'properties_PumpingTestReadingType_waterDepth', 
+				'properties_PumpingTestReadingType_pumpingRate');
+var usedByBoxes= new Array('usedBy_PumpingTestReadingType');
+var sourceBoxes= new Array('source_PumpingTestReadingType_trialNo', 
+				'source_PumpingTestReadingType_dateTimeOfReading', 
+				'source_PumpingTestReadingType_waterDepth', 
+				'source_PumpingTestReadingType_pumpingRate', 
+				'source_PumpingTestReadingType');
+var diagramBoxes= new Array('diagram_PumpingTestReadingType_trialNo', 
+				'diagram_PumpingTestReadingType_dateTimeOfReading', 
+				'diagram_PumpingTestReadingType_waterDepth', 
+				'diagram_PumpingTestReadingType_pumpingRate', 
+				'diagram_PumpingTestReadingType');
+var annotationBoxes= new Array('annotations_PumpingTestReadingType_trialNo', 
+				'annotations_PumpingTestReadingType_dateTimeOfReading', 
+				'annotations_PumpingTestReadingType_waterDepth', 
+				'annotations_PumpingTestReadingType_pumpingRate', 
+				'annotations_PumpingTestReadingType');
+var attributesBoxes= new Array('attributes_PumpingTestReadingType_waterDepth', 
+				'attributes_PumpingTestReadingType_pumpingRate', 
+				'attributes_PumpingTestReadingType');
+var modelBoxes= new Array('model_PumpingTestReadingType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="PumpingTestReadingType_trialNo"></a><div class="componentTitle">Element <span class="qname"><b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:PumpingTestReadingType')">diggs_geo:PumpingTestReadingType</a></b> / diggs_geo:trialNo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PumpingTestReadingType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PumpingTestReadingType_trialNo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PumpingTestReadingType_trialNo" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">The count of the test cycle</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PumpingTestReadingType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PumpingTestReadingType_trialNo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PumpingTestReadingType_trialNo" style="display:block"><img alt="Diagram" border="0" src="img/BetaProcedures_xsd_Element_diggs_geo_trialNo_1.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>integer</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PumpingTestReadingType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PumpingTestReadingType_trialNo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PumpingTestReadingType_trialNo" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PumpingTestReadingType_trialNo" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PumpingTestReadingType_trialNo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PumpingTestReadingType_trialNo" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"trialNo"</span><span class="tAN"> type=</span><span class="tAV">"integer"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The count of the test cycle</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PumpingTestReadingType_dateTimeOfReading"></a><div class="componentTitle">Element <span class="qname"><b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:PumpingTestReadingType')">diggs_geo:PumpingTestReadingType</a></b> / diggs_geo:dateTimeOfReading</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PumpingTestReadingType_dateTimeOfReading" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PumpingTestReadingType_dateTimeOfReading');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PumpingTestReadingType_dateTimeOfReading" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Date and time of reading.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PumpingTestReadingType_dateTimeOfReading" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PumpingTestReadingType_dateTimeOfReading');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PumpingTestReadingType_dateTimeOfReading" style="display:block"><img alt="Diagram" border="0" src="img/BetaProcedures_xsd_Element_diggs_geo_dateTimeOfReading.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>dateTime</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PumpingTestReadingType_dateTimeOfReading" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PumpingTestReadingType_dateTimeOfReading');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PumpingTestReadingType_dateTimeOfReading" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PumpingTestReadingType_dateTimeOfReading" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PumpingTestReadingType_dateTimeOfReading');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PumpingTestReadingType_dateTimeOfReading" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"dateTimeOfReading"</span><span class="tAN"> type=</span><span class="tAV">"dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and time of reading.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PumpingTestReadingType_waterDepth"></a><div class="componentTitle">Element <span class="qname"><b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:PumpingTestReadingType')">diggs_geo:PumpingTestReadingType</a></b> / diggs_geo:waterDepth</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PumpingTestReadingType_waterDepth" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PumpingTestReadingType_waterDepth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PumpingTestReadingType_waterDepth" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Depth to water below ground.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PumpingTestReadingType_waterDepth" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PumpingTestReadingType_waterDepth');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PumpingTestReadingType_waterDepth" style="display:block"><img alt="Diagram" border="0" src="img/BetaProcedures_xsd_Element_diggs_geo_waterDepth.png" usemap="#BetaProcedures_xsd_Element_diggs_geo_waterDepth" /><map name="BetaProcedures_xsd_Element_diggs_geo_waterDepth" id="BetaProcedures_xsd_Element_diggs_geo_waterDepth"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="154,40,322,66" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.tmp#LengthMeasureExt_uom" href="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.html#LengthMeasureExt_uom" coords="168,157,240,181" /><area alt="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.tmp#LengthMeasureExt" href="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.html#LengthMeasureExt" coords="143,3,315,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.html#LengthMeasureExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasureExt')">eml:LengthMeasureExt</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.html#LengthMeasureExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthMeasureExt')">eml:LengthMeasureExt</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PumpingTestReadingType_waterDepth" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PumpingTestReadingType_waterDepth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PumpingTestReadingType_waterDepth" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PumpingTestReadingType_waterDepth" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PumpingTestReadingType_waterDepth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PumpingTestReadingType_waterDepth" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_LengthMeasureExt.html#LengthMeasureExt_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUomExt.html#LengthUomExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUomExt')">eml:LengthUomExt</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PumpingTestReadingType_waterDepth" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PumpingTestReadingType_waterDepth');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PumpingTestReadingType_waterDepth" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"waterDepth"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasureExt"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Depth to water below ground.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PumpingTestReadingType_pumpingRate"></a><div class="componentTitle">Element <span class="qname"><b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:PumpingTestReadingType')">diggs_geo:PumpingTestReadingType</a></b> / diggs_geo:pumpingRate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PumpingTestReadingType_pumpingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PumpingTestReadingType_pumpingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PumpingTestReadingType_pumpingRate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Pumping rate from hole.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PumpingTestReadingType_pumpingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PumpingTestReadingType_pumpingRate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PumpingTestReadingType_pumpingRate" style="display:block"><img alt="Diagram" border="0" src="img/BetaProcedures_xsd_Element_diggs_geo_pumpingRate.png" usemap="#BetaProcedures_xsd_Element_diggs_geo_pumpingRate" /><map name="BetaProcedures_xsd_Element_diggs_geo_pumpingRate" id="BetaProcedures_xsd_Element_diggs_geo_pumpingRate"><area alt="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="164,40,332,66" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.tmp#VolumePerTimeMeasureExt_uom" href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.html#VolumePerTimeMeasureExt_uom" coords="178,157,250,181" /><area alt="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.tmp#VolumePerTimeMeasureExt" href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.html#VolumePerTimeMeasureExt" coords="153,3,371,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.html#VolumePerTimeMeasureExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeMeasureExt')">eml:VolumePerTimeMeasureExt</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:double</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.html#VolumePerTimeMeasureExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeMeasureExt')">eml:VolumePerTimeMeasureExt</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_PumpingTestReadingType_pumpingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_PumpingTestReadingType_pumpingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_PumpingTestReadingType_pumpingRate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PumpingTestReadingType_pumpingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PumpingTestReadingType_pumpingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PumpingTestReadingType_pumpingRate" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureType_xsd_Complex_Type_eml_VolumePerTimeMeasureExt.html#VolumePerTimeMeasureExt_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimeUomExt.html#VolumePerTimeUomExt" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeUomExt')">eml:VolumePerTimeUomExt</a></b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PumpingTestReadingType_pumpingRate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PumpingTestReadingType_pumpingRate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PumpingTestReadingType_pumpingRate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"pumpingRate"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumePerTimeMeasureExt"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Pumping rate from hole.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="PumpingTestReadingType"></a><div class="componentTitle">Complex Type <span class="qname">diggs_geo:PumpingTestReadingType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6/geotechnical</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_PumpingTestReadingType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_PumpingTestReadingType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_PumpingTestReadingType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Base type for PumpingTestTrials</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_PumpingTestReadingType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_PumpingTestReadingType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_PumpingTestReadingType" style="display:block"><img alt="Diagram" border="0" src="img/BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.png" usemap="#BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType" /><map name="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType" id="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="298,158,379,182" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="461,299,576,323" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="461,389,629,413" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="461,466,563,490" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="461,556,544,580" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="358,258,574,284" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="273,83,537,105" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="284,698,365,722" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="341,795,456,819" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="341,885,443,909" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="259,43,566,65" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="270,1020,364,1044" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="348,1117,431,1141" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_status" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" coords="348,1207,412,1231" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" coords="348,1297,417,1321" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType" href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" coords="245,3,528,25" /><area alt="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.tmp#PumpingTestReadingType_trialNo" href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_trialNo" coords="313,1394,380,1418" /><area alt="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.tmp#PumpingTestReadingType_dateTimeOfReading" href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_dateTimeOfReading" coords="313,1458,449,1482" /><area alt="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.tmp#PumpingTestReadingType_waterDepth" href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_waterDepth" coords="313,1522,405,1546" /><area alt="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.tmp#PumpingTestReadingType_pumpingRate" href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_pumpingRate" coords="313,1586,415,1610" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:PumpingTestReadingType')">diggs_geo:PumpingTestReadingType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_PumpingTestReadingType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_PumpingTestReadingType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_PumpingTestReadingType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="BetaProcedures_xsd_Element_diggs_geo_PumpingTestReading.html#PumpingTestReading" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:PumpingTestReading')">diggs_geo:PumpingTestReading</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_PumpingTestReadingType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_PumpingTestReadingType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_PumpingTestReadingType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_trialNo" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:trialNo{0,1}')">diggs_geo:trialNo{0,1}</a></b> , <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_dateTimeOfReading" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:dateTimeOfReading{0,1}')">diggs_geo:dateTimeOfReading{0,1}</a></b> , <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_waterDepth" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:waterDepth{0,1}')">diggs_geo:waterDepth{0,1}</a></b> , <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_pumpingRate" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:pumpingRate{0,1}')">diggs_geo:pumpingRate{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_dateTimeOfReading" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:dateTimeOfReading')">diggs_geo:dateTimeOfReading</a></b>, <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_pumpingRate" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:pumpingRate')">diggs_geo:pumpingRate</a></b>, <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_trialNo" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:trialNo')">diggs_geo:trialNo</a></b>, <b><a href="BetaProcedures_xsd_Complex_Type_diggs_geo_PumpingTestReadingType.html#PumpingTestReadingType_waterDepth" target="mainFrame" title="http://diggsml.org/schemas/2.6/geotechnical" onclick="updatePageTitle('Schema documentation for component diggs_geo:waterDepth')">diggs_geo:waterDepth</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_PumpingTestReadingType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_PumpingTestReadingType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_PumpingTestReadingType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_PumpingTestReadingType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_PumpingTestReadingType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_PumpingTestReadingType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"PumpingTestReadingType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Base type for PumpingTestTrials</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"trialNo"</span><span class="tAN"> type=</span><span class="tAV">"integer"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The count of the test cycle</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"dateTimeOfReading"</span><span class="tAN"> type=</span><span class="tAV">"dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and time of reading.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"waterDepth"</span><span class="tAN"> type=</span><span class="tAV">"eml:LengthMeasureExt"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Depth to water below ground.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"pumpingRate"</span><span class="tAN"> type=</span><span class="tAV">"eml:VolumePerTimeMeasureExt"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Pumping rate from hole.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

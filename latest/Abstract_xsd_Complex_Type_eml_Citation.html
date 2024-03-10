@@ -1,0 +1,1687 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component eml:Title</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_Citation_Title', 
+				'properties_Citation_Originator', 
+				'properties_Citation_Creation', 
+				'properties_Citation_Format', 
+				'properties_Citation_Editor', 
+				'properties_Citation_LastUpdate', 
+				'properties_Citation_VersionString', 
+				'properties_Citation_Description', 
+				'properties_Citation_DescriptiveKeywords');
+var facetsBoxes= new Array('facets_Citation_Title', 
+				'facets_Citation_Originator', 
+				'facets_Citation_Format', 
+				'facets_Citation_Editor', 
+				'facets_Citation_VersionString', 
+				'facets_Citation_Description', 
+				'facets_Citation_DescriptiveKeywords');
+var usedByBoxes= new Array('usedBy_Citation');
+var sourceBoxes= new Array('source_Citation_Title', 
+				'source_Citation_Originator', 
+				'source_Citation_Creation', 
+				'source_Citation_Format', 
+				'source_Citation_Editor', 
+				'source_Citation_LastUpdate', 
+				'source_Citation_VersionString', 
+				'source_Citation_Description', 
+				'source_Citation_DescriptiveKeywords', 
+				'source_Citation');
+var diagramBoxes= new Array('diagram_Citation_Title', 
+				'diagram_Citation_Originator', 
+				'diagram_Citation_Creation', 
+				'diagram_Citation_Format', 
+				'diagram_Citation_Editor', 
+				'diagram_Citation_LastUpdate', 
+				'diagram_Citation_VersionString', 
+				'diagram_Citation_Description', 
+				'diagram_Citation_DescriptiveKeywords', 
+				'diagram_Citation');
+var annotationBoxes= new Array('annotations_Citation_Title', 
+				'annotations_Citation_Originator', 
+				'annotations_Citation_Creation', 
+				'annotations_Citation_Format', 
+				'annotations_Citation_Editor', 
+				'annotations_Citation_LastUpdate', 
+				'annotations_Citation_Description', 
+				'annotations_Citation_DescriptiveKeywords', 
+				'annotations_Citation');
+var modelBoxes= new Array('model_Citation');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="Citation_Title"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:Title</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_Title" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_Title');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_Title" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">One line description/name of the object.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent in ISO 19115 of CI_Citation.title</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - title</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_Title" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_Title');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_Title" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_Title.png" usemap="#Abstract_xsd_Element_eml_Title" /><map name="Abstract_xsd_Element_eml_Title" id="Abstract_xsd_Element_eml_Title"><area alt="BaseTypes_xsd_Simple_Type_eml_String2000.tmp#String2000" href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" coords="102,0,239,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_Title" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_Title');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_Title" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_Title" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_Title');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_Title" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>2000</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_Title" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_Title');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_Title" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Title"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One line description/name of the object. This is the equivalent in ISO 19115 of CI_Citation.title Legacy DCGroup - title</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_Originator"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:Originator</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_Originator" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_Originator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_Originator" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Name (or other human-readable identifier) of the person who initially originated the object or document in the source application. If that information is not available, then this is the user who created the format file. The originator remains the same as the object is subsequently edited. </span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent in ISO 19115 to the CI_Individual.name or the CI_Organization.name of the citedResponsibleParty whose role is "originator".</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - author</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_Originator" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_Originator');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_Originator" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_Originator.png" usemap="#Abstract_xsd_Element_eml_Originator" /><map name="Abstract_xsd_Element_eml_Originator" id="Abstract_xsd_Element_eml_Originator"><area alt="BaseTypes_xsd_Simple_Type_eml_String64.tmp#String64" href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" coords="135,0,258,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_Originator" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_Originator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_Originator" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_Originator" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_Originator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_Originator" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_Originator" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_Originator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_Originator" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Originator"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Name (or other human-readable identifier) of the person who initially originated the object or document in the source application. If that information is not available, then this is the user who created the format file. The originator remains the same as the object is subsequently edited. This is the equivalent in ISO 19115 to the CI_Individual.name or the CI_Organization.name of the citedResponsibleParty whose role is "originator". Legacy DCGroup - author</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_Creation"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:Creation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_Creation" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_Creation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_Creation" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Date and time the document was created in the source application or, if that information is not available, when it was saved to the file.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent of the ISO 19115 CI_Date where the CI_DateTypeCode = ”creation"</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Format:</span><span class="tI">
+</span><span class="tT">YYYY-MM-DDThh:mm:ssZ[+/-]hh:mm</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - created</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_Creation" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_Creation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_Creation" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_Creation.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:dateTime</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_Creation" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_Creation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_Creation" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_Creation" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_Creation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_Creation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Creation"</span><span class="tAN"> type=</span><span class="tAV">"xs:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and time the document was created in the source application or, if that information is not available, when it was saved to the file. This is the equivalent of the ISO 19115 CI_Date where the CI_DateTypeCode = ”creation" Format: YYYY-MM-DDThh:mm:ssZ[+/-]hh:mm Legacy DCGroup - created</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_Format"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:Format</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_Format" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_Format');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_Format" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Software or service that was used to originate the object and the file format created. Must be human and machine readable and unambiguously identify the software by including the company name, software name and software version. This is the equivalent in ISO 19115 to the distributionFormat.MD_Format.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">The ISO format for this is [vendor:applicationName]/fileExtension where the application name includes the version number of the application.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">SIG Implementation Notes</span><span class="tI">
+</span><span class="tT">- Legacy DCGroup from v1.1 - publisher</span><span class="tI">
+</span><span class="tT">- fileExtension is not relevant and will be ignored if present.</span><span class="tI">
+</span><span class="tT">- vendor and applicationName are mandatory.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_Format" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_Format');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_Format" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_Format.png" usemap="#Abstract_xsd_Element_eml_Format" /><map name="Abstract_xsd_Element_eml_Format" id="Abstract_xsd_Element_eml_Format"><area alt="BaseTypes_xsd_Simple_Type_eml_String2000.tmp#String2000" href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" coords="117,0,254,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_Format" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_Format');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_Format" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_Format" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_Format');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_Format" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>2000</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_Format" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_Format');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_Format" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Format"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Software or service that was used to originate the object and the file format created. Must be human and machine readable and unambiguously identify the software by including the company name, software name and software version. This is the equivalent in ISO 19115 to the distributionFormat.MD_Format. The ISO format for this is [vendor:applicationName]/fileExtension where the application name includes the version number of the application. SIG Implementation Notes - Legacy DCGroup from v1.1 - publisher - fileExtension is not relevant and will be ignored if present. - vendor and applicationName are mandatory.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_Editor"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:Editor</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_Editor" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_Editor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_Editor" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Name (or other human-readable identifier) of the last person who updated the object. </span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent in ISO 19115 to the CI_Individual.name or the CI_Organization.name of the citedResponsibleParty whose role is "editor".</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - contributor</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_Editor" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_Editor');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_Editor" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_Editor.png" usemap="#Abstract_xsd_Element_eml_Editor" /><map name="Abstract_xsd_Element_eml_Editor" id="Abstract_xsd_Element_eml_Editor"><area alt="BaseTypes_xsd_Simple_Type_eml_String64.tmp#String64" href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" coords="111,0,234,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_Editor" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_Editor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_Editor" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_Editor" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_Editor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_Editor" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_Editor" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_Editor');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_Editor" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Editor"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Name (or other human-readable identifier) of the last person who updated the object. This is the equivalent in ISO 19115 to the CI_Individual.name or the CI_Organization.name of the citedResponsibleParty whose role is "editor". Legacy DCGroup - contributor</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_LastUpdate"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:LastUpdate</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_LastUpdate" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_LastUpdate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_LastUpdate" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Date and time the document was last modified in the source application or, if that information is not available, when it was last saved to the RESQML format file.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent of the ISO 19115 CI_Date where the CI_DateTypeCode = ”lastUpdate"</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Format:</span><span class="tI">
+</span><span class="tT">YYYY-MM-DDThh:mm:ssZ[+/-]hh:mm</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - modified</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_LastUpdate" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_LastUpdate');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_LastUpdate" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_LastUpdate.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:dateTime</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_LastUpdate" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_LastUpdate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_LastUpdate" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_LastUpdate" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_LastUpdate');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_LastUpdate" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"LastUpdate"</span><span class="tAN"> type=</span><span class="tAV">"xs:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and time the document was last modified in the source application or, if that information is not available, when it was last saved to the RESQML format file. This is the equivalent of the ISO 19115 CI_Date where the CI_DateTypeCode = ”lastUpdate" Format: YYYY-MM-DDThh:mm:ssZ[+/-]hh:mm Legacy DCGroup - modified</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_VersionString"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:VersionString</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_VersionString" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_VersionString');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_VersionString" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_VersionString.png" usemap="#Abstract_xsd_Element_eml_VersionString" /><map name="Abstract_xsd_Element_eml_VersionString" id="Abstract_xsd_Element_eml_VersionString"><area alt="BaseTypes_xsd_Simple_Type_eml_String64.tmp#String64" href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" coords="132,0,255,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String64.html#String64" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String64')">eml:String64</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_VersionString" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_VersionString');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_VersionString" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_VersionString" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_VersionString');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_VersionString" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>64</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_VersionString" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_VersionString');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_VersionString" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"VersionString"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_Description"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:Description</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_Description" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_Description');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_Description" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">User descriptive comments about the object. Intended for end-user use (human readable); not necessarily meant to be used by software.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent of the ISO 19115 abstract.CharacterString</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - description</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_Description" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_Description');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_Description" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_Description_2.png" usemap="#Abstract_xsd_Element_eml_Description_2" /><map name="Abstract_xsd_Element_eml_Description_2" id="Abstract_xsd_Element_eml_Description_2"><area alt="BaseTypes_xsd_Simple_Type_eml_String2000.tmp#String2000" href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" coords="141,0,278,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_Description" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_Description');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_Description" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_Description" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_Description');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_Description" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>2000</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_Description" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_Description');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_Description" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Description"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">User descriptive comments about the object. Intended for end-user use (human readable); not necessarily meant to be used by software. This is the equivalent of the ISO 19115 abstract.CharacterString Legacy DCGroup - description</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation_DescriptiveKeywords"></a><div class="componentTitle">Element <span class="qname"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Citation')">eml:Citation</a></b> / eml:DescriptiveKeywords</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation_DescriptiveKeywords" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation_DescriptiveKeywords');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation_DescriptiveKeywords" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Key words to describe the activity, for example, history match or volumetric calculations, relevant to this object. Intended to be used in a search function by software.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">This is the equivalent in ISO 19115 of descriptiveKeywords.MD_Keywords</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">Legacy DCGroup - subject</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation_DescriptiveKeywords" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation_DescriptiveKeywords');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation_DescriptiveKeywords" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Element_eml_DescriptiveKeywords.png" usemap="#Abstract_xsd_Element_eml_DescriptiveKeywords" /><map name="Abstract_xsd_Element_eml_DescriptiveKeywords" id="Abstract_xsd_Element_eml_DescriptiveKeywords"><area alt="BaseTypes_xsd_Simple_Type_eml_String2000.tmp#String2000" href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" coords="191,0,328,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="BaseTypes_xsd_Simple_Type_eml_String2000.html#String2000" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:String2000')">eml:String2000</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Citation_DescriptiveKeywords" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_Citation_DescriptiveKeywords');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Citation_DescriptiveKeywords" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_Citation_DescriptiveKeywords" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_Citation_DescriptiveKeywords');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_Citation_DescriptiveKeywords" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>2000</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation_DescriptiveKeywords" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation_DescriptiveKeywords');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation_DescriptiveKeywords" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"DescriptiveKeywords"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Key words to describe the activity, for example, history match or volumetric calculations, relevant to this object. Intended to be used in a search function by software. This is the equivalent in ISO 19115 of descriptiveKeywords.MD_Keywords Legacy DCGroup - subject</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Citation"></a><div class="componentTitle">Complex Type <span class="qname">eml:Citation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Citation" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_Citation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Citation" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">An ISO 19115 EIP-derived set of metadata attached to all specializations of AbstractObject to ensure the traceability of each individual independent (top level) element.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Citation" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Citation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Citation" style="display:block"><img alt="Diagram" border="0" src="img/Abstract_xsd_Complex_Type_eml_Citation.png" usemap="#Abstract_xsd_Complex_Type_eml_Citation" /><map name="Abstract_xsd_Complex_Type_eml_Citation" id="Abstract_xsd_Complex_Type_eml_Citation"><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_Title" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Title" coords="216,0,270,24" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_Originator" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Originator" coords="216,90,303,114" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_Creation" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Creation" coords="216,180,293,204" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_Format" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Format" coords="216,270,285,294" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_Editor" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Editor" coords="216,360,279,384" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_LastUpdate" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_LastUpdate" coords="216,450,307,474" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_VersionString" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_VersionString" coords="216,540,320,564" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_Description" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Description" coords="216,574,309,598" /><area alt="Abstract_xsd_Complex_Type_eml_Citation.tmp#Citation_DescriptiveKeywords" href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_DescriptiveKeywords" coords="216,664,359,688" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_Citation" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_Citation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_Citation" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Abstract_xsd_Complex_Type_eml_AbstractObject.html#http___www.energistics.org_energyml_data_commonv2_AbstractObject_Citation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractObject/eml:Citation')">eml:AbstractObject/eml:Citation</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_Citation" type="image" src="img/btM.gif" value="-" onclick="switchState('model_Citation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_Citation" style="display:block"><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Title" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Title')">eml:Title</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Originator" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Originator')">eml:Originator</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Creation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Creation')">eml:Creation</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Format" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Format')">eml:Format</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Editor" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Editor{0,1}')">eml:Editor{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_LastUpdate" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LastUpdate{0,1}')">eml:LastUpdate{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_VersionString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VersionString{0,1}')">eml:VersionString{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Description" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Description{0,1}')">eml:Description{0,1}</a></b> , <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_DescriptiveKeywords" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DescriptiveKeywords{0,1}')">eml:DescriptiveKeywords{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Creation" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Creation')">eml:Creation</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Description" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Description')">eml:Description</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_DescriptiveKeywords" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DescriptiveKeywords')">eml:DescriptiveKeywords</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Editor" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Editor')">eml:Editor</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Format" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Format')">eml:Format</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_LastUpdate" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LastUpdate')">eml:LastUpdate</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Originator" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Originator')">eml:Originator</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_Title" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:Title')">eml:Title</a></b>, <b><a href="Abstract_xsd_Complex_Type_eml_Citation.html#Citation_VersionString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VersionString')">eml:VersionString</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Citation" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Citation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Citation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;xs:complexType</span><span class="tAN"> name=</span><span class="tAV">"Citation"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An ISO 19115 EIP-derived set of metadata attached to all specializations of AbstractObject to ensure the traceability of each individual independent (top level) element.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Title"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One line description/name of the object. This is the equivalent in ISO 19115 of CI_Citation.title Legacy DCGroup - title</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Originator"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Name (or other human-readable identifier) of the person who initially originated the object or document in the source application. If that information is not available, then this is the user who created the format file. The originator remains the same as the object is subsequently edited. This is the equivalent in ISO 19115 to the CI_Individual.name or the CI_Organization.name of the citedResponsibleParty whose role is "originator". Legacy DCGroup - author</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Creation"</span><span class="tAN"> type=</span><span class="tAV">"xs:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and time the document was created in the source application or, if that information is not available, when it was saved to the file. This is the equivalent of the ISO 19115 CI_Date where the CI_DateTypeCode = ”creation" Format: YYYY-MM-DDThh:mm:ssZ[+/-]hh:mm Legacy DCGroup - created</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Format"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Software or service that was used to originate the object and the file format created. Must be human and machine readable and unambiguously identify the software by including the company name, software name and software version. This is the equivalent in ISO 19115 to the distributionFormat.MD_Format. The ISO format for this is [vendor:applicationName]/fileExtension where the application name includes the version number of the application. SIG Implementation Notes - Legacy DCGroup from v1.1 - publisher - fileExtension is not relevant and will be ignored if present. - vendor and applicationName are mandatory.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Editor"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Name (or other human-readable identifier) of the last person who updated the object. This is the equivalent in ISO 19115 to the CI_Individual.name or the CI_Organization.name of the citedResponsibleParty whose role is "editor". Legacy DCGroup - contributor</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"LastUpdate"</span><span class="tAN"> type=</span><span class="tAV">"xs:dateTime"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Date and time the document was last modified in the source application or, if that information is not available, when it was last saved to the RESQML format file. This is the equivalent of the ISO 19115 CI_Date where the CI_DateTypeCode = ”lastUpdate" Format: YYYY-MM-DDThh:mm:ssZ[+/-]hh:mm Legacy DCGroup - modified</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"VersionString"</span><span class="tAN"> type=</span><span class="tAV">"eml:String64"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"Description"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">User descriptive comments about the object. Intended for end-user use (human readable); not necessarily meant to be used by software. This is the equivalent of the ISO 19115 abstract.CharacterString Legacy DCGroup - description</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"DescriptiveKeywords"</span><span class="tAN"> type=</span><span class="tAV">"eml:String2000"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Key words to describe the activity, for example, history match or volumetric calculations, relevant to this object. Intended to be used in a search function by software. This is the equivalent in ISO 19115 of descriptiveKeywords.MD_Keywords Legacy DCGroup - subject</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:element&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
