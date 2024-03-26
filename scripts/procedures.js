@@ -284,6 +284,11 @@ async function main() {
 
   //Now that we've collected all of the Procedure information, call function to write out html and then stop
   writeHtml();
+  console.log(propArray.length);
+console.log(labProcedures.length);
+console.log(inSituProcedures.length);
+console.log(genericProcedures.length);
+
 }
 
 /* ------------------------------------------------------------------------------------------*/
@@ -297,30 +302,77 @@ function writeHtml() {
     "</h1></div>";
 
   txt += "<details><summary>New in Version 2.6:</summary>";
-  txt +=
-    '<p style="font-weight: bold;">New geotechnical laboratory test procedures:</p><ul>';
+  txt += '<table style="width:100%;"><tr>';
+  txt += '<th class="detail">New Laboratory Test Procedures</th>';
+  txt += '<th class="detail">New In-situ Test Procedures</th>';
+  txt += '<th class="detail">New General Procedure</th>';
+  txt += '<th class="detail">Deprecated Procedures</th></tr><tr>';
+
+  txt += '<td class="cells">';
+  txt += " <li>Aggregate Abrasion Value Test</li>";
+  txt += "<li>Aggregate Crushing Value Test</li>";
+  txt += "<li>Aggregate Elongation Index Test</li>";
+  txt += "<li>Aggregate Flakiness Index Test</li>";
+  txt += "<li>Aggregate Impact Value Test</li>";
+  txt += "<li>Aggregate Polished Stone Value Test</li>";
+  txt += "<li>Aggregate Slake Durability Test</li>";
+  txt += "<li>Aggregate Soundness Test</li>";
+  txt += "<li>Aggregate Ten Percent Fines Test</li>";
+  txt += "<li>Aggregate Water Absorption Test</li>";
+  txt += "<li>Bleed Test</li>";
+  txt += "<li>Cation Exchange Test</li>";
+  txt += "<li>Chalk Crushing Value Test</li>";
   txt += "<li>Environmental Screening Test</li>";
+  txt += "<li>Frost Susceptibility Test</li>";
+  txt += "<li>Lab Penetrometer Test</li>";
   txt += "<li>Lab Vane Test</li>";
+  txt += "<li>Lab Velocity Test</li>";
+  txt += "<li>Linear Shrinkage Test</li>";
+  txt += "<li>Line Loss Test</li>";
+  txt += "<li>Los Angeles Abrasion</li>";
   txt += "<li>Loss On Ignition Test</li>";
   txt += "<li>Material Gradation Test</li>";
+  txt += "<li>MCV Test</li>";
+  txt += "<li>Micro Deval Test</li>";
   txt += "<li>Pocket Penetrometer Test</li>";
-  txt += "<li>Point Load Test</li></ul>";
+  txt += "<li>Point Load Test</li>";
+  txt += "<li>Pressure Filtration Test</li>";
+  txt += "<li>Relative Density Test</li>";
+  txt += "<li>Rock Porosity Density Test</li>";
+  txt += "<li>Schmidt Rebound Hardness Test</li>";
+  txt += "<li>Shore Scleroscope Hardness Test</li>";
+  txt += "<li>Shrinkage Test</li>";
+  txt += "<li>Slump Test</li>";
+  txt += "<li>Suction Test</li>";
+  txt += "<li>Syneresis Test</li>";
+  txt += "<li>Tilt Cup Test</li>";
+  txt += "<li>Viscometer Test</li>";
+  txt += "<li>Washout Test</li></td>";
 
-  txt +=
-    '<p style="font-weight: bold;">New geotechnical In-situ test procedures:</p><ul>';
+  txt += '<td class="cells">';
   txt += "<li>Dynamic Probe Test</li>";
-  txt += "<li>Pore Pressure Dissipation Test</li></ul>";
+  txt += "<li>GP_Field Procedure</li>";
+  txt += "<li>In-situ Density Test</li>";
+  txt += "<li>In-situ Penetrometer Test</li>";
+  txt += "<li>In-situ Permeability Test</li>";
+  txt += "<li>In-situ Resistivity Test</li>";
+  txt += "<li>Pore Pressure Dissipation Test</li>";
+  txt += "<li>Pressuremeter Test</li>";
+  txt += "<li>Pumping Test</li></td>";
 
-  txt += '<p style="font-weight: bold;">Deprecated procedures:</p><ul>';
+  txt += '<td class="cells">';
+  txt += "<li>Geophysical Processing</li></td>";
+
+  txt += '<td class="cells">';
   txt +=
     "<li>diggs_geo:FlameIonizationDetectorTest (replaced by diggs_geo:EnvironmentalScreeningTest)</li>";
   txt +=
-    "<li>diggs_geo:PhotoIonizationDetectorTest (replaced by diggs_geo:EnvironmentalScreeningTest)</li>";
+    "<li>diggs_geo:PhotoIonizationDetectorTest (replaced by diggs_geo:EnvironmentalScreeningTest)";
   txt +=
-    "<li>diggs_geo:TriaxialTest (replaced by updated diggs:TriaxialTest)</li></ul>";
-  txt += "<hr>";
+    "<li>diggs_geo:TriaxialTest (replaced by updated diggs:TriaxialTest)</li></ul></td></tr></table>";
+
   txt +=
-    '<ol><div><li>Procedure names in <span class = "blue">blue</span> below are legacy procedures brought back from v. 2.0 to enable AGS 4 interoperability (BetaProedures.xsd). These procedures are in beta form and may change their structure in future releases.';
+    '<ol><div style="font-size:20px;"><li>Procedure names in <span class = "blue">blue</span> below are legacy procedures brought back from v. 2.0 to enable AGS 4 interoperability (BetaProedures.xsd). These procedures are in beta form and may change their structure in future releases.';
   txt +=
     '<li>Procedure names in <span class = "green">green</span> below are new and are part of the grouting (Construction.xsd) and geophysics (Geophysics.xsd) schema extensions introduced in v. 2.6.</li>';
   txt +=
@@ -387,7 +439,7 @@ function results(param) {
       paramArray[paramCnt] = propArray[i];
 
       //Now check to see if param procedure is ProcessedGeophysicalSurvey; if so, parse out the goeophysical method from param
-      if (param.indexOf("ProcessedGeophysicalSurvey") >= 0) {
+      if (param.indexOf("GeophysicalProcessing") >= 0) {
         var prc = propArray[i].procedure;
         var method = prc.substring(prc.indexOf("text()") + 8, prc.length - 2);
         paramArray[paramCnt].method = method.toProperCase();
@@ -409,8 +461,8 @@ function results(param) {
     return 0;
   });
 
-  //Then by method if param = ProcessedGeophysicalSurvey
-  if (param.indexOf("ProcessedGeophysicalSurvey") >= 0) {
+  //Then by method if param = GeophysicalProcessing
+  if (param.indexOf("GeophysicalProcessing") >= 0) {
     paramArray.sort((a, b) => {
       let fa = a.method.toLowerCase(),
         fb = b.method.toLowerCase();
@@ -444,7 +496,7 @@ function results(param) {
     t += "<th>Property Name</th>";
     t += "<th>Property ID</th>";
 
-    if (param.indexOf("ProcessedGeophysicalSurvey") >= 0) {
+    if (param.indexOf("GeophysicalProcessing") >= 0) {
       t += "<th>Geophysical Method</th>";
       t += "<th>Source Dictionary File</th>";
       t += "</tr>";
@@ -460,7 +512,7 @@ function results(param) {
       }
       t += "</table></div>";
     } else {
-      t += "<th>Source Ditionary File</th>";
+      t += "<th>Source Dictionary File</th>";
       t += "</tr>";
 
       //Loop to write the table rows
