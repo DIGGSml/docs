@@ -285,10 +285,9 @@ async function main() {
   //Now that we've collected all of the Procedure information, call function to write out html and then stop
   writeHtml();
   console.log(propArray.length);
-console.log(labProcedures.length);
-console.log(inSituProcedures.length);
-console.log(genericProcedures.length);
-
+  console.log(labProcedures.length);
+  console.log(inSituProcedures.length);
+  console.log(genericProcedures.length);
 }
 
 /* ------------------------------------------------------------------------------------------*/
