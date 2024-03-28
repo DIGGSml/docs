@@ -99,7 +99,8 @@ async function main() {
           procedure: `${prc}`,
           name: `${name}`,
           id: `${id}`,
-          file: `${filerec.name}`
+          file: `${filerec.name}`,
+          url: `${url}`
         };
 
         //Fill Array
@@ -300,7 +301,8 @@ function writeHtml() {
     version +
     "</h1></div>";
 
-  txt += "<details><summary>New in Version 2.6:</summary>";
+  txt += "<details><summary>Explanation</summary>";
+  txt += '<p style ="font-weight: bold;">What\'s new in Version 2.6:</p>';
   txt += '<table style="width:100%;"><tr>';
   txt += '<th class="detail">New Laboratory Test Procedures</th>';
   txt += '<th class="detail">New In-situ Test Procedures</th>';
@@ -506,7 +508,12 @@ function results(param) {
         t += "<td>" + paramArray[i].name + "</td>";
         t += "<td>" + paramArray[i].id + "</td>";
         t += "<td>" + paramArray[i].method + "</td>";
-        t += "<td>" + paramArray[i].file + "</td>";
+        t +=
+          '<td><a href = "' +
+          paramArray[i].url +
+          '" target = "_blank">' +
+          paramArray[i].file +
+          "</a></td>";
         t += "</tr>";
       }
       t += "</table></div>";
@@ -519,7 +526,12 @@ function results(param) {
         t += "<tr>";
         t += "<td>" + paramArray[i].name + "</td>";
         t += "<td>" + paramArray[i].id + "</td>";
-        t += "<td>" + paramArray[i].file + "</td>";
+        t +=
+          '<td><a href = "' +
+          paramArray[i].url +
+          '" target = "_blank">' +
+          paramArray[i].file +
+          "</a></td>";
         t += "</tr>";
       }
       t += "</table></div>";
