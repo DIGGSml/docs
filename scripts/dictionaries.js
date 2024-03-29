@@ -96,7 +96,7 @@ function writeHtml() {
   txt +=
     '<div><div class="logo"><img src= "https://diggsml.org/def/img/diggs-logo.png" style="width:150px"/></div>';
   txt +=
-    "<h1>DIGGS Codelist and Property Dictionaries<br/>Version " +
+    "<h1>DIGGS Code Lists and Measurement Properties Dictionaries<br/>Version " +
     propvers +
     "</h1></div>";
 
