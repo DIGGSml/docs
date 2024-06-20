@@ -1,0 +1,602 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:TimberPile</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_TimberPile');
+var sourceBoxes= new Array('source_TimberPile');
+var instanceBoxes= new Array('instance_TimberPile');
+var diagramBoxes= new Array('diagram_TimberPile');
+var annotationBoxes= new Array('annotations_TimberPile');
+var attributesBoxes= new Array('attributes_TimberPile');
+var modelBoxes= new Array('model_TimberPile');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="TimberPile"></a><div class="componentTitle">Element <span class="qname">diggs:TimberPile</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/2.6</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TimberPile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TimberPile" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A TimberPile object, including all its properties.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TimberPile');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TimberPile" style="display:block"><img alt="Diagram" border="0" src="img/Piling_xsd_Element_diggs_TimberPile.png" usemap="#Piling_xsd_Element_diggs_TimberPile" /><map name="Piling_xsd_Element_diggs_TimberPile" id="Piling_xsd_Element_diggs_TimberPile"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="289,438,370,462" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="452,579,567,603" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="452,669,620,693" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="452,746,554,770" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="452,836,535,860" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="349,538,565,564" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="264,363,525,385" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#http___www.opengis.net_gml_3.2_AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" coords="250,323,531,345" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="261,1070,342,1094" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="318,1154,433,1178" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="318,1244,420,1268" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="236,283,548,305" /><area alt="xml_xsd_Attribute_xml_lang.tmp#lang" href="xml_xsd_Attribute_xml_lang.html#lang" coords="247,1379,341,1403" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="325,1476,408,1500" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_internalIdentifier" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_internalIdentifier" coords="325,1566,445,1590" /><area alt="Kernel_xsd_Element_diggs_status.tmp#status" href="Kernel_xsd_Element_diggs_status.html#status" coords="325,1643,422,1667" /><area alt="Kernel_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Kernel_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="325,1733,505,1757" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_associatedFile" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_associatedFile" coords="325,1810,431,1834" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_role" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_role" coords="325,1900,377,1924" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType_remark" coords="325,1990,394,2014" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#AbstractFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" coords="222,243,513,265" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="361,2087,476,2111" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="361,2177,463,2201" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="382,2267,465,2291" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_internalIdentifier" href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_internalIdentifier" coords="382,2357,502,2381" /><area alt="Kernel_xsd_Element_diggs_status.tmp#status" href="Kernel_xsd_Element_diggs_status.html#status" coords="382,2434,479,2458" /><area alt="Kernel_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Kernel_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="382,2524,562,2548" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_associatedFile" href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_associatedFile" coords="382,2601,488,2625" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_role" href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_role" coords="382,2678,434,2702" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_remark" href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_remark" coords="382,2768,451,2792" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType" coords="208,203,533,225" /><area alt="Kernel_xsd_Element_diggs_investigationTarget.tmp#investigationTarget" href="Kernel_xsd_Element_diggs_investigationTarget.html#investigationTarget" coords="297,2852,465,2876" /><area alt="Kernel_xsd_Element_diggs_projectRef.tmp#projectRef" href="Kernel_xsd_Element_diggs_projectRef.html#projectRef" coords="297,2929,416,2953" /><area alt="Kernel_xsd_Element_diggs_originalProjectRef.tmp#originalProjectRef" href="Kernel_xsd_Element_diggs_originalProjectRef.html#originalProjectRef" coords="297,3006,456,3030" /><area alt="Kernel_xsd_Element_diggs_associatedProjectRef.tmp#associatedProjectRef" href="Kernel_xsd_Element_diggs_associatedProjectRef.html#associatedProjectRef" coords="297,3096,472,3120" /><area alt="Kernel_xsd_Element_diggs_programRef.tmp#programRef" href="Kernel_xsd_Element_diggs_programRef.html#programRef" coords="297,3173,425,3197" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_environment" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_environment" coords="297,3237,396,3261" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_otherSamplingFeatureProperty" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_otherSamplingFeatureProperty" coords="297,3327,492,3351" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_locality" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_locality" coords="297,3404,366,3428" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_referencePoint" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_referencePoint" coords="297,3481,406,3505" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_localCoordinates" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_localCoordinates" coords="297,3571,419,3595" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType" coords="194,163,531,185" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.tmp#AbstractLinearSamplingFeatureType_centerLine" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_centerLine" coords="283,3655,370,3679" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.tmp#AbstractLinearSamplingFeatureType_linearReferencing" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_linearReferencing" coords="283,3745,408,3769" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.tmp#AbstractLinearSamplingFeatureType_plunge" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_plunge" coords="283,3822,351,3846" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.tmp#AbstractLinearSamplingFeatureType_bearing" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_bearing" coords="283,3899,355,3923" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.tmp#AbstractLinearSamplingFeatureType" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType" coords="180,123,550,145" /><area alt="Kernel_xsd_Element_diggs_samplingFeatureRef.tmp#samplingFeatureRef" href="Kernel_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" coords="269,3996,439,4020" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.tmp#AbstractLinearInstallationType_installationConstructionEvent" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.html#AbstractLinearInstallationType_installationConstructionEvent" coords="269,4086,459,4110" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.tmp#AbstractLinearInstallationType" href="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.html#AbstractLinearInstallationType" coords="166,83,506,105" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_whenInstalled" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_whenInstalled" coords="255,4170,359,4194" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_groundSurfaceElevation" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_groundSurfaceElevation" coords="255,4234,414,4258" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_cutoffElevation" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_cutoffElevation" coords="255,4298,366,4322" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_jettingElevation" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_jettingElevation" coords="255,4362,368,4386" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_totalPileLength" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_totalPileLength" coords="255,4426,365,4450" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_weightPerLength" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_weightPerLength" coords="255,4490,375,4514" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_tipDeviationNorth" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_tipDeviationNorth" coords="255,4554,381,4578" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_tipDeviationEast" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_tipDeviationEast" coords="255,4631,372,4655" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_lengthAboveGroundSurface" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthAboveGroundSurface" coords="255,4708,435,4732" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_lengthBelowGroundSurface" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthBelowGroundSurface" coords="255,4772,431,4796" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_lengthNonFriction" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthNonFriction" coords="255,4836,383,4860" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_intervalData" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_intervalData" coords="255,4900,350,4924" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_productionPile" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_productionPile" coords="255,4964,364,4988" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_testPile" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_testPile" coords="255,5041,324,5065" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_nominalCapacity" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_nominalCapacity" coords="255,5118,375,5142" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType_finalTipElevation" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_finalTipElevation" coords="255,5182,374,5206" /><area alt="Piling_xsd_Complex_Type_diggs_AbstractPileType.tmp#AbstractPileType" href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType" coords="152,43,418,65" /><area alt="Piling_xsd_Complex_Type_diggs_TimberPileType.tmp#TimberPileType_timberType" href="Piling_xsd_Complex_Type_diggs_TimberPileType.html#TimberPileType_timberType" coords="220,5300,312,5324" /><area alt="Piling_xsd_Complex_Type_diggs_TimberPileType.tmp#TimberPileType" href="Piling_xsd_Complex_Type_diggs_TimberPileType.html#TimberPileType" coords="138,3,304,25" /><area alt="Kernel_xsd_Element_diggs_AbstractLinearSamplingFeature.tmp#AbstractLinearSamplingFeature" href="Kernel_xsd_Element_diggs_AbstractLinearSamplingFeature.html#AbstractLinearSamplingFeature" coords="149,5439,348,5463" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Piling_xsd_Complex_Type_diggs_TimberPileType.html#TimberPileType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimberPileType')">diggs:TimberPileType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#http___www.opengis.net_gml_3.2_AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractNamedFeatureType')">diggs:AbstractNamedFeatureType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingFeatureType')">diggs:AbstractSamplingFeatureType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLinearSamplingFeatureType')">diggs:AbstractLinearSamplingFeatureType</a></b><ul class="internal">
+                                                                        <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.html#AbstractLinearInstallationType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLinearInstallationType')">diggs:AbstractLinearInstallationType</a></b><ul class="internal">
+                                                                              <li class="internal"><b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractPileType')">diggs:AbstractPileType</a></b><ul class="internal">
+                                                                                    <li class="internal"><b><a href="Piling_xsd_Complex_Type_diggs_TimberPileType.html#TimberPileType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:TimberPileType')">diggs:TimberPileType</a></b></li>
+                                                                                 </ul>
+                                                                              </li>
+                                                                           </ul>
+                                                                        </li>
+                                                                     </ul>
+                                                                  </li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TimberPile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TimberPile" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Substitution Group Affiliation</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="Kernel_xsd_Element_diggs_AbstractLinearSamplingFeature.html#AbstractLinearSamplingFeature" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLinearSamplingFeature')">diggs:AbstractLinearSamplingFeature</a></b></li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TimberPile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TimberPile" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name+')">gml:name+</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Kernel_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Kernel_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Kernel_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget+')">diggs:investigationTarget+</a></b> , <b><a href="Kernel_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b> , <b><a href="Kernel_xsd_Element_diggs_originalProjectRef.html#originalProjectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:originalProjectRef{0,1}')">diggs:originalProjectRef{0,1}</a></b> , <b><a href="Kernel_xsd_Element_diggs_associatedProjectRef.html#associatedProjectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedProjectRef*')">diggs:associatedProjectRef*</a></b> , <b><a href="Kernel_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:programRef{0,1}')">diggs:programRef{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_environment" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:environment*')">diggs:environment*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_otherSamplingFeatureProperty" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:otherSamplingFeatureProperty*')">diggs:otherSamplingFeatureProperty*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_locality" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:locality{0,1}')">diggs:locality{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_referencePoint" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:referencePoint')">diggs:referencePoint</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_localCoordinates" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:localCoordinates{0,1}')">diggs:localCoordinates{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_centerLine" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:centerLine+')">diggs:centerLine+</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_linearReferencing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:linearReferencing*')">diggs:linearReferencing*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_plunge" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:plunge{0,1}')">diggs:plunge{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_bearing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:bearing{0,1}')">diggs:bearing{0,1}</a></b> , <b><a href="Kernel_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef')">diggs:samplingFeatureRef</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.html#AbstractLinearInstallationType_installationConstructionEvent" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:installationConstructionEvent*')">diggs:installationConstructionEvent*</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_whenInstalled" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:whenInstalled{0,1}')">diggs:whenInstalled{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_groundSurfaceElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:groundSurfaceElevation')">diggs:groundSurfaceElevation</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_cutoffElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:cutoffElevation')">diggs:cutoffElevation</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_jettingElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:jettingElevation{0,1}')">diggs:jettingElevation{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_totalPileLength" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:totalPileLength{0,1}')">diggs:totalPileLength{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_weightPerLength" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:weightPerLength{0,1}')">diggs:weightPerLength{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_tipDeviationNorth" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:tipDeviationNorth{0,1}')">diggs:tipDeviationNorth{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_tipDeviationEast" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:tipDeviationEast{0,1}')">diggs:tipDeviationEast{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthAboveGroundSurface" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:lengthAboveGroundSurface{0,1}')">diggs:lengthAboveGroundSurface{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthBelowGroundSurface" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:lengthBelowGroundSurface{0,1}')">diggs:lengthBelowGroundSurface{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthNonFriction" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:lengthNonFriction{0,1}')">diggs:lengthNonFriction{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_intervalData" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:intervalData+')">diggs:intervalData+</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_productionPile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:productionPile{0,1}')">diggs:productionPile{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_testPile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testPile{0,1}')">diggs:testPile{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_nominalCapacity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:nominalCapacity{0,1}')">diggs:nominalCapacity{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_finalTipElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:finalTipElevation{0,1}')">diggs:finalTipElevation{0,1}</a></b> , <b><a href="Piling_xsd_Complex_Type_diggs_TimberPileType.html#TimberPileType_timberType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:timberType{0,1}')">diggs:timberType{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="Kernel_xsd_Element_diggs_associatedProjectRef.html#associatedProjectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:associatedProjectRef')">diggs:associatedProjectRef</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_bearing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:bearing')">diggs:bearing</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_centerLine" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:centerLine')">diggs:centerLine</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_cutoffElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:cutoffElevation')">diggs:cutoffElevation</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_environment" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:environment')">diggs:environment</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_finalTipElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:finalTipElevation')">diggs:finalTipElevation</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_groundSurfaceElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:groundSurfaceElevation')">diggs:groundSurfaceElevation</a></b>, <b><a href="Kernel_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearInstallationType.html#AbstractLinearInstallationType_installationConstructionEvent" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:installationConstructionEvent')">diggs:installationConstructionEvent</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_intervalData" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:intervalData')">diggs:intervalData</a></b>, <b><a href="Kernel_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget')">diggs:investigationTarget</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_jettingElevation" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:jettingElevation')">diggs:jettingElevation</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthAboveGroundSurface" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:lengthAboveGroundSurface')">diggs:lengthAboveGroundSurface</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthBelowGroundSurface" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:lengthBelowGroundSurface')">diggs:lengthBelowGroundSurface</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_lengthNonFriction" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:lengthNonFriction')">diggs:lengthNonFriction</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_linearReferencing" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:linearReferencing')">diggs:linearReferencing</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_localCoordinates" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:localCoordinates')">diggs:localCoordinates</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_locality" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:locality')">diggs:locality</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_nominalCapacity" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:nominalCapacity')">diggs:nominalCapacity</a></b>, <b><a href="Kernel_xsd_Element_diggs_originalProjectRef.html#originalProjectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:originalProjectRef')">diggs:originalProjectRef</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_otherSamplingFeatureProperty" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:otherSamplingFeatureProperty')">diggs:otherSamplingFeatureProperty</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractLinearSamplingFeatureType.html#AbstractLinearSamplingFeatureType_plunge" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:plunge')">diggs:plunge</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_productionPile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:productionPile')">diggs:productionPile</a></b>, <b><a href="Kernel_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:programRef')">diggs:programRef</a></b>, <b><a href="Kernel_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_referencePoint" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:referencePoint')">diggs:referencePoint</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Kernel_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef')">diggs:samplingFeatureRef</a></b>, <b><a href="Kernel_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_testPile" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:testPile')">diggs:testPile</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_TimberPileType.html#TimberPileType_timberType" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:timberType')">diggs:timberType</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_tipDeviationEast" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:tipDeviationEast')">diggs:tipDeviationEast</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_tipDeviationNorth" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:tipDeviationNorth')">diggs:tipDeviationNorth</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_totalPileLength" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:totalPileLength')">diggs:totalPileLength</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_weightPerLength" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:weightPerLength')">diggs:weightPerLength</a></b>, <b><a href="Piling_xsd_Complex_Type_diggs_AbstractPileType.html#AbstractPileType_whenInstalled" target="mainFrame" title="http://diggsml.org/schemas/2.6" onclick="updatePageTitle('Schema documentation for component diggs:whenInstalled')">diggs:whenInstalled</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_TimberPile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_TimberPile" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:TimberPile</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/2.6"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:description</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:description&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:identifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:identifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:name</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/gml:name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:internalIdentifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:internalIdentifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:status</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:status&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:implementationStatus</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:implementationStatus&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:associatedFile</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:associatedFile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:role</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:role&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:remark</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:remark&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:investigationTarget</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:investigationTarget&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:projectRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:projectRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:originalProjectRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:originalProjectRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:associatedProjectRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:associatedProjectRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:programRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:programRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:environment</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:environment&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:otherSamplingFeatureProperty</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:otherSamplingFeatureProperty&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:locality</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:locality&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:referencePoint</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:referencePoint&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:localCoordinates</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:localCoordinates&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:centerLine</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:centerLine&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:linearReferencing</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:linearReferencing&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:plunge</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:plunge&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:bearing</span><span class="tT"> </span><span class="tAN">refAzimuth=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:bearing&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:samplingFeatureRef</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:samplingFeatureRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:installationConstructionEvent</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:installationConstructionEvent&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:whenInstalled</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:whenInstalled&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:groundSurfaceElevation</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:groundSurfaceElevation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:cutoffElevation</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:cutoffElevation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:jettingElevation</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:jettingElevation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:totalPileLength</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:totalPileLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:weightPerLength</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:weightPerLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:tipDeviationNorth</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:tipDeviationNorth&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:tipDeviationEast</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:tipDeviationEast&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:lengthAboveGroundSurface</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:lengthAboveGroundSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:lengthBelowGroundSurface</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:lengthBelowGroundSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:lengthNonFriction</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:lengthNonFriction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:intervalData</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:intervalData&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:productionPile</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:productionPile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testPile</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:testPile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:nominalCapacity</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:nominalCapacity&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:finalTipElevation</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:finalTipElevation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:timberType</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:timberType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:TimberPile&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TimberPile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TimberPile" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd_Attribute_xml_lang.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for component xml:lang')">xml:lang</a></b></td>
+                                    <td>union of(<b>xs:language</b>, restriction of <b>xs:string</b>)</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h3</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">lang (as an attribute name)</span><span class="tEl">&lt;/h3&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span><span class="tEl">&lt;div</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;h4</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Notes</span><span class="tEl">&lt;/h4&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">See BCP 47 at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.rfc-editor.org/rfc/bcp/bcp47.txt"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">and the IANA language subtag registry at</span><span class="tI">
+    </span><span class="tEl">&lt;a</span><span class="tAN"> href=</span><span class="tAV">"http://www.iana.org/assignments/language-subtag-registry"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">http://www.iana.org/assignments/language-subtag-registry</span><span class="tEl">&lt;/a&gt;</span><span class="tT" style="white-space:normal">for further information.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;p</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The union allows for the 'un-declaration' of xml:lang with the empty string.</span><span class="tEl">&lt;/p&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/div&gt;</span><span class="tI">
+</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TimberPile" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TimberPile');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TimberPile" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"TimberPile"</span><span class="tAN"> substitutionGroup=</span><span class="tAV">"diggs:AbstractLinearSamplingFeature"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimberPileType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A TimberPile object, including all its properties.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
