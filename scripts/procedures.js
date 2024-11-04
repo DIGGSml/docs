@@ -567,7 +567,7 @@ function tableBody(content) {
 
   //Loop through the array to populate cells
   for (i = 0; i < content.length; i++) {
-    var param = "//" + content[i].ns + ":" + content[i].name;
+    var param = content[i].ns + ":" + content[i].name;
     txt += '<tr><td class="center">';
     if (content[i].schema === "BetaProcedures.xsd") {
       txt += '<a class = "blue" href="';
