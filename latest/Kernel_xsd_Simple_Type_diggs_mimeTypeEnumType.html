@@ -1,0 +1,1318 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:mimeTypeEnumType</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var facetsBoxes= new Array('facets_mimeTypeEnumType');
+var sourceBoxes= new Array('source_mimeTypeEnumType');
+var diagramBoxes= new Array('diagram_mimeTypeEnumType');
+var annotationBoxes= new Array('annotations_mimeTypeEnumType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="mimeTypeEnumType"></a><div class="componentTitle">Simple Type <span class="qname">diggs:mimeTypeEnumType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_mimeTypeEnumType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_mimeTypeEnumType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_mimeTypeEnumType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Enumerated list of common MIME types</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_mimeTypeEnumType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_mimeTypeEnumType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_mimeTypeEnumType" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Simple_Type_diggs_mimeTypeEnumType.png" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_mimeTypeEnumType" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_mimeTypeEnumType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_mimeTypeEnumType" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/javascript</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/json</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">JavaScript Object Notation data format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/pdf</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Adobe Portable Document Format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/xml</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Extensible Markup Language document</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/zip</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">ZIP archive format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/x-www-form-urlencoded</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Form encoded data from HTML forms</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/vnd.ms-excel</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Microsoft Excel spreadsheet (legacy .xls format)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Microsoft Excel spreadsheet (.xlsx format)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/msword</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Microsoft Word document (legacy .doc format)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/vnd.openxmlformats-officedocument.wordprocessingml.document</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Microsoft Word document (.docx format)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/javascript</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">JavaScript code (application type)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/octet-stream</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Binary data with no specific type</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/x-tar</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">TAR archive format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/graphql</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">GraphQL query language content</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/x-httpd-php</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">PHP script file</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>application/rtf</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Rich Text Format document</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/plain</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Plain text without formatting</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/html</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">HyperText Markup Language document</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/css</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Cascading Style Sheets</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/javascript</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">JavaScript code (text type)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/csv</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Comma-Separated Values data</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/xml</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">XML document (text type)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/markdown</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Markdown formatted text</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/rtf</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Rich Text Format (text type)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/calendar</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">iCalendar data format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>text/cache-manifest</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Application cache manifest</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/jpeg</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">JPEG image format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/png</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Portable Network Graphics format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/gif</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Graphics Interchange Format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/svg+xml</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Scalable Vector Graphics format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/webp</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">WebP image format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/avif</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">AV1 Image File Format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/tiff</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Tagged Image File Format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/bmp</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Bitmap image format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/x-icon</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Icon format (ICO)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>image/vnd.microsoft.icon</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Microsoft Icon format (ICO)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/mp4</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">MPEG-4 video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/webm</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">WebM video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/ogg</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Ogg video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/x-msvideo</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">AVI video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/quicktime</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">QuickTime video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/mpeg</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">MPEG video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/3gpp</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">3GPP video format for mobile devices</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/x-ms-wmv</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Windows Media Video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/x-flv</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Flash Video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>video/H264</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">H.264 video format</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_mimeTypeEnumType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_mimeTypeEnumType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_mimeTypeEnumType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;simpleType</span><span class="tAN"> name=</span><span class="tAV">"mimeTypeEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Enumerated list of common MIME types</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;restriction</span><span class="tAN"> base=</span><span class="tAV">"string"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Application types --&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Text types --&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Image types --&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- Video types --&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/javascript"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/json"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">JavaScript Object Notation data format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/pdf"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Adobe Portable Document Format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/xml"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Extensible Markup Language document</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/zip"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">ZIP archive format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/x-www-form-urlencoded"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Form encoded data from HTML forms</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/vnd.ms-excel"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Microsoft Excel spreadsheet (legacy .xls format)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Microsoft Excel spreadsheet (.xlsx format)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/msword"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Microsoft Word document (legacy .doc format)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/vnd.openxmlformats-officedocument.wordprocessingml.document"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Microsoft Word document (.docx format)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/javascript"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">JavaScript code (application type)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/octet-stream"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Binary data with no specific type</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/x-tar"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">TAR archive format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/graphql"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">GraphQL query language content</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/x-httpd-php"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">PHP script file</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"application/rtf"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Rich Text Format document</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/plain"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Plain text without formatting</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/html"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">HyperText Markup Language document</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/css"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Cascading Style Sheets</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/javascript"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">JavaScript code (text type)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/csv"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Comma-Separated Values data</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/xml"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">XML document (text type)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/markdown"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Markdown formatted text</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/rtf"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Rich Text Format (text type)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/calendar"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">iCalendar data format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"text/cache-manifest"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Application cache manifest</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/jpeg"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">JPEG image format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/png"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Portable Network Graphics format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/gif"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Graphics Interchange Format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/svg+xml"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Scalable Vector Graphics format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/webp"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">WebP image format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/avif"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">AV1 Image File Format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/tiff"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Tagged Image File Format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/bmp"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Bitmap image format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/x-icon"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Icon format (ICO)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"image/vnd.microsoft.icon"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Microsoft Icon format (ICO)</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/mp4"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">MPEG-4 video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/webm"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">WebM video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/ogg"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Ogg video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/x-msvideo"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">AVI video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/quicktime"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">QuickTime video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/mpeg"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">MPEG video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/3gpp"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">3GPP video format for mobile devices</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/x-ms-wmv"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Windows Media Video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/x-flv"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Flash Video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"video/H264"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">H.264 video format</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/restriction&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/simpleType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
