@@ -1,0 +1,1633 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:remark</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_TexturallPropertiesType_remark', 
+				'properties_TexturallPropertiesType_Fabric', 
+				'properties_TexturallPropertiesType_particleAngularity', 
+				'properties_TexturallPropertiesType_particleShape', 
+				'properties_TexturallPropertiesType_particleSize', 
+				'properties_TexturallPropertiesType_particleSizeDistribution', 
+				'properties_TexturallPropertiesType_particleSorting', 
+				'properties_TexturallPropertiesType_surfaceTexture');
+var usedByBoxes= new Array('usedBy_TexturallPropertiesType');
+var sourceBoxes= new Array('source_TexturallPropertiesType_remark', 
+				'source_TexturallPropertiesType_Fabric', 
+				'source_TexturallPropertiesType_particleAngularity', 
+				'source_TexturallPropertiesType_particleShape', 
+				'source_TexturallPropertiesType_particleSize', 
+				'source_TexturallPropertiesType_particleSizeDistribution', 
+				'source_TexturallPropertiesType_particleSorting', 
+				'source_TexturallPropertiesType_surfaceTexture', 
+				'source_TexturallPropertiesType');
+var instanceBoxes= new Array('instance_TexturallPropertiesType_remark', 
+				'instance_TexturallPropertiesType_particleSizeDistribution');
+var diagramBoxes= new Array('diagram_TexturallPropertiesType_remark', 
+				'diagram_TexturallPropertiesType_Fabric', 
+				'diagram_TexturallPropertiesType_particleAngularity', 
+				'diagram_TexturallPropertiesType_particleShape', 
+				'diagram_TexturallPropertiesType_particleSize', 
+				'diagram_TexturallPropertiesType_particleSizeDistribution', 
+				'diagram_TexturallPropertiesType_particleSorting', 
+				'diagram_TexturallPropertiesType_surfaceTexture', 
+				'diagram_TexturallPropertiesType');
+var annotationBoxes= new Array('annotations_TexturallPropertiesType_remark', 
+				'annotations_TexturallPropertiesType_Fabric', 
+				'annotations_TexturallPropertiesType_particleAngularity', 
+				'annotations_TexturallPropertiesType_particleShape', 
+				'annotations_TexturallPropertiesType_particleSize', 
+				'annotations_TexturallPropertiesType_particleSizeDistribution', 
+				'annotations_TexturallPropertiesType_particleSorting', 
+				'annotations_TexturallPropertiesType_surfaceTexture');
+var attributesBoxes= new Array('attributes_TexturallPropertiesType_Fabric', 
+				'attributes_TexturallPropertiesType_particleAngularity', 
+				'attributes_TexturallPropertiesType_particleShape', 
+				'attributes_TexturallPropertiesType_particleSize', 
+				'attributes_TexturallPropertiesType_particleSorting', 
+				'attributes_TexturallPropertiesType_surfaceTexture', 
+				'attributes_TexturallPropertiesType');
+var modelBoxes= new Array('model_TexturallPropertiesType_remark', 
+				'model_TexturallPropertiesType_particleSizeDistribution', 
+				'model_TexturallPropertiesType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="TexturallPropertiesType_remark"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:remark</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_remark" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Any comment or remark associated with this specific</span><span class="tI">
+</span><span class="tT">feature, the person or organization making the comment, and the time</span><span class="tI">
+</span><span class="tT">comment was made.Any comment or remark associated with this specific</span><span class="tI">
+</span><span class="tT">feature, the person or organization making the comment, and the time</span><span class="tI">
+</span><span class="tT">comment was made.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_remark');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_remark" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_remark_15.png" usemap="#Kernel_xsd_Element_diggs_remark_15" /><map name="Kernel_xsd_Element_diggs_remark_15" id="Kernel_xsd_Element_diggs_remark_15"><area alt="Kernel_xsd_Element_diggs_Remark.tmp#Remark" href="Kernel_xsd_Element_diggs_Remark.html#Remark" coords="202,44,306,68" /><area alt="Kernel_xsd_Complex_Type_diggs_RemarkPropertyType.tmp#RemarkPropertyType" href="Kernel_xsd_Complex_Type_diggs_RemarkPropertyType.html#RemarkPropertyType" coords="120,3,316,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_RemarkPropertyType.html#RemarkPropertyType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:RemarkPropertyType')">diggs:RemarkPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_remark" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TexturallPropertiesType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TexturallPropertiesType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TexturallPropertiesType_remark" style="display:block"><b><a href="Kernel_xsd_Element_diggs_Remark.html#Remark" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:Remark')">diggs:Remark</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_Remark.html#Remark" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:Remark')">diggs:Remark</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_TexturallPropertiesType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_TexturallPropertiesType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_TexturallPropertiesType_remark" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:remark</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schema-dev"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Remark</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Remark&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:remark&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_remark" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_remark" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"remark"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RemarkPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_Fabric"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:Fabric</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_Fabric" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_Fabric');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_Fabric" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A descriptive term or phrase to describe the patial arrangement of grains, Common terms are random, oriented, imbricated, etc. Intended to come from a controlled list of terms.</span><span class="tI">
+</span><span class="tT">I</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_Fabric" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_Fabric');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_Fabric" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_Fabric.png" usemap="#Kernel_xsd_Element_diggs_Fabric" /><map name="Kernel_xsd_Element_diggs_Fabric" id="Kernel_xsd_Element_diggs_Fabric"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="140,157,245,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="115,3,243,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_Fabric" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_Fabric');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_Fabric" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType_Fabric" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType_Fabric');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType_Fabric" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_Fabric" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_Fabric');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_Fabric" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"Fabric"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the patial arrangement of grains, Common terms are random, oriented, imbricated, etc. Intended to come from a controlled list of terms. I</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_particleAngularity"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:particleAngularity</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_particleAngularity" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_particleAngularity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_particleAngularity" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A descriptive term or phrase to describe the overall</span><span class="tI">
+</span><span class="tT">angularity of coarse-grained particles. Common terms are angular, subangular, subrounded, rounded). Intended to come from a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_particleAngularity" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_particleAngularity');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_particleAngularity" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_particleAngularity.png" usemap="#Kernel_xsd_Element_diggs_particleAngularity" /><map name="Kernel_xsd_Element_diggs_particleAngularity" id="Kernel_xsd_Element_diggs_particleAngularity"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="203,157,308,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="178,3,306,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_particleAngularity" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_particleAngularity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_particleAngularity" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType_particleAngularity" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType_particleAngularity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType_particleAngularity" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_particleAngularity" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_particleAngularity');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_particleAngularity" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleAngularity"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the overall angularity of coarse-grained particles. Common terms are angular, subangular, subrounded, rounded). Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_particleShape"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:particleShape</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_particleShape" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_particleShape');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_particleShape" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A descriptive term or phrase to describe the overall</span><span class="tI">
+</span><span class="tT">shape of (typically) gravel and larger particles particles. Common terms are flat, elongated, and flat and elongated. Intended to come from a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_particleShape" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_particleShape');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_particleShape" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_particleShape.png" usemap="#Kernel_xsd_Element_diggs_particleShape" /><map name="Kernel_xsd_Element_diggs_particleShape" id="Kernel_xsd_Element_diggs_particleShape"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="179,157,284,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="154,3,282,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_particleShape" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_particleShape');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_particleShape" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType_particleShape" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType_particleShape');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType_particleShape" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_particleShape" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_particleShape');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_particleShape" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleShape"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the overall shape of (typically) gravel and larger particles particles. Common terms are flat, elongated, and flat and elongated. Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_particleSize"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:particleSize</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_particleSize" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_particleSize');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_particleSize" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A descriptive term or phrase to describe the overall particle size distribution of sand and coarser material, eg. "fine", "fine to coarse", "medium. Intended to come from a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_particleSize" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_particleSize');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_particleSize" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_particleSize.png" usemap="#Kernel_xsd_Element_diggs_particleSize" /><map name="Kernel_xsd_Element_diggs_particleSize" id="Kernel_xsd_Element_diggs_particleSize"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="168,157,273,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="143,3,271,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_particleSize" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_particleSize');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_particleSize" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType_particleSize" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType_particleSize');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType_particleSize" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_particleSize" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_particleSize');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_particleSize" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleSize"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the overall particle size distribution of sand and coarser material, eg. "fine", "fine to coarse", "medium. Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_particleSizeDistribution"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:particleSizeDistribution</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_particleSizeDistribution" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_particleSizeDistribution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_particleSizeDistribution" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Particle size distribution information providing details such as mean grain size, maximum grain size, etc. As opposed to Properties in this object support quantitative values derived from laboratory analyses can carry descriptive terms. Detailed properties of a grain size distribution curve should be reported as test results of a ParticleSizeTest</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_particleSizeDistribution" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_particleSizeDistribution');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_particleSizeDistribution" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_particleSizeDistribution.png" usemap="#Kernel_xsd_Element_diggs_particleSizeDistribution" /><map name="Kernel_xsd_Element_diggs_particleSizeDistribution" id="Kernel_xsd_Element_diggs_particleSizeDistribution"><area alt="Kernel_xsd_Element_diggs_ParticleSizeDistribution.tmp#ParticleSizeDistribution" href="Kernel_xsd_Element_diggs_ParticleSizeDistribution.html#ParticleSizeDistribution" coords="289,44,477,68" /><area alt="Kernel_xsd_Complex_Type_diggs_ParticleSizeDistributionPropertyType.tmp#ParticleSizeDistributionPropertyType" href="Kernel_xsd_Complex_Type_diggs_ParticleSizeDistributionPropertyType.html#ParticleSizeDistributionPropertyType" coords="207,3,487,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_ParticleSizeDistributionPropertyType.html#ParticleSizeDistributionPropertyType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:ParticleSizeDistributionPropertyType')">diggs:ParticleSizeDistributionPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_particleSizeDistribution" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_particleSizeDistribution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_particleSizeDistribution" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TexturallPropertiesType_particleSizeDistribution" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TexturallPropertiesType_particleSizeDistribution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TexturallPropertiesType_particleSizeDistribution" style="display:block"><b><a href="Kernel_xsd_Element_diggs_ParticleSizeDistribution.html#ParticleSizeDistribution" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:ParticleSizeDistribution')">diggs:ParticleSizeDistribution</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Element_diggs_ParticleSizeDistribution.html#ParticleSizeDistribution" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:ParticleSizeDistribution')">diggs:ParticleSizeDistribution</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_TexturallPropertiesType_particleSizeDistribution" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_TexturallPropertiesType_particleSizeDistribution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_TexturallPropertiesType_particleSizeDistribution" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:particleSizeDistribution</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schema-dev"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:ParticleSizeDistribution</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:ParticleSizeDistribution&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:particleSizeDistribution&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_particleSizeDistribution" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_particleSizeDistribution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_particleSizeDistribution" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleSizeDistribution"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ParticleSizeDistributionPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Particle size distribution information providing details such as mean grain size, maximum grain size, etc. As opposed to Properties in this object support quantitative values derived from laboratory analyses can carry descriptive terms. Detailed properties of a grain size distribution curve should be reported as test results of a ParticleSizeTest</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_particleSorting"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:particleSorting</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_particleSorting" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_particleSorting');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_particleSorting" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A descriptive term or phrase to describe the relative</span><span class="tI">
+</span><span class="tT">particle sorting of the soil, eg. "well-sorted". Intended to come</span><span class="tI">
+</span><span class="tT">from a controlled list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_particleSorting" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_particleSorting');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_particleSorting" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_particleSorting.png" usemap="#Kernel_xsd_Element_diggs_particleSorting" /><map name="Kernel_xsd_Element_diggs_particleSorting" id="Kernel_xsd_Element_diggs_particleSorting"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="200,197,305,221" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="175,43,395,65" /><area alt="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.tmp#SizeClassCodeType_sizeClass" href="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.html#SizeClassCodeType_sizeClass" coords="186,339,284,363" /><area alt="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.tmp#SizeClassCodeType" href="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.html#SizeClassCodeType" coords="161,3,349,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.html#SizeClassCodeType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:SizeClassCodeType')">diggs:SizeClassCodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>string</b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.html#SizeClassCodeType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:SizeClassCodeType')">diggs:SizeClassCodeType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_particleSorting" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_particleSorting');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_particleSorting" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType_particleSorting" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType_particleSorting');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType_particleSorting" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Kernel_xsd_Complex_Type_diggs_SizeClassCodeType.html#SizeClassCodeType_sizeClass" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component sizeClass')">sizeClass</a></b></td>
+                                    <td><b><a href="Kernel_xsd_Simple_Type_diggs_SizeClassEnumExtType.html#SizeClassEnumExtType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:SizeClassEnumExtType')">diggs:SizeClassEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_particleSorting" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_particleSorting');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_particleSorting" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleSorting"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SizeClassCodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the relative particle sorting of the soil, eg. "well-sorted". Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType_surfaceTexture"></a><div class="componentTitle">Element <span class="qname"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b> / diggs:surfaceTexture</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_TexturallPropertiesType_surfaceTexture" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_TexturallPropertiesType_surfaceTexture');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_TexturallPropertiesType_surfaceTexture" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">A descriptive term or phrase to describe the microscale features on grain surfaces. Common terms include: polished, smooth, pitted, striated, etc. Intended to come from a controlled list of terms.</span><span class="tI">
+</span><span class="tT">Includes:</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType_surfaceTexture" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType_surfaceTexture');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType_surfaceTexture" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_surfaceTexture.png" usemap="#Kernel_xsd_Element_diggs_surfaceTexture" /><map name="Kernel_xsd_Element_diggs_surfaceTexture" id="Kernel_xsd_Element_diggs_surfaceTexture"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="189,157,294,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="164,3,292,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_TexturallPropertiesType_surfaceTexture" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_TexturallPropertiesType_surfaceTexture');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_TexturallPropertiesType_surfaceTexture" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType_surfaceTexture" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType_surfaceTexture');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType_surfaceTexture" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType_surfaceTexture" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType_surfaceTexture');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType_surfaceTexture" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"surfaceTexture"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the microscale features on grain surfaces. Common terms include: polished, smooth, pitted, striated, etc. Intended to come from a controlled list of terms. Includes:</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="TexturallPropertiesType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:TexturallPropertiesType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_TexturallPropertiesType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_TexturallPropertiesType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_TexturallPropertiesType" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.png" usemap="#Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType" /><map name="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType" id="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="240,78,321,102" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.tmp#AbstractComponentObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" coords="215,3,585,25" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_remark" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_remark" coords="304,224,373,248" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_Fabric" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_Fabric" coords="304,314,368,338" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_particleAngularity" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleAngularity" coords="304,404,431,428" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_particleShape" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleShape" coords="304,494,407,518" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_particleSize" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSize" coords="304,584,396,608" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_particleSizeDistribution" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSizeDistribution" coords="304,674,460,698" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_particleSorting" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSorting" coords="304,751,414,775" /><area alt="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.tmp#TexturallPropertiesType_surfaceTexture" href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_surfaceTexture" coords="304,841,417,865" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturallPropertiesType')">diggs:TexturallPropertiesType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_TexturallPropertiesType" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_TexturallPropertiesType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_TexturallPropertiesType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Kernel_xsd_Element_diggs_TexturalProperties.html#TexturalProperties" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:TexturalProperties')">diggs:TexturalProperties</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_TexturallPropertiesType" type="image" src="img/btM.gif" value="-" onclick="switchState('model_TexturallPropertiesType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_TexturallPropertiesType" style="display:block"><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_remark" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_Fabric" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:Fabric{0,1}')">diggs:Fabric{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleAngularity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleAngularity{0,1}')">diggs:particleAngularity{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleShape" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleShape{0,1}')">diggs:particleShape{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSize" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSize{0,1}')">diggs:particleSize{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSizeDistribution" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSizeDistribution{0,1}')">diggs:particleSizeDistribution{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSorting" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSorting*')">diggs:particleSorting*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_surfaceTexture" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:surfaceTexture{0,1}')">diggs:surfaceTexture{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_Fabric" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:Fabric')">diggs:Fabric</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleAngularity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleAngularity')">diggs:particleAngularity</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleShape" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleShape')">diggs:particleShape</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSize" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSize')">diggs:particleSize</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSizeDistribution" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSizeDistribution')">diggs:particleSizeDistribution</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_particleSorting" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSorting')">diggs:particleSorting</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_remark" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_TexturallPropertiesType.html#TexturallPropertiesType_surfaceTexture" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:surfaceTexture')">diggs:surfaceTexture</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_TexturallPropertiesType" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_TexturallPropertiesType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_TexturallPropertiesType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_TexturallPropertiesType" type="image" src="img/btM.gif" value="-" onclick="switchState('source_TexturallPropertiesType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_TexturallPropertiesType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"TexturallPropertiesType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractComponentObjectBaseType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"remark"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RemarkPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"Fabric"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the patial arrangement of grains, Common terms are random, oriented, imbricated, etc. Intended to come from a controlled list of terms. I</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleAngularity"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the overall angularity of coarse-grained particles. Common terms are angular, subangular, subrounded, rounded). Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleShape"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the overall shape of (typically) gravel and larger particles particles. Common terms are flat, elongated, and flat and elongated. Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleSize"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the overall particle size distribution of sand and coarser material, eg. "fine", "fine to coarse", "medium. Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleSizeDistribution"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ParticleSizeDistributionPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Particle size distribution information providing details such as mean grain size, maximum grain size, etc. As opposed to Properties in this object support quantitative values derived from laboratory analyses can carry descriptive terms. Detailed properties of a grain size distribution curve should be reported as test results of a ParticleSizeTest</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"particleSorting"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SizeClassCodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the relative particle sorting of the soil, eg. "well-sorted". Intended to come from a controlled list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"surfaceTexture"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A descriptive term or phrase to describe the microscale features on grain surfaces. Common terms include: polished, smooth, pitted, striated, etc. Intended to come from a controlled list of terms. Includes:</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
