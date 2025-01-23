@@ -1,0 +1,553 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:LithProperties</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_LithProperties');
+var usedByBoxes= new Array('usedBy_LithProperties');
+var sourceBoxes= new Array('source_LithProperties');
+var instanceBoxes= new Array('instance_LithProperties');
+var diagramBoxes= new Array('diagram_LithProperties');
+var annotationBoxes= new Array('annotations_LithProperties');
+var attributesBoxes= new Array('attributes_LithProperties');
+var modelBoxes= new Array('model_LithProperties');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="LithProperties"></a><div class="componentTitle">Element <span class="qname">diggs:LithProperties</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schema-dev</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LithProperties" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%">
+                                          <pre><span class="tT">Soil geotechnical and geologic properties derived solely from visual/manual techniques, such as that defined in ASTM D2488.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_LithProperties');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LithProperties" style="display:block"><img alt="Diagram" border="0" src="img/Kernel_xsd_Element_diggs_LithProperties.png" usemap="#Kernel_xsd_Element_diggs_LithProperties" /><map name="Kernel_xsd_Element_diggs_LithProperties" id="Kernel_xsd_Element_diggs_LithProperties"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="196,118,277,142" /><area alt="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.tmp#AbstractComponentObjectBaseType" href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" coords="171,43,541,65" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_remark" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_remark" coords="260,264,329,288" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_apparentDensity" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_apparentDensity" coords="351,354,470,378" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_consistency" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_consistency" coords="351,444,446,468" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_beddingOrientation" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_beddingOrientation" coords="260,636,396,660" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_beddingSpacing" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_beddingSpacing" coords="260,713,377,737" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_cementation" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_cementation" coords="260,790,357,814" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_dilatancy" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_dilatancy" coords="260,880,339,904" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_dryStrength" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_dryStrength" coords="260,970,355,994" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_fabric" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_fabric" coords="260,1060,322,1084" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_moistureCondition" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_moistureCondition" coords="260,1150,392,1174" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_odor" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_odor" coords="260,1227,317,1251" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_particleAngularity" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleAngularity" coords="260,1317,387,1341" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_particleHardness" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleHardness" coords="260,1407,382,1431" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_particleShape" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleShape" coords="260,1497,363,1521" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_particleSize" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSize" coords="260,1587,352,1611" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_particleSizeDistribution" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSizeDistribution" coords="260,1677,416,1701" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_particleSorting" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSorting" coords="260,1754,370,1778" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_plasticity" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_plasticity" coords="260,1844,339,1868" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_reactionToHCl" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_reactionToHCl" coords="260,1934,368,1958" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_rockGrainSize" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockGrainSize" coords="260,2024,365,2048" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_rockHardness" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockHardness" coords="260,2114,366,2138" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_rockMass" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockMass" coords="260,2204,342,2228" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_rockSlakingRate" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockSlakingRate" coords="260,2294,376,2318" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_rockStrength" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockStrength" coords="260,2371,361,2395" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_rockWeathering" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockWeathering" coords="260,2461,375,2485" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_soilStructure" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_soilStructure" coords="260,2551,360,2575" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_staining" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_staining" coords="260,2641,334,2665" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_surfaceTexture" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_surfaceTexture" coords="260,2731,373,2755" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_toughness" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_toughness" coords="260,2821,348,2845" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_unitRecoveryLength" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRecoveryLength" coords="260,2911,398,2935" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_unitRQD" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRQD" coords="260,2988,336,3012" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_unitRQDLength" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRQDLength" coords="260,3078,373,3102" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType_otherLithProperty" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_otherLithProperty" coords="260,3155,386,3179" /><area alt="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.tmp#LithPropertiesType" href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType" coords="157,3,342,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:LithPropertiesType')">diggs:LithPropertiesType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:LithPropertiesType')">diggs:LithPropertiesType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LithProperties" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_LithProperties" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesPropertyType.html#LithPropertiesPropertyType" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:LithPropertiesPropertyType')">diggs:LithPropertiesPropertyType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('model_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_LithProperties" style="display:block"><b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_remark" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , (<b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_apparentDensity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:apparentDensity{0,1}')">diggs:apparentDensity{0,1}</a></b> | <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_consistency" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:consistency{0,1}')">diggs:consistency{0,1}</a></b>) , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_beddingOrientation" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:beddingOrientation{0,1}')">diggs:beddingOrientation{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_beddingSpacing" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:beddingSpacing{0,1}')">diggs:beddingSpacing{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_cementation" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:cementation{0,1}')">diggs:cementation{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_dilatancy" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:dilatancy{0,1}')">diggs:dilatancy{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_dryStrength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:dryStrength{0,1}')">diggs:dryStrength{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_fabric" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:fabric{0,1}')">diggs:fabric{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_moistureCondition" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:moistureCondition{0,1}')">diggs:moistureCondition{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_odor" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:odor{0,1}')">diggs:odor{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleAngularity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleAngularity{0,1}')">diggs:particleAngularity{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleHardness" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleHardness{0,1}')">diggs:particleHardness{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleShape" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleShape{0,1}')">diggs:particleShape{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSize" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSize{0,1}')">diggs:particleSize{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSizeDistribution" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSizeDistribution{0,1}')">diggs:particleSizeDistribution{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSorting" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSorting*')">diggs:particleSorting*</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_plasticity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:plasticity{0,1}')">diggs:plasticity{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_reactionToHCl" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:reactionToHCl{0,1}')">diggs:reactionToHCl{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockGrainSize" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockGrainSize{0,1}')">diggs:rockGrainSize{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockHardness" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockHardness{0,1}')">diggs:rockHardness{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockMass" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockMass{0,1}')">diggs:rockMass{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockSlakingRate" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockSlakingRate{0,1}')">diggs:rockSlakingRate{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockStrength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockStrength{0,1}')">diggs:rockStrength{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockWeathering" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockWeathering{0,1}')">diggs:rockWeathering{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_soilStructure" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:soilStructure{0,1}')">diggs:soilStructure{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_staining" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:staining{0,1}')">diggs:staining{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_surfaceTexture" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:surfaceTexture{0,1}')">diggs:surfaceTexture{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_toughness" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:toughness{0,1}')">diggs:toughness{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRecoveryLength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:unitRecoveryLength{0,1}')">diggs:unitRecoveryLength{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRQD" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:unitRQD{0,1}')">diggs:unitRQD{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRQDLength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:unitRQDLength{0,1}')">diggs:unitRQDLength{0,1}</a></b> , <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_otherLithProperty" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:otherLithProperty*')">diggs:otherLithProperty*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_apparentDensity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:apparentDensity')">diggs:apparentDensity</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_beddingOrientation" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:beddingOrientation')">diggs:beddingOrientation</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_beddingSpacing" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:beddingSpacing')">diggs:beddingSpacing</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_cementation" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:cementation')">diggs:cementation</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_consistency" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:consistency')">diggs:consistency</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_dilatancy" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:dilatancy')">diggs:dilatancy</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_dryStrength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:dryStrength')">diggs:dryStrength</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_fabric" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:fabric')">diggs:fabric</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_moistureCondition" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:moistureCondition')">diggs:moistureCondition</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_odor" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:odor')">diggs:odor</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_otherLithProperty" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:otherLithProperty')">diggs:otherLithProperty</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleAngularity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleAngularity')">diggs:particleAngularity</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleHardness" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleHardness')">diggs:particleHardness</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleShape" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleShape')">diggs:particleShape</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSize" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSize')">diggs:particleSize</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSizeDistribution" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSizeDistribution')">diggs:particleSizeDistribution</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_particleSorting" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:particleSorting')">diggs:particleSorting</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_plasticity" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:plasticity')">diggs:plasticity</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_reactionToHCl" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:reactionToHCl')">diggs:reactionToHCl</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_remark" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockGrainSize" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockGrainSize')">diggs:rockGrainSize</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockHardness" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockHardness')">diggs:rockHardness</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockMass" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockMass')">diggs:rockMass</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockSlakingRate" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockSlakingRate')">diggs:rockSlakingRate</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockStrength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockStrength')">diggs:rockStrength</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_rockWeathering" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:rockWeathering')">diggs:rockWeathering</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_soilStructure" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:soilStructure')">diggs:soilStructure</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_staining" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:staining')">diggs:staining</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_surfaceTexture" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:surfaceTexture')">diggs:surfaceTexture</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_toughness" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:toughness')">diggs:toughness</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRQD" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:unitRQD')">diggs:unitRQD</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRQDLength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:unitRQDLength')">diggs:unitRQDLength</a></b>, <b><a href="Kernel_xsd_Complex_Type_diggs_LithPropertiesType.html#LithPropertiesType_unitRecoveryLength" target="mainFrame" title="http://diggsml.org/schema-dev" onclick="updatePageTitle('Schema documentation for component diggs:unitRecoveryLength')">diggs:unitRecoveryLength</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_LithProperties" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;diggs:LithProperties</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schema-dev"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:remark</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:remark&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:apparentDensity</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:apparentDensity&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:consistency</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:consistency&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:beddingOrientation</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:beddingOrientation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:beddingSpacing</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:beddingSpacing&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:cementation</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:cementation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:dilatancy</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:dilatancy&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:dryStrength</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:dryStrength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:fabric</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:fabric&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:moistureCondition</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:moistureCondition&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:odor</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:odor&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:particleAngularity</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:particleAngularity&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:particleHardness</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">sizeClass=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:particleHardness&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:particleShape</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:particleShape&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:particleSize</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:particleSize&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:particleSizeDistribution</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:particleSizeDistribution&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:particleSorting</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:particleSorting&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:plasticity</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:plasticity&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:reactionToHCl</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:reactionToHCl&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:rockGrainSize</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:rockGrainSize&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:rockHardness</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:rockHardness&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:rockMass</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:rockMass&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:rockSlakingRate</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:rockSlakingRate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:rockStrength</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:rockStrength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:rockWeathering</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:rockWeathering&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:soilStructure</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:soilStructure&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:staining</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:staining&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:surfaceTexture</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:surfaceTexture&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:toughness</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:toughness&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:unitRecoveryLength</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:unitRecoveryLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:unitRQD</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:unitRQD&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:unitRQDLength</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:unitRQDLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:otherLithProperty</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:otherLithProperty&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:LithProperties&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_LithProperties" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LithProperties" type="image" src="img/btM.gif" value="-" onclick="switchState('source_LithProperties');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LithProperties" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"LithProperties"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LithPropertiesType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Soil geotechnical and geologic properties derived solely from visual/manual techniques, such as that defined in ASTM D2488.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
