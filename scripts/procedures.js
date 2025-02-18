@@ -5,6 +5,9 @@ var rootURL = "https://diggsml.org/schema-dev/";
 // Set schema version to query
 var version = 2.6;
 
+// Set documentation version
+var docvers="latest"
+
 //Set the properties version to query
 var propvers = 0.1;
 
@@ -145,6 +148,7 @@ async function main() {
       ).nodeValue;
 
       //Check to see if this is a DIGGS namespace
+      /** 
       if (
         nameSpace === "http://diggsml.org/schemas/2.6/geotechnical" ||
         nameSpace === "http://diggsml.org/schemas/2.6"
@@ -153,7 +157,17 @@ async function main() {
         if (nameSpace === "http://diggsml.org/schemas/2.6/geotechnical")
           nameSpace = "diggs_geo";
         if (nameSpace === "http://diggsml.org/schemas/2.6") nameSpace = "diggs";
+      **/
 
+        if (
+          nameSpace === "http://diggsml.org/schema-dev/geotechnical" ||
+          nameSpace === "http://diggsml.org/schemaa-dev"
+        ) {
+          //Yes, this is a DIGGS namespace schema file, so let's record shortened nameSpace
+          if (nameSpace === "http://diggsml.org/schema-dev/geotechnical")
+            nameSpace = "diggs_geo";
+          if (nameSpace === "http://diggsml.org/schema-dev") nameSpace = "diggs";  
+        
         //Now, let's look at the elements in the file
         var elements = xmlObj.getElementsByTagName("element");
         for (var j = 0; j < elements.length; j++) {
@@ -196,10 +210,10 @@ async function main() {
             elDoc = elDoc.replaceAll(/\t/g, " ");
             elDoc = elDoc.replaceAll(/[ ]{2,}/g, " ");
 
-            //Construct the UEL to the documentation page for this element
+            //Construct the URL to the documentation page for this element
             var elLink =
               "https://diggsml.org/docs/" +
-              version +
+              docvers +
               "/" +
               rec.name.substring(0, rec.name.length - 4) +
               "_xsd_Element_" +
