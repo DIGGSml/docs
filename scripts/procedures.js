@@ -6,7 +6,7 @@ var rootURL = "https://diggsml.org/schema-dev/";
 var version = 2.6;
 
 // Set documentation version
-var docvers="latest"
+var docvers = "latest";
 
 //Set the properties version to query
 var propvers = 0.1;
@@ -159,15 +159,15 @@ async function main() {
         if (nameSpace === "http://diggsml.org/schemas/2.6") nameSpace = "diggs";
       **/
 
-        if (
-          nameSpace === "http://diggsml.org/schema-dev/geotechnical" ||
-          nameSpace === "http://diggsml.org/schemaa-dev"
-        ) {
-          //Yes, this is a DIGGS namespace schema file, so let's record shortened nameSpace
-          if (nameSpace === "http://diggsml.org/schema-dev/geotechnical")
-            nameSpace = "diggs_geo";
-          if (nameSpace === "http://diggsml.org/schema-dev") nameSpace = "diggs";  
-        
+      if (
+        nameSpace === "http://diggsml.org/schema-dev/geotechnical" ||
+        nameSpace === "http://diggsml.org/schema-dev"
+      ) {
+        //Yes, this is a DIGGS namespace schema file, so let's record shortened nameSpace
+        if (nameSpace === "http://diggsml.org/schema-dev/geotechnical")
+          nameSpace = "diggs_geo";
+        if (nameSpace === "http://diggsml.org/schema-dev") nameSpace = "diggs";
+
         //Now, let's look at the elements in the file
         var elements = xmlObj.getElementsByTagName("element");
         for (var j = 0; j < elements.length; j++) {
@@ -320,7 +320,7 @@ function writeHtml() {
   txt += '<table style="width:100%;"><tr>';
   txt += '<th class="detail">New Laboratory Test Procedures</th>';
   txt += '<th class="detail">New In-situ Test Procedures</th>';
-  txt += '<th class="detail">New General Procedure</th>';
+  txt += '<th class="detail">New General Procedures</th>';
   txt += '<th class="detail">Deprecated Procedures</th></tr><tr>';
 
   txt += '<td class="cells">';
@@ -376,7 +376,8 @@ function writeHtml() {
   txt += "<li>Pumping Test</li></td>";
 
   txt += '<td class="cells">';
-  txt += "<li>Geophysical Processing</li></td>";
+  txt += "<li>Geophysical Processing</li>";
+  txt += "<li>MWD Procedure</li></td>";
 
   txt += '<td class="cells">';
   txt +=
@@ -587,10 +588,14 @@ function tableBody(content) {
       txt += '<a class = "blue" href="';
     } else if (
       content[i].schema === "Construction.xsd" ||
-      content[i].schema === "Geophysics.xsd"
+      content[i].schema === "Geophysics.xsd" ||
+      content[i].schema === "Diggs_procedures_temp.xsd"
     ) {
       txt += '<a class = "green" href="';
-    } else if (content[i].schema.indexOf("deprecated") > 0) {
+    } else if (
+      content[i].schema.indexOf("deprecated") > 0 ||
+      content[i].schema === "Geotechnical.xsd"
+    ) {
       txt += '<a class = "red" href="';
     } else {
       txt += '<a class = "black" href="';
