@@ -310,13 +310,10 @@ async function main() {
 function writeHtml() {
   txt +=
     '<div><div class="logo"><img src= "https://diggsml.org/def/img/diggs-logo.png" style="width:150px"/></div>';
-  txt +=
-    "<h1>Supported Test Procedures in DIGGS<br/>Version " +
-    version +
-    "</h1></div>";
+  txt += "<h1>Supported Test Procedures in DIGGS</h1></div>";
 
-  txt += "<details><summary>Explanation</summary>";
-  txt += '<p style ="font-weight: bold;">What\'s new in Version 2.6:</p>';
+  txt +=
+    "<details><summary>What's new since Version 2.5.a <i>(click arrow)</i></summary>";
   txt += '<table style="width:100%;"><tr>';
   txt += '<th class="detail">New Laboratory Test Procedures</th>';
   txt += '<th class="detail">New In-situ Test Procedures</th>';
@@ -381,21 +378,25 @@ function writeHtml() {
 
   txt += '<td class="cells">';
   txt +=
-    "<li>diggs_geo:FlameIonizationDetectorTest (replaced by diggs_geo:EnvironmentalScreeningTest)</li>";
-  txt +=
-    "<li>diggs_geo:PhotoIonizationDetectorTest (replaced by diggs_geo:EnvironmentalScreeningTest)";
-  txt +=
-    "<li>diggs_geo:TriaxialTest (replaced by updated diggs:TriaxialTest)</li></ul></td></tr></table>";
+    "<li>Following the release of Version 2.6, the diggs:geo namespace has been deprecated. All diggs_geo: test procedures have been migrated to the diggs: namespace, except for:</li>";
 
+  txt +=
+    "<ul><li>diggs_geo:FlameIonizationDetectorTest (replaced by diggs:EnvironmentalScreeningTest)</li>";
+  txt +=
+    "<li>diggs_geo:PhotoIonizationDetectorTest (replaced by diggs:EnvironmentalScreeningTest)</li></ul>";
+  txt +=
+    "<li>The diggs:geo test procedures will be removed in a future release. When developing against any version greater than 2.6, including the development version (http://diggsml.org/schema-dev), only diggs: namespace test procedures should be used</li></ul></td></tr></table>";
+
+  txt += "</details>";
+
+  txt += "<hr>";
   txt +=
     '<ol><div style="font-size:20px;"><li>Procedure names in <span class = "blue">blue</span> below are legacy procedures brought back from v. 2.0 to enable AGS 4 interoperability (BetaProedures.xsd). These procedures are in beta form and may change their structure in future releases.';
   txt +=
-    '<li>Procedure names in <span class = "green">green</span> below are new and are part of the grouting (Construction.xsd) and geophysics (Geophysics.xsd) schema extensions introduced in v. 2.6.</li>';
+    '<li>Procedure names in <span class = "green">green</span> below have been developed or modified since the 2.5.a release.</li>';
   txt +=
-    '<li>Procedure names in <span class = "red">red</span> below are deprecated in v. 2.6 and replaced with new procedures as noted above.</li>';
+    '<li>Procedure names in <span class = "red">red</span> below are deprecated and have been migrated to the diggs: namespace or have been modified and replaced with procedures as described in the &quot;What\'s new...&quot; section above.</li>';
   txt += "</div></ol>";
-  txt += "<hr>";
-  txt += "</details>";
 
   //Write tables
 
