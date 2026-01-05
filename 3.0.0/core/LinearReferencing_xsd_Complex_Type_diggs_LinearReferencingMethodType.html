@@ -1,0 +1,1449 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:name</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_LinearReferencingMethodType_name', 
+				'properties_LinearReferencingMethodType_type', 
+				'properties_LinearReferencingMethodType_units', 
+				'properties_LinearReferencingMethodType_positiveDirection', 
+				'properties_LinearReferencingMethodType_constraint', 
+				'properties_LinearReferencingMethodType_offsetParameters');
+var facetsBoxes= new Array('facets_LinearReferencingMethodType_positiveDirection');
+var usedByBoxes= new Array('usedBy_LinearReferencingMethodType');
+var sourceBoxes= new Array('source_LinearReferencingMethodType_name', 
+				'source_LinearReferencingMethodType_type', 
+				'source_LinearReferencingMethodType_units', 
+				'source_LinearReferencingMethodType_positiveDirection', 
+				'source_LinearReferencingMethodType_constraint', 
+				'source_LinearReferencingMethodType_offsetParameters', 
+				'source_LinearReferencingMethodType');
+var instanceBoxes= new Array('instance_LinearReferencingMethodType_offsetParameters');
+var diagramBoxes= new Array('diagram_LinearReferencingMethodType_name', 
+				'diagram_LinearReferencingMethodType_type', 
+				'diagram_LinearReferencingMethodType_units', 
+				'diagram_LinearReferencingMethodType_positiveDirection', 
+				'diagram_LinearReferencingMethodType_constraint', 
+				'diagram_LinearReferencingMethodType_offsetParameters', 
+				'diagram_LinearReferencingMethodType');
+var annotationBoxes= new Array('annotations_LinearReferencingMethodType_name', 
+				'annotations_LinearReferencingMethodType_type', 
+				'annotations_LinearReferencingMethodType_units', 
+				'annotations_LinearReferencingMethodType_positiveDirection', 
+				'annotations_LinearReferencingMethodType_constraint', 
+				'annotations_LinearReferencingMethodType_offsetParameters', 
+				'annotations_LinearReferencingMethodType');
+var attributesBoxes= new Array('attributes_LinearReferencingMethodType_offsetParameters', 
+				'attributes_LinearReferencingMethodType');
+var modelBoxes= new Array('model_LinearReferencingMethodType_offsetParameters', 
+				'model_LinearReferencingMethodType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="LinearReferencingMethodType_name"></a><div class="componentTitle">Element <span class="qname"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b> / diggs:name</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType_name" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType_name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType_name" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The name property.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType_name" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType_name');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType_name" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Element_diggs_name_1.jpeg" usemap="#LinearReferencing_xsd_Element_diggs_name_1" /><map name="LinearReferencing_xsd_Element_diggs_name_1" id="LinearReferencing_xsd_Element_diggs_name_1"><area alt="LinearReferencing_xsd_Simple_Type_diggs_LinearReferencingNameTypeEnumType.tmp#LinearReferencingNameTypeEnumType" href="LinearReferencing_xsd_Simple_Type_diggs_LinearReferencingNameTypeEnumType.html#LinearReferencingNameTypeEnumType" coords="108,0,405,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="LinearReferencing_xsd_Simple_Type_diggs_LinearReferencingNameTypeEnumType.html#LinearReferencingNameTypeEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingNameTypeEnumType')">diggs:LinearReferencingNameTypeEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LinearReferencingMethodType_name" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LinearReferencingMethodType_name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LinearReferencingMethodType_name" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType_name" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType_name');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType_name" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"name"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LinearReferencingNameTypeEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="LinearReferencingMethodType_type"></a><div class="componentTitle">Element <span class="qname"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b> / diggs:type</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType_type" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType_type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType_type" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The type/category of linear referencing method per </span><span class="tI">
+</span><span class="tT">ISO 19148 §6.2.3 (absolute, relative, interpolative).</span><span class="tI">
+</span><span class="tT">                                </span><span class="tI">
+</span><span class="tT">- absolute: Distance from fixed origin (typically first coordinate)</span><span class="tI">
+</span><span class="tT">- relative: Distance from a specified referent point</span><span class="tI">
+</span><span class="tT">- interpolative: Position determined by interpolation between </span><span class="tI">
+</span><span class="tT">  known control points</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType_type" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType_type');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType_type" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Element_diggs_type.jpeg" usemap="#LinearReferencing_xsd_Element_diggs_type" /><map name="LinearReferencing_xsd_Element_diggs_type" id="LinearReferencing_xsd_Element_diggs_type"><area alt="LinearReferencing_xsd_Simple_Type_diggs_LinearReferencingMethodTypeEnumType.tmp#LinearReferencingMethodTypeEnumType" href="LinearReferencing_xsd_Simple_Type_diggs_LinearReferencingMethodTypeEnumType.html#LinearReferencingMethodTypeEnumType" coords="102,0,409,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="LinearReferencing_xsd_Simple_Type_diggs_LinearReferencingMethodTypeEnumType.html#LinearReferencingMethodTypeEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodTypeEnumType')">diggs:LinearReferencingMethodTypeEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LinearReferencingMethodType_type" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LinearReferencingMethodType_type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LinearReferencingMethodType_type" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType_type" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType_type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType_type" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LinearReferencingMethodTypeEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The type/category of linear referencing method per ISO 19148 §6.2.3 (absolute, relative, interpolative). - absolute: Distance from fixed origin (typically first coordinate) - relative: Distance from a specified referent point - interpolative: Position determined by interpolation between known control points</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="LinearReferencingMethodType_units"></a><div class="componentTitle">Element <span class="qname"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b> / diggs:units</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType_units" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType_units');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType_units" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Default units of measure for distance measurements along </span><span class="tI">
+</span><span class="tT">the linear element using this method. This is the unit for </span><span class="tI">
+</span><span class="tT">the first coordinate value (distance along).</span><span class="tI">
+</span><span class="tT">                                </span><span class="tI">
+</span><span class="tT">Common values: ft, m, km, mi</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType_units" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType_units');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType_units" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Element_diggs_units.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>LengthUomEnumType</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LinearReferencingMethodType_units" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LinearReferencingMethodType_units');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LinearReferencingMethodType_units" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType_units" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType_units');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType_units" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"units"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LengthUomEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Default units of measure for distance measurements along the linear element using this method. This is the unit for the first coordinate value (distance along). Common values: ft, m, km, mi</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="LinearReferencingMethodType_positiveDirection"></a><div class="componentTitle">Element <span class="qname"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b> / diggs:positiveDirection</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType_positiveDirection" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType_positiveDirection');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType_positiveDirection" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Convention for positive measurement direction along the </span><span class="tI">
+</span><span class="tT">linear element. In DIGGS, typically "increasing" (along </span><span class="tI">
+</span><span class="tT">coordinate order). Semantic labels (downward, upward, forward) </span><span class="tI">
+</span><span class="tT">provide clarity but don't change the fundamental </span><span class="tI">
+</span><span class="tT">coordinate-order-based direction.</span><span class="tI">
+</span><span class="tT">                                </span><span class="tI">
+</span><span class="tT">Values:</span><span class="tI">
+</span><span class="tT">- increasing: Default, follows coordinate order</span><span class="tI">
+</span><span class="tT">- downward: Semantic label for boreholes (positive is deeper)</span><span class="tI">
+</span><span class="tT">- upward: Semantic label (positive is shallower)</span><span class="tI">
+</span><span class="tT">- forward: Semantic label for horizontal features</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType_positiveDirection" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType_positiveDirection');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType_positiveDirection" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Element_diggs_positiveDirection.jpeg" usemap="#LinearReferencing_xsd_Element_diggs_positiveDirection" /><map name="LinearReferencing_xsd_Element_diggs_positiveDirection" id="LinearReferencing_xsd_Element_diggs_positiveDirection"><area alt="LinearReferencing_xsd_Simple_Type_diggs_PositiveDirectionEnumType.tmp#PositiveDirectionEnumType" href="LinearReferencing_xsd_Simple_Type_diggs_PositiveDirectionEnumType.html#PositiveDirectionEnumType" coords="170,0,404,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="LinearReferencing_xsd_Simple_Type_diggs_PositiveDirectionEnumType.html#PositiveDirectionEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PositiveDirectionEnumType')">diggs:PositiveDirectionEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LinearReferencingMethodType_positiveDirection" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LinearReferencingMethodType_positiveDirection');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LinearReferencingMethodType_positiveDirection" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">default</td>
+                                    <td><b>increasing</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_LinearReferencingMethodType_positiveDirection" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('facets_LinearReferencingMethodType_positiveDirection');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_LinearReferencingMethodType_positiveDirection" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>increasing</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Positive direction follows coordinate order from first to last.</span><span class="tI">
+</span><span class="tT">This is the DIGGS standard and default convention.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>downward</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Semantic label indicating positive is downward (deeper). </span><span class="tI">
+</span><span class="tT">Common for boreholes where first coordinate is collar and </span><span class="tI">
+</span><span class="tT">last is bottom of hole. Measurements increase with depth.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>upward</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Semantic label indicating positive is upward (shallower). </span><span class="tI">
+</span><span class="tT">May be used for core logging from bottom to top, or for </span><span class="tI">
+</span><span class="tT">elevation-based referencing systems.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>forward</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Semantic label for horizontal features indicating positive </span><span class="tI">
+</span><span class="tT">is in the forward direction of survey or alignment.</span><span class="tI">
+</span><span class="tT">Common for transects, pipelines, and tracklines.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType_positiveDirection" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType_positiveDirection');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType_positiveDirection" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"positiveDirection"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PositiveDirectionEnumType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> default=</span><span class="tAV">"increasing"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Convention for positive measurement direction along the linear element. In DIGGS, typically "increasing" (along coordinate order). Semantic labels (downward, upward, forward) provide clarity but don't change the fundamental coordinate-order-based direction. Values: - increasing: Default, follows coordinate order - downward: Semantic label for boreholes (positive is deeper) - upward: Semantic label (positive is shallower) - forward: Semantic label for horizontal features</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="LinearReferencingMethodType_constraint"></a><div class="componentTitle">Element <span class="qname"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b> / diggs:constraint</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType_constraint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType_constraint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType_constraint" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A string value that allows for the specification of constraints imposed by this LRM. For</span><span class="tI">
+</span><span class="tT">example, a referenceFoot Linear Referencing Method can specify that referents cannot be of type "line start" or "Line end".</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType_constraint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType_constraint');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType_constraint" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Element_diggs_constraint.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LinearReferencingMethodType_constraint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LinearReferencingMethodType_constraint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LinearReferencingMethodType_constraint" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType_constraint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType_constraint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType_constraint" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"constraint"</span><span class="tAN"> type=</span><span class="tAV">"string"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A string value that allows for the specification of constraints imposed by this LRM. For example, a referenceFoot Linear Referencing Method can specify that referents cannot be of type "line start" or "Line end".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="LinearReferencingMethodType_offsetParameters"></a><div class="componentTitle">Element <span class="qname"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b> / diggs:offsetParameters</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType_offsetParameters" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Optional parameters for methods that support lateral offset </span><span class="tI">
+</span><span class="tT">from the linear element centerline, such as for Transect or </span><span class="tI">
+</span><span class="tT">TrialPit sampling features.</span><span class="tI">
+</span><span class="tT">                                </span><span class="tI">
+</span><span class="tT">When PRESENT: This method supports 2D positioning</span><span class="tI">
+</span><span class="tT">- LinearSRS using this method has srsDimension = 2</span><span class="tI">
+</span><span class="tT">- Coordinates are encoded as: &lt;gml:pos&gt;distance offset&lt;/gml:pos&gt;</span><span class="tI">
+</span><span class="tT">- First value = distance along (in 'units')</span><span class="tI">
+</span><span class="tT">- Second value = lateral offset (in 'offsetParameters/offsetUnits')</span><span class="tI">
+</span><span class="tT">- Positive offset direction defined by 'offsetParameters/offsetDirection'</span><span class="tI">
+</span><span class="tT">                                </span><span class="tI">
+</span><span class="tT">When ABSENT: This method supports 1D positioning only</span><span class="tI">
+</span><span class="tT">- LinearSRS using this method has srsDimension = 1</span><span class="tI">
+</span><span class="tT">- Coordinates are encoded as: &lt;gml:pos&gt;distance&lt;/gml:pos&gt;</span><span class="tI">
+</span><span class="tT">                                </span><span class="tI">
+</span><span class="tT">Used for:</span><span class="tI">
+</span><span class="tT">- Transects with offset soil sampling</span><span class="tI">
+</span><span class="tT">- Geophysical tracklines with side-scan sonar swaths</span><span class="tI">
+</span><span class="tT">- Pipelines with offset monitoring points</span><span class="tI">
+</span><span class="tT">- Survey lines with offset test pits</span><span class="tI">
+</span><span class="tT">- Trial or test pits with offset sampling locations</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType_offsetParameters" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Element_diggs_offsetParameters.jpeg" usemap="#LinearReferencing_xsd_Element_diggs_offsetParameters" /><map name="LinearReferencing_xsd_Element_diggs_offsetParameters" id="LinearReferencing_xsd_Element_diggs_offsetParameters"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="201,81,424,107" /><area alt="LinearReferencing_xsd_Element_diggs_OffsetParameters.tmp#OffsetParameters" href="LinearReferencing_xsd_Element_diggs_OffsetParameters.html#OffsetParameters" coords="255,189,412,213" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_OffsetParametersPropertyType.tmp#OffsetParametersPropertyType" href="LinearReferencing_xsd_Complex_Type_diggs_OffsetParametersPropertyType.html#OffsetParametersPropertyType" coords="173,3,422,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="LinearReferencing_xsd_Complex_Type_diggs_OffsetParametersPropertyType.html#OffsetParametersPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:OffsetParametersPropertyType')">diggs:OffsetParametersPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LinearReferencingMethodType_offsetParameters" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_LinearReferencingMethodType_offsetParameters" style="display:block"><b><a href="LinearReferencing_xsd_Element_diggs_OffsetParameters.html#OffsetParameters" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:OffsetParameters')">diggs:OffsetParameters</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="LinearReferencing_xsd_Element_diggs_OffsetParameters.html#OffsetParameters" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:OffsetParameters')">diggs:OffsetParameters</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_LinearReferencingMethodType_offsetParameters" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:offsetParameters</span><span class="tT"> </span><span class="tAN">xlink:actuate=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:arcrole=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:role=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:show=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xlink:type=</span><span class="tAV">"simple"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:OffsetParameters</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:OffsetParameters&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:offsetParameters&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_LinearReferencingMethodType_offsetParameters" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Fixed</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_actuate.html#actuate" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:actuate')">xlink:actuate</a></b></td>
+                                    <td>restriction of <b>string</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The 'actuate' attribute is used to communicate the desired timing </span><span class="tI">
+</span><span class="tT">of traversal from the starting resource to the ending resource; </span><span class="tI">
+</span><span class="tT">it's value should be treated as follows:</span><span class="tI">
+</span><span class="tT">onLoad - traverse to the ending resource immediately on loading </span><span class="tI">
+</span><span class="tT">         the starting resource </span><span class="tI">
+</span><span class="tT">onRequest - traverse from the starting resource to the ending </span><span class="tI">
+</span><span class="tT">            resource only on a post-loading event triggered for </span><span class="tI">
+</span><span class="tT">            this purpose </span><span class="tI">
+</span><span class="tT">other - behavior is unconstrained; examine other markup in link </span><span class="tI">
+</span><span class="tT">        for hints </span><span class="tI">
+</span><span class="tT">none - behavior is unconstrained</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_arcrole.html#arcrole" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:arcrole')">xlink:arcrole</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_role.html#role" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:role')">xlink:role</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_show.html#show" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:show')">xlink:show</a></b></td>
+                                    <td>restriction of <b>string</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The 'show' attribute is used to communicate the desired presentation </span><span class="tI">
+</span><span class="tT">of the ending resource on traversal from the starting resource; it's </span><span class="tI">
+</span><span class="tT">value should be treated as follows: </span><span class="tI">
+</span><span class="tT">new - load ending resource in a new window, frame, pane, or other </span><span class="tI">
+</span><span class="tT">      presentation context</span><span class="tI">
+</span><span class="tT">replace - load the resource in the same window, frame, pane, or </span><span class="tI">
+</span><span class="tT">          other presentation context</span><span class="tI">
+</span><span class="tT">embed - load ending resource in place of the presentation of the </span><span class="tI">
+</span><span class="tT">        starting resource</span><span class="tI">
+</span><span class="tT">other - behavior is unconstrained; examine other markup in the </span><span class="tI">
+</span><span class="tT">        link for hints </span><span class="tI">
+</span><span class="tT">none - behavior is unconstrained</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_title.html#title" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:title')">xlink:title</a></b></td>
+                                    <td><b>string</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_Group_xlink_simpleLink.html#simpleLink_type" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:type')">xlink:type</a></b></td>
+                                    <td><b>string</b></td>
+                                    <td>simple</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType_offsetParameters" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType_offsetParameters');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType_offsetParameters" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"offsetParameters"</span><span class="tAN"> type=</span><span class="tAV">"diggs:OffsetParametersPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Optional parameters for methods that support lateral offset from the linear element centerline, such as for Transect or TrialPit sampling features. When PRESENT: This method supports 2D positioning - LinearSRS using this method has srsDimension = 2 - Coordinates are encoded as: &lt;gml:pos&gt;distance offset&lt;/gml:pos&gt; - First value = distance along (in 'units') - Second value = lateral offset (in 'offsetParameters/offsetUnits') - Positive offset direction defined by 'offsetParameters/offsetDirection' When ABSENT: This method supports 1D positioning only - LinearSRS using this method has srsDimension = 1 - Coordinates are encoded as: &lt;gml:pos&gt;distance&lt;/gml:pos&gt; Used for: - Transects with offset soil sampling - Geophysical tracklines with side-scan sonar swaths - Pipelines with offset monitoring points - Survey lines with offset test pits - Trial or test pits with offset sampling locations</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="LinearReferencingMethodType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:LinearReferencingMethodType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LinearReferencingMethodType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LinearReferencingMethodType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LinearReferencingMethodType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Type definition for Linear Referencing Method per ISO 19148 §6.2.</span><span class="tI">
+</span><span class="tT">                </span><span class="tI">
+</span><span class="tT">Specifies how positions are determined along a linear feature. </span><span class="tI">
+</span><span class="tT">DIGGS LR methods rely on the LinearExtent geometry to establish the </span><span class="tI">
+</span><span class="tT">spatial framework. The method defines how measures are computed from </span><span class="tI">
+</span><span class="tT">or applied to that geometry.</span><span class="tI">
+</span><span class="tT">                </span><span class="tI">
+</span><span class="tT">Methods can be 1-dimensional (distance along only) or 2-dimensional </span><span class="tI">
+</span><span class="tT">(distance along + lateral offset). The presence of offsetParameters </span><span class="tI">
+</span><span class="tT">determines the dimensionality:</span><span class="tI">
+</span><span class="tT">                </span><span class="tI">
+</span><span class="tT">- offsetParameters absent: 1D method, srsDimension=1, gml:pos="distance"</span><span class="tI">
+</span><span class="tT">- offsetParameters present: 2D method, srsDimension=2, </span><span class="tI">
+</span><span class="tT">  gml:pos="distance offset"</span><span class="tI">
+</span><span class="tT">                </span><span class="tI">
+</span><span class="tT">DIGGS examples:</span><span class="tI">
+</span><span class="tT">- 1D: Borehole depth from ground surface</span><span class="tI">
+</span><span class="tT">- 1D: Well measured depth from casing top</span><span class="tI">
+</span><span class="tT">- 2D: Transect with offset sampling</span><span class="tI">
+</span><span class="tT">- 2D: Geophysical trackline with swath data</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LinearReferencingMethodType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LinearReferencingMethodType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LinearReferencingMethodType" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.jpeg" usemap="#LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType" /><map name="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType" id="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="336,198,417,222" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="499,339,614,363" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="499,429,667,453" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="499,506,601,530" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="499,596,582,620" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="396,298,612,324" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="311,123,575,145" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="322,738,403,762" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="400,835,515,859" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="400,925,568,949" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="400,1002,502,1026" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="400,1092,483,1116" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_DefinitionBaseType.tmp#DefinitionBaseType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_DefinitionBaseType.html#DefinitionBaseType" coords="297,83,565,105" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_remarks.tmp#remarks" href="gml3_2Profile_diggs_xsd_Element_gml_remarks.html#remarks" coords="365,1193,463,1217" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_DefinitionType.tmp#DefinitionType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_DefinitionType.html#DefinitionType" coords="283,43,527,65" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_IdentifiedObjectType.tmp#IdentifiedObjectType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_IdentifiedObjectType.html#IdentifiedObjectType" coords="269,3,546,25" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.tmp#LinearReferencingMethodType_name" href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_name" coords="358,1275,418,1299" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.tmp#LinearReferencingMethodType_type" href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_type" coords="358,1339,412,1363" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.tmp#LinearReferencingMethodType_units" href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_units" coords="358,1429,405,1453" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.tmp#LinearReferencingMethodType_positiveDirection" href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_positiveDirection" coords="358,1519,480,1543" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.tmp#LinearReferencingMethodType_constraint" href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_constraint" coords="358,1596,444,1620" /><area alt="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.tmp#LinearReferencingMethodType_offsetParameters" href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_offsetParameters" coords="358,1686,480,1710" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_IdentifiedObjectType.html#IdentifiedObjectType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:IdentifiedObjectType')">gml:IdentifiedObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_DefinitionBaseType.html#DefinitionBaseType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:DefinitionBaseType')">gml:DefinitionBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_DefinitionType.html#DefinitionType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:DefinitionType')">gml:DefinitionType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_IdentifiedObjectType.html#IdentifiedObjectType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:IdentifiedObjectType')">gml:IdentifiedObjectType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethodType')">diggs:LinearReferencingMethodType</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_LinearReferencingMethodType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_LinearReferencingMethodType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_LinearReferencingMethodType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="LinearReferencing_xsd_Element_diggs_LinearReferencingMethod.html#LinearReferencingMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearReferencingMethod')">diggs:LinearReferencingMethod</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_LinearReferencingMethodType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_LinearReferencingMethodType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_LinearReferencingMethodType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:descriptionReference{0,1}')">gml:descriptionReference{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_remarks.html#remarks" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:remarks{0,1}')">gml:remarks{0,1}</a></b> , <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_name" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:name')">diggs:name</a></b> , <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_type" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:type')">diggs:type</a></b> , <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_units" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:units')">diggs:units</a></b> , <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_positiveDirection" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:positiveDirection{0,1}')">diggs:positiveDirection{0,1}</a></b> , <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_constraint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constraint*')">diggs:constraint*</a></b> , <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_offsetParameters" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:offsetParameters{0,1}')">diggs:offsetParameters{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_constraint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constraint')">diggs:constraint</a></b>, <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_name" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:name')">diggs:name</a></b>, <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_offsetParameters" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:offsetParameters')">diggs:offsetParameters</a></b>, <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_positiveDirection" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:positiveDirection')">diggs:positiveDirection</a></b>, <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_type" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:type')">diggs:type</a></b>, <b><a href="LinearReferencing_xsd_Complex_Type_diggs_LinearReferencingMethodType.html#LinearReferencingMethodType_units" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:units')">diggs:units</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:descriptionReference')">gml:descriptionReference</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_remarks.html#remarks" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:remarks')">gml:remarks</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_LinearReferencingMethodType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_LinearReferencingMethodType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_LinearReferencingMethodType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LinearReferencingMethodType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LinearReferencingMethodType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LinearReferencingMethodType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"LinearReferencingMethodType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Type definition for Linear Referencing Method per ISO 19148 §6.2. Specifies how positions are determined along a linear feature. DIGGS LR methods rely on the LinearExtent geometry to establish the spatial framework. The method defines how measures are computed from or applied to that geometry. Methods can be 1-dimensional (distance along only) or 2-dimensional (distance along + lateral offset). The presence of offsetParameters determines the dimensionality: - offsetParameters absent: 1D method, srsDimension=1, gml:pos="distance" - offsetParameters present: 2D method, srsDimension=2, gml:pos="distance offset" DIGGS examples: - 1D: Borehole depth from ground surface - 1D: Well measured depth from casing top - 2D: Transect with offset sampling - 2D: Geophysical trackline with swath data</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"gml:IdentifiedObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"name"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LinearReferencingNameTypeEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The name property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"type"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LinearReferencingMethodTypeEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The type/category of linear referencing method per ISO 19148 §6.2.3 (absolute, relative, interpolative). - absolute: Distance from fixed origin (typically first coordinate) - relative: Distance from a specified referent point - interpolative: Position determined by interpolation between known control points</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"units"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LengthUomEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Default units of measure for distance measurements along the linear element using this method. This is the unit for the first coordinate value (distance along). Common values: ft, m, km, mi</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"positiveDirection"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PositiveDirectionEnumType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> default=</span><span class="tAV">"increasing"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Convention for positive measurement direction along the linear element. In DIGGS, typically "increasing" (along coordinate order). Semantic labels (downward, upward, forward) provide clarity but don't change the fundamental coordinate-order-based direction. Values: - increasing: Default, follows coordinate order - downward: Semantic label for boreholes (positive is deeper) - upward: Semantic label (positive is shallower) - forward: Semantic label for horizontal features</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"constraint"</span><span class="tAN"> type=</span><span class="tAV">"string"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A string value that allows for the specification of constraints imposed by this LRM. For example, a referenceFoot Linear Referencing Method can specify that referents cannot be of type "line start" or "Line end".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"offsetParameters"</span><span class="tAN"> type=</span><span class="tAV">"diggs:OffsetParametersPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Optional parameters for methods that support lateral offset from the linear element centerline, such as for Transect or TrialPit sampling features. When PRESENT: This method supports 2D positioning - LinearSRS using this method has srsDimension = 2 - Coordinates are encoded as: &lt;gml:pos&gt;distance offset&lt;/gml:pos&gt; - First value = distance along (in 'units') - Second value = lateral offset (in 'offsetParameters/offsetUnits') - Positive offset direction defined by 'offsetParameters/offsetDirection' When ABSENT: This method supports 1D positioning only - LinearSRS using this method has srsDimension = 1 - Coordinates are encoded as: &lt;gml:pos&gt;distance&lt;/gml:pos&gt; Used for: - Transects with offset soil sampling - Geophysical tracklines with side-scan sonar swaths - Pipelines with offset monitoring points - Survey lines with offset test pits - Trial or test pits with offset sampling locations</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

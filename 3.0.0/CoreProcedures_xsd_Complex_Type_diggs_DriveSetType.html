@@ -1,0 +1,1347 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:remark</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_http___diggsml.org_schemas_3_DriveSetType_remark', 
+				'properties_http___diggsml.org_schemas_3_DriveSetType_index', 
+				'properties_http___diggsml.org_schemas_3_DriveSetType_blowCount', 
+				'properties_http___diggsml.org_schemas_3_DriveSetType_penetration', 
+				'properties_http___diggsml.org_schemas_3_DriveSetType_delay', 
+				'properties_http___diggsml.org_schemas_3_DriveSetType_torque');
+var usedByBoxes= new Array('usedBy_http___diggsml.org_schemas_3_DriveSetType');
+var sourceBoxes= new Array('source_http___diggsml.org_schemas_3_DriveSetType_remark', 
+				'source_http___diggsml.org_schemas_3_DriveSetType_index', 
+				'source_http___diggsml.org_schemas_3_DriveSetType_blowCount', 
+				'source_http___diggsml.org_schemas_3_DriveSetType_penetration', 
+				'source_http___diggsml.org_schemas_3_DriveSetType_delay', 
+				'source_http___diggsml.org_schemas_3_DriveSetType_torque', 
+				'source_http___diggsml.org_schemas_3_DriveSetType');
+var instanceBoxes= new Array('instance_http___diggsml.org_schemas_3_DriveSetType_remark', 
+				'instance_http___diggsml.org_schemas_3_DriveSetType_delay');
+var diagramBoxes= new Array('diagram_http___diggsml.org_schemas_3_DriveSetType_remark', 
+				'diagram_http___diggsml.org_schemas_3_DriveSetType_index', 
+				'diagram_http___diggsml.org_schemas_3_DriveSetType_blowCount', 
+				'diagram_http___diggsml.org_schemas_3_DriveSetType_penetration', 
+				'diagram_http___diggsml.org_schemas_3_DriveSetType_delay', 
+				'diagram_http___diggsml.org_schemas_3_DriveSetType_torque', 
+				'diagram_http___diggsml.org_schemas_3_DriveSetType');
+var annotationBoxes= new Array('annotations_http___diggsml.org_schemas_3_DriveSetType_remark', 
+				'annotations_http___diggsml.org_schemas_3_DriveSetType_index', 
+				'annotations_http___diggsml.org_schemas_3_DriveSetType_blowCount', 
+				'annotations_http___diggsml.org_schemas_3_DriveSetType_penetration', 
+				'annotations_http___diggsml.org_schemas_3_DriveSetType_delay', 
+				'annotations_http___diggsml.org_schemas_3_DriveSetType_torque', 
+				'annotations_http___diggsml.org_schemas_3_DriveSetType');
+var attributesBoxes= new Array('attributes_http___diggsml.org_schemas_3_DriveSetType_penetration', 
+				'attributes_http___diggsml.org_schemas_3_DriveSetType_torque', 
+				'attributes_http___diggsml.org_schemas_3_DriveSetType');
+var modelBoxes= new Array('model_http___diggsml.org_schemas_3_DriveSetType_remark', 
+				'model_http___diggsml.org_schemas_3_DriveSetType_delay', 
+				'model_http___diggsml.org_schemas_3_DriveSetType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="http___diggsml.org_schemas_3_DriveSetType_remark"></a><div class="componentTitle">Element <span class="qname"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b> / diggs:remark</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType_remark" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType_remark" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Any comment or remark associated with this specific</span><span class="tI">
+</span><span class="tT">feature, the person or organization making the comment, and the time</span><span class="tI">
+</span><span class="tT">comment was made.Any comment or remark associated with this specific</span><span class="tI">
+</span><span class="tT">feature, the person or organization making the comment, and the time</span><span class="tI">
+</span><span class="tT">comment was made.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType_remark" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType_remark');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType_remark" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Element_diggs_remark.jpeg" usemap="#CoreProcedures_xsd_Element_diggs_remark" /><map name="CoreProcedures_xsd_Element_diggs_remark" id="CoreProcedures_xsd_Element_diggs_remark"><area alt="Common_xsd_Element_diggs_Remark.tmp#Remark" href="Common_xsd_Element_diggs_Remark.html#Remark" coords="202,44,306,68" /><area alt="Common_xsd_Complex_Type_diggs_RemarkPropertyType.tmp#RemarkPropertyType" href="Common_xsd_Complex_Type_diggs_RemarkPropertyType.html#RemarkPropertyType" coords="120,3,316,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_RemarkPropertyType.html#RemarkPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RemarkPropertyType')">diggs:RemarkPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_http___diggsml.org_schemas_3_DriveSetType_remark" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_http___diggsml.org_schemas_3_DriveSetType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_http___diggsml.org_schemas_3_DriveSetType_remark" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_http___diggsml.org_schemas_3_DriveSetType_remark" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_http___diggsml.org_schemas_3_DriveSetType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_http___diggsml.org_schemas_3_DriveSetType_remark" style="display:block"><b><a href="Common_xsd_Element_diggs_Remark.html#Remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Remark')">diggs:Remark</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_Remark.html#Remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Remark')">diggs:Remark</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_http___diggsml.org_schemas_3_DriveSetType_remark" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_http___diggsml.org_schemas_3_DriveSetType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_http___diggsml.org_schemas_3_DriveSetType_remark" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:remark</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Remark</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Remark&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:remark&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType_remark" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType_remark');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType_remark" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"remark"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RemarkPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="http___diggsml.org_schemas_3_DriveSetType_index"></a><div class="componentTitle">Element <span class="qname"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b> / diggs:index</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType_index" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType_index');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType_index" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">An integer that indicates the location of the drive set.</span><span class="tI">
+</span><span class="tT">The first or seating drive of a test would be assigned an index of</span><span class="tI">
+</span><span class="tT">1, the next drive set an index of 2, etc. An index of 1 should only</span><span class="tI">
+</span><span class="tT">be used for the seating drive.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType_index" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType_index');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType_index" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Element_diggs_index.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>positiveInteger</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_http___diggsml.org_schemas_3_DriveSetType_index" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_http___diggsml.org_schemas_3_DriveSetType_index');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_http___diggsml.org_schemas_3_DriveSetType_index" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType_index" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType_index');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType_index" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"index"</span><span class="tAN"> type=</span><span class="tAV">"positiveInteger"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An integer that indicates the location of the drive set. The first or seating drive of a test would be assigned an index of 1, the next drive set an index of 2, etc. An index of 1 should only be used for the seating drive.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="http___diggsml.org_schemas_3_DriveSetType_blowCount"></a><div class="componentTitle">Element <span class="qname"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b> / diggs:blowCount</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType_blowCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType_blowCount');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType_blowCount" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">An integer value of the number of hammer blows in this</span><span class="tI">
+</span><span class="tT">drive set.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType_blowCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType_blowCount');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType_blowCount" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Element_diggs_blowCount.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>nonNegativeInteger</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_http___diggsml.org_schemas_3_DriveSetType_blowCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_http___diggsml.org_schemas_3_DriveSetType_blowCount');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_http___diggsml.org_schemas_3_DriveSetType_blowCount" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType_blowCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType_blowCount');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType_blowCount" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"blowCount"</span><span class="tAN"> type=</span><span class="tAV">"nonNegativeInteger"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An integer value of the number of hammer blows in this drive set.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="http___diggsml.org_schemas_3_DriveSetType_penetration"></a><div class="componentTitle">Element <span class="qname"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b> / diggs:penetration</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType_penetration" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType_penetration');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType_penetration" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The distance the sampler is driven into the soil in this</span><span class="tI">
+</span><span class="tT">drive set.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType_penetration" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType_penetration');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType_penetration" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Element_diggs_penetration.jpeg" usemap="#CoreProcedures_xsd_Element_diggs_penetration" /><map name="CoreProcedures_xsd_Element_diggs_penetration" id="CoreProcedures_xsd_Element_diggs_penetration"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="169,80,337,106" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="183,197,315,221" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="183,231,275,255" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" coords="158,43,446,65" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.tmp#LengthMeasureType_uom" href="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.html#LengthMeasureType_uom" coords="169,317,241,341" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.tmp#LengthMeasureType" href="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.html#LengthMeasureType" coords="144,3,336,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.html#LengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthMeasureType')">diggs:LengthMeasureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.html#LengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthMeasureType')">diggs:LengthMeasureType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_http___diggsml.org_schemas_3_DriveSetType_penetration" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_http___diggsml.org_schemas_3_DriveSetType_penetration');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_http___diggsml.org_schemas_3_DriveSetType_penetration" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_http___diggsml.org_schemas_3_DriveSetType_penetration" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_http___diggsml.org_schemas_3_DriveSetType_penetration');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_http___diggsml.org_schemas_3_DriveSetType_penetration" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.html#LengthMeasureType_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_LengthUomEnumType.html#LengthUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthUomEnumType')">diggs:LengthUomEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The unit of measure for length or distance.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType_penetration" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType_penetration');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType_penetration" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"penetration"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LengthMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The distance the sampler is driven into the soil in this drive set.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="http___diggsml.org_schemas_3_DriveSetType_delay"></a><div class="componentTitle">Element <span class="qname"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b> / diggs:delay</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType_delay" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Duration of delay before increment</span><span class="tI">
+</span><span class="tT">started.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType_delay');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType_delay" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Element_diggs_delay.jpeg" usemap="#CoreProcedures_xsd_Element_diggs_delay" /><map name="CoreProcedures_xsd_Element_diggs_delay" id="CoreProcedures_xsd_Element_diggs_delay"><area alt="CoreProcedures_xsd_Element_diggs_DelayEvent.tmp#DelayEvent" href="CoreProcedures_xsd_Element_diggs_DelayEvent.html#DelayEvent" coords="192,44,314,68" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DelayEventPropertyType.tmp#DelayEventPropertyType" href="CoreProcedures_xsd_Complex_Type_diggs_DelayEventPropertyType.html#DelayEventPropertyType" coords="110,3,324,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DelayEventPropertyType.html#DelayEventPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DelayEventPropertyType')">diggs:DelayEventPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_http___diggsml.org_schemas_3_DriveSetType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_http___diggsml.org_schemas_3_DriveSetType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_http___diggsml.org_schemas_3_DriveSetType_delay" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_http___diggsml.org_schemas_3_DriveSetType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_http___diggsml.org_schemas_3_DriveSetType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_http___diggsml.org_schemas_3_DriveSetType_delay" style="display:block"><b><a href="CoreProcedures_xsd_Element_diggs_DelayEvent.html#DelayEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DelayEvent')">diggs:DelayEvent</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="CoreProcedures_xsd_Element_diggs_DelayEvent.html#DelayEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DelayEvent')">diggs:DelayEvent</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_http___diggsml.org_schemas_3_DriveSetType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_http___diggsml.org_schemas_3_DriveSetType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_http___diggsml.org_schemas_3_DriveSetType_delay" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:delay</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:DelayEvent</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:DelayEvent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:delay&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType_delay" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"delay"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DelayEventPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Duration of delay before increment started.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="http___diggsml.org_schemas_3_DriveSetType_torque"></a><div class="componentTitle">Element <span class="qname"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b> / diggs:torque</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType_torque" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType_torque');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType_torque" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Maximum torque required to rotate rods.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType_torque" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType_torque');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType_torque" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Element_diggs_torque.jpeg" usemap="#CoreProcedures_xsd_Element_diggs_torque" /><map name="CoreProcedures_xsd_Element_diggs_torque" id="CoreProcedures_xsd_Element_diggs_torque"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="143,80,311,106" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="157,197,289,221" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="157,231,249,255" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" coords="132,43,420,65" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.tmp#MomentOfForceMeasureType_uom" href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.html#MomentOfForceMeasureType_uom" coords="143,317,215,341" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.tmp#MomentOfForceMeasureType" href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.html#MomentOfForceMeasureType" coords="118,3,359,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.html#MomentOfForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MomentOfForceMeasureType')">diggs:MomentOfForceMeasureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.html#MomentOfForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MomentOfForceMeasureType')">diggs:MomentOfForceMeasureType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_http___diggsml.org_schemas_3_DriveSetType_torque" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_http___diggsml.org_schemas_3_DriveSetType_torque');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_http___diggsml.org_schemas_3_DriveSetType_torque" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_http___diggsml.org_schemas_3_DriveSetType_torque" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_http___diggsml.org_schemas_3_DriveSetType_torque');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_http___diggsml.org_schemas_3_DriveSetType_torque" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.html#MomentOfForceMeasureType_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_MomentOfForceUomEnumType.html#MomentOfForceUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MomentOfForceUomEnumType')">diggs:MomentOfForceUomEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The unit of measure for moment of force or torque.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType_torque" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType_torque');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType_torque" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"torque"</span><span class="tAN"> type=</span><span class="tAV">"diggs:MomentOfForceMeasureType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Maximum torque required to rotate rods.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="http___diggsml.org_schemas_3_DriveSetType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:DriveSetType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_http___diggsml.org_schemas_3_DriveSetType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_http___diggsml.org_schemas_3_DriveSetType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_http___diggsml.org_schemas_3_DriveSetType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Base type for DriveSet object.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_http___diggsml.org_schemas_3_DriveSetType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_http___diggsml.org_schemas_3_DriveSetType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_http___diggsml.org_schemas_3_DriveSetType" style="display:block"><img alt="Diagram" style="border:0" src="img/CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.jpeg" usemap="#CoreProcedures_xsd_Complex_Type_diggs_DriveSetType" /><map name="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType" id="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="215,118,296,142" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="378,259,493,283" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="378,349,546,373" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="378,426,480,450" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="378,516,461,540" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="275,218,491,244" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="190,43,454,65" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="329,620,444,644" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="329,710,431,734" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.tmp#AbstractComponentObjectBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" coords="176,3,546,25" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.tmp#http___diggsml.org_schemas_3_DriveSetType_remark" href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_remark" coords="265,837,334,861" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.tmp#http___diggsml.org_schemas_3_DriveSetType_index" href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_index" coords="265,927,326,951" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.tmp#http___diggsml.org_schemas_3_DriveSetType_blowCount" href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_blowCount" coords="265,1017,354,1041" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.tmp#http___diggsml.org_schemas_3_DriveSetType_penetration" href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_penetration" coords="265,1094,358,1118" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.tmp#http___diggsml.org_schemas_3_DriveSetType_delay" href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_delay" coords="265,1171,324,1195" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.tmp#http___diggsml.org_schemas_3_DriveSetType_torque" href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_torque" coords="265,1235,332,1259" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSetType')">diggs:DriveSetType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_http___diggsml.org_schemas_3_DriveSetType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_http___diggsml.org_schemas_3_DriveSetType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_http___diggsml.org_schemas_3_DriveSetType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="CoreProcedures_xsd_Element_diggs_DriveSet.html#http___diggsml.org_schemas_3_DriveSet" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DriveSet')">diggs:DriveSet</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_http___diggsml.org_schemas_3_DriveSetType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_http___diggsml.org_schemas_3_DriveSetType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_http___diggsml.org_schemas_3_DriveSetType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_index" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:index')">diggs:index</a></b> , <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_blowCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:blowCount')">diggs:blowCount</a></b> , <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_penetration" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:penetration')">diggs:penetration</a></b> , <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_delay" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:delay{0,1}')">diggs:delay{0,1}</a></b> , <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_torque" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:torque{0,1}')">diggs:torque{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_blowCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:blowCount')">diggs:blowCount</a></b>, <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_delay" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:delay')">diggs:delay</a></b>, <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_index" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:index')">diggs:index</a></b>, <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_penetration" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:penetration')">diggs:penetration</a></b>, <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="CoreProcedures_xsd_Complex_Type_diggs_DriveSetType.html#http___diggsml.org_schemas_3_DriveSetType_torque" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:torque')">diggs:torque</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_http___diggsml.org_schemas_3_DriveSetType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_http___diggsml.org_schemas_3_DriveSetType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_http___diggsml.org_schemas_3_DriveSetType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_http___diggsml.org_schemas_3_DriveSetType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_http___diggsml.org_schemas_3_DriveSetType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_http___diggsml.org_schemas_3_DriveSetType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"DriveSetType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Base type for DriveSet object.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractComponentObjectBaseType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"remark"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RemarkPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.Any comment or remark associated with this specific feature, the person or organization making the comment, and the time comment was made.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"index"</span><span class="tAN"> type=</span><span class="tAV">"positiveInteger"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An integer that indicates the location of the drive set. The first or seating drive of a test would be assigned an index of 1, the next drive set an index of 2, etc. An index of 1 should only be used for the seating drive.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"blowCount"</span><span class="tAN"> type=</span><span class="tAV">"nonNegativeInteger"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An integer value of the number of hammer blows in this drive set.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"penetration"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LengthMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The distance the sampler is driven into the soil in this drive set.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"delay"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DelayEventPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Duration of delay before increment started.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"torque"</span><span class="tAN"> type=</span><span class="tAV">"diggs:MomentOfForceMeasureType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Maximum torque required to rotate rods.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

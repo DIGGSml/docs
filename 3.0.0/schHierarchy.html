@@ -1,0 +1,724 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                        //--></script></head>
+   <body>
+      <h2><a id="INDEX">Table of Contents</a></h2>
+      <p><a href="index.indexList.html">Components</a><span> | </span><a href="schHierarchy.html">Resource Hierarchy</a></p>
+      <hr />
+      <ul class="schemaHierarchy">
+         <li class="internal">
+            <p class="componentTitle"><input id="button_sHDiggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsd');" class="control" /><a href="Diggs_xsd_Main_schema_Diggs_xsd.html#Diggs.xsd" target="mainFrame">Diggs.xsd</a></p>
+            <div id="sHDiggs.xsd" style="display:block">
+               <ul class="internal">
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Diggs.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                     <div id="sHDiggs.xsdgml3.2Profile_diggs.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Diggs.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdDiggs_geo_deprecated.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdDiggs_geo_deprecated.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Diggs.xsd'." /> <a href="Diggs_geo_deprecated_xsd_Imported_schema_Diggs_geo_deprecated_xsd.html#Diggs_geo_deprecated.xsd" target="mainFrame" title="Imported by  'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Diggs_geo_deprecated.xsd</a></p>
+                     <div id="sHDiggs.xsdDiggs_geo_deprecated.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><img src="img/Cycle12.png" title="Imported by  'Diggs_geo_deprecated.xsd'. Cycle detected." /> <img src="img/Import12.gif" title="Imported by  'Diggs_geo_deprecated.xsd'." /> <a href="Diggs_xsd_Main_schema_Diggs_xsd.html#Diggs.xsd" target="mainFrame" title="Imported by  'Diggs_geo_deprecated.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Diggs.xsd</a></p>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdDiggs_geo_deprecated.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdDiggs_geo_deprecated.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Diggs_geo_deprecated.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Diggs_geo_deprecated.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdDiggs_geo_deprecated.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdAbstractTypes.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdAbstractTypes.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="AbstractTypes_xsd_Included_schema_AbstractTypes_xsd.html#AbstractTypes.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">AbstractTypes.xsd</a></p>
+                     <div id="sHDiggs.xsdAbstractTypes.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdCommon.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdCommon.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Common_xsd_Included_schema_Common_xsd.html#Common.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Common.xsd</a></p>
+                     <div id="sHDiggs.xsdCommon.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdCommon.xsdAbstractTypes.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCommon.xsdAbstractTypes.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Common.xsd'." /> <a href="AbstractTypes_xsd_Included_schema_AbstractTypes_xsd.html#AbstractTypes.xsd" target="mainFrame" title="Included by 'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">AbstractTypes.xsd</a></p>
+                              <div id="sHDiggs.xsdCommon.xsdAbstractTypes.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                       <div id="sHDiggs.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdCommon.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCommon.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Common.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdCommon.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Common.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdMeasureTypes.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdMeasureTypes.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="MeasureTypes_xsd_Included_schema_MeasureTypes_xsd.html#MeasureTypes.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">MeasureTypes.xsd</a></p>
+                     <div id="sHDiggs.xsdMeasureTypes.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdMeasureTypes.xsdEmlAllObjects.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdMeasureTypes.xsdEmlAllObjects.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'MeasureTypes.xsd'." /> <a href="EmlAllObjects_xsd_Imported_schema_EmlAllObjects_xsd.html#EmlAllObjects.xsd" target="mainFrame" title="Imported by  'MeasureTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">EmlAllObjects.xsd</a></p>
+                              <div id="sHDiggs.xsdMeasureTypes.xsdEmlAllObjects.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'EmlAllObjects.xsd'." /> <a href="QuantityClass_xsd_Included_schema_QuantityClass_xsd.html#QuantityClass.xsd" target="mainFrame" title="Included by 'EmlAllObjects.xsd'." onclick="updatePageTitle('Schema documentation for component ')">QuantityClass.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdMeasureTypes.xsdCommon.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdMeasureTypes.xsdCommon.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'MeasureTypes.xsd'." /> <a href="Common_xsd_Included_schema_Common_xsd.html#Common.xsd" target="mainFrame" title="Included by 'MeasureTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Common.xsd</a></p>
+                              <div id="sHDiggs.xsdMeasureTypes.xsdCommon.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdMeasureTypes.xsdCommon.xsdAbstractTypes.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdMeasureTypes.xsdCommon.xsdAbstractTypes.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Common.xsd'." /> <a href="AbstractTypes_xsd_Included_schema_AbstractTypes_xsd.html#AbstractTypes.xsd" target="mainFrame" title="Included by 'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">AbstractTypes.xsd</a></p>
+                                       <div id="sHDiggs.xsdMeasureTypes.xsdCommon.xsdAbstractTypes.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><input id="button_sHDiggs.xsdMeasureTypes.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdMeasureTypes.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                                <div id="sHDiggs.xsdMeasureTypes.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                                   <ul class="internal">
+                                                      <li class="schemaHierarchy">
+                                                         <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </li>
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdMeasureTypes.xsdCommon.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdMeasureTypes.xsdCommon.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Common.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                       <div id="sHDiggs.xsdMeasureTypes.xsdCommon.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Common.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdLinearReferencing.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdLinearReferencing.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="LinearReferencing_xsd_Included_schema_LinearReferencing_xsd.html#LinearReferencing.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">LinearReferencing.xsd</a></p>
+                     <div id="sHDiggs.xsdLinearReferencing.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdLinearReferencing.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdLinearReferencing.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'LinearReferencing.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'LinearReferencing.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdLinearReferencing.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdLinearReferencing.xsdglrProfile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdLinearReferencing.xsdglrProfile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'LinearReferencing.xsd'." /> <a href="glrProfile_diggs_xsd_Imported_schema_glrProfile_diggs_xsd.html#glrProfile_diggs.xsd" target="mainFrame" title="Imported by  'LinearReferencing.xsd'." onclick="updatePageTitle('Schema documentation for component ')">glrProfile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdLinearReferencing.xsdglrProfile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdLinearReferencing.xsdglrProfile_diggs.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdLinearReferencing.xsdglrProfile_diggs.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'glrProfile_diggs.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'glrProfile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                       <div id="sHDiggs.xsdLinearReferencing.xsdglrProfile_diggs.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'glrProfile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'glrProfile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdLinearReferencing.xsdglrovProfile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdLinearReferencing.xsdglrovProfile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'LinearReferencing.xsd'." /> <a href="glrovProfile_diggs_xsd_Imported_schema_glrovProfile_diggs_xsd.html#glrovProfile_diggs.xsd" target="mainFrame" title="Imported by  'LinearReferencing.xsd'." onclick="updatePageTitle('Schema documentation for component ')">glrovProfile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdLinearReferencing.xsdglrovProfile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdLinearReferencing.xsdglrovProfile_diggs.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdLinearReferencing.xsdglrovProfile_diggs.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'glrovProfile_diggs.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'glrovProfile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                       <div id="sHDiggs.xsdLinearReferencing.xsdglrovProfile_diggs.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="LocalReferencing_xsd_Included_schema_LocalReferencing_xsd.html#LocalReferencing.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">LocalReferencing.xsd</a></p>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdDictionary_diggs.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdDictionary_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Dictionary_diggs_xsd_Included_schema_Dictionary_diggs_xsd.html#Dictionary_diggs.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Dictionary_diggs.xsd</a></p>
+                     <div id="sHDiggs.xsdDictionary_diggs.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdDictionary_diggs.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdDictionary_diggs.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Dictionary_diggs.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Dictionary_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdDictionary_diggs.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdCore.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdCore.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Core_xsd_Included_schema_Core_xsd.html#Core.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Core.xsd</a></p>
+                     <div id="sHDiggs.xsdCore.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdCore.xsdCommon.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCore.xsdCommon.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Core.xsd'." /> <a href="Common_xsd_Included_schema_Common_xsd.html#Common.xsd" target="mainFrame" title="Included by 'Core.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Common.xsd</a></p>
+                              <div id="sHDiggs.xsdCore.xsdCommon.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdCore.xsdCommon.xsdAbstractTypes.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCore.xsdCommon.xsdAbstractTypes.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Common.xsd'." /> <a href="AbstractTypes_xsd_Included_schema_AbstractTypes_xsd.html#AbstractTypes.xsd" target="mainFrame" title="Included by 'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">AbstractTypes.xsd</a></p>
+                                       <div id="sHDiggs.xsdCore.xsdCommon.xsdAbstractTypes.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><input id="button_sHDiggs.xsdCore.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCore.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                                <div id="sHDiggs.xsdCore.xsdCommon.xsdAbstractTypes.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                                   <ul class="internal">
+                                                      <li class="schemaHierarchy">
+                                                         <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </li>
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'AbstractTypes.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'AbstractTypes.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="schemaHierarchy">
+                                       <p><input id="button_sHDiggs.xsdCore.xsdCommon.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCore.xsdCommon.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Common.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                                       <div id="sHDiggs.xsdCore.xsdCommon.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                          <ul class="internal">
+                                             <li class="schemaHierarchy">
+                                                <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Common.xsd'." /> <a href="xml_xsd_Imported_schema_xml_xsd.html#xml.xsd" target="mainFrame" title="Imported by  'Common.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xml.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdCore.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCore.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Core.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Core.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdCore.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Core.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'Core.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdCoreProcedures.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdCoreProcedures.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="CoreProcedures_xsd_Included_schema_CoreProcedures_xsd.html#CoreProcedures.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">CoreProcedures.xsd</a></p>
+                     <div id="sHDiggs.xsdCoreProcedures.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdCoreProcedures.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCoreProcedures.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'CoreProcedures.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'CoreProcedures.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdCoreProcedures.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdCoreProcedures.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdCoreProcedures.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'CoreProcedures.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'CoreProcedures.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdCoreProcedures.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdExtSamplingFeatures.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdExtSamplingFeatures.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="ExtSamplingFeatures_xsd_Included_schema_ExtSamplingFeatures_xsd.html#ExtSamplingFeatures.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">ExtSamplingFeatures.xsd</a></p>
+                     <div id="sHDiggs.xsdExtSamplingFeatures.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdExtSamplingFeatures.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdExtSamplingFeatures.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'ExtSamplingFeatures.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'ExtSamplingFeatures.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdExtSamplingFeatures.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdExtSamplingFeatures.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdExtSamplingFeatures.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'ExtSamplingFeatures.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'ExtSamplingFeatures.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdExtSamplingFeatures.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdObservation.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdObservation.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Observation_xsd_Included_schema_Observation_xsd.html#Observation.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Observation.xsd</a></p>
+                     <div id="sHDiggs.xsdObservation.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdObservation.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdObservation.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Observation.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Observation.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdObservation.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdObservation.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdObservation.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Observation.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Observation.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdObservation.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Groups_xsd_Included_schema_Groups_xsd.html#Groups.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Groups.xsd</a></p>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdExtProcedures.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdExtProcedures.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="ExtProcedures_xsd_Included_schema_ExtProcedures_xsd.html#ExtProcedures.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">ExtProcedures.xsd</a></p>
+                     <div id="sHDiggs.xsdExtProcedures.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdExtProcedures.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdExtProcedures.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'ExtProcedures.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'ExtProcedures.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdExtProcedures.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdExtProcedures.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdExtProcedures.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'ExtProcedures.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'ExtProcedures.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdExtProcedures.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdGrouting.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdGrouting.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Grouting_xsd_Included_schema_Grouting_xsd.html#Grouting.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Grouting.xsd</a></p>
+                     <div id="sHDiggs.xsdGrouting.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdGrouting.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdGrouting.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Grouting.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Grouting.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdGrouting.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdGrouting.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdGrouting.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Grouting.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Grouting.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdGrouting.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdDeepFoundation.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdDeepFoundation.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="DeepFoundation_xsd_Included_schema_DeepFoundation_xsd.html#DeepFoundation.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">DeepFoundation.xsd</a></p>
+                     <div id="sHDiggs.xsdDeepFoundation.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdDeepFoundation.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdDeepFoundation.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'DeepFoundation.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'DeepFoundation.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdDeepFoundation.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdDeepFoundation.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdDeepFoundation.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'DeepFoundation.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'DeepFoundation.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdDeepFoundation.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="schemaHierarchy">
+                     <p><input id="button_sHDiggs.xsdGeophysics.xsd" type="image" alt="expand/collapse" src="img/btP.gif" onclick="switchState('sHDiggs.xsdGeophysics.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Include12.gif" title="Included by 'Diggs.xsd'." /> <a href="Geophysics_xsd_Included_schema_Geophysics_xsd.html#Geophysics.xsd" target="mainFrame" title="Included by 'Diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">Geophysics.xsd</a></p>
+                     <div id="sHDiggs.xsdGeophysics.xsd" style="display:none">
+                        <ul class="internal">
+                           <li class="schemaHierarchy">
+                              <p><input id="button_sHDiggs.xsdGeophysics.xsdgml3.2Profile_diggs.xsd" type="image" alt="expand/collapse" src="img/btM.gif" onclick="switchState('sHDiggs.xsdGeophysics.xsdgml3.2Profile_diggs.xsd');" class="control" /><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'Geophysics.xsd'." /> <a href="gml3_2Profile_diggs_xsd_Imported_schema_gml3_2Profile_diggs_xsd.html#gml3.2Profile_diggs.xsd" target="mainFrame" title="Imported by  'Geophysics.xsd'." onclick="updatePageTitle('Schema documentation for component ')">gml3.2Profile_diggs.xsd</a></p>
+                              <div id="sHDiggs.xsdGeophysics.xsdgml3.2Profile_diggs.xsd" style="display:block">
+                                 <ul class="internal">
+                                    <li class="schemaHierarchy">
+                                       <p><img src="img/HierarchyArrow12.jpg" /> <img src="img/Import12.gif" title="Imported by  'gml3.2Profile_diggs.xsd'." /> <a href="xlinks_xsd_Imported_schema_xlinks_xsd.html#xlinks.xsd" target="mainFrame" title="Imported by  'gml3.2Profile_diggs.xsd'." onclick="updatePageTitle('Schema documentation for component ')">xlinks.xsd</a></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </li>
+      </ul>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div>
+   </body>
+</html>

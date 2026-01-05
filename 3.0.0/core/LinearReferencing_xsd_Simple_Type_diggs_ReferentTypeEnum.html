@@ -1,0 +1,1011 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:ReferentTypeEnum</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var facetsBoxes= new Array('facets_ReferentTypeEnum');
+var sourceBoxes= new Array('source_ReferentTypeEnum');
+var diagramBoxes= new Array('diagram_ReferentTypeEnum');
+var annotationBoxes= new Array('annotations_ReferentTypeEnum');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ReferentTypeEnum"></a><div class="componentTitle">Simple Type <span class="qname">diggs:ReferentTypeEnum</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ReferentTypeEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_ReferentTypeEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ReferentTypeEnum" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Standard referent types for geotechnical and geoenvironmental </span><span class="tI">
+</span><span class="tT">linear features. These codes represent common reference points </span><span class="tI">
+</span><span class="tT">used in drilling, sampling, and geophysical operations.</span><span class="tI">
+</span><span class="tT">                </span><span class="tI">
+</span><span class="tT">Organized by application area:</span><span class="tI">
+</span><span class="tT">- Drilling: groundSurface, kellyBushing, rotaryTable, rotaryBushing, </span><span class="tI">
+</span><span class="tT">  crownValve, derrickFloor, kickoffPoint</span><span class="tI">
+</span><span class="tT">- Marine: seafloor, mudline, meanSeaLevel, tidal datums</span><span class="tI">
+</span><span class="tT">- Borehole/Well: topOfCasing, bottomOfCasing, topOfHole, bottomOfHole, </span><span class="tI">
+</span><span class="tT">  casingFlange</span><span class="tI">
+</span><span class="tT">- Core: topOfCore, bottomOfCore</span><span class="tI">
+</span><span class="tT">- Survey: start, end, intersection, benchMark</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ReferentTypeEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_ReferentTypeEnum');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ReferentTypeEnum" style="display:block"><img alt="Diagram" style="border:0" src="img/LinearReferencing_xsd_Simple_Type_diggs_ReferentTypeEnum.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_ReferentTypeEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('facets_ReferentTypeEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_ReferentTypeEnum" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>ground surface</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Natural or existing ground surface at the location of the </span><span class="tI">
+</span><span class="tT">feature. Common reference for boreholes, CPT soundings, test pits, </span><span class="tI">
+</span><span class="tT">and other subsurface investigations.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>kelly bushing</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Kelly bushing on a drilling rig, typically the reference </span><span class="tI">
+</span><span class="tT">point for measured depth in rotary drilling operations. </span><span class="tI">
+</span><span class="tT">Located at the top of the kelly drive system.</span><span class="tI">
+</span><span class="tT">                        </span><span class="tI">
+</span><span class="tT">Note: See also 'rotaryBushing' which is the preferred term.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>rotary bushing</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The bushing seated in the rotary table through which the kelly </span><span class="tI">
+</span><span class="tT">or drill string passes during drilling operations. The elevation </span><span class="tI">
+</span><span class="tT">of the rotary bushing (often referred to as RKB - Rotary Kelly </span><span class="tI">
+</span><span class="tT">Bushing) is a common datum reference for measuring drilled depths </span><span class="tI">
+</span><span class="tT">and is typically a few feet above the drill floor elevation.</span><span class="tI">
+</span><span class="tT">                        </span><span class="tI">
+</span><span class="tT">This is the preferred term over 'kelly bushing'.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>rotary table</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Rotary table on a drilling rig, alternative reference point </span><span class="tI">
+</span><span class="tT">for measured depth measurements. The rotating platform through </span><span class="tI">
+</span><span class="tT">which the drill string passes.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>crown valve</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The valve assembly located at the crown of the derrick or mast, </span><span class="tI">
+</span><span class="tT">typically at or near the crown block. Used as a reference datum </span><span class="tI">
+</span><span class="tT">for depth measurements in drilling operations, representing one </span><span class="tI">
+</span><span class="tT">of the highest fixed points on the rig structure.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>derrick floor</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Derrick floor or rig floor elevation, sometimes used as </span><span class="tI">
+</span><span class="tT">alternative to kelly bushing or rotary table. The main working </span><span class="tI">
+</span><span class="tT">platform of the drilling rig.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mudline</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">River or lakebed surface in over-water drilling operations. </span><span class="tI">
+</span><span class="tT">The sediment-water interface in non-marine aquatic environments.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>sea floor</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Seafloor surface, used in marine geophysical and geotechnical </span><span class="tI">
+</span><span class="tT">surveys. Typically the reference for measured depth in subsea </span><span class="tI">
+</span><span class="tT">wells and offshore boreholes.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mean sea level</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Mean sea level, used as vertical datum reference in marine </span><span class="tI">
+</span><span class="tT">and coastal environments. The arithmetic mean of hourly water </span><span class="tI">
+</span><span class="tT">elevations observed over a specific 19-year cycle (National </span><span class="tI">
+</span><span class="tT">Tidal Datum Epoch).</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>lowest astronomical tide</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The lowest tide level over the duration of the National Tidal </span><span class="tI">
+</span><span class="tT">Datum Epoch (19 years). Used as a low-water datum in some </span><span class="tI">
+</span><span class="tT">coastal applications.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mean higher high water</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A tidal datum. The average of the higher high water height of </span><span class="tI">
+</span><span class="tT">each tidal day observed over the National Tidal Datum Epoch </span><span class="tI">
+</span><span class="tT">(19 years). Applicable in areas with mixed tidal regimes.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mean high water</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A tidal datum. The average of all the high water heights observed </span><span class="tI">
+</span><span class="tT">over the National Tidal Datum Epoch (19 years).</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mean lower low water</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A tidal datum. The average of the lower low water height of each </span><span class="tI">
+</span><span class="tT">tidal day observed over the National Tidal Datum Epoch (19 years). </span><span class="tI">
+</span><span class="tT">Common datum for nautical charts in the United States.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mean low water</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A tidal datum. The average of all the low water heights observed </span><span class="tI">
+</span><span class="tT">over the National Tidal Datum Epoch (19 years).</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>mean tide level</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A tidal datum. The arithmetic mean of mean high water and mean </span><span class="tI">
+</span><span class="tT">low water. Same as half-tide level.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>top of casing</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Top of protective casing in a borehole or well. May be used </span><span class="tI">
+</span><span class="tT">as reference for depth measurements in monitoring wells and </span><span class="tI">
+</span><span class="tT">environmental boreholes.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>bottom of casing</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Base of protective casing in a borehole or well. Marks the </span><span class="tI">
+</span><span class="tT">transition from cased to open hole.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>casing flange</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A flange affixed to the top of the casing string used to attach </span><span class="tI">
+</span><span class="tT">production equipment. Common reference in oil/gas wells.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>kickoff point</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Point at which a borehole deviates from vertical in directional </span><span class="tI">
+</span><span class="tT">drilling operations. Important reference for deviated well paths </span><span class="tI">
+</span><span class="tT">and horizontal drilling.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>top of hole</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The top of a drilled hole - generally synonymous with ground </span><span class="tI">
+</span><span class="tT">surface unless drilled within an excavation or from a platform.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>bottom of hole</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Terminal end of a borehole or well at maximum penetration depth. </span><span class="tI">
+</span><span class="tT">Total depth (TD) of the hole.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>top of core</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The defined top of a core sample. Used when referencing positions </span><span class="tI">
+</span><span class="tT">within core samples that may be handled separately from the parent </span><span class="tI">
+</span><span class="tT">borehole. Common anchor point for core sample linear referencing.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>bottom of core</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The defined base of a core sample. Used for core recovery </span><span class="tI">
+</span><span class="tT">calculations and sample referencing. Often provides a better-defined </span><span class="tI">
+</span><span class="tT">reference than top of core when slough is present at the top of </span><span class="tI">
+</span><span class="tT">cored interval. Common anchor point for bottom-up core logging.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>line start</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Starting point of a geophysical trackline or survey transect. </span><span class="tI">
+</span><span class="tT">Corresponds to first coordinate in LinearExtent. Common reference </span><span class="tI">
+</span><span class="tT">for distance along survey lines.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>line end</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Ending point of a geophysical trackline or survey transect. </span><span class="tI">
+</span><span class="tT">Corresponds to last coordinate in LinearExtent.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>intersection</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Intersection point where this linear feature crosses another </span><span class="tI">
+</span><span class="tT">linear feature. Common in grid-based geophysical surveys where </span><span class="tI">
+</span><span class="tT">perpendicular survey lines create a network of tie points.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>benchmark</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Surveyed benchmark used as elevation reference for the feature. </span><span class="tI">
+</span><span class="tT">A monumented point with known coordinates in a geodetic reference </span><span class="tI">
+</span><span class="tT">system.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ReferentTypeEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_ReferentTypeEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ReferentTypeEnum" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;simpleType</span><span class="tAN"> name=</span><span class="tAV">"ReferentTypeEnum"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Standard referent types for geotechnical and geoenvironmental linear features. These codes represent common reference points used in drilling, sampling, and geophysical operations. Organized by application area: - Drilling: groundSurface, kellyBushing, rotaryTable, rotaryBushing, crownValve, derrickFloor, kickoffPoint - Marine: seafloor, mudline, meanSeaLevel, tidal datums - Borehole/Well: topOfCasing, bottomOfCasing, topOfHole, bottomOfHole, casingFlange - Core: topOfCore, bottomOfCore - Survey: start, end, intersection, benchMark</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;restriction</span><span class="tAN"> base=</span><span class="tAV">"string"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"ground surface"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Natural or existing ground surface at the location of the feature. Common reference for boreholes, CPT soundings, test pits, and other subsurface investigations.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"kelly bushing"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Kelly bushing on a drilling rig, typically the reference point for measured depth in rotary drilling operations. Located at the top of the kelly drive system. Note: See also 'rotaryBushing' which is the preferred term.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"rotary bushing"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The bushing seated in the rotary table through which the kelly or drill string passes during drilling operations. The elevation of the rotary bushing (often referred to as RKB - Rotary Kelly Bushing) is a common datum reference for measuring drilled depths and is typically a few feet above the drill floor elevation. This is the preferred term over 'kelly bushing'.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"rotary table"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Rotary table on a drilling rig, alternative reference point for measured depth measurements. The rotating platform through which the drill string passes.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"crown valve"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The valve assembly located at the crown of the derrick or mast, typically at or near the crown block. Used as a reference datum for depth measurements in drilling operations, representing one of the highest fixed points on the rig structure.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"derrick floor"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Derrick floor or rig floor elevation, sometimes used as alternative to kelly bushing or rotary table. The main working platform of the drilling rig.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mudline"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">River or lakebed surface in over-water drilling operations. The sediment-water interface in non-marine aquatic environments.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"sea floor"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Seafloor surface, used in marine geophysical and geotechnical surveys. Typically the reference for measured depth in subsea wells and offshore boreholes.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mean sea level"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Mean sea level, used as vertical datum reference in marine and coastal environments. The arithmetic mean of hourly water elevations observed over a specific 19-year cycle (National Tidal Datum Epoch).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"lowest astronomical tide"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The lowest tide level over the duration of the National Tidal Datum Epoch (19 years). Used as a low-water datum in some coastal applications.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mean higher high water"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A tidal datum. The average of the higher high water height of each tidal day observed over the National Tidal Datum Epoch (19 years). Applicable in areas with mixed tidal regimes.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mean high water"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A tidal datum. The average of all the high water heights observed over the National Tidal Datum Epoch (19 years).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mean lower low water"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A tidal datum. The average of the lower low water height of each tidal day observed over the National Tidal Datum Epoch (19 years). Common datum for nautical charts in the United States.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mean low water"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A tidal datum. The average of all the low water heights observed over the National Tidal Datum Epoch (19 years).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"mean tide level"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A tidal datum. The arithmetic mean of mean high water and mean low water. Same as half-tide level.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"top of casing"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Top of protective casing in a borehole or well. May be used as reference for depth measurements in monitoring wells and environmental boreholes.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"bottom of casing"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Base of protective casing in a borehole or well. Marks the transition from cased to open hole.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"casing flange"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A flange affixed to the top of the casing string used to attach production equipment. Common reference in oil/gas wells.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"kickoff point"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Point at which a borehole deviates from vertical in directional drilling operations. Important reference for deviated well paths and horizontal drilling.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"top of hole"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The top of a drilled hole - generally synonymous with ground surface unless drilled within an excavation or from a platform.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"bottom of hole"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Terminal end of a borehole or well at maximum penetration depth. Total depth (TD) of the hole.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"top of core"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The defined top of a core sample. Used when referencing positions within core samples that may be handled separately from the parent borehole. Common anchor point for core sample linear referencing.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"bottom of core"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The defined base of a core sample. Used for core recovery calculations and sample referencing. Often provides a better-defined reference than top of core when slough is present at the top of cored interval. Common anchor point for bottom-up core logging.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"line start"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Starting point of a geophysical trackline or survey transect. Corresponds to first coordinate in LinearExtent. Common reference for distance along survey lines.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"line end"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Ending point of a geophysical trackline or survey transect. Corresponds to last coordinate in LinearExtent.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"intersection"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Intersection point where this linear feature crosses another linear feature. Common in grid-based geophysical surveys where perpendicular survey lines create a network of tie points.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;enumeration</span><span class="tAN"> value=</span><span class="tAV">"benchmark"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Surveyed benchmark used as elevation reference for the feature. A monumented point with known coordinates in a geodetic reference system.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/enumeration&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/restriction&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/simpleType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

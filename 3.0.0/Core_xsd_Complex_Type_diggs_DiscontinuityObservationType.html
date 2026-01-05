@@ -1,0 +1,822 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:fractureObservation</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_DiscontinuityObservationType_fractureObservation', 
+				'properties_DiscontinuityObservationType_fractureSpacing');
+var usedByBoxes= new Array('usedBy_DiscontinuityObservationType');
+var sourceBoxes= new Array('source_DiscontinuityObservationType_fractureObservation', 
+				'source_DiscontinuityObservationType_fractureSpacing', 
+				'source_DiscontinuityObservationType');
+var instanceBoxes= new Array('instance_DiscontinuityObservationType_fractureObservation', 
+				'instance_DiscontinuityObservationType_fractureSpacing');
+var diagramBoxes= new Array('diagram_DiscontinuityObservationType_fractureObservation', 
+				'diagram_DiscontinuityObservationType_fractureSpacing', 
+				'diagram_DiscontinuityObservationType');
+var annotationBoxes= new Array('annotations_DiscontinuityObservationType_fractureObservation', 
+				'annotations_DiscontinuityObservationType_fractureSpacing', 
+				'annotations_DiscontinuityObservationType');
+var attributesBoxes= new Array('attributes_DiscontinuityObservationType');
+var modelBoxes= new Array('model_DiscontinuityObservationType_fractureObservation', 
+				'model_DiscontinuityObservationType_fractureSpacing', 
+				'model_DiscontinuityObservationType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="DiscontinuityObservationType_fractureObservation"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiscontinuityObservationType')">diggs:DiscontinuityObservationType</a></b> / diggs:fractureObservation</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DiscontinuityObservationType_fractureObservation" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_DiscontinuityObservationType_fractureObservation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DiscontinuityObservationType_fractureObservation" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The fracture observation property.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiscontinuityObservationType_fractureObservation" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_DiscontinuityObservationType_fractureObservation');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiscontinuityObservationType_fractureObservation" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_fractureObservation.jpeg" usemap="#Core_xsd_Element_diggs_fractureObservation" /><map name="Core_xsd_Element_diggs_fractureObservation" id="Core_xsd_Element_diggs_fractureObservation"><area alt="Core_xsd_Element_diggs_FractureObservation.tmp#FractureObservation" href="Core_xsd_Element_diggs_FractureObservation.html#FractureObservation" coords="273,44,448,68" /><area alt="Core_xsd_Complex_Type_diggs_FractureObservationPropertyType.tmp#FractureObservationPropertyType" href="Core_xsd_Complex_Type_diggs_FractureObservationPropertyType.html#FractureObservationPropertyType" coords="191,3,458,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_FractureObservationPropertyType.html#FractureObservationPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractureObservationPropertyType')">diggs:FractureObservationPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiscontinuityObservationType_fractureObservation" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_DiscontinuityObservationType_fractureObservation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiscontinuityObservationType_fractureObservation" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiscontinuityObservationType_fractureObservation" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_DiscontinuityObservationType_fractureObservation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiscontinuityObservationType_fractureObservation" style="display:block"><b><a href="Core_xsd_Element_diggs_FractureObservation.html#FractureObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractureObservation')">diggs:FractureObservation</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_FractureObservation.html#FractureObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractureObservation')">diggs:FractureObservation</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiscontinuityObservationType_fractureObservation" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_DiscontinuityObservationType_fractureObservation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiscontinuityObservationType_fractureObservation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:fractureObservation</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:FractureObservation</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:FractureObservation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:fractureObservation&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiscontinuityObservationType_fractureObservation" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_DiscontinuityObservationType_fractureObservation');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiscontinuityObservationType_fractureObservation" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"fractureObservation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FractureObservationPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The fracture observation property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiscontinuityObservationType_fractureSpacing"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiscontinuityObservationType')">diggs:DiscontinuityObservationType</a></b> / diggs:fractureSpacing</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DiscontinuityObservationType_fractureSpacing" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_DiscontinuityObservationType_fractureSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DiscontinuityObservationType_fractureSpacing" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The fracture spacing property.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiscontinuityObservationType_fractureSpacing" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_DiscontinuityObservationType_fractureSpacing');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiscontinuityObservationType_fractureSpacing" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_fractureSpacing.jpeg" usemap="#Core_xsd_Element_diggs_fractureSpacing" /><map name="Core_xsd_Element_diggs_fractureSpacing" id="Core_xsd_Element_diggs_fractureSpacing"><area alt="Core_xsd_Element_diggs_FractureSpacing.tmp#FractureSpacing" href="Core_xsd_Element_diggs_FractureSpacing.html#FractureSpacing" coords="249,44,400,68" /><area alt="Core_xsd_Complex_Type_diggs_FractureSpacingPropertyType.tmp#FractureSpacingPropertyType" href="Core_xsd_Complex_Type_diggs_FractureSpacingPropertyType.html#FractureSpacingPropertyType" coords="167,3,410,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_FractureSpacingPropertyType.html#FractureSpacingPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractureSpacingPropertyType')">diggs:FractureSpacingPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DiscontinuityObservationType_fractureSpacing" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_DiscontinuityObservationType_fractureSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DiscontinuityObservationType_fractureSpacing" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiscontinuityObservationType_fractureSpacing" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_DiscontinuityObservationType_fractureSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiscontinuityObservationType_fractureSpacing" style="display:block"><b><a href="Core_xsd_Element_diggs_FractureSpacing.html#FractureSpacing" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractureSpacing')">diggs:FractureSpacing</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_FractureSpacing.html#FractureSpacing" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractureSpacing')">diggs:FractureSpacing</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_DiscontinuityObservationType_fractureSpacing" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_DiscontinuityObservationType_fractureSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_DiscontinuityObservationType_fractureSpacing" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:fractureSpacing</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:FractureSpacing</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:FractureSpacing&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:fractureSpacing&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiscontinuityObservationType_fractureSpacing" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_DiscontinuityObservationType_fractureSpacing');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiscontinuityObservationType_fractureSpacing" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"fractureSpacing"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FractureSpacingPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The fracture spacing property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DiscontinuityObservationType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:DiscontinuityObservationType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_DiscontinuityObservationType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_DiscontinuityObservationType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_DiscontinuityObservationType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A discontinuity or zone of discontinuities</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DiscontinuityObservationType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_DiscontinuityObservationType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DiscontinuityObservationType" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.jpeg" usemap="#Core_xsd_Complex_Type_diggs_DiscontinuityObservationType" /><map name="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType" id="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="336,198,417,222" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="499,339,614,363" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="499,429,667,453" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="499,506,601,530" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="499,596,582,620" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="396,298,612,324" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="311,123,575,145" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="322,738,403,762" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.tmp#AbstractDiggsType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" coords="297,83,576,105" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="457,872,559,896" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="457,962,554,986" /><area alt="Common_xsd_Element_diggs_remark_1.tmp#http___diggsml.org_schemas_3_remark" href="Common_xsd_Element_diggs_remark_1.html#http___diggsml.org_schemas_3_remark" coords="457,1052,559,1076" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectNoDescriptionType.tmp#AbstractObjectNoDescriptionType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectNoDescriptionType.html#AbstractObjectNoDescriptionType" coords="283,43,643,65" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.tmp#AbstractObservationType_howDetermined" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_howDetermined" coords="294,1191,426,1215" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.tmp#AbstractObservationType_stratumCode" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_stratumCode" coords="294,1268,412,1292" /><area alt="Common_xsd_Element_diggs_measurementRef.tmp#measurementRef" href="Common_xsd_Element_diggs_measurementRef.html#measurementRef" coords="372,1352,526,1376" /><area alt="Common_xsd_Element_diggs_location.tmp#location" href="Common_xsd_Element_diggs_location.html#location" coords="372,1429,479,1453" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.tmp#AbstractObservationType_trueTopObserved" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_trueTopObserved" coords="372,1519,498,1543" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.tmp#AbstractObservationType_trueBaseObserved" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_trueBaseObserved" coords="372,1609,501,1633" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.tmp#AbstractObservationType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType" coords="269,3,583,25" /><area alt="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.tmp#DiscontinuityObservationType_fractureObservation" href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType_fractureObservation" coords="358,1736,498,1760" /><area alt="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.tmp#DiscontinuityObservationType_fractureSpacing" href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType_fractureSpacing" coords="358,1800,474,1824" /><area alt="Core_xsd_Element_diggs_placedObservation_1.tmp#placedObservation" href="Core_xsd_Element_diggs_placedObservation_1.html#placedObservation" coords="358,1864,523,1888" /><area alt="Common_xsd_Element_diggs_baseBoundary.tmp#baseBoundary" href="Common_xsd_Element_diggs_baseBoundary.html#baseBoundary" coords="358,1928,498,1952" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObservationType')">diggs:AbstractObservationType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractDiggsType')">diggs:AbstractDiggsType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectNoDescriptionType.html#AbstractObjectNoDescriptionType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectNoDescriptionType')">diggs:AbstractObjectNoDescriptionType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObservationType')">diggs:AbstractObservationType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiscontinuityObservationType')">diggs:DiscontinuityObservationType</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DiscontinuityObservationType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_DiscontinuityObservationType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DiscontinuityObservationType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Core_xsd_Element_diggs_DiscontinuityObservation.html#DiscontinuityObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiscontinuityObservation')">diggs:DiscontinuityObservation</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_DiscontinuityObservationType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_DiscontinuityObservationType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_DiscontinuityObservationType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_remark_1.html#http___diggsml.org_schemas_3_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Common_xsd_Element_diggs_measurementRef.html#measurementRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:measurementRef*')">diggs:measurementRef*</a></b> , <b><a href="Common_xsd_Element_diggs_location.html#location" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:location{0,1}')">diggs:location{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_trueTopObserved" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:trueTopObserved{0,1}')">diggs:trueTopObserved{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_trueBaseObserved" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:trueBaseObserved{0,1}')">diggs:trueBaseObserved{0,1}</a></b> , <b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType_fractureObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:fractureObservation{0,1}')">diggs:fractureObservation{0,1}</a></b> , <b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType_fractureSpacing" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:fractureSpacing{0,1}')">diggs:fractureSpacing{0,1}</a></b> , <b><a href="Core_xsd_Element_diggs_placedObservation_1.html#placedObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:placedObservation*')">diggs:placedObservation*</a></b> , <b><a href="Common_xsd_Element_diggs_baseBoundary.html#baseBoundary" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:baseBoundary{0,1}')">diggs:baseBoundary{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_baseBoundary.html#baseBoundary" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:baseBoundary')">diggs:baseBoundary</a></b>, <b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType_fractureObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:fractureObservation')">diggs:fractureObservation</a></b>, <b><a href="Core_xsd_Complex_Type_diggs_DiscontinuityObservationType.html#DiscontinuityObservationType_fractureSpacing" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:fractureSpacing')">diggs:fractureSpacing</a></b>, <b><a href="Common_xsd_Element_diggs_location.html#location" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:location')">diggs:location</a></b>, <b><a href="Common_xsd_Element_diggs_measurementRef.html#measurementRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:measurementRef')">diggs:measurementRef</a></b>, <b><a href="Core_xsd_Element_diggs_placedObservation_1.html#placedObservation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:placedObservation')">diggs:placedObservation</a></b>, <b><a href="Common_xsd_Element_diggs_remark_1.html#http___diggsml.org_schemas_3_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_trueBaseObserved" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:trueBaseObserved')">diggs:trueBaseObserved</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_trueTopObserved" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:trueTopObserved')">diggs:trueTopObserved</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_DiscontinuityObservationType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_DiscontinuityObservationType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_DiscontinuityObservationType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A value that describes the method by which the observation or</span><span class="tI">
+</span><span class="tT">measurement was determined.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObservationType.html#AbstractObservationType_stratumCode" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component stratumCode')">stratumCode</a></b></td>
+                                    <td><b>string</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">A legacy attribute to support AGS trial pit sampling features</span><span class="tI">
+</span><span class="tT">where observations of different stratum may occur at the same depth in a</span><span class="tI">
+</span><span class="tT">pit. It is a reference letter or number whose sole purpose is to link</span><span class="tI">
+</span><span class="tT">the stratum shown on a face sketch of the trial pit to the specific</span><span class="tI">
+</span><span class="tT">observation.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DiscontinuityObservationType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_DiscontinuityObservationType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DiscontinuityObservationType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"DiscontinuityObservationType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A discontinuity or zone of discontinuities</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractObservationType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"fractureObservation"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FractureObservationPropertyType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The fracture observation property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"fractureSpacing"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FractureSpacingPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The fracture spacing property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:placedObservation"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:baseBoundary"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Description of the boundary at the base of the observed zone or interval as defined in the observation's location property</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
