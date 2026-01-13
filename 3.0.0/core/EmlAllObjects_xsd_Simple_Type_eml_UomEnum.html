@@ -1,0 +1,451 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component eml:UomEnum</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var facetsBoxes= new Array('facets_UomEnum');
+var usedByBoxes= new Array('usedBy_UomEnum');
+var sourceBoxes= new Array('source_UomEnum');
+var diagramBoxes= new Array('diagram_UomEnum');
+var annotationBoxes= new Array('annotations_UomEnum');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="UomEnum"></a><div class="componentTitle">Simple Type <span class="qname">eml:UomEnum</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.energistics.org/energyml/data/commonv2</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_UomEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_UomEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_UomEnum" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The intended abstract supertype of all "units of measure".</span><span class="tI">
+</span><span class="tT">This abstract type allows the maximum length of a UOM enumeration to be centrally defined. </span><span class="tI">
+</span><span class="tT">This type is abstract in the sense that it should not be used directly </span><span class="tI">
+</span><span class="tT">except to derive another type.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_UomEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_UomEnum');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_UomEnum" style="display:block"><img alt="Diagram" style="border:0" src="img/EmlAllObjects_xsd_Simple_Type_eml_UomEnum.jpeg" usemap="#EmlAllObjects_xsd_Simple_Type_eml_UomEnum" /><map name="EmlAllObjects_xsd_Simple_Type_eml_UomEnum" id="EmlAllObjects_xsd_Simple_Type_eml_UomEnum"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractString.tmp#AbstractString" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractString.html#AbstractString" coords="158,0,313,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>xs:string</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractString.html#AbstractString" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractString')">eml:AbstractString</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_UomEnum.html#UomEnum" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:UomEnum')">eml:UomEnum</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_UomEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('facets_UomEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_UomEnum" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td style="width:30%"><b>32</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_UomEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_UomEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_UomEnum" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Simple Types </td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsAreaPerTimeUomEnumType.html#DiggsAreaPerTimeUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsAreaPerTimeUomEnumType')">diggs:DiggsAreaPerTimeUomEnumType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsDensityUomEnumType.html#DiggsDensityUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsDensityUomEnumType')">diggs:DiggsDensityUomEnumType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsEnergyDensityUomEnumType.html#DiggsEnergyDensityUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsEnergyDensityUomEnumType')">diggs:DiggsEnergyDensityUomEnumType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsGravitationalGradientUomEnumBaseType.html#DiggsGravitationalGradientUomEnumBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsGravitationalGradientUomEnumBaseType')">diggs:DiggsGravitationalGradientUomEnumBaseType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsLugeonValueUomEnumType.html#DiggsLugeonValueUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsLugeonValueUomEnumType')">diggs:DiggsLugeonValueUomEnumType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsParticleSizeUomEnumBaseType.html#DiggsParticleSizeUomEnumBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsParticleSizeUomEnumBaseType')">diggs:DiggsParticleSizeUomEnumBaseType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsPressurePerTimeUomEnumType.html#DiggsPressurePerTimeUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsPressurePerTimeUomEnumType')">diggs:DiggsPressurePerTimeUomEnumType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsReciprocalSquareRootTimeUomEnumBaseType.html#DiggsReciprocalSquareRootTimeUomEnumBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsReciprocalSquareRootTimeUomEnumBaseType')">diggs:DiggsReciprocalSquareRootTimeUomEnumBaseType</a></b>, <b><a href="MeasureTypes_xsd_Simple_Type_diggs_DiggsRelativeRateUomEnumBaseType.html#DiggsRelativeRateUomEnumBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiggsRelativeRateUomEnumBaseType')">diggs:DiggsRelativeRateUomEnumBaseType</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_APIGammaRayUom.html#APIGammaRayUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:APIGammaRayUom')">eml:APIGammaRayUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_APIGravityUom.html#APIGravityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:APIGravityUom')">eml:APIGravityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_APINeutronUom.html#APINeutronUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:APINeutronUom')">eml:APINeutronUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AbsorbedDoseUom.html#AbsorbedDoseUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbsorbedDoseUom')">eml:AbsorbedDoseUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ActivityOfRadioactivityUom.html#ActivityOfRadioactivityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ActivityOfRadioactivityUom')">eml:ActivityOfRadioactivityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AmountOfSubstancePerAmountOfSubstanceUom.html#AmountOfSubstancePerAmountOfSubstanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AmountOfSubstancePerAmountOfSubstanceUom')">eml:AmountOfSubstancePerAmountOfSubstanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AmountOfSubstancePerAreaUom.html#AmountOfSubstancePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AmountOfSubstancePerAreaUom')">eml:AmountOfSubstancePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AmountOfSubstancePerTimePerAreaUom.html#AmountOfSubstancePerTimePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AmountOfSubstancePerTimePerAreaUom')">eml:AmountOfSubstancePerTimePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AmountOfSubstancePerTimeUom.html#AmountOfSubstancePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AmountOfSubstancePerTimeUom')">eml:AmountOfSubstancePerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AmountOfSubstancePerVolumeUom.html#AmountOfSubstancePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AmountOfSubstancePerVolumeUom')">eml:AmountOfSubstancePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AmountOfSubstanceUom.html#AmountOfSubstanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AmountOfSubstanceUom')">eml:AmountOfSubstanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AnglePerLengthUom.html#AnglePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AnglePerLengthUom')">eml:AnglePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AnglePerVolumeUom.html#AnglePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AnglePerVolumeUom')">eml:AnglePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AngularAccelerationUom.html#AngularAccelerationUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AngularAccelerationUom')">eml:AngularAccelerationUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AngularVelocityUom.html#AngularVelocityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AngularVelocityUom')">eml:AngularVelocityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaPerAmountOfSubstanceUom.html#AreaPerAmountOfSubstanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaPerAmountOfSubstanceUom')">eml:AreaPerAmountOfSubstanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaPerAreaUom.html#AreaPerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaPerAreaUom')">eml:AreaPerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaPerCountUom.html#AreaPerCountUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaPerCountUom')">eml:AreaPerCountUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaPerMassUom.html#AreaPerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaPerMassUom')">eml:AreaPerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaPerTimeUom.html#AreaPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaPerTimeUom')">eml:AreaPerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaPerVolumeUom.html#AreaPerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaPerVolumeUom')">eml:AreaPerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AreaUom.html#AreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AreaUom')">eml:AreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_AttenuationPerFrequencyIntervalUom.html#AttenuationPerFrequencyIntervalUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AttenuationPerFrequencyIntervalUom')">eml:AttenuationPerFrequencyIntervalUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_CapacitanceUom.html#CapacitanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:CapacitanceUom')">eml:CapacitanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_CationExchangeCapacityUom.html#CationExchangeCapacityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:CationExchangeCapacityUom')">eml:CationExchangeCapacityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DataTransferSpeedUom.html#DataTransferSpeedUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DataTransferSpeedUom')">eml:DataTransferSpeedUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DiffusionCoefficientUom.html#DiffusionCoefficientUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DiffusionCoefficientUom')">eml:DiffusionCoefficientUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DiffusiveTimeOfFlightUom.html#DiffusiveTimeOfFlightUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DiffusiveTimeOfFlightUom')">eml:DiffusiveTimeOfFlightUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DigitalStorageUom.html#DigitalStorageUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DigitalStorageUom')">eml:DigitalStorageUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DimensionlessUom.html#DimensionlessUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DimensionlessUom')">eml:DimensionlessUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DipoleMomentUom.html#DipoleMomentUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DipoleMomentUom')">eml:DipoleMomentUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DoseEquivalentUom.html#DoseEquivalentUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DoseEquivalentUom')">eml:DoseEquivalentUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_DynamicViscosityUom.html#DynamicViscosityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:DynamicViscosityUom')">eml:DynamicViscosityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricChargePerAreaUom.html#ElectricChargePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricChargePerAreaUom')">eml:ElectricChargePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricChargePerMassUom.html#ElectricChargePerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricChargePerMassUom')">eml:ElectricChargePerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricChargePerVolumeUom.html#ElectricChargePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricChargePerVolumeUom')">eml:ElectricChargePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricChargeUom.html#ElectricChargeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricChargeUom')">eml:ElectricChargeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricConductanceUom.html#ElectricConductanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricConductanceUom')">eml:ElectricConductanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricConductivityUom.html#ElectricConductivityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricConductivityUom')">eml:ElectricConductivityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricCurrentDensityUom.html#ElectricCurrentDensityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricCurrentDensityUom')">eml:ElectricCurrentDensityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricCurrentUom.html#ElectricCurrentUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricCurrentUom')">eml:ElectricCurrentUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricFieldStrengthUom.html#ElectricFieldStrengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricFieldStrengthUom')">eml:ElectricFieldStrengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricPotentialDifferenceUom.html#ElectricPotentialDifferenceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricPotentialDifferenceUom')">eml:ElectricPotentialDifferenceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricResistancePerLengthUom.html#ElectricResistancePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricResistancePerLengthUom')">eml:ElectricResistancePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricResistanceUom.html#ElectricResistanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricResistanceUom')">eml:ElectricResistanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectricalResistivityUom.html#ElectricalResistivityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectricalResistivityUom')">eml:ElectricalResistivityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ElectromagneticMomentUom.html#ElectromagneticMomentUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ElectromagneticMomentUom')">eml:ElectromagneticMomentUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyLengthPerAreaUom.html#EnergyLengthPerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyLengthPerAreaUom')">eml:EnergyLengthPerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyLengthPerTimeAreaTemperatureUom.html#EnergyLengthPerTimeAreaTemperatureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyLengthPerTimeAreaTemperatureUom')">eml:EnergyLengthPerTimeAreaTemperatureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyPerAreaUom.html#EnergyPerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyPerAreaUom')">eml:EnergyPerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyPerLengthUom.html#EnergyPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyPerLengthUom')">eml:EnergyPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyPerMassPerTimeUom.html#EnergyPerMassPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyPerMassPerTimeUom')">eml:EnergyPerMassPerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyPerMassUom.html#EnergyPerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyPerMassUom')">eml:EnergyPerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyPerVolumeUom.html#EnergyPerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyPerVolumeUom')">eml:EnergyPerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_EnergyUom.html#EnergyUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:EnergyUom')">eml:EnergyUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ForceAreaUom.html#ForceAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForceAreaUom')">eml:ForceAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ForceLengthPerLengthUom.html#ForceLengthPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForceLengthPerLengthUom')">eml:ForceLengthPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ForcePerForceUom.html#ForcePerForceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForcePerForceUom')">eml:ForcePerForceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ForcePerLengthUom.html#ForcePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForcePerLengthUom')">eml:ForcePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ForcePerVolumeUom.html#ForcePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForcePerVolumeUom')">eml:ForcePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ForceUom.html#ForceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ForceUom')">eml:ForceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_FrequencyIntervalUom.html#FrequencyIntervalUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:FrequencyIntervalUom')">eml:FrequencyIntervalUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_FrequencyUom.html#FrequencyUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:FrequencyUom')">eml:FrequencyUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_HeatCapacityUom.html#HeatCapacityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:HeatCapacityUom')">eml:HeatCapacityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_HeatFlowRateUom.html#HeatFlowRateUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:HeatFlowRateUom')">eml:HeatFlowRateUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_HeatTransferCoefficientUom.html#HeatTransferCoefficientUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:HeatTransferCoefficientUom')">eml:HeatTransferCoefficientUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_IlluminanceUom.html#IlluminanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:IlluminanceUom')">eml:IlluminanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_InductanceUom.html#InductanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:InductanceUom')">eml:InductanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_IsothermalCompressibilityUom.html#IsothermalCompressibilityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:IsothermalCompressibilityUom')">eml:IsothermalCompressibilityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_KinematicViscosityUom.html#KinematicViscosityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:KinematicViscosityUom')">eml:KinematicViscosityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerLengthUom.html#LengthPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerLengthUom')">eml:LengthPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerMassUom.html#LengthPerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerMassUom')">eml:LengthPerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerPressureUom.html#LengthPerPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerPressureUom')">eml:LengthPerPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerTemperatureUom.html#LengthPerTemperatureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerTemperatureUom')">eml:LengthPerTemperatureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerTimeUom.html#LengthPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerTimeUom')">eml:LengthPerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthPerVolumeUom.html#LengthPerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthPerVolumeUom')">eml:LengthPerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LengthUom.html#LengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LengthUom')">eml:LengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LightExposureUom.html#LightExposureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LightExposureUom')">eml:LightExposureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LinearAccelerationUom.html#LinearAccelerationUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LinearAccelerationUom')">eml:LinearAccelerationUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LinearThermalExpansionUom.html#LinearThermalExpansionUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LinearThermalExpansionUom')">eml:LinearThermalExpansionUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LogarithmicPowerRatioPerLengthUom.html#LogarithmicPowerRatioPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LogarithmicPowerRatioPerLengthUom')">eml:LogarithmicPowerRatioPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LogarithmicPowerRatioUom.html#LogarithmicPowerRatioUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LogarithmicPowerRatioUom')">eml:LogarithmicPowerRatioUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LuminanceUom.html#LuminanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LuminanceUom')">eml:LuminanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LuminousEfficacyUom.html#LuminousEfficacyUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LuminousEfficacyUom')">eml:LuminousEfficacyUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LuminousFluxUom.html#LuminousFluxUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LuminousFluxUom')">eml:LuminousFluxUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_LuminousIntensityUom.html#LuminousIntensityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:LuminousIntensityUom')">eml:LuminousIntensityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticDipoleMomentUom.html#MagneticDipoleMomentUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticDipoleMomentUom')">eml:MagneticDipoleMomentUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticFieldStrengthUom.html#MagneticFieldStrengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticFieldStrengthUom')">eml:MagneticFieldStrengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticFluxDensityPerLengthUom.html#MagneticFluxDensityPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticFluxDensityPerLengthUom')">eml:MagneticFluxDensityPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticFluxDensityUom.html#MagneticFluxDensityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticFluxDensityUom')">eml:MagneticFluxDensityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticFluxUom.html#MagneticFluxUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticFluxUom')">eml:MagneticFluxUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticPermeabilityUom.html#MagneticPermeabilityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticPermeabilityUom')">eml:MagneticPermeabilityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MagneticVectorPotentialUom.html#MagneticVectorPotentialUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MagneticVectorPotentialUom')">eml:MagneticVectorPotentialUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassLengthUom.html#MassLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassLengthUom')">eml:MassLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerAreaUom.html#MassPerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerAreaUom')">eml:MassPerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerEnergyUom.html#MassPerEnergyUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerEnergyUom')">eml:MassPerEnergyUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerLengthUom.html#MassPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerLengthUom')">eml:MassPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerMassUom.html#MassPerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerMassUom')">eml:MassPerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerTimePerAreaUom.html#MassPerTimePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerTimePerAreaUom')">eml:MassPerTimePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerTimePerLengthUom.html#MassPerTimePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerTimePerLengthUom')">eml:MassPerTimePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerTimeUom.html#MassPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerTimeUom')">eml:MassPerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerVolumePerLengthUom.html#MassPerVolumePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerVolumePerLengthUom')">eml:MassPerVolumePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerVolumePerPressureUom.html#MassPerVolumePerPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerVolumePerPressureUom')">eml:MassPerVolumePerPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerVolumePerTemperatureUom.html#MassPerVolumePerTemperatureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerVolumePerTemperatureUom')">eml:MassPerVolumePerTemperatureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassPerVolumeUom.html#MassPerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassPerVolumeUom')">eml:MassPerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MassUom.html#MassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MassUom')">eml:MassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MobilityUom.html#MobilityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MobilityUom')">eml:MobilityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MolarEnergyUom.html#MolarEnergyUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MolarEnergyUom')">eml:MolarEnergyUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MolarHeatCapacityUom.html#MolarHeatCapacityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MolarHeatCapacityUom')">eml:MolarHeatCapacityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MolarVolumeUom.html#MolarVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MolarVolumeUom')">eml:MolarVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MolecularWeightUom.html#MolecularWeightUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MolecularWeightUom')">eml:MolecularWeightUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MomentOfForceUom.html#MomentOfForceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MomentOfForceUom')">eml:MomentOfForceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MomentOfInertiaUom.html#MomentOfInertiaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MomentOfInertiaUom')">eml:MomentOfInertiaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_MomentumUom.html#MomentumUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:MomentumUom')">eml:MomentumUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_NormalizedPowerUom.html#NormalizedPowerUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:NormalizedPowerUom')">eml:NormalizedPowerUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PermeabilityLengthUom.html#PermeabilityLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PermeabilityLengthUom')">eml:PermeabilityLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PermeabilityRockUom.html#PermeabilityRockUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PermeabilityRockUom')">eml:PermeabilityRockUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PermittivityUom.html#PermittivityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PermittivityUom')">eml:PermittivityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PlaneAngleUom.html#PlaneAngleUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PlaneAngleUom')">eml:PlaneAngleUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PotentialDifferencePerPowerDropUom.html#PotentialDifferencePerPowerDropUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PotentialDifferencePerPowerDropUom')">eml:PotentialDifferencePerPowerDropUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PowerPerAreaUom.html#PowerPerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PowerPerAreaUom')">eml:PowerPerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PowerPerPowerUom.html#PowerPerPowerUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PowerPerPowerUom')">eml:PowerPerPowerUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PowerPerVolumeUom.html#PowerPerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PowerPerVolumeUom')">eml:PowerPerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PowerUom.html#PowerUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PowerUom')">eml:PowerUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressurePerPressureUom.html#PressurePerPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressurePerPressureUom')">eml:PressurePerPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressurePerTimeUom.html#PressurePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressurePerTimeUom')">eml:PressurePerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressurePerVolumeUom.html#PressurePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressurePerVolumeUom')">eml:PressurePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressureSquaredPerForceTimePerAreaUom.html#PressureSquaredPerForceTimePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressureSquaredPerForceTimePerAreaUom')">eml:PressureSquaredPerForceTimePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressureSquaredUom.html#PressureSquaredUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressureSquaredUom')">eml:PressureSquaredUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressureTimePerVolumeUom.html#PressureTimePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressureTimePerVolumeUom')">eml:PressureTimePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_PressureUom.html#PressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:PressureUom')">eml:PressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_QuantityOfLightUom.html#QuantityOfLightUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:QuantityOfLightUom')">eml:QuantityOfLightUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_RadianceUom.html#RadianceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:RadianceUom')">eml:RadianceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_RadiantIntensityUom.html#RadiantIntensityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:RadiantIntensityUom')">eml:RadiantIntensityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalAreaUom.html#ReciprocalAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalAreaUom')">eml:ReciprocalAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalElectricPotentialDifferenceUom.html#ReciprocalElectricPotentialDifferenceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalElectricPotentialDifferenceUom')">eml:ReciprocalElectricPotentialDifferenceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalForceUom.html#ReciprocalForceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalForceUom')">eml:ReciprocalForceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalLengthUom.html#ReciprocalLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalLengthUom')">eml:ReciprocalLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalMassTimeUom.html#ReciprocalMassTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalMassTimeUom')">eml:ReciprocalMassTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalMassUom.html#ReciprocalMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalMassUom')">eml:ReciprocalMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalPressureUom.html#ReciprocalPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalPressureUom')">eml:ReciprocalPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalTimeUom.html#ReciprocalTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalTimeUom')">eml:ReciprocalTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReciprocalVolumeUom.html#ReciprocalVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReciprocalVolumeUom')">eml:ReciprocalVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ReluctanceUom.html#ReluctanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ReluctanceUom')">eml:ReluctanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_SecondMomentOfAreaUom.html#SecondMomentOfAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:SecondMomentOfAreaUom')">eml:SecondMomentOfAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_SignalingEventPerTimeUom.html#SignalingEventPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:SignalingEventPerTimeUom')">eml:SignalingEventPerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_SolidAngleUom.html#SolidAngleUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:SolidAngleUom')">eml:SolidAngleUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_SpecificHeatCapacityUom.html#SpecificHeatCapacityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:SpecificHeatCapacityUom')">eml:SpecificHeatCapacityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TemperatureIntervalPerLengthUom.html#TemperatureIntervalPerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TemperatureIntervalPerLengthUom')">eml:TemperatureIntervalPerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TemperatureIntervalPerPressureUom.html#TemperatureIntervalPerPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TemperatureIntervalPerPressureUom')">eml:TemperatureIntervalPerPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TemperatureIntervalPerTimeUom.html#TemperatureIntervalPerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TemperatureIntervalPerTimeUom')">eml:TemperatureIntervalPerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TemperatureIntervalUom.html#TemperatureIntervalUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TemperatureIntervalUom')">eml:TemperatureIntervalUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermalConductanceUom.html#ThermalConductanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermalConductanceUom')">eml:ThermalConductanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermalConductivityUom.html#ThermalConductivityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermalConductivityUom')">eml:ThermalConductivityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermalDiffusivityUom.html#ThermalDiffusivityUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermalDiffusivityUom')">eml:ThermalDiffusivityUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermalInsulanceUom.html#ThermalInsulanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermalInsulanceUom')">eml:ThermalInsulanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermalResistanceUom.html#ThermalResistanceUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermalResistanceUom')">eml:ThermalResistanceUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermodynamicTemperaturePerThermodynamicTemperatureUom.html#ThermodynamicTemperaturePerThermodynamicTemperatureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermodynamicTemperaturePerThermodynamicTemperatureUom')">eml:ThermodynamicTemperaturePerThermodynamicTemperatureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_ThermodynamicTemperatureUom.html#ThermodynamicTemperatureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:ThermodynamicTemperatureUom')">eml:ThermodynamicTemperatureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TimePerLengthUom.html#TimePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimePerLengthUom')">eml:TimePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TimePerMassUom.html#TimePerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimePerMassUom')">eml:TimePerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TimePerTimeUom.html#TimePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimePerTimeUom')">eml:TimePerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TimePerVolumeUom.html#TimePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimePerVolumeUom')">eml:TimePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_TimeUom.html#TimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:TimeUom')">eml:TimeUom</a></b>, <b><a href="EmlAllObjects_xsd_Simple_Type_eml_UnitOfMeasure.html#UnitOfMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:UnitOfMeasure')">eml:UnitOfMeasure</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VerticalCoordinateUom.html#VerticalCoordinateUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VerticalCoordinateUom')">eml:VerticalCoordinateUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumeFlowRatePerVolumeFlowRateUom.html#VolumeFlowRatePerVolumeFlowRateUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeFlowRatePerVolumeFlowRateUom')">eml:VolumeFlowRatePerVolumeFlowRateUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerAreaUom.html#VolumePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerAreaUom')">eml:VolumePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerLengthUom.html#VolumePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerLengthUom')">eml:VolumePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerMassUom.html#VolumePerMassUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerMassUom')">eml:VolumePerMassUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerPressureUom.html#VolumePerPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerPressureUom')">eml:VolumePerPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerRotationUom.html#VolumePerRotationUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerRotationUom')">eml:VolumePerRotationUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimeLengthUom.html#VolumePerTimeLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeLengthUom')">eml:VolumePerTimeLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimePerAreaUom.html#VolumePerTimePerAreaUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimePerAreaUom')">eml:VolumePerTimePerAreaUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimePerLengthUom.html#VolumePerTimePerLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimePerLengthUom')">eml:VolumePerTimePerLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimePerPressureLengthUom.html#VolumePerTimePerPressureLengthUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimePerPressureLengthUom')">eml:VolumePerTimePerPressureLengthUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimePerPressureUom.html#VolumePerTimePerPressureUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimePerPressureUom')">eml:VolumePerTimePerPressureUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimePerTimeUom.html#VolumePerTimePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimePerTimeUom')">eml:VolumePerTimePerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimePerVolumeUom.html#VolumePerTimePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimePerVolumeUom')">eml:VolumePerTimePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerTimeUom.html#VolumePerTimeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerTimeUom')">eml:VolumePerTimeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumePerVolumeUom.html#VolumePerVolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumePerVolumeUom')">eml:VolumePerVolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumeUom.html#VolumeUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumeUom')">eml:VolumeUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumetricHeatTransferCoefficientUom.html#VolumetricHeatTransferCoefficientUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumetricHeatTransferCoefficientUom')">eml:VolumetricHeatTransferCoefficientUom</a></b>, <b><a href="QuantityClass_xsd_Simple_Type_eml_VolumetricThermalExpansionUom.html#VolumetricThermalExpansionUom" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:VolumetricThermalExpansionUom')">eml:VolumetricThermalExpansionUom</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_UomEnum" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_UomEnum');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_UomEnum" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;xs:simpleType</span><span class="tAN"> name=</span><span class="tAV">"UomEnum"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The intended abstract supertype of all "units of measure". This abstract type allows the maximum length of a UOM enumeration to be centrally defined. This type is abstract in the sense that it should not be used directly except to derive another type.</span><span class="tEl">&lt;/xs:documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"eml:AbstractString"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:maxLength</span><span class="tAN"> value=</span><span class="tAV">"32"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:simpleType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

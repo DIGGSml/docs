@@ -1,0 +1,849 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:DescriptorValueType</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_DescriptorValueType_howDetermined', 
+				'properties_DescriptorValueType_qualifier');
+var facetsBoxes= new Array('facets_DescriptorValueType_howDetermined');
+var usedByBoxes= new Array('usedBy_DescriptorValueType', 
+				'usedBy_DescriptorValueType_howDetermined', 
+				'usedBy_DescriptorValueType_qualifier');
+var sourceBoxes= new Array('source_DescriptorValueType', 
+				'source_DescriptorValueType_howDetermined', 
+				'source_DescriptorValueType_qualifier');
+var diagramBoxes= new Array('diagram_DescriptorValueType');
+var attributesBoxes= new Array('attributes_DescriptorValueType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="DescriptorValueType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:DescriptorValueType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_DescriptorValueType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_DescriptorValueType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_DescriptorValueType" style="display:block"><img alt="Diagram" style="border:0" src="img/MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.jpeg" usemap="#MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType" /><map name="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType" id="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="195,0,363,26" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="209,117,341,141" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="209,151,301,175" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DescriptorValueType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_DescriptorValueType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DescriptorValueType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Types </td>
+                                    <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_APIGammaRayMeasureType.html#APIGammaRayMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:APIGammaRayMeasureType')">diggs:APIGammaRayMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_APIGravityMeasureType.html#APIGravityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:APIGravityMeasureType')">diggs:APIGravityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_APINeutronMeasureType.html#APINeutronMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:APINeutronMeasureType')">diggs:APINeutronMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AbsorbedDoseMeasureType.html#AbsorbedDoseMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbsorbedDoseMeasureType')">diggs:AbsorbedDoseMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ActivityOfRadioactivityMeasureType.html#ActivityOfRadioactivityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ActivityOfRadioactivityMeasureType')">diggs:ActivityOfRadioactivityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AmountOfSubstanceMeasureType.html#AmountOfSubstanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AmountOfSubstanceMeasureType')">diggs:AmountOfSubstanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AmountOfSubstancePerAmountOfSubstanceMeasureType.html#AmountOfSubstancePerAmountOfSubstanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AmountOfSubstancePerAmountOfSubstanceMeasureType')">diggs:AmountOfSubstancePerAmountOfSubstanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AmountOfSubstancePerAreaMeasureType.html#AmountOfSubstancePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AmountOfSubstancePerAreaMeasureType')">diggs:AmountOfSubstancePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AmountOfSubstancePerTimeMeasureType.html#AmountOfSubstancePerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AmountOfSubstancePerTimeMeasureType')">diggs:AmountOfSubstancePerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AmountOfSubstancePerTimePerAreaMeasureType.html#AmountOfSubstancePerTimePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AmountOfSubstancePerTimePerAreaMeasureType')">diggs:AmountOfSubstancePerTimePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AmountOfSubstancePerVolumeMeasureType.html#AmountOfSubstancePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AmountOfSubstancePerVolumeMeasureType')">diggs:AmountOfSubstancePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AnglePerLengthMeasureType.html#AnglePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AnglePerLengthMeasureType')">diggs:AnglePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AnglePerVolumeMeasureType.html#AnglePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AnglePerVolumeMeasureType')">diggs:AnglePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AngularAccelerationMeasureType.html#AngularAccelerationMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AngularAccelerationMeasureType')">diggs:AngularAccelerationMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AngularVelocityMeasureType.html#AngularVelocityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AngularVelocityMeasureType')">diggs:AngularVelocityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.html#AreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaMeasureType')">diggs:AreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaPerAmountOfSubstanceMeasureType.html#AreaPerAmountOfSubstanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaPerAmountOfSubstanceMeasureType')">diggs:AreaPerAmountOfSubstanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaPerAreaMeasureType.html#AreaPerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaPerAreaMeasureType')">diggs:AreaPerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaPerCountMeasureType.html#AreaPerCountMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaPerCountMeasureType')">diggs:AreaPerCountMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaPerMassMeasureType.html#AreaPerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaPerMassMeasureType')">diggs:AreaPerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaPerTimeMeasureType.html#AreaPerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaPerTimeMeasureType')">diggs:AreaPerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaPerVolumeMeasureType.html#AreaPerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaPerVolumeMeasureType')">diggs:AreaPerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_AttenuationPerFrequencyIntervalMeasureType.html#AttenuationPerFrequencyIntervalMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AttenuationPerFrequencyIntervalMeasureType')">diggs:AttenuationPerFrequencyIntervalMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_CapacitanceMeasureType.html#CapacitanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CapacitanceMeasureType')">diggs:CapacitanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_CationExchangeCapacityMeasureType.html#CationExchangeCapacityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CationExchangeCapacityMeasureType')">diggs:CationExchangeCapacityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DataTransferSpeedMeasureType.html#DataTransferSpeedMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DataTransferSpeedMeasureType')">diggs:DataTransferSpeedMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DensityOrUnitWeightMeasureType.html#DensityOrUnitWeightMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DensityOrUnitWeightMeasureType')">diggs:DensityOrUnitWeightMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DiffusionCoefficientMeasureType.html#DiffusionCoefficientMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiffusionCoefficientMeasureType')">diggs:DiffusionCoefficientMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DiffusiveTimeOfFlightMeasureType.html#DiffusiveTimeOfFlightMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DiffusiveTimeOfFlightMeasureType')">diggs:DiffusiveTimeOfFlightMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DigitalStorageMeasureType.html#DigitalStorageMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DigitalStorageMeasureType')">diggs:DigitalStorageMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DimensionlessMeasureType.html#DimensionlessMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DimensionlessMeasureType')">diggs:DimensionlessMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DipoleMomentMeasureType.html#DipoleMomentMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DipoleMomentMeasureType')">diggs:DipoleMomentMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DoseEquivalentMeasureType.html#DoseEquivalentMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DoseEquivalentMeasureType')">diggs:DoseEquivalentMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_DynamicViscosityMeasureType.html#DynamicViscosityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DynamicViscosityMeasureType')">diggs:DynamicViscosityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricChargeMeasureType.html#ElectricChargeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricChargeMeasureType')">diggs:ElectricChargeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricChargePerAreaMeasureType.html#ElectricChargePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricChargePerAreaMeasureType')">diggs:ElectricChargePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricChargePerMassMeasureType.html#ElectricChargePerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricChargePerMassMeasureType')">diggs:ElectricChargePerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricChargePerVolumeMeasureType.html#ElectricChargePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricChargePerVolumeMeasureType')">diggs:ElectricChargePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricConductanceMeasureType.html#ElectricConductanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricConductanceMeasureType')">diggs:ElectricConductanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricConductivityMeasureType.html#ElectricConductivityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricConductivityMeasureType')">diggs:ElectricConductivityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricCurrentDensityMeasureType.html#ElectricCurrentDensityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricCurrentDensityMeasureType')">diggs:ElectricCurrentDensityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricCurrentMeasureType.html#ElectricCurrentMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricCurrentMeasureType')">diggs:ElectricCurrentMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricFieldStrengthMeasureType.html#ElectricFieldStrengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricFieldStrengthMeasureType')">diggs:ElectricFieldStrengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricPotentialDifferenceMeasureType.html#ElectricPotentialDifferenceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricPotentialDifferenceMeasureType')">diggs:ElectricPotentialDifferenceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricResistanceMeasureType.html#ElectricResistanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricResistanceMeasureType')">diggs:ElectricResistanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricResistancePerLengthMeasureType.html#ElectricResistancePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricResistancePerLengthMeasureType')">diggs:ElectricResistancePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectricalResistivityMeasureType.html#ElectricalResistivityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectricalResistivityMeasureType')">diggs:ElectricalResistivityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ElectromagneticMomentMeasureType.html#ElectromagneticMomentMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ElectromagneticMomentMeasureType')">diggs:ElectromagneticMomentMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyLengthPerAreaMeasureType.html#EnergyLengthPerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyLengthPerAreaMeasureType')">diggs:EnergyLengthPerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyLengthPerTimeAreaTemperatureMeasureType.html#EnergyLengthPerTimeAreaTemperatureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyLengthPerTimeAreaTemperatureMeasureType')">diggs:EnergyLengthPerTimeAreaTemperatureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyMeasureType.html#EnergyMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyMeasureType')">diggs:EnergyMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyPerAreaMeasureType.html#EnergyPerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyPerAreaMeasureType')">diggs:EnergyPerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyPerLengthMeasureType.html#EnergyPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyPerLengthMeasureType')">diggs:EnergyPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyPerMassMeasureType.html#EnergyPerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyPerMassMeasureType')">diggs:EnergyPerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyPerMassPerTimeMeasureType.html#EnergyPerMassPerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyPerMassPerTimeMeasureType')">diggs:EnergyPerMassPerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_EnergyPerVolumeMeasureType.html#EnergyPerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnergyPerVolumeMeasureType')">diggs:EnergyPerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceAreaMeasureType.html#ForceAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceAreaMeasureType')">diggs:ForceAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceLengthPerLengthMeasureType.html#ForceLengthPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceLengthPerLengthMeasureType')">diggs:ForceLengthPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceMeasureType')">diggs:ForceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForcePerForceMeasureType.html#ForcePerForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForcePerForceMeasureType')">diggs:ForcePerForceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForcePerLengthMeasureType.html#ForcePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForcePerLengthMeasureType')">diggs:ForcePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForcePerVolumeMeasureType.html#ForcePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForcePerVolumeMeasureType')">diggs:ForcePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_FrequencyIntervalMeasureType.html#FrequencyIntervalMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FrequencyIntervalMeasureType')">diggs:FrequencyIntervalMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_FrequencyMeasureType.html#FrequencyMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FrequencyMeasureType')">diggs:FrequencyMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_GravitationalGradientMeasureType.html#GravitationalGradientMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:GravitationalGradientMeasureType')">diggs:GravitationalGradientMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_HeatCapacityMeasureType.html#HeatCapacityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:HeatCapacityMeasureType')">diggs:HeatCapacityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_HeatFlowRateMeasureType.html#HeatFlowRateMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:HeatFlowRateMeasureType')">diggs:HeatFlowRateMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_HeatTransferCoefficientMeasureType.html#HeatTransferCoefficientMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:HeatTransferCoefficientMeasureType')">diggs:HeatTransferCoefficientMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_IlluminanceMeasureType.html#IlluminanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IlluminanceMeasureType')">diggs:IlluminanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_InductanceMeasureType.html#InductanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InductanceMeasureType')">diggs:InductanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_IsothermalCompressibilityMeasureType.html#IsothermalCompressibilityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IsothermalCompressibilityMeasureType')">diggs:IsothermalCompressibilityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_KinematicViscosityMeasureType.html#KinematicViscosityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:KinematicViscosityMeasureType')">diggs:KinematicViscosityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthMeasureType.html#LengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthMeasureType')">diggs:LengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthPerLengthMeasureType.html#LengthPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthPerLengthMeasureType')">diggs:LengthPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthPerMassMeasureType.html#LengthPerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthPerMassMeasureType')">diggs:LengthPerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthPerPressureMeasureType.html#LengthPerPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthPerPressureMeasureType')">diggs:LengthPerPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthPerTemperatureMeasureType.html#LengthPerTemperatureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthPerTemperatureMeasureType')">diggs:LengthPerTemperatureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthPerTimeMeasureType.html#LengthPerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthPerTimeMeasureType')">diggs:LengthPerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LengthPerVolumeMeasureType.html#LengthPerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LengthPerVolumeMeasureType')">diggs:LengthPerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LightExposureMeasureType.html#LightExposureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LightExposureMeasureType')">diggs:LightExposureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LinearAccelerationMeasureType.html#LinearAccelerationMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearAccelerationMeasureType')">diggs:LinearAccelerationMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LinearThermalExpansionMeasureType.html#LinearThermalExpansionMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearThermalExpansionMeasureType')">diggs:LinearThermalExpansionMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LogarithmicPowerRatioMeasureType.html#LogarithmicPowerRatioMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LogarithmicPowerRatioMeasureType')">diggs:LogarithmicPowerRatioMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LogarithmicPowerRatioPerLengthMeasureType.html#LogarithmicPowerRatioPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LogarithmicPowerRatioPerLengthMeasureType')">diggs:LogarithmicPowerRatioPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LuminanceMeasureType.html#LuminanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LuminanceMeasureType')">diggs:LuminanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LuminousEfficacyMeasureType.html#LuminousEfficacyMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LuminousEfficacyMeasureType')">diggs:LuminousEfficacyMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LuminousFluxMeasureType.html#LuminousFluxMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LuminousFluxMeasureType')">diggs:LuminousFluxMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_LuminousIntensityMeasureType.html#LuminousIntensityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LuminousIntensityMeasureType')">diggs:LuminousIntensityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticDipoleMomentMeasureType.html#MagneticDipoleMomentMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticDipoleMomentMeasureType')">diggs:MagneticDipoleMomentMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticFieldStrengthMeasureType.html#MagneticFieldStrengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticFieldStrengthMeasureType')">diggs:MagneticFieldStrengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticFluxDensityMeasureType.html#MagneticFluxDensityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticFluxDensityMeasureType')">diggs:MagneticFluxDensityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticFluxDensityPerLengthMeasureType.html#MagneticFluxDensityPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticFluxDensityPerLengthMeasureType')">diggs:MagneticFluxDensityPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticFluxMeasureType.html#MagneticFluxMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticFluxMeasureType')">diggs:MagneticFluxMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticPermeabilityMeasureType.html#MagneticPermeabilityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticPermeabilityMeasureType')">diggs:MagneticPermeabilityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MagneticVectorPotentialMeasureType.html#MagneticVectorPotentialMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MagneticVectorPotentialMeasureType')">diggs:MagneticVectorPotentialMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassLengthMeasureType.html#MassLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassLengthMeasureType')">diggs:MassLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassMeasureType.html#MassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassMeasureType')">diggs:MassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerAreaMeasureType.html#MassPerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerAreaMeasureType')">diggs:MassPerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerEnergyMeasureType.html#MassPerEnergyMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerEnergyMeasureType')">diggs:MassPerEnergyMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerLengthMeasureType.html#MassPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerLengthMeasureType')">diggs:MassPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerMassMeasureType.html#MassPerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerMassMeasureType')">diggs:MassPerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerTimeMeasureType.html#MassPerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerTimeMeasureType')">diggs:MassPerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerTimePerAreaMeasureType.html#MassPerTimePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerTimePerAreaMeasureType')">diggs:MassPerTimePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerTimePerLengthMeasureType.html#MassPerTimePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerTimePerLengthMeasureType')">diggs:MassPerTimePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerVolumeMeasureType.html#MassPerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerVolumeMeasureType')">diggs:MassPerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerVolumePerLengthMeasureType.html#MassPerVolumePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerVolumePerLengthMeasureType')">diggs:MassPerVolumePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerVolumePerPressureMeasureType.html#MassPerVolumePerPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerVolumePerPressureMeasureType')">diggs:MassPerVolumePerPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MassPerVolumePerTemperatureMeasureType.html#MassPerVolumePerTemperatureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MassPerVolumePerTemperatureMeasureType')">diggs:MassPerVolumePerTemperatureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MobilityMeasureType.html#MobilityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MobilityMeasureType')">diggs:MobilityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MolarEnergyMeasureType.html#MolarEnergyMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MolarEnergyMeasureType')">diggs:MolarEnergyMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MolarHeatCapacityMeasureType.html#MolarHeatCapacityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MolarHeatCapacityMeasureType')">diggs:MolarHeatCapacityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MolarVolumeMeasureType.html#MolarVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MolarVolumeMeasureType')">diggs:MolarVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MolecularWeightMeasureType.html#MolecularWeightMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MolecularWeightMeasureType')">diggs:MolecularWeightMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfForceMeasureType.html#MomentOfForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MomentOfForceMeasureType')">diggs:MomentOfForceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MomentOfInertiaMeasureType.html#MomentOfInertiaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MomentOfInertiaMeasureType')">diggs:MomentOfInertiaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_MomentumMeasureType.html#MomentumMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MomentumMeasureType')">diggs:MomentumMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_NormalizedPowerMeasureType.html#NormalizedPowerMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:NormalizedPowerMeasureType')">diggs:NormalizedPowerMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PermeabilityLengthMeasureType.html#PermeabilityLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PermeabilityLengthMeasureType')">diggs:PermeabilityLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PermeabilityRockMeasureType.html#PermeabilityRockMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PermeabilityRockMeasureType')">diggs:PermeabilityRockMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PermittivityMeasureType.html#PermittivityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PermittivityMeasureType')">diggs:PermittivityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PlaneAngleMeasureType.html#PlaneAngleMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlaneAngleMeasureType')">diggs:PlaneAngleMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PotentialDifferencePerPowerDropMeasureType.html#PotentialDifferencePerPowerDropMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PotentialDifferencePerPowerDropMeasureType')">diggs:PotentialDifferencePerPowerDropMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PowerMeasureType.html#PowerMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PowerMeasureType')">diggs:PowerMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PowerPerAreaMeasureType.html#PowerPerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PowerPerAreaMeasureType')">diggs:PowerPerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PowerPerPowerMeasureType.html#PowerPerPowerMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PowerPerPowerMeasureType')">diggs:PowerPerPowerMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PowerPerVolumeMeasureType.html#PowerPerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PowerPerVolumeMeasureType')">diggs:PowerPerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.html#PressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureMeasureType')">diggs:PressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressurePerPressureMeasureType.html#PressurePerPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressurePerPressureMeasureType')">diggs:PressurePerPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressurePerTimeMeasureType.html#PressurePerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressurePerTimeMeasureType')">diggs:PressurePerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressurePerVolumeMeasureType.html#PressurePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressurePerVolumeMeasureType')">diggs:PressurePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureSquaredMeasureType.html#PressureSquaredMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureSquaredMeasureType')">diggs:PressureSquaredMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureSquaredPerForceTimePerAreaMeasureType.html#PressureSquaredPerForceTimePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureSquaredPerForceTimePerAreaMeasureType')">diggs:PressureSquaredPerForceTimePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureTimePerVolumeMeasureType.html#PressureTimePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureTimePerVolumeMeasureType')">diggs:PressureTimePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_QuantityOfLightMeasureType.html#QuantityOfLightMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QuantityOfLightMeasureType')">diggs:QuantityOfLightMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_RadianceMeasureType.html#RadianceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RadianceMeasureType')">diggs:RadianceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_RadiantIntensityMeasureType.html#RadiantIntensityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RadiantIntensityMeasureType')">diggs:RadiantIntensityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalAreaMeasureType.html#ReciprocalAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalAreaMeasureType')">diggs:ReciprocalAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalElectricPotentialDifferenceMeasureType.html#ReciprocalElectricPotentialDifferenceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalElectricPotentialDifferenceMeasureType')">diggs:ReciprocalElectricPotentialDifferenceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalForceMeasureType.html#ReciprocalForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalForceMeasureType')">diggs:ReciprocalForceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalLengthMeasureType.html#ReciprocalLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalLengthMeasureType')">diggs:ReciprocalLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalMassMeasureType.html#ReciprocalMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalMassMeasureType')">diggs:ReciprocalMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalMassTimeMeasureType.html#ReciprocalMassTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalMassTimeMeasureType')">diggs:ReciprocalMassTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalPressureMeasureType.html#ReciprocalPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalPressureMeasureType')">diggs:ReciprocalPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalSquareRootTimeMeasureType.html#ReciprocalSquareRootTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalSquareRootTimeMeasureType')">diggs:ReciprocalSquareRootTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalTimeMeasureType.html#ReciprocalTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalTimeMeasureType')">diggs:ReciprocalTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReciprocalVolumeMeasureType.html#ReciprocalVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReciprocalVolumeMeasureType')">diggs:ReciprocalVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_RelativeRateMeasureType.html#RelativeRateMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RelativeRateMeasureType')">diggs:RelativeRateMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ReluctanceMeasureType.html#ReluctanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReluctanceMeasureType')">diggs:ReluctanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_SecondMomentOfAreaMeasureType.html#SecondMomentOfAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SecondMomentOfAreaMeasureType')">diggs:SecondMomentOfAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_SignalingEventPerTimeMeasureType.html#SignalingEventPerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SignalingEventPerTimeMeasureType')">diggs:SignalingEventPerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_SolidAngleMeasureType.html#SolidAngleMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SolidAngleMeasureType')">diggs:SolidAngleMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_SpecificGravityMeasureType.html#SpecificGravityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificGravityMeasureType')">diggs:SpecificGravityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_SpecificHeatCapacityMeasureType.html#SpecificHeatCapacityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificHeatCapacityMeasureType')">diggs:SpecificHeatCapacityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TemperatureIntervalMeasureType.html#TemperatureIntervalMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TemperatureIntervalMeasureType')">diggs:TemperatureIntervalMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TemperatureIntervalPerLengthMeasureType.html#TemperatureIntervalPerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TemperatureIntervalPerLengthMeasureType')">diggs:TemperatureIntervalPerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TemperatureIntervalPerPressureMeasureType.html#TemperatureIntervalPerPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TemperatureIntervalPerPressureMeasureType')">diggs:TemperatureIntervalPerPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TemperatureIntervalPerTimeMeasureType.html#TemperatureIntervalPerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TemperatureIntervalPerTimeMeasureType')">diggs:TemperatureIntervalPerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermalConductanceMeasureType.html#ThermalConductanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermalConductanceMeasureType')">diggs:ThermalConductanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermalConductivityMeasureType.html#ThermalConductivityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermalConductivityMeasureType')">diggs:ThermalConductivityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermalDiffusivityMeasureType.html#ThermalDiffusivityMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermalDiffusivityMeasureType')">diggs:ThermalDiffusivityMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermalInsulanceMeasureType.html#ThermalInsulanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermalInsulanceMeasureType')">diggs:ThermalInsulanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermalResistanceMeasureType.html#ThermalResistanceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermalResistanceMeasureType')">diggs:ThermalResistanceMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermodynamicTemperatureMeasureType.html#ThermodynamicTemperatureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermodynamicTemperatureMeasureType')">diggs:ThermodynamicTemperatureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_ThermodynamicTemperaturePerThermodynamicTemperatureMeasureType.html#ThermodynamicTemperaturePerThermodynamicTemperatureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ThermodynamicTemperaturePerThermodynamicTemperatureMeasureType')">diggs:ThermodynamicTemperaturePerThermodynamicTemperatureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TimeMeasureType.html#TimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimeMeasureType')">diggs:TimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TimePerLengthMeasureType.html#TimePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimePerLengthMeasureType')">diggs:TimePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TimePerMassMeasureType.html#TimePerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimePerMassMeasureType')">diggs:TimePerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TimePerTimeMeasureType.html#TimePerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimePerTimeMeasureType')">diggs:TimePerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_TimePerVolumeMeasureType.html#TimePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimePerVolumeMeasureType')">diggs:TimePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VerticalCoordinateMeasureType.html#VerticalCoordinateMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VerticalCoordinateMeasureType')">diggs:VerticalCoordinateMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumeFlowRatePerVolumeFlowRateMeasureType.html#VolumeFlowRatePerVolumeFlowRateMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumeFlowRatePerVolumeFlowRateMeasureType')">diggs:VolumeFlowRatePerVolumeFlowRateMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumeMeasureType.html#VolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumeMeasureType')">diggs:VolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumeOrMassLossMeasureType.html#VolumeOrMassLossMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumeOrMassLossMeasureType')">diggs:VolumeOrMassLossMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerAreaMeasureType.html#VolumePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerAreaMeasureType')">diggs:VolumePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerLengthMeasureType.html#VolumePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerLengthMeasureType')">diggs:VolumePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerMassMeasureType.html#VolumePerMassMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerMassMeasureType')">diggs:VolumePerMassMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerPressureMeasureType.html#VolumePerPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerPressureMeasureType')">diggs:VolumePerPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerRotationMeasureType.html#VolumePerRotationMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerRotationMeasureType')">diggs:VolumePerRotationMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimeMeasureType.html#VolumePerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimeMeasureType')">diggs:VolumePerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimePerAreaMeasureType.html#VolumePerTimePerAreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimePerAreaMeasureType')">diggs:VolumePerTimePerAreaMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimePerLengthMeasureType.html#VolumePerTimePerLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimePerLengthMeasureType')">diggs:VolumePerTimePerLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimePerPressureLengthMeasureType.html#VolumePerTimePerPressureLengthMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimePerPressureLengthMeasureType')">diggs:VolumePerTimePerPressureLengthMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimePerPressureMeasureType.html#VolumePerTimePerPressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimePerPressureMeasureType')">diggs:VolumePerTimePerPressureMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimePerTimeMeasureType.html#VolumePerTimePerTimeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimePerTimeMeasureType')">diggs:VolumePerTimePerTimeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerTimePerVolumeMeasureType.html#VolumePerTimePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerTimePerVolumeMeasureType')">diggs:VolumePerTimePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumePerVolumeMeasureType.html#VolumePerVolumeMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumePerVolumeMeasureType')">diggs:VolumePerVolumeMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumetricHeatTransferCoefficientMeasureType.html#VolumetricHeatTransferCoefficientMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumetricHeatTransferCoefficientMeasureType')">diggs:VolumetricHeatTransferCoefficientMeasureType</a></b>, <b><a href="MeasureTypes_xsd_Complex_Type_diggs_VolumetricThermalExpansionMeasureType.html#VolumetricThermalExpansionMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:VolumetricThermalExpansionMeasureType')">diggs:VolumetricThermalExpansionMeasureType</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Elements </td>
+                                    <td><b><a href="Common_xsd_Complex_Type_diggs_UncertaintyType.html#UncertaintyType_minusUncertaintyValue" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:UncertaintyType/diggs:minusUncertaintyValue')">diggs:UncertaintyType/diggs:minusUncertaintyValue</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_UncertaintyType.html#UncertaintyType_plusUncertaintyValue" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:UncertaintyType/diggs:plusUncertaintyValue')">diggs:UncertaintyType/diggs:plusUncertaintyValue</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_DescriptorValueType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_DescriptorValueType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_DescriptorValueType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptorValueType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_DescriptorValueType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptorValueType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"DescriptorValueType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;simpleContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"eml:AbstractMeasure"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;attribute</span><span class="tAN"> name=</span><span class="tAV">"howDetermined"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DescriptorMethodEnumType"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;attribute</span><span class="tAN"> name=</span><span class="tAV">"qualifier"</span><span class="tAN"> type=</span><span class="tAV">"diggs:QualifierEnumExtType"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/simpleContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DescriptorValueType_howDetermined"></a><div class="componentTitle">Attribute <span class="qname"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b> / @howDetermined</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DescriptorValueType_howDetermined" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_DescriptorValueType_howDetermined');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DescriptorValueType_howDetermined" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_DescriptorValueType_howDetermined" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('facets_DescriptorValueType_howDetermined');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_DescriptorValueType_howDetermined" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>assigned</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is assigned a priori as a commonly used value or by</span><span class="tI">
+</span><span class="tT">assumption</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>calculated</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is computed directly from other value(s)</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>extrapolated</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is estimated by extrapolating trends in the known</span><span class="tI">
+</span><span class="tT">data</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>graphic</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is manually picked from a graph or visual</span><span class="tI">
+</span><span class="tT">display</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>inferred</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is estimated from some indirect measurements such as from a</span><span class="tI">
+</span><span class="tT">wireline log or transducer.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>interpolated</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is estimated betweem two known values using some presumed</span><span class="tI">
+</span><span class="tT">function</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>measured</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is determined directly from a laboratory or in situ test</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>missing</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Method known but not reported here</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>modeled</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is estimated from a representation of the measured</span><span class="tI">
+</span><span class="tT">feature</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>moving average</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value is calculated as a moving average of</span><span class="tI">
+</span><span class="tT">reading</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>other</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Method other than the choices in this list. Further information</span><span class="tI">
+</span><span class="tT">should be provided in the remarks property</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>reported</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value or description comes from a third party</span><span class="tI">
+</span><span class="tT">source</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>unknown</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Method of determination unknown and can likely not be determined</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>visual</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Value or description comes from visual or visual/manual</span><span class="tI">
+</span><span class="tT">inspection</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DescriptorValueType_howDetermined" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_DescriptorValueType_howDetermined');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DescriptorValueType_howDetermined" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptorValueType_howDetermined" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_DescriptorValueType_howDetermined');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptorValueType_howDetermined" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;attribute</span><span class="tAN"> name=</span><span class="tAV">"howDetermined"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DescriptorMethodEnumType"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="DescriptorValueType_qualifier"></a><div class="componentTitle">Attribute <span class="qname"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b> / @qualifier</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_DescriptorValueType_qualifier" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_DescriptorValueType_qualifier');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_DescriptorValueType_qualifier" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_DescriptorValueType_qualifier" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_DescriptorValueType_qualifier');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_DescriptorValueType_qualifier" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_DescriptorValueType_qualifier" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_DescriptorValueType_qualifier');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_DescriptorValueType_qualifier" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;attribute</span><span class="tAN"> name=</span><span class="tAV">"qualifier"</span><span class="tAN"> type=</span><span class="tAV">"diggs:QualifierEnumExtType"</span><span class="tEl">/&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
