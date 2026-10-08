@@ -1,0 +1,558 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:AcceptanceCheck</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_AcceptanceCheck');
+var usedByBoxes= new Array('usedBy_AcceptanceCheck');
+var sourceBoxes= new Array('source_AcceptanceCheck');
+var instanceBoxes= new Array('instance_AcceptanceCheck');
+var diagramBoxes= new Array('diagram_AcceptanceCheck');
+var annotationBoxes= new Array('annotations_AcceptanceCheck');
+var attributesBoxes= new Array('attributes_AcceptanceCheck');
+var modelBoxes= new Array('model_AcceptanceCheck');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="AcceptanceCheck"></a><div class="componentTitle">Element <span class="qname">diggs:AcceptanceCheck</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AcceptanceCheck" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The verdict of evaluating one acceptance criterion against a subject: that the</span><span class="tI">
+</span><span class="tT">verticality of a column was within tolerance, that a grout batch met its strength</span><span class="tI">
+</span><span class="tT">requirement, that a test was performed to its procedure. Records a pass as well as a</span><span class="tI">
+</span><span class="tT">fail; a failure that needs a decision is recorded as a diggs:NonConformance citing</span><span class="tI">
+</span><span class="tT">this check. Contained in a diggs:AcceptanceEvaluation. The subject is identified by</span><span class="tI">
+</span><span class="tT">at least one of samplingFeatureRef, sampleRef, samplingActivityRef,</span><span class="tI">
+</span><span class="tT">constructionActivityRef, measurementRef or observationSystemRef, and subjectLocation</span><span class="tI">
+</span><span class="tT">narrows it to the part concerned. gml:name carries a check reference where a project</span><span class="tI">
+</span><span class="tT">numbers them; diggs:status is the state of this record (draft, reviewed, released),</span><span class="tI">
+</span><span class="tT">which is distinct from outcome, the verdict on the work.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AcceptanceCheck" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_AcceptanceCheck.jpeg" usemap="#Common_xsd_Element_diggs_AcceptanceCheck" /><map name="Common_xsd_Element_diggs_AcceptanceCheck" id="Common_xsd_Element_diggs_AcceptanceCheck"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="258,238,339,262" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="421,379,536,403" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="421,469,589,493" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="421,546,523,570" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="421,636,504,660" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="318,338,534,364" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="233,163,497,185" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="244,778,325,802" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.tmp#AbstractDiggsType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" coords="219,123,498,145" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="287,925,402,949" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="287,1015,389,1039" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="205,83,512,105" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="294,1142,377,1166" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="294,1232,391,1256" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" coords="294,1322,363,1346" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" coords="191,43,474,65" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_criterionRef" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_criterionRef" coords="280,1449,374,1473" /><area alt="Common_xsd_Element_diggs_samplingFeatureRef.tmp#samplingFeatureRef" href="Common_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" coords="392,1539,562,1563" /><area alt="Common_xsd_Element_diggs_sampleRef.tmp#sampleRef" href="Common_xsd_Element_diggs_sampleRef.html#sampleRef" coords="392,1616,511,1640" /><area alt="Common_xsd_Element_diggs_samplingActivityRef.tmp#samplingActivityRef" href="Common_xsd_Element_diggs_samplingActivityRef.html#samplingActivityRef" coords="392,1693,562,1717" /><area alt="Common_xsd_Element_diggs_constructionActivityRef.tmp#constructionActivityRef" href="Common_xsd_Element_diggs_constructionActivityRef.html#constructionActivityRef" coords="392,1770,582,1794" /><area alt="Common_xsd_Element_diggs_measurementRef.tmp#measurementRef" href="Common_xsd_Element_diggs_measurementRef.html#measurementRef" coords="392,1847,546,1871" /><area alt="Common_xsd_Element_diggs_observationSystemRef.tmp#observationSystemRef" href="Common_xsd_Element_diggs_observationSystemRef.html#observationSystemRef" coords="392,1924,575,1948" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_subjectLocation" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_subjectLocation" coords="280,2001,396,2025" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_determination" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_determination" coords="280,2078,386,2102" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_outcome" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_outcome" coords="280,2168,358,2192" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_evidenceMeasurementRef" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceMeasurementRef" coords="280,2258,447,2282" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_evidenceObservationRef" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceObservationRef" coords="280,2335,441,2359" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_evidenceConstructionActivityRef" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceConstructionActivityRef" coords="280,2412,486,2436" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_observedValue" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_observedValue" coords="280,2489,390,2513" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType_checkDate" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_checkDate" coords="280,2566,366,2590" /><area alt="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.tmp#AcceptanceCheckType" href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType" coords="177,3,382,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AcceptanceCheckType')">diggs:AcceptanceCheckType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractDiggsType')">diggs:AbstractDiggsType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AcceptanceCheckType')">diggs:AcceptanceCheckType</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AcceptanceCheck" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_AcceptanceCheck" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckPropertyType.html#AcceptanceCheckPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AcceptanceCheckPropertyType')">diggs:AcceptanceCheckPropertyType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AcceptanceCheck" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_criterionRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:criterionRef')">diggs:criterionRef</a></b> , (<b><a href="Common_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef+')">diggs:samplingFeatureRef+</a></b> | <b><a href="Common_xsd_Element_diggs_sampleRef.html#sampleRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sampleRef+')">diggs:sampleRef+</a></b> | <b><a href="Common_xsd_Element_diggs_samplingActivityRef.html#samplingActivityRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingActivityRef+')">diggs:samplingActivityRef+</a></b> | <b><a href="Common_xsd_Element_diggs_constructionActivityRef.html#constructionActivityRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionActivityRef+')">diggs:constructionActivityRef+</a></b> | <b><a href="Common_xsd_Element_diggs_measurementRef.html#measurementRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:measurementRef+')">diggs:measurementRef+</a></b> | <b><a href="Common_xsd_Element_diggs_observationSystemRef.html#observationSystemRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:observationSystemRef+')">diggs:observationSystemRef+</a></b>) , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_subjectLocation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:subjectLocation{0,1}')">diggs:subjectLocation{0,1}</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_determination" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:determination')">diggs:determination</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_outcome" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:outcome')">diggs:outcome</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceMeasurementRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evidenceMeasurementRef*')">diggs:evidenceMeasurementRef*</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceObservationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evidenceObservationRef*')">diggs:evidenceObservationRef*</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceConstructionActivityRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evidenceConstructionActivityRef*')">diggs:evidenceConstructionActivityRef*</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_observedValue" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:observedValue{0,1}')">diggs:observedValue{0,1}</a></b> , <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_checkDate" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:checkDate{0,1}')">diggs:checkDate{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_checkDate" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:checkDate')">diggs:checkDate</a></b>, <b><a href="Common_xsd_Element_diggs_constructionActivityRef.html#constructionActivityRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionActivityRef')">diggs:constructionActivityRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_criterionRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:criterionRef')">diggs:criterionRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_determination" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:determination')">diggs:determination</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceConstructionActivityRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evidenceConstructionActivityRef')">diggs:evidenceConstructionActivityRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceMeasurementRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evidenceMeasurementRef')">diggs:evidenceMeasurementRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_evidenceObservationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evidenceObservationRef')">diggs:evidenceObservationRef</a></b>, <b><a href="Common_xsd_Element_diggs_measurementRef.html#measurementRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:measurementRef')">diggs:measurementRef</a></b>, <b><a href="Common_xsd_Element_diggs_observationSystemRef.html#observationSystemRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:observationSystemRef')">diggs:observationSystemRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_observedValue" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:observedValue')">diggs:observedValue</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_outcome" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:outcome')">diggs:outcome</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="Common_xsd_Element_diggs_sampleRef.html#sampleRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sampleRef')">diggs:sampleRef</a></b>, <b><a href="Common_xsd_Element_diggs_samplingActivityRef.html#samplingActivityRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingActivityRef')">diggs:samplingActivityRef</a></b>, <b><a href="Common_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef')">diggs:samplingFeatureRef</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_AcceptanceCheckType.html#AcceptanceCheckType_subjectLocation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:subjectLocation')">diggs:subjectLocation</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AcceptanceCheck" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:AcceptanceCheck</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:description</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:description&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:identifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:identifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:name</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/gml:name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:status</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:status&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:remark</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:remark&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:criterionRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:criterionRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:samplingFeatureRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:samplingFeatureRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:sampleRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">percentage=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:sampleRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:samplingActivityRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:samplingActivityRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:constructionActivityRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:constructionActivityRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:measurementRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:measurementRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:observationSystemRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,unbounded}</span><span class="tEl">&lt;/diggs:observationSystemRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:subjectLocation</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:subjectLocation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:determination</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:determination&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:outcome</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:outcome&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:evidenceMeasurementRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:evidenceMeasurementRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:evidenceObservationRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:evidenceObservationRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:evidenceConstructionActivityRef</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">identifierRef=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:evidenceConstructionActivityRef&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:observedValue</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:observedValue&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:checkDate</span><span class="tT"> </span><span class="tAN">calendarEraName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">frame=</span><span class="tAV">"#ISO-8601"</span><span class="tT"> </span><span class="tAN">indeterminatePosition=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:checkDate&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:AcceptanceCheck&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AcceptanceCheck" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AcceptanceCheck" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AcceptanceCheck');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AcceptanceCheck" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"AcceptanceCheck"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AcceptanceCheckType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The verdict of evaluating one acceptance criterion against a subject: that the verticality of a column was within tolerance, that a grout batch met its strength requirement, that a test was performed to its procedure. Records a pass as well as a fail; a failure that needs a decision is recorded as a diggs:NonConformance citing this check. Contained in a diggs:AcceptanceEvaluation. The subject is identified by at least one of samplingFeatureRef, sampleRef, samplingActivityRef, constructionActivityRef, measurementRef or observationSystemRef, and subjectLocation narrows it to the part concerned. gml:name carries a check reference where a project numbers them; diggs:status is the state of this record (draft, reviewed, released), which is distinct from outcome, the verdict on the work.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:LowStrainIntegrityTest</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_LowStrainIntegrityTest');
+var sourceBoxes= new Array('source_LowStrainIntegrityTest');
+var instanceBoxes= new Array('instance_LowStrainIntegrityTest');
+var diagramBoxes= new Array('diagram_LowStrainIntegrityTest');
+var annotationBoxes= new Array('annotations_LowStrainIntegrityTest');
+var attributesBoxes= new Array('attributes_LowStrainIntegrityTest');
+var modelBoxes= new Array('model_LowStrainIntegrityTest');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="LowStrainIntegrityTest"></a><div class="componentTitle">Element <span class="qname">diggs:LowStrainIntegrityTest</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_LowStrainIntegrityTest" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A low-strain impact integrity test on a completed deep foundation element, per ASTM</span><span class="tI">
+</span><span class="tT">D5882 or the French standards NF P94-160-2 (reflection/sonic-echo method) and NF</span><span class="tI">
+</span><span class="tT">P94-160-4 (impedance method). It is typically applied to a population of production</span><span class="tI">
+</span><span class="tT">elements (commonly around 5 % in US DOT practice) rather than to selected elements.</span><span class="tI">
+</span><span class="tT">It substitutes diggs:AbstractInsituTestProcedure directly, not</span><span class="tI">
+</span><span class="tT">diggs:AbstractLoadTestProcedure, because no sustained load is applied and there is</span><span class="tI">
+</span><span class="tT">no reaction system or load-increment schedule. ASTM D5882 names two methods in one</span><span class="tI">
+</span><span class="tT">document, the Pulse Echo Method (time domain, "sonic echo") and the Transient</span><span class="tI">
+</span><span class="tT">Response Method (frequency domain, "impedance" or "impulse response"); French</span><span class="tI">
+</span><span class="tT">practice splits them into two standards. Cite the governing standard through the</span><span class="tI">
+</span><span class="tT">inherited testProcedureMethod; testMethod records which physical method was used.</span><span class="tI">
+</span><span class="tT">ASTM D5882 was withdrawn by ASTM in 2025 with no replacement named (a reinstatement</span><span class="tI">
+</span><span class="tT">effort, ASTM work item WK93548, was in progress); the specification registry marks</span><span class="tI">
+</span><span class="tT">it withdrawn, and instances that cite it keep resolving. EN 12699 requires integrity</span><span class="tI">
+</span><span class="tT">testing of displacement piles but defines no test method, so cite it through</span><span class="tI">
+</span><span class="tT">diggs:RIProgramBasis/governingStandard rather than testProcedureMethod. The impact</span><span class="tI">
+</span><span class="tT">hammer and the motion transducer are equipment objects carried through the inherited</span><span class="tI">
+</span><span class="tT">testProcedureEquipment, classified with equipmentClass.xml#low_strain_impact_hammer</span><span class="tI">
+</span><span class="tT">and equipmentClass.xml#accelerometer. headPreparation, sensorMounting,</span><span class="tI">
+</span><span class="tT">sensorPositionCount, sensorOffset and impactOffset state how the head was prepared</span><span class="tI">
+</span><span class="tT">and where the transducer and impact were placed, and lengthToDiameterRatio the</span><span class="tI">
+</span><span class="tT">slenderness of the element. State the amplification applied to the record, because</span><span class="tI">
+</span><span class="tT">the height of a reflection can be read only against it: amplificationFunction gives</span><span class="tI">
+</span><span class="tT">its shape, amplificationFactor the equipment setting, and amplificationStart and</span><span class="tI">
+</span><span class="tT">amplificationEnd the depths over which it rises. The other settings a report states</span><span class="tI">
+</span><span class="tT">are filterType, filterCutoff, sharpeningApplied, impactNormalized, recordReference,</span><span class="tI">
+</span><span class="tT">samplingRate, sampleResolution and recordLength; processing specific to one</span><span class="tI">
+</span><span class="tT">equipment goes in otherTestProperty. evaluationSoftware names the software that</span><span class="tI">
+</span><span class="tT">evaluated the record, and the inherited role states who evaluated it. The record is</span><span class="tI">
+</span><span class="tT">the result: the diggs:Test on the element tested has as its outcome the evaluated</span><span class="tI">
+</span><span class="tT">record as a depth-indexed result, whose location is a MultiPoint of the record</span><span class="tI">
+</span><span class="tT">depths along the element and whose ResultSet holds one column per curve sampled at</span><span class="tI">
+</span><span class="tT">those depths: the amplified, normalized velocity</span><span class="tI">
+</span><span class="tT">(properties.xml#normalized_velocity) and, where reported, the force, the time after</span><span class="tI">
+</span><span class="tT">impact (properties.xml#elapsed_time) and a reconstructed relative impedance. Depth</span><span class="tI">
+</span><span class="tT">and time are related by waveSpeed (depth = waveSpeed x time / 2), so a record</span><span class="tI">
+</span><span class="tT">reported against time is stated at the depths that waveSpeed gives, with the time as</span><span class="tI">
+</span><span class="tT">a column. One test with one set of procedure values is one Test, however many</span><span class="tI">
+</span><span class="tT">reflections it shows. Values picked from the record, such as the toe depth, the</span><span class="tI">
+</span><span class="tT">depth of a reflection above it or its relative amplitude, go in</span><span class="tI">
+</span><span class="tT">otherMeasurementProperty or in a column of the result (on every row, or only on the</span><span class="tI">
+</span><span class="tT">row at the depth where picked); the conclusion the tester draws from the whole</span><span class="tI">
+</span><span class="tT">record is measurementSummary. A frequency-domain record has no depth or time domain:</span><span class="tI">
+</span><span class="tT">the mobility of a transient response test (velocity over force against frequency)</span><span class="tI">
+</span><span class="tT">goes in frequencyResponse, a table whose columns its parameters declare, and values</span><span class="tI">
+</span><span class="tT">read from it, such as the characteristic mobility or the dynamic stiffness, go in</span><span class="tI">
+</span><span class="tT">otherMeasurementProperty.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_LowStrainIntegrityTest" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtProcedures_xsd_Element_diggs_LowStrainIntegrityTest.jpeg" usemap="#ExtProcedures_xsd_Element_diggs_LowStrainIntegrityTest" /><map name="ExtProcedures_xsd_Element_diggs_LowStrainIntegrityTest" id="ExtProcedures_xsd_Element_diggs_LowStrainIntegrityTest"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="325,358,406,382" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="488,499,603,523" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="488,589,656,613" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="488,666,590,690" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="488,756,571,780" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="385,458,601,484" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="300,283,561,305" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="286,243,567,265" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="297,990,378,1014" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="354,1074,469,1098" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="354,1164,456,1188" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="272,203,584,225" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="361,1291,444,1315" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="361,1381,514,1405" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="361,1458,458,1482" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="361,1548,541,1572" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="361,1625,467,1649" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="361,1715,413,1739" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="361,1805,430,1829" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="258,163,546,185" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.tmp#AbstractProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" coords="244,123,547,145" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureMethod" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" coords="333,1998,479,2022" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureEquipment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" coords="333,2075,496,2099" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testingEnvironment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" coords="333,2152,469,2176" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_otherTestProperty" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" coords="333,2229,462,2253" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" coords="230,83,556,105" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType_testEvent" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" coords="319,2347,399,2371" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" coords="216,43,572,65" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_testMethod" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_testMethod" coords="305,2474,396,2498" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_waveSpeed" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_waveSpeed" coords="305,2564,394,2588" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_referenceLength" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_referenceLength" coords="305,2654,424,2678" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_referenceLengthBasis" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_referenceLengthBasis" coords="305,2744,451,2768" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_lengthToDiameterRatio" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_lengthToDiameterRatio" coords="305,2821,459,2845" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_averagedImpactCount" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_averagedImpactCount" coords="305,2898,454,2922" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_amplificationFunction" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationFunction" coords="305,2975,452,2999" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_amplificationFactor" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationFactor" coords="305,3052,439,3076" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_amplificationStart" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationStart" coords="305,3129,430,3153" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_amplificationEnd" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationEnd" coords="305,3206,425,3230" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_recordReference" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_recordReference" coords="305,3283,425,3307" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_impactNormalized" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_impactNormalized" coords="305,3360,433,3384" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_filterType" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_filterType" coords="305,3437,387,3461" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_filterCutoff" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_filterCutoff" coords="305,3527,395,3551" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_sharpeningApplied" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sharpeningApplied" coords="305,3617,438,3641" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_samplingRate" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_samplingRate" coords="305,3694,408,3718" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_sampleResolution" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sampleResolution" coords="305,3758,431,3782" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_recordLength" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_recordLength" coords="305,3822,409,3846" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_headPreparation" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_headPreparation" coords="305,3886,424,3910" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_sensorMounting" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorMounting" coords="305,3963,424,3987" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_sensorPositionCount" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorPositionCount" coords="305,4040,449,4064" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_sensorOffset" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorOffset" coords="305,4117,406,4141" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_impactOffset" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_impactOffset" coords="305,4207,405,4231" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_frequencyResponse" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_frequencyResponse" coords="305,4284,442,4308" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType_evaluationSoftware" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_evaluationSoftware" coords="305,4361,437,4385" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.tmp#LowStrainIntegrityTestType" href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType" coords="202,3,432,25" /><area alt="AbstractTypes_xsd_Element_diggs_AbstractInsituTestProcedure.tmp#AbstractInsituTestProcedure" href="AbstractTypes_xsd_Element_diggs_AbstractInsituTestProcedure.html#AbstractInsituTestProcedure" coords="213,4483,398,4507" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LowStrainIntegrityTestType')">diggs:LowStrainIntegrityTestType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProcedureType')">diggs:AbstractProcedureType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractTestProcedureType')">diggs:AbstractTestProcedureType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedureType')">diggs:AbstractInsituTestProcedureType</a></b><ul class="internal">
+                                                                        <li class="internal"><b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LowStrainIntegrityTestType')">diggs:LowStrainIntegrityTestType</a></b></li>
+                                                                     </ul>
+                                                                  </li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_LowStrainIntegrityTest" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">abstract</td>
+                                    <td><b>false</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Substitution Group Affiliation</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="AbstractTypes_xsd_Element_diggs_AbstractInsituTestProcedure.html#AbstractInsituTestProcedure" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedure')">diggs:AbstractInsituTestProcedure</a></b></li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_LowStrainIntegrityTest" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod*')">diggs:testProcedureMethod*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment*')">diggs:testProcedureEquipment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment*')">diggs:testingEnvironment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty*')">diggs:otherTestProperty*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testEvent*')">diggs:testEvent*</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_testMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testMethod{0,1}')">diggs:testMethod{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_waveSpeed" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:waveSpeed{0,1}')">diggs:waveSpeed{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_referenceLength" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceLength{0,1}')">diggs:referenceLength{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_referenceLengthBasis" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceLengthBasis{0,1}')">diggs:referenceLengthBasis{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_lengthToDiameterRatio" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:lengthToDiameterRatio{0,1}')">diggs:lengthToDiameterRatio{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_averagedImpactCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:averagedImpactCount{0,1}')">diggs:averagedImpactCount{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationFunction" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationFunction{0,1}')">diggs:amplificationFunction{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationFactor" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationFactor{0,1}')">diggs:amplificationFactor{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationStart" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationStart{0,1}')">diggs:amplificationStart{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationEnd" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationEnd{0,1}')">diggs:amplificationEnd{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_recordReference" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:recordReference{0,1}')">diggs:recordReference{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_impactNormalized" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:impactNormalized{0,1}')">diggs:impactNormalized{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_filterType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:filterType{0,1}')">diggs:filterType{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_filterCutoff" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:filterCutoff{0,1}')">diggs:filterCutoff{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sharpeningApplied" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sharpeningApplied{0,1}')">diggs:sharpeningApplied{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_samplingRate" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingRate{0,1}')">diggs:samplingRate{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sampleResolution" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sampleResolution{0,1}')">diggs:sampleResolution{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_recordLength" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:recordLength{0,1}')">diggs:recordLength{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_headPreparation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:headPreparation{0,1}')">diggs:headPreparation{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorMounting" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sensorMounting{0,1}')">diggs:sensorMounting{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorPositionCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sensorPositionCount{0,1}')">diggs:sensorPositionCount{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorOffset" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sensorOffset*')">diggs:sensorOffset*</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_impactOffset" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:impactOffset{0,1}')">diggs:impactOffset{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_frequencyResponse" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:frequencyResponse*')">diggs:frequencyResponse*</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_evaluationSoftware" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evaluationSoftware{0,1}')">diggs:evaluationSoftware{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationEnd" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationEnd')">diggs:amplificationEnd</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationFactor" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationFactor')">diggs:amplificationFactor</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationFunction" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationFunction')">diggs:amplificationFunction</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_amplificationStart" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:amplificationStart')">diggs:amplificationStart</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_averagedImpactCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:averagedImpactCount')">diggs:averagedImpactCount</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_evaluationSoftware" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:evaluationSoftware')">diggs:evaluationSoftware</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_filterCutoff" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:filterCutoff')">diggs:filterCutoff</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_filterType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:filterType')">diggs:filterType</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_frequencyResponse" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:frequencyResponse')">diggs:frequencyResponse</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_headPreparation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:headPreparation')">diggs:headPreparation</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_impactNormalized" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:impactNormalized')">diggs:impactNormalized</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_impactOffset" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:impactOffset')">diggs:impactOffset</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_lengthToDiameterRatio" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:lengthToDiameterRatio')">diggs:lengthToDiameterRatio</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty')">diggs:otherTestProperty</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_recordLength" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:recordLength')">diggs:recordLength</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_recordReference" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:recordReference')">diggs:recordReference</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_referenceLength" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceLength')">diggs:referenceLength</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_referenceLengthBasis" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceLengthBasis')">diggs:referenceLengthBasis</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sampleResolution" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sampleResolution')">diggs:sampleResolution</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_samplingRate" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingRate')">diggs:samplingRate</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorMounting" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sensorMounting')">diggs:sensorMounting</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorOffset" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sensorOffset')">diggs:sensorOffset</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sensorPositionCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sensorPositionCount')">diggs:sensorPositionCount</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_sharpeningApplied" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sharpeningApplied')">diggs:sharpeningApplied</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testEvent')">diggs:testEvent</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_testMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testMethod')">diggs:testMethod</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment')">diggs:testProcedureEquipment</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod')">diggs:testProcedureMethod</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment')">diggs:testingEnvironment</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LowStrainIntegrityTestType.html#LowStrainIntegrityTestType_waveSpeed" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:waveSpeed')">diggs:waveSpeed</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_LowStrainIntegrityTest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:LowStrainIntegrityTest</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:description</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:description&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:identifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:identifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:name</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/gml:name&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:internalIdentifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:internalIdentifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:status</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:status&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:implementationStatus</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:implementationStatus&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:associatedFile</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:associatedFile&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:role</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:role&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:remark</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:remark&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testProcedureMethod</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testProcedureMethod&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testProcedureEquipment</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testProcedureEquipment&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testingEnvironment</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testingEnvironment&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:otherTestProperty</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:otherTestProperty&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testEvent</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:testEvent&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:testMethod</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:testMethod&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:waveSpeed</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:waveSpeed&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:referenceLength</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:referenceLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:referenceLengthBasis</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:referenceLengthBasis&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:lengthToDiameterRatio</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:lengthToDiameterRatio&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:averagedImpactCount</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:averagedImpactCount&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:amplificationFunction</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:amplificationFunction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:amplificationFactor</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:amplificationFactor&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:amplificationStart</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:amplificationStart&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:amplificationEnd</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:amplificationEnd&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:recordReference</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:recordReference&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:impactNormalized</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:impactNormalized&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:filterType</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:filterType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:filterCutoff</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:filterCutoff&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:sharpeningApplied</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:sharpeningApplied&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:samplingRate</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:samplingRate&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:sampleResolution</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:sampleResolution&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:recordLength</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:recordLength&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:headPreparation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:headPreparation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:sensorMounting</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:sensorMounting&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:sensorPositionCount</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:sensorPositionCount&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:sensorOffset</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:sensorOffset&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:impactOffset</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:impactOffset&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:frequencyResponse</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:frequencyResponse&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:evaluationSoftware</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:evaluationSoftware&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:LowStrainIntegrityTest&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_LowStrainIntegrityTest" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_LowStrainIntegrityTest" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_LowStrainIntegrityTest');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_LowStrainIntegrityTest" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"LowStrainIntegrityTest"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LowStrainIntegrityTestType"</span><span class="tAN"> abstract=</span><span class="tAV">"false"</span><span class="tAN"> substitutionGroup=</span><span class="tAV">"diggs:AbstractInsituTestProcedure"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A low-strain impact integrity test on a completed deep foundation element, per ASTM D5882 or the French standards NF P94-160-2 (reflection/sonic-echo method) and NF P94-160-4 (impedance method). It is typically applied to a population of production elements (commonly around 5 % in US DOT practice) rather than to selected elements. It substitutes diggs:AbstractInsituTestProcedure directly, not diggs:AbstractLoadTestProcedure, because no sustained load is applied and there is no reaction system or load-increment schedule. ASTM D5882 names two methods in one document, the Pulse Echo Method (time domain, "sonic echo") and the Transient Response Method (frequency domain, "impedance" or "impulse response"); French practice splits them into two standards. Cite the governing standard through the inherited testProcedureMethod; testMethod records which physical method was used. ASTM D5882 was withdrawn by ASTM in 2025 with no replacement named (a reinstatement effort, ASTM work item WK93548, was in progress); the specification registry marks it withdrawn, and instances that cite it keep resolving. EN 12699 requires integrity testing of displacement piles but defines no test method, so cite it through diggs:RIProgramBasis/governingStandard rather than testProcedureMethod. The impact hammer and the motion transducer are equipment objects carried through the inherited testProcedureEquipment, classified with equipmentClass.xml#low_strain_impact_hammer and equipmentClass.xml#accelerometer. headPreparation, sensorMounting, sensorPositionCount, sensorOffset and impactOffset state how the head was prepared and where the transducer and impact were placed, and lengthToDiameterRatio the slenderness of the element. State the amplification applied to the record, because the height of a reflection can be read only against it: amplificationFunction gives its shape, amplificationFactor the equipment setting, and amplificationStart and amplificationEnd the depths over which it rises. The other settings a report states are filterType, filterCutoff, sharpeningApplied, impactNormalized, recordReference, samplingRate, sampleResolution and recordLength; processing specific to one equipment goes in otherTestProperty. evaluationSoftware names the software that evaluated the record, and the inherited role states who evaluated it. The record is the result: the diggs:Test on the element tested has as its outcome the evaluated record as a depth-indexed result, whose location is a MultiPoint of the record depths along the element and whose ResultSet holds one column per curve sampled at those depths: the amplified, normalized velocity (properties.xml#normalized_velocity) and, where reported, the force, the time after impact (properties.xml#elapsed_time) and a reconstructed relative impedance. Depth and time are related by waveSpeed (depth = waveSpeed x time / 2), so a record reported against time is stated at the depths that waveSpeed gives, with the time as a column. One test with one set of procedure values is one Test, however many reflections it shows. Values picked from the record, such as the toe depth, the depth of a reflection above it or its relative amplitude, go in otherMeasurementProperty or in a column of the result (on every row, or only on the row at the depth where picked); the conclusion the tester draws from the whole record is measurementSummary. A frequency-domain record has no depth or time domain: the mobility of a transient response test (velocity over force against frequency) goes in frequencyResponse, a table whose columns its parameters declare, and values read from it, such as the characteristic mobility or the dynamic stiffness, go in otherMeasurementProperty.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:logicalOperator</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_CompositeAcceptanceCriterionType_logicalOperator', 
+				'properties_CompositeAcceptanceCriterionType_criterionRef');
+var facetsBoxes= new Array('facets_CompositeAcceptanceCriterionType_logicalOperator');
+var usedByBoxes= new Array('usedBy_CompositeAcceptanceCriterionType');
+var sourceBoxes= new Array('source_CompositeAcceptanceCriterionType_logicalOperator', 
+				'source_CompositeAcceptanceCriterionType_criterionRef', 
+				'source_CompositeAcceptanceCriterionType');
+var diagramBoxes= new Array('diagram_CompositeAcceptanceCriterionType_logicalOperator', 
+				'diagram_CompositeAcceptanceCriterionType_criterionRef', 
+				'diagram_CompositeAcceptanceCriterionType');
+var annotationBoxes= new Array('annotations_CompositeAcceptanceCriterionType_logicalOperator', 
+				'annotations_CompositeAcceptanceCriterionType_criterionRef');
+var attributesBoxes= new Array('attributes_CompositeAcceptanceCriterionType_criterionRef', 
+				'attributes_CompositeAcceptanceCriterionType');
+var modelBoxes= new Array('model_CompositeAcceptanceCriterionType_criterionRef', 
+				'model_CompositeAcceptanceCriterionType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="CompositeAcceptanceCriterionType_logicalOperator"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeAcceptanceCriterionType')">diggs:CompositeAcceptanceCriterionType</a></b> / diggs:logicalOperator</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_CompositeAcceptanceCriterionType_logicalOperator" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_CompositeAcceptanceCriterionType_logicalOperator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_CompositeAcceptanceCriterionType_logicalOperator" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">How the member criteria combine. One operator applies across all</span><span class="tI">
+</span><span class="tT">members; write a mixed expression such as "A and (B or C)" as nested</span><span class="tI">
+</span><span class="tT">composites, the inner one declared first and cited by the outer</span><span class="tI">
+</span><span class="tT">through criterionRef. There is no "not": negate a comparison by</span><span class="tI">
+</span><span class="tT">using the complementary operator on the member criterion. Values</span><span class="tI">
+</span><span class="tT">come from the enumerated list.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_CompositeAcceptanceCriterionType_logicalOperator" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_CompositeAcceptanceCriterionType_logicalOperator');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_CompositeAcceptanceCriterionType_logicalOperator" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_logicalOperator.jpeg" usemap="#Core_xsd_Element_diggs_logicalOperator" /><map name="Core_xsd_Element_diggs_logicalOperator" id="Core_xsd_Element_diggs_logicalOperator"><area alt="Core_xsd_Simple_Type_diggs_LogicalOperatorEnumType.tmp#LogicalOperatorEnumType" href="Core_xsd_Simple_Type_diggs_LogicalOperatorEnumType.html#LogicalOperatorEnumType" coords="163,0,394,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Simple_Type_diggs_LogicalOperatorEnumType.html#LogicalOperatorEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LogicalOperatorEnumType')">diggs:LogicalOperatorEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_CompositeAcceptanceCriterionType_logicalOperator" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_CompositeAcceptanceCriterionType_logicalOperator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_CompositeAcceptanceCriterionType_logicalOperator" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_CompositeAcceptanceCriterionType_logicalOperator" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('facets_CompositeAcceptanceCriterionType_logicalOperator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_CompositeAcceptanceCriterionType_logicalOperator" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>and</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Every member criterion must be satisfied, for example a drilling refusal</span><span class="tI">
+</span><span class="tT">rule such as penetration rate below X and torque above Y, which is met only</span><span class="tI">
+</span><span class="tT">when both hold together.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>or</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">At least one member criterion must be satisfied, for example a termination</span><span class="tI">
+</span><span class="tT">rule that stops at design depth or on reaching a specified resistance,</span><span class="tI">
+</span><span class="tT">whichever occurs first.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_CompositeAcceptanceCriterionType_logicalOperator" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_CompositeAcceptanceCriterionType_logicalOperator');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_CompositeAcceptanceCriterionType_logicalOperator" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"logicalOperator"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LogicalOperatorEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How the member criteria combine. One operator applies across all members; write a mixed expression such as "A and (B or C)" as nested composites, the inner one declared first and cited by the outer through criterionRef. There is no "not": negate a comparison by using the complementary operator on the member criterion. Values come from the enumerated list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="CompositeAcceptanceCriterionType_criterionRef"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeAcceptanceCriterionType')">diggs:CompositeAcceptanceCriterionType</a></b> / diggs:criterionRef</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_CompositeAcceptanceCriterionType_criterionRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_CompositeAcceptanceCriterionType_criterionRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_CompositeAcceptanceCriterionType_criterionRef" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A member criterion: a diggs:PerformanceCriterion, a</span><span class="tI">
+</span><span class="tT">diggs:DesignConformanceCriterion or, where the expression nests,</span><span class="tI">
+</span><span class="tT">another diggs:CompositeAcceptanceCriterion. A composite has at least</span><span class="tI">
+</span><span class="tT">two members. A member is cited rather than contained, because a</span><span class="tI">
+</span><span class="tT">criterion is cited from elsewhere (by a diggs:DesignVerification or</span><span class="tI">
+</span><span class="tT">a report) and may take part in more than one composite; declare it</span><span class="tI">
+</span><span class="tT">before the composite that cites it. The target is a criterion, not</span><span class="tI">
+</span><span class="tT">any other program specification, which the validation chain checks.</span><span class="tI">
+</span><span class="tT">Given by reference only.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_CompositeAcceptanceCriterionType_criterionRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_CompositeAcceptanceCriterionType_criterionRef');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_CompositeAcceptanceCriterionType_criterionRef" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_criterionRef.jpeg" usemap="#Core_xsd_Element_diggs_criterionRef" /><map name="Core_xsd_Element_diggs_criterionRef" id="Core_xsd_Element_diggs_criterionRef"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="187,121,405,147" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="187,208,410,234" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.tmp#ReferenceType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" coords="159,43,404,65" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType_identifierRef" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" coords="170,442,283,466" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" coords="145,3,348,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:ReferenceType')">gml:ReferenceType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_CompositeAcceptanceCriterionType_criterionRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_CompositeAcceptanceCriterionType_criterionRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_CompositeAcceptanceCriterionType_criterionRef" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>2</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_CompositeAcceptanceCriterionType_criterionRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_CompositeAcceptanceCriterionType_criterionRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_CompositeAcceptanceCriterionType_criterionRef" style="display:block"></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_CompositeAcceptanceCriterionType_criterionRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_CompositeAcceptanceCriterionType_criterionRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_CompositeAcceptanceCriterionType_criterionRef" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component identifierRef')">identifierRef</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_IdentifierReferenceType.html#IdentifierReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IdentifierReferenceType')">diggs:IdentifierReferenceType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The gml:identifier value of the referenced feature, as a fully qualified</span><span class="tI">
+</span><span class="tT">value. It gives an alternative to the gml:id in xlink:href for finding</span><span class="tI">
+</span><span class="tT">the referenced feature, mainly to reference a feature by a globally</span><span class="tI">
+</span><span class="tT">unique identifier and where naming conflicts occur with gml:id when</span><span class="tI">
+</span><span class="tT">accessing data in external files.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_CompositeAcceptanceCriterionType_criterionRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_CompositeAcceptanceCriterionType_criterionRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_CompositeAcceptanceCriterionType_criterionRef" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"2"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"criterionRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:AbstractProgramSpecification</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A member criterion: a diggs:PerformanceCriterion, a diggs:DesignConformanceCriterion or, where the expression nests, another diggs:CompositeAcceptanceCriterion. A composite has at least two members. A member is cited rather than contained, because a criterion is cited from elsewhere (by a diggs:DesignVerification or a report) and may take part in more than one composite; declare it before the composite that cites it. The target is a criterion, not any other program specification, which the validation chain checks. Given by reference only.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="CompositeAcceptanceCriterionType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:CompositeAcceptanceCriterionType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_CompositeAcceptanceCriterionType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_CompositeAcceptanceCriterionType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_CompositeAcceptanceCriterionType" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.jpeg" usemap="#Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType" /><map name="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType" id="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="375,278,456,302" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="538,419,653,443" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="538,509,706,533" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="538,586,640,610" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="538,676,621,700" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="435,378,651,404" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="350,203,611,225" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="336,163,617,185" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="347,910,428,934" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="404,994,519,1018" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="404,1084,506,1108" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="322,123,634,145" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="411,1211,494,1235" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="411,1301,564,1325" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="411,1378,508,1402" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="411,1468,591,1492" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="411,1545,517,1569" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="411,1635,463,1659" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="411,1725,480,1749" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="308,83,596,105" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramModuleType.tmp#AbstractProgramModuleType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramModuleType.html#AbstractProgramModuleType" coords="294,43,627,65" /><area alt="Common_xsd_Element_diggs_basedOnRef.tmp#basedOnRef" href="Common_xsd_Element_diggs_basedOnRef.html#basedOnRef" coords="362,1918,491,1942" /><area alt="Common_xsd_Element_diggs_basisRef.tmp#basisRef" href="Common_xsd_Element_diggs_basisRef.html#basisRef" coords="362,1995,471,2019" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.tmp#AbstractProgramSpecificationType_appliesToZone" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType_appliesToZone" coords="362,2085,472,2109" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.tmp#AbstractProgramSpecificationType_appliesToFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType_appliesToFeatureType" coords="362,2162,511,2186" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.tmp#AbstractProgramSpecificationType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType" coords="280,3,642,25" /><area alt="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.tmp#CompositeAcceptanceCriterionType_logicalOperator" href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType_logicalOperator" coords="369,2276,484,2300" /><area alt="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.tmp#CompositeAcceptanceCriterionType_criterionRef" href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType_criterionRef" coords="369,2366,463,2390" /><area alt="Common_xsd_Element_diggs_partOfSpecificationRef.tmp#partOfSpecificationRef" href="Common_xsd_Element_diggs_partOfSpecificationRef.html#partOfSpecificationRef" coords="369,2456,553,2480" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramSpecificationType')">diggs:AbstractProgramSpecificationType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramModuleType.html#AbstractProgramModuleType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramModuleType')">diggs:AbstractProgramModuleType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramSpecificationType')">diggs:AbstractProgramSpecificationType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeAcceptanceCriterionType')">diggs:CompositeAcceptanceCriterionType</a></b></li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_CompositeAcceptanceCriterionType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_CompositeAcceptanceCriterionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_CompositeAcceptanceCriterionType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Core_xsd_Element_diggs_CompositeAcceptanceCriterion.html#CompositeAcceptanceCriterion" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeAcceptanceCriterion')">diggs:CompositeAcceptanceCriterion</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_CompositeAcceptanceCriterionType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_CompositeAcceptanceCriterionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_CompositeAcceptanceCriterionType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Common_xsd_Element_diggs_basedOnRef.html#basedOnRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:basedOnRef{0,1}')">diggs:basedOnRef{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_basisRef.html#basisRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:basisRef{0,1}')">diggs:basisRef{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType_appliesToZone" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:appliesToZone{0,1}')">diggs:appliesToZone{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType_appliesToFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:appliesToFeatureType{0,1}')">diggs:appliesToFeatureType{0,1}</a></b> , <b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType_logicalOperator" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:logicalOperator')">diggs:logicalOperator</a></b> , <b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType_criterionRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:criterionRef{2,unbounded}')">diggs:criterionRef{2,unbounded}</a></b> , <b><a href="Common_xsd_Element_diggs_partOfSpecificationRef.html#partOfSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:partOfSpecificationRef{0,1}')">diggs:partOfSpecificationRef{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType_appliesToFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:appliesToFeatureType')">diggs:appliesToFeatureType</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramSpecificationType.html#AbstractProgramSpecificationType_appliesToZone" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:appliesToZone')">diggs:appliesToZone</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="Common_xsd_Element_diggs_basedOnRef.html#basedOnRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:basedOnRef')">diggs:basedOnRef</a></b>, <b><a href="Common_xsd_Element_diggs_basisRef.html#basisRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:basisRef')">diggs:basisRef</a></b>, <b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType_criterionRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:criterionRef')">diggs:criterionRef</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Core_xsd_Complex_Type_diggs_CompositeAcceptanceCriterionType.html#CompositeAcceptanceCriterionType_logicalOperator" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:logicalOperator')">diggs:logicalOperator</a></b>, <b><a href="Common_xsd_Element_diggs_partOfSpecificationRef.html#partOfSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:partOfSpecificationRef')">diggs:partOfSpecificationRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_CompositeAcceptanceCriterionType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_CompositeAcceptanceCriterionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_CompositeAcceptanceCriterionType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_CompositeAcceptanceCriterionType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_CompositeAcceptanceCriterionType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_CompositeAcceptanceCriterionType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"CompositeAcceptanceCriterionType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractProgramSpecificationType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"logicalOperator"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LogicalOperatorEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How the member criteria combine. One operator applies across all members; write a mixed expression such as "A and (B or C)" as nested composites, the inner one declared first and cited by the outer through criterionRef. There is no "not": negate a comparison by using the complementary operator on the member criterion. Values come from the enumerated list.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"2"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"criterionRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:AbstractProgramSpecification</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A member criterion: a diggs:PerformanceCriterion, a diggs:DesignConformanceCriterion or, where the expression nests, another diggs:CompositeAcceptanceCriterion. A composite has at least two members. A member is cited rather than contained, because a criterion is cited from elsewhere (by a diggs:DesignVerification or a report) and may take part in more than one composite; declare it before the composite that cites it. The target is a criterion, not any other program specification, which the validation chain checks. Given by reference only.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:partOfSpecificationRef"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The named program specification this composite elaborates, as for the members of diggs:AbstractAcceptanceCriterionType.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

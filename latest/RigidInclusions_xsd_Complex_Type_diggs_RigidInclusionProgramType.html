@@ -1,0 +1,921 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:design</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_RigidInclusionProgramType_design', 
+				'properties_RigidInclusionProgramType_specification', 
+				'properties_RigidInclusionProgramType_basis');
+var usedByBoxes= new Array('usedBy_RigidInclusionProgramType');
+var sourceBoxes= new Array('source_RigidInclusionProgramType_design', 
+				'source_RigidInclusionProgramType_specification', 
+				'source_RigidInclusionProgramType_basis', 
+				'source_RigidInclusionProgramType');
+var instanceBoxes= new Array('instance_RigidInclusionProgramType_design', 
+				'instance_RigidInclusionProgramType_specification', 
+				'instance_RigidInclusionProgramType_basis');
+var diagramBoxes= new Array('diagram_RigidInclusionProgramType_design', 
+				'diagram_RigidInclusionProgramType_specification', 
+				'diagram_RigidInclusionProgramType_basis', 
+				'diagram_RigidInclusionProgramType');
+var annotationBoxes= new Array('annotations_RigidInclusionProgramType_design', 
+				'annotations_RigidInclusionProgramType_specification', 
+				'annotations_RigidInclusionProgramType_basis');
+var attributesBoxes= new Array('attributes_RigidInclusionProgramType');
+var modelBoxes= new Array('model_RigidInclusionProgramType_design', 
+				'model_RigidInclusionProgramType_specification', 
+				'model_RigidInclusionProgramType_basis', 
+				'model_RigidInclusionProgramType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="RigidInclusionProgramType_design"></a><div class="componentTitle">Element <span class="qname"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RigidInclusionProgramType')">diggs:RigidInclusionProgramType</a></b> / diggs:design</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_RigidInclusionProgramType_design" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_RigidInclusionProgramType_design');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_RigidInclusionProgramType_design" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A design this program issues: what is intended to be built. It holds</span><span class="tI">
+</span><span class="tT">any member of the diggs:AbstractProgramDesign substitution group, so</span><span class="tI">
+</span><span class="tT">a program may carry a diggs:DesignRITreatedArea, a</span><span class="tI">
+</span><span class="tT">diggs:DesignRIColumn and a diggs:DesignGroutMix alongside one</span><span class="tI">
+</span><span class="tT">another. Repeat for each design.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RigidInclusionProgramType_design" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RigidInclusionProgramType_design');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RigidInclusionProgramType_design" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_design.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_design" /><map name="RigidInclusions_xsd_Element_diggs_design" id="RigidInclusions_xsd_Element_diggs_design"><area alt="AbstractTypes_xsd_Element_diggs_AbstractProgramDesign.tmp#AbstractProgramDesign" href="AbstractTypes_xsd_Element_diggs_AbstractProgramDesign.html#AbstractProgramDesign" coords="200,44,393,68" /><area alt="Common_xsd_Complex_Type_diggs_RIProgramDesignPropertyType.tmp#RIProgramDesignPropertyType" href="Common_xsd_Complex_Type_diggs_RIProgramDesignPropertyType.html#RIProgramDesignPropertyType" coords="118,3,367,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_RIProgramDesignPropertyType.html#RIProgramDesignPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RIProgramDesignPropertyType')">diggs:RIProgramDesignPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_RigidInclusionProgramType_design" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_RigidInclusionProgramType_design');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_RigidInclusionProgramType_design" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RigidInclusionProgramType_design" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_RigidInclusionProgramType_design');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RigidInclusionProgramType_design" style="display:block"><b><a href="AbstractTypes_xsd_Element_diggs_AbstractProgramDesign.html#AbstractProgramDesign" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramDesign')">diggs:AbstractProgramDesign</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Element_diggs_AbstractProgramDesign.html#AbstractProgramDesign" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramDesign')">diggs:AbstractProgramDesign</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_RigidInclusionProgramType_design" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_RigidInclusionProgramType_design');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_RigidInclusionProgramType_design" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:design</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractProgramDesign</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractProgramDesign&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:design&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RigidInclusionProgramType_design" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RigidInclusionProgramType_design');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RigidInclusionProgramType_design" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"design"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RIProgramDesignPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A design this program issues: what is intended to be built. It holds any member of the diggs:AbstractProgramDesign substitution group, so a program may carry a diggs:DesignRITreatedArea, a diggs:DesignRIColumn and a diggs:DesignGroutMix alongside one another. Repeat for each design.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RigidInclusionProgramType_specification"></a><div class="componentTitle">Element <span class="qname"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RigidInclusionProgramType')">diggs:RigidInclusionProgramType</a></b> / diggs:specification</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_RigidInclusionProgramType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_RigidInclusionProgramType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_RigidInclusionProgramType_specification" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A specification this program must satisfy: the constraints and</span><span class="tI">
+</span><span class="tT">tolerances the work is judged against. It holds any member of the</span><span class="tI">
+</span><span class="tT">diggs:AbstractProgramSpecification substitution group. Repeat for</span><span class="tI">
+</span><span class="tT">each specification.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RigidInclusionProgramType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RigidInclusionProgramType_specification');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RigidInclusionProgramType_specification" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_specification.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_specification" /><map name="RigidInclusions_xsd_Element_diggs_specification" id="RigidInclusions_xsd_Element_diggs_specification"><area alt="AbstractTypes_xsd_Element_diggs_AbstractProgramSpecification.tmp#AbstractProgramSpecification" href="AbstractTypes_xsd_Element_diggs_AbstractProgramSpecification.html#AbstractProgramSpecification" coords="232,44,456,68" /><area alt="Common_xsd_Complex_Type_diggs_RIProgramSpecificationPropertyType.tmp#RIProgramSpecificationPropertyType" href="Common_xsd_Complex_Type_diggs_RIProgramSpecificationPropertyType.html#RIProgramSpecificationPropertyType" coords="150,3,430,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_RIProgramSpecificationPropertyType.html#RIProgramSpecificationPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RIProgramSpecificationPropertyType')">diggs:RIProgramSpecificationPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_RigidInclusionProgramType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_RigidInclusionProgramType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_RigidInclusionProgramType_specification" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RigidInclusionProgramType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_RigidInclusionProgramType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RigidInclusionProgramType_specification" style="display:block"><b><a href="AbstractTypes_xsd_Element_diggs_AbstractProgramSpecification.html#AbstractProgramSpecification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramSpecification')">diggs:AbstractProgramSpecification</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Element_diggs_AbstractProgramSpecification.html#AbstractProgramSpecification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramSpecification')">diggs:AbstractProgramSpecification</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_RigidInclusionProgramType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_RigidInclusionProgramType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_RigidInclusionProgramType_specification" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:specification</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractProgramSpecification</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractProgramSpecification&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:specification&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RigidInclusionProgramType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RigidInclusionProgramType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RigidInclusionProgramType_specification" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"specification"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RIProgramSpecificationPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A specification this program must satisfy: the constraints and tolerances the work is judged against. It holds any member of the diggs:AbstractProgramSpecification substitution group. Repeat for each specification.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RigidInclusionProgramType_basis"></a><div class="componentTitle">Element <span class="qname"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RigidInclusionProgramType')">diggs:RigidInclusionProgramType</a></b> / diggs:basis</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_RigidInclusionProgramType_basis" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_RigidInclusionProgramType_basis');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_RigidInclusionProgramType_basis" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A basis the designs of the program were prepared from: the ground</span><span class="tI">
+</span><span class="tT">model, requirement set or other evidence relied on. It holds any</span><span class="tI">
+</span><span class="tT">member of the diggs:AbstractProgramBasis substitution group. Repeat</span><span class="tI">
+</span><span class="tT">for each basis.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RigidInclusionProgramType_basis" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RigidInclusionProgramType_basis');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RigidInclusionProgramType_basis" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_basis.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_basis" /><map name="RigidInclusions_xsd_Element_diggs_basis" id="RigidInclusions_xsd_Element_diggs_basis"><area alt="AbstractTypes_xsd_Element_diggs_AbstractProgramBasis.tmp#AbstractProgramBasis" href="AbstractTypes_xsd_Element_diggs_AbstractProgramBasis.html#AbstractProgramBasis" coords="192,44,375,68" /><area alt="Common_xsd_Complex_Type_diggs_ProgramBasisPropertyType.tmp#ProgramBasisPropertyType" href="Common_xsd_Complex_Type_diggs_ProgramBasisPropertyType.html#ProgramBasisPropertyType" coords="110,3,339,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_ProgramBasisPropertyType.html#ProgramBasisPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ProgramBasisPropertyType')">diggs:ProgramBasisPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_RigidInclusionProgramType_basis" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_RigidInclusionProgramType_basis');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_RigidInclusionProgramType_basis" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RigidInclusionProgramType_basis" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_RigidInclusionProgramType_basis');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RigidInclusionProgramType_basis" style="display:block"><b><a href="AbstractTypes_xsd_Element_diggs_AbstractProgramBasis.html#AbstractProgramBasis" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramBasis')">diggs:AbstractProgramBasis</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Element_diggs_AbstractProgramBasis.html#AbstractProgramBasis" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramBasis')">diggs:AbstractProgramBasis</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_RigidInclusionProgramType_basis" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_RigidInclusionProgramType_basis');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_RigidInclusionProgramType_basis" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:basis</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractProgramBasis</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractProgramBasis&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:basis&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RigidInclusionProgramType_basis" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RigidInclusionProgramType_basis');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RigidInclusionProgramType_basis" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"basis"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ProgramBasisPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A basis the designs of the program were prepared from: the ground model, requirement set or other evidence relied on. It holds any member of the diggs:AbstractProgramBasis substitution group. Repeat for each basis.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RigidInclusionProgramType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:RigidInclusionProgramType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RigidInclusionProgramType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RigidInclusionProgramType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RigidInclusionProgramType" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.jpeg" usemap="#RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType" /><map name="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType" id="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="315,238,396,262" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="478,379,593,403" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="478,469,646,493" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="478,546,580,570" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="478,636,561,660" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="375,338,591,364" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="290,163,551,185" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="276,123,557,145" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="287,870,368,894" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="344,954,459,978" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="344,1044,446,1068" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="262,83,574,105" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="351,1171,434,1195" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="351,1261,504,1285" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="351,1338,448,1362" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="351,1428,531,1452" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="351,1505,457,1529" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="351,1595,403,1619" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="351,1685,420,1709" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="248,43,536,65" /><area alt="Common_xsd_Element_diggs_projectRef.tmp#projectRef" href="Common_xsd_Element_diggs_projectRef.html#projectRef" coords="337,1803,456,1827" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramType.tmp#AbstractProgramType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramType.html#AbstractProgramType" coords="234,3,528,25" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.tmp#RigidInclusionProgramType_design" href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_design" coords="323,1917,390,1941" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.tmp#RigidInclusionProgramType_specification" href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_specification" coords="323,2007,422,2031" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.tmp#RigidInclusionProgramType_basis" href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_basis" coords="323,2097,382,2121" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramType.html#AbstractProgramType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramType')">diggs:AbstractProgramType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProgramType.html#AbstractProgramType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProgramType')">diggs:AbstractProgramType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RigidInclusionProgramType')">diggs:RigidInclusionProgramType</a></b></li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_RigidInclusionProgramType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_RigidInclusionProgramType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_RigidInclusionProgramType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="RigidInclusions_xsd_Element_diggs_RigidInclusionProgram.html#RigidInclusionProgram" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RigidInclusionProgram')">diggs:RigidInclusionProgram</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RigidInclusionProgramType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_RigidInclusionProgramType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RigidInclusionProgramType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Common_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:projectRef+')">diggs:projectRef+</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_design" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:design*')">diggs:design*</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:specification*')">diggs:specification*</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_basis" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:basis*')">diggs:basis*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_basis" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:basis')">diggs:basis</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_design" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:design')">diggs:design</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Common_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RigidInclusionProgramType.html#RigidInclusionProgramType_specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:specification')">diggs:specification</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_RigidInclusionProgramType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_RigidInclusionProgramType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_RigidInclusionProgramType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RigidInclusionProgramType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RigidInclusionProgramType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RigidInclusionProgramType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"RigidInclusionProgramType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractProgramType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"design"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RIProgramDesignPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A design this program issues: what is intended to be built. It holds any member of the diggs:AbstractProgramDesign substitution group, so a program may carry a diggs:DesignRITreatedArea, a diggs:DesignRIColumn and a diggs:DesignGroutMix alongside one another. Repeat for each design.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"specification"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RIProgramSpecificationPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A specification this program must satisfy: the constraints and tolerances the work is judged against. It holds any member of the diggs:AbstractProgramSpecification substitution group. Repeat for each specification.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"basis"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ProgramBasisPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A basis the designs of the program were prepared from: the ground model, requirement set or other evidence relied on. It holds any member of the diggs:AbstractProgramBasis substitution group. Repeat for each basis.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

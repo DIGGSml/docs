@@ -1,0 +1,1004 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:sequenceRule</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_InstallationSequenceType_sequenceRule', 
+				'properties_InstallationSequenceType_startPoint', 
+				'properties_InstallationSequenceType_gridIndexStep');
+var usedByBoxes= new Array('usedBy_InstallationSequenceType');
+var sourceBoxes= new Array('source_InstallationSequenceType_sequenceRule', 
+				'source_InstallationSequenceType_startPoint', 
+				'source_InstallationSequenceType_gridIndexStep', 
+				'source_InstallationSequenceType');
+var diagramBoxes= new Array('diagram_InstallationSequenceType_sequenceRule', 
+				'diagram_InstallationSequenceType_startPoint', 
+				'diagram_InstallationSequenceType_gridIndexStep', 
+				'diagram_InstallationSequenceType');
+var annotationBoxes= new Array('annotations_InstallationSequenceType_sequenceRule', 
+				'annotations_InstallationSequenceType_startPoint', 
+				'annotations_InstallationSequenceType_gridIndexStep');
+var attributesBoxes= new Array('attributes_InstallationSequenceType_sequenceRule', 
+				'attributes_InstallationSequenceType_startPoint', 
+				'attributes_InstallationSequenceType_gridIndexStep', 
+				'attributes_InstallationSequenceType');
+var modelBoxes= new Array('model_InstallationSequenceType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="InstallationSequenceType_sequenceRule"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceType')">diggs:InstallationSequenceType</a></b> / diggs:sequenceRule</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_InstallationSequenceType_sequenceRule" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_InstallationSequenceType_sequenceRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_InstallationSequenceType_sequenceRule" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The traversal that generates the installation order over the</span><span class="tI">
+</span><span class="tT">grid: Linear or Boustrophedonic, with axisOrder stating which</span><span class="tI">
+</span><span class="tT">axis varies fastest and the direction along each. The rule names</span><span class="tI">
+</span><span class="tT">are restricted to these two; state any other order with</span><span class="tI">
+</span><span class="tT">gridIndexStep.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_InstallationSequenceType_sequenceRule" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_InstallationSequenceType_sequenceRule');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_InstallationSequenceType_sequenceRule" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_sequenceRule_1.jpeg" usemap="#Core_xsd_Element_diggs_sequenceRule_1" /><map name="Core_xsd_Element_diggs_sequenceRule_1" id="Core_xsd_Element_diggs_sequenceRule_1"><area alt="Core_xsd_Simple_Type_diggs_InstallationSequenceRuleEnumType.tmp#InstallationSequenceRuleEnumType" href="Core_xsd_Simple_Type_diggs_InstallationSequenceRuleEnumType.html#InstallationSequenceRuleEnumType" coords="167,40,444,66" /><area alt="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.tmp#InstallationSequenceRuleType_axisOrder" href="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.html#InstallationSequenceRuleType_axisOrder" coords="181,157,283,181" /><area alt="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.tmp#InstallationSequenceRuleType" href="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.html#InstallationSequenceRuleType" coords="156,3,399,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.html#InstallationSequenceRuleType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceRuleType')">diggs:InstallationSequenceRuleType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>string</b><ul class="internal">
+                                    <li class="internal"><b><a href="Core_xsd_Simple_Type_diggs_InstallationSequenceRuleEnumType.html#InstallationSequenceRuleEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceRuleEnumType')">diggs:InstallationSequenceRuleEnumType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.html#InstallationSequenceRuleType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceRuleType')">diggs:InstallationSequenceRuleType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_InstallationSequenceType_sequenceRule" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_InstallationSequenceType_sequenceRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_InstallationSequenceType_sequenceRule" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_InstallationSequenceType_sequenceRule" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_InstallationSequenceType_sequenceRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_InstallationSequenceType_sequenceRule" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceRuleType.html#InstallationSequenceRuleType_axisOrder" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component axisOrder')">axisOrder</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_AxisDirectionList.html#AxisDirectionList" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AxisDirectionList')">gml:AxisDirectionList</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Which axis of the grid's index space varies fastest, and the direction</span><span class="tI">
+</span><span class="tT">along each: a whitespace-separated list of signed, 1-based axis numbers,</span><span class="tI">
+</span><span class="tT">for example "+1 +2" or "-2 +1". The numbers index the grid's own axes,</span><span class="tI">
+</span><span class="tT">in the order its axisLabels and offsetVectors declare them, not the axes</span><span class="tI">
+</span><span class="tT">of the CRS named by srsName. The sign is the direction: + runs from</span><span class="tI">
+</span><span class="tT">gml:low to gml:high, - from high to low. Position in the list is</span><span class="tI">
+</span><span class="tT">precedence: the first axis named varies fastest, the last slowest. Each</span><span class="tI">
+</span><span class="tT">axis of the grid appears exactly once. Where omitted, the axes are taken</span><span class="tI">
+</span><span class="tT">in their declared order, all ascending ("+1 +2" on a two-dimensional</span><span class="tI">
+</span><span class="tT">grid).</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_InstallationSequenceType_sequenceRule" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_InstallationSequenceType_sequenceRule');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_InstallationSequenceType_sequenceRule" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"sequenceRule"</span><span class="tAN"> type=</span><span class="tAV">"diggs:InstallationSequenceRuleType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The traversal that generates the installation order over the grid: Linear or Boustrophedonic, with axisOrder stating which axis varies fastest and the direction along each. The rule names are restricted to these two; state any other order with gridIndexStep.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="InstallationSequenceType_startPoint"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceType')">diggs:InstallationSequenceType</a></b> / diggs:startPoint</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_InstallationSequenceType_startPoint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_InstallationSequenceType_startPoint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_InstallationSequenceType_startPoint" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The grid node the sequence begins at. If omitted, it is the</span><span class="tI">
+</span><span class="tT">gml:low of the grid, its lowest-indexed corner, as</span><span class="tI">
+</span><span class="tT">gml:GridFunction also defaults. Meaningful only with</span><span class="tI">
+</span><span class="tT">sequenceRule.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_InstallationSequenceType_startPoint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_InstallationSequenceType_startPoint');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_InstallationSequenceType_startPoint" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_startPoint.jpeg" usemap="#Core_xsd_Element_diggs_startPoint" /><map name="Core_xsd_Element_diggs_startPoint" id="Core_xsd_Element_diggs_startPoint"><area alt="gml3_2Profile_diggs_xsd_Simple_Type_gml_integerList.tmp#integerList" href="gml3_2Profile_diggs_xsd_Simple_Type_gml_integerList.html#integerList" coords="145,40,280,66" /><area alt="Core_xsd_Complex_Type_diggs_GridIndexType.tmp#GridIndexType_dimension" href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType_dimension" coords="159,144,263,168" /><area alt="Core_xsd_Complex_Type_diggs_GridIndexType.tmp#GridIndexType" href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType" coords="134,3,297,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:GridIndexType')">diggs:GridIndexType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>anySimpleType</b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_integerList.html#integerList" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:integerList')">gml:integerList</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:GridIndexType')">diggs:GridIndexType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_InstallationSequenceType_startPoint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_InstallationSequenceType_startPoint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_InstallationSequenceType_startPoint" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_InstallationSequenceType_startPoint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_InstallationSequenceType_startPoint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_InstallationSequenceType_startPoint" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType_dimension" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component dimension')">dimension</a></b></td>
+                                    <td><b>positiveInteger</b></td>
+                                    <td>2</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The number of values in the index, equal to the dimension of the grid it</span><span class="tI">
+</span><span class="tT">indexes. It is two where omitted; state 3 for an index into a</span><span class="tI">
+</span><span class="tT">three-dimensional grid.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_InstallationSequenceType_startPoint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_InstallationSequenceType_startPoint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_InstallationSequenceType_startPoint" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"startPoint"</span><span class="tAN"> type=</span><span class="tAV">"diggs:GridIndexType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The grid node the sequence begins at. If omitted, it is the gml:low of the grid, its lowest-indexed corner, as gml:GridFunction also defaults. Meaningful only with sequenceRule.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="InstallationSequenceType_gridIndexStep"></a><div class="componentTitle">Element <span class="qname"><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceType')">diggs:InstallationSequenceType</a></b> / diggs:gridIndexStep</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_InstallationSequenceType_gridIndexStep" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_InstallationSequenceType_gridIndexStep');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_InstallationSequenceType_gridIndexStep" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">One explicitly ordered node, the alternative to a generated</span><span class="tI">
+</span><span class="tT">traversal. The content is the grid index of the node, a</span><span class="tI">
+</span><span class="tT">diggs:GridIndexType like diggs:realizesGridIndex and</span><span class="tI">
+</span><span class="tT">plannedGridIndex, and the sequenceNumber attribute states its</span><span class="tI">
+</span><span class="tT">position in the order. The entries account for every node of the</span><span class="tI">
+</span><span class="tT">design's plannedPositions grid, each node once, with the sequence</span><span class="tI">
+</span><span class="tT">numbers running 1 to n; the schema does not enforce either. Use it</span><span class="tI">
+</span><span class="tT">for an order no rule generates, such as (1,1) then (10,2) then</span><span class="tI">
+</span><span class="tT">(1,2).</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_InstallationSequenceType_gridIndexStep" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_InstallationSequenceType_gridIndexStep');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_InstallationSequenceType_gridIndexStep" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Element_diggs_gridIndexStep.jpeg" usemap="#Core_xsd_Element_diggs_gridIndexStep" /><map name="Core_xsd_Element_diggs_gridIndexStep" id="Core_xsd_Element_diggs_gridIndexStep"><area alt="gml3_2Profile_diggs_xsd_Simple_Type_gml_integerList.tmp#integerList" href="gml3_2Profile_diggs_xsd_Simple_Type_gml_integerList.html#integerList" coords="182,80,317,106" /><area alt="Core_xsd_Complex_Type_diggs_GridIndexType.tmp#GridIndexType_dimension" href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType_dimension" coords="196,184,300,208" /><area alt="Core_xsd_Complex_Type_diggs_GridIndexType.tmp#GridIndexType" href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType" coords="171,43,426,65" /><area alt="Core_xsd_Complex_Type_diggs_GridIndexStepType.tmp#GridIndexStepType_sequenceNumber" href="Core_xsd_Complex_Type_diggs_GridIndexStepType.html#GridIndexStepType_sequenceNumber" coords="182,369,324,393" /><area alt="Core_xsd_Complex_Type_diggs_GridIndexStepType.tmp#GridIndexStepType" href="Core_xsd_Complex_Type_diggs_GridIndexStepType.html#GridIndexStepType" coords="157,3,343,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_GridIndexStepType.html#GridIndexStepType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:GridIndexStepType')">diggs:GridIndexStepType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>anySimpleType</b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_integerList.html#integerList" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:integerList')">gml:integerList</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:GridIndexType')">diggs:GridIndexType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_GridIndexStepType.html#GridIndexStepType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:GridIndexStepType')">diggs:GridIndexStepType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_InstallationSequenceType_gridIndexStep" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_InstallationSequenceType_gridIndexStep');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_InstallationSequenceType_gridIndexStep" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_InstallationSequenceType_gridIndexStep" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_InstallationSequenceType_gridIndexStep');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_InstallationSequenceType_gridIndexStep" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Core_xsd_Complex_Type_diggs_GridIndexType.html#GridIndexType_dimension" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component dimension')">dimension</a></b></td>
+                                    <td><b>positiveInteger</b></td>
+                                    <td>2</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The number of values in the index, equal to the dimension of the grid it</span><span class="tI">
+</span><span class="tT">indexes. It is two where omitted; state 3 for an index into a</span><span class="tI">
+</span><span class="tT">three-dimensional grid.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Core_xsd_Complex_Type_diggs_GridIndexStepType.html#GridIndexStepType_sequenceNumber" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component sequenceNumber')">sequenceNumber</a></b></td>
+                                    <td><b>positiveInteger</b></td>
+                                    <td></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The position of this node in the installation order, counting from 1. It</span><span class="tI">
+</span><span class="tT">is stated on the step, not left to document order, so it survives</span><span class="tI">
+</span><span class="tT">reserialization and can be compared with the as-built</span><span class="tI">
+</span><span class="tT">diggs:RIColumnType/installationSequenceNumber. The numbers of one</span><span class="tI">
+</span><span class="tT">sequence run 1 to n, counted within this design; a</span><span class="tI">
+</span><span class="tT">diggs:DesignProductionSequence places the design among the program's</span><span class="tI">
+</span><span class="tT">other work.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_InstallationSequenceType_gridIndexStep" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_InstallationSequenceType_gridIndexStep');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_InstallationSequenceType_gridIndexStep" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"gridIndexStep"</span><span class="tAN"> type=</span><span class="tAV">"diggs:GridIndexStepType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One explicitly ordered node, the alternative to a generated traversal. The content is the grid index of the node, a diggs:GridIndexType like diggs:realizesGridIndex and plannedGridIndex, and the sequenceNumber attribute states its position in the order. The entries account for every node of the design's plannedPositions grid, each node once, with the sequence numbers running 1 to n; the schema does not enforce either. Use it for an order no rule generates, such as (1,1) then (10,2) then (1,2).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="InstallationSequenceType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:InstallationSequenceType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_InstallationSequenceType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_InstallationSequenceType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_InstallationSequenceType" style="display:block"><img alt="Diagram" style="border:0" src="img/Core_xsd_Complex_Type_diggs_InstallationSequenceType.jpeg" usemap="#Core_xsd_Complex_Type_diggs_InstallationSequenceType" /><map name="Core_xsd_Complex_Type_diggs_InstallationSequenceType" id="Core_xsd_Complex_Type_diggs_InstallationSequenceType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="261,118,342,142" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="424,259,539,283" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="424,349,592,373" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="424,426,526,450" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="424,516,507,540" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="321,218,537,244" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="236,43,500,65" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="375,620,490,644" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="375,710,477,734" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.tmp#AbstractComponentObjectBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" coords="222,3,592,25" /><area alt="Core_xsd_Complex_Type_diggs_InstallationSequenceType.tmp#InstallationSequenceType_sequenceRule" href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_sequenceRule" coords="382,850,487,874" /><area alt="Core_xsd_Complex_Type_diggs_InstallationSequenceType.tmp#InstallationSequenceType_startPoint" href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_startPoint" coords="382,940,465,964" /><area alt="Core_xsd_Complex_Type_diggs_InstallationSequenceType.tmp#InstallationSequenceType_gridIndexStep" href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_gridIndexStep" coords="311,1030,417,1054" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequenceType')">diggs:InstallationSequenceType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_InstallationSequenceType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_InstallationSequenceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_InstallationSequenceType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Core_xsd_Element_diggs_InstallationSequence.html#InstallationSequence" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationSequence')">diggs:InstallationSequence</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_InstallationSequenceType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_InstallationSequenceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_InstallationSequenceType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , ((<b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_sequenceRule" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sequenceRule')">diggs:sequenceRule</a></b> , <b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_startPoint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:startPoint{0,1}')">diggs:startPoint{0,1}</a></b>) | <b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_gridIndexStep" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:gridIndexStep+')">diggs:gridIndexStep+</a></b>)</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_gridIndexStep" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:gridIndexStep')">diggs:gridIndexStep</a></b>, <b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_sequenceRule" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sequenceRule')">diggs:sequenceRule</a></b>, <b><a href="Core_xsd_Complex_Type_diggs_InstallationSequenceType.html#InstallationSequenceType_startPoint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:startPoint')">diggs:startPoint</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_InstallationSequenceType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_InstallationSequenceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_InstallationSequenceType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_InstallationSequenceType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_InstallationSequenceType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_InstallationSequenceType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"InstallationSequenceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractComponentObjectBaseType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;choice</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"sequenceRule"</span><span class="tAN"> type=</span><span class="tAV">"diggs:InstallationSequenceRuleType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The traversal that generates the installation order over the grid: Linear or Boustrophedonic, with axisOrder stating which axis varies fastest and the direction along each. The rule names are restricted to these two; state any other order with gridIndexStep.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"startPoint"</span><span class="tAN"> type=</span><span class="tAV">"diggs:GridIndexType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The grid node the sequence begins at. If omitted, it is the gml:low of the grid, its lowest-indexed corner, as gml:GridFunction also defaults. Meaningful only with sequenceRule.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"gridIndexStep"</span><span class="tAN"> type=</span><span class="tAV">"diggs:GridIndexStepType"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One explicitly ordered node, the alternative to a generated traversal. The content is the grid index of the node, a diggs:GridIndexType like diggs:realizesGridIndex and plannedGridIndex, and the sequenceNumber attribute states its position in the order. The entries account for every node of the design's plannedPositions grid, each node once, with the sequence numbers running 1 to n; the schema does not enforce either. Use it for an order no rule generates, such as (1,1) then (10,2) then (1,2).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/choice&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

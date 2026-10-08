@@ -1,0 +1,1339 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:referenceSystem</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_AbstractLoadTestProcedureType_referenceSystem', 
+				'properties_AbstractLoadTestProcedureType_maxTestLoad', 
+				'properties_AbstractLoadTestProcedureType_increment', 
+				'properties_AbstractLoadTestProcedureType_maxTestStress', 
+				'properties_AbstractLoadTestProcedureType_deadLoad', 
+				'properties_AbstractLoadTestProcedureType');
+var usedByBoxes= new Array('usedBy_AbstractLoadTestProcedureType');
+var sourceBoxes= new Array('source_AbstractLoadTestProcedureType_referenceSystem', 
+				'source_AbstractLoadTestProcedureType_maxTestLoad', 
+				'source_AbstractLoadTestProcedureType_increment', 
+				'source_AbstractLoadTestProcedureType_maxTestStress', 
+				'source_AbstractLoadTestProcedureType_deadLoad', 
+				'source_AbstractLoadTestProcedureType');
+var instanceBoxes= new Array('instance_AbstractLoadTestProcedureType_increment');
+var diagramBoxes= new Array('diagram_AbstractLoadTestProcedureType_referenceSystem', 
+				'diagram_AbstractLoadTestProcedureType_maxTestLoad', 
+				'diagram_AbstractLoadTestProcedureType_increment', 
+				'diagram_AbstractLoadTestProcedureType_maxTestStress', 
+				'diagram_AbstractLoadTestProcedureType_deadLoad', 
+				'diagram_AbstractLoadTestProcedureType');
+var annotationBoxes= new Array('annotations_AbstractLoadTestProcedureType_referenceSystem', 
+				'annotations_AbstractLoadTestProcedureType_maxTestLoad', 
+				'annotations_AbstractLoadTestProcedureType_increment', 
+				'annotations_AbstractLoadTestProcedureType_maxTestStress', 
+				'annotations_AbstractLoadTestProcedureType_deadLoad', 
+				'annotations_AbstractLoadTestProcedureType');
+var attributesBoxes= new Array('attributes_AbstractLoadTestProcedureType_maxTestLoad', 
+				'attributes_AbstractLoadTestProcedureType_maxTestStress', 
+				'attributes_AbstractLoadTestProcedureType_deadLoad', 
+				'attributes_AbstractLoadTestProcedureType');
+var modelBoxes= new Array('model_AbstractLoadTestProcedureType_increment', 
+				'model_AbstractLoadTestProcedureType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="AbstractLoadTestProcedureType_referenceSystem"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b> / diggs:referenceSystem</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractLoadTestProcedureType_referenceSystem" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractLoadTestProcedureType_referenceSystem');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractLoadTestProcedureType_referenceSystem" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">How the movement measured during the test was referenced, for</span><span class="tI">
+</span><span class="tT">example by an independent reference beam, optical survey or</span><span class="tI">
+</span><span class="tT">satellite positioning. ASTM D1143 and EN ISO 22477-1 require the</span><span class="tI">
+</span><span class="tT">reference to be independent of the reaction system and unaffected by</span><span class="tI">
+</span><span class="tT">ground movement caused by the test; this element records the</span><span class="tI">
+</span><span class="tT">arrangement used and does not assert that it met that requirement.</span><span class="tI">
+</span><span class="tT">Values come from the enumerated list, or "Other: xx", where xx is a</span><span class="tI">
+</span><span class="tT">user-defined term whose meaning differs from every listed value (not</span><span class="tI">
+</span><span class="tT">a synonym of one).</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractLoadTestProcedureType_referenceSystem" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractLoadTestProcedureType_referenceSystem');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractLoadTestProcedureType_referenceSystem" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_referenceSystem.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_referenceSystem" /><map name="AbstractTypes_xsd_Element_diggs_referenceSystem" id="AbstractTypes_xsd_Element_diggs_referenceSystem"><area alt="AbstractTypes_xsd_Simple_Type_diggs_LoadTestReferenceSystemEnumExtType.tmp#LoadTestReferenceSystemEnumExtType" href="AbstractTypes_xsd_Simple_Type_diggs_LoadTestReferenceSystemEnumExtType.html#LoadTestReferenceSystemEnumExtType" coords="168,0,469,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Simple_Type_diggs_LoadTestReferenceSystemEnumExtType.html#LoadTestReferenceSystemEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LoadTestReferenceSystemEnumExtType')">diggs:LoadTestReferenceSystemEnumExtType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractLoadTestProcedureType_referenceSystem" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractLoadTestProcedureType_referenceSystem');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractLoadTestProcedureType_referenceSystem" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractLoadTestProcedureType_referenceSystem" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractLoadTestProcedureType_referenceSystem');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractLoadTestProcedureType_referenceSystem" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"referenceSystem"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LoadTestReferenceSystemEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How the movement measured during the test was referenced, for example by an independent reference beam, optical survey or satellite positioning. ASTM D1143 and EN ISO 22477-1 require the reference to be independent of the reaction system and unaffected by ground movement caused by the test; this element records the arrangement used and does not assert that it met that requirement. Values come from the enumerated list, or "Other: xx", where xx is a user-defined term whose meaning differs from every listed value (not a synonym of one).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractLoadTestProcedureType_maxTestLoad"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b> / diggs:maxTestLoad</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractLoadTestProcedureType_maxTestLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractLoadTestProcedureType_maxTestLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractLoadTestProcedureType_maxTestLoad" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The maximum load reached during the test. A summary value,</span><span class="tI">
+</span><span class="tT">independent of the increments: a test recorded without a full</span><span class="tI">
+</span><span class="tT">increment schedule can still state its peak load.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractLoadTestProcedureType_maxTestLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractLoadTestProcedureType_maxTestLoad');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractLoadTestProcedureType_maxTestLoad" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_maxTestLoad.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_maxTestLoad" /><map name="AbstractTypes_xsd_Element_diggs_maxTestLoad" id="AbstractTypes_xsd_Element_diggs_maxTestLoad"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="179,80,347,106" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="193,197,325,221" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="193,231,285,255" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" coords="168,43,456,65" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.tmp#ForceMeasureType_uom" href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType_uom" coords="179,317,251,341" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.tmp#ForceMeasureType" href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" coords="154,3,339,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceMeasureType')">diggs:ForceMeasureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceMeasureType')">diggs:ForceMeasureType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractLoadTestProcedureType_maxTestLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractLoadTestProcedureType_maxTestLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractLoadTestProcedureType_maxTestLoad" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractLoadTestProcedureType_maxTestLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractLoadTestProcedureType_maxTestLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractLoadTestProcedureType_maxTestLoad" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_ForceUomEnumType.html#ForceUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceUomEnumType')">diggs:ForceUomEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The unit of measure for force.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractLoadTestProcedureType_maxTestLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractLoadTestProcedureType_maxTestLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractLoadTestProcedureType_maxTestLoad" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"maxTestLoad"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ForceMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The maximum load reached during the test. A summary value, independent of the increments: a test recorded without a full increment schedule can still state its peak load.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractLoadTestProcedureType_increment"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b> / diggs:increment</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractLoadTestProcedureType_increment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractLoadTestProcedureType_increment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractLoadTestProcedureType_increment" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A load increment applied during the test; repeat in sequence. A</span><span class="tI">
+</span><span class="tT">static test recorded with a full loading schedule has several; a</span><span class="tI">
+</span><span class="tT">rapid or dynamic test, a single pulse or blow, typically has none.</span><span class="tI">
+</span><span class="tT">See diggs:LoadTestIncrementType for what each increment carries,</span><span class="tI">
+</span><span class="tT">including the two alternative hold criteria: a fixed-duration hold</span><span class="tI">
+</span><span class="tT">(as in the ASTM quick test) or a hold until the movement rate</span><span class="tI">
+</span><span class="tT">stabilizes (as in the EN ISO 22477-1 maintained-load method).</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractLoadTestProcedureType_increment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractLoadTestProcedureType_increment');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractLoadTestProcedureType_increment" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_increment.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_increment" /><map name="AbstractTypes_xsd_Element_diggs_increment" id="AbstractTypes_xsd_Element_diggs_increment"><area alt="ExtProcedures_xsd_Element_diggs_LoadTestIncrement.tmp#LoadTestIncrement" href="ExtProcedures_xsd_Element_diggs_LoadTestIncrement.html#LoadTestIncrement" coords="218,44,385,68" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_LoadTestIncrementPropertyType.tmp#LoadTestIncrementPropertyType" href="ExtProcedures_xsd_Complex_Type_diggs_LoadTestIncrementPropertyType.html#LoadTestIncrementPropertyType" coords="136,3,395,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ExtProcedures_xsd_Complex_Type_diggs_LoadTestIncrementPropertyType.html#LoadTestIncrementPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LoadTestIncrementPropertyType')">diggs:LoadTestIncrementPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractLoadTestProcedureType_increment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractLoadTestProcedureType_increment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractLoadTestProcedureType_increment" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractLoadTestProcedureType_increment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractLoadTestProcedureType_increment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractLoadTestProcedureType_increment" style="display:block"><b><a href="ExtProcedures_xsd_Element_diggs_LoadTestIncrement.html#LoadTestIncrement" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LoadTestIncrement')">diggs:LoadTestIncrement</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ExtProcedures_xsd_Element_diggs_LoadTestIncrement.html#LoadTestIncrement" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LoadTestIncrement')">diggs:LoadTestIncrement</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractLoadTestProcedureType_increment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractLoadTestProcedureType_increment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractLoadTestProcedureType_increment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:increment</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:LoadTestIncrement</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:LoadTestIncrement&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:increment&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractLoadTestProcedureType_increment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractLoadTestProcedureType_increment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractLoadTestProcedureType_increment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"increment"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LoadTestIncrementPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A load increment applied during the test; repeat in sequence. A static test recorded with a full loading schedule has several; a rapid or dynamic test, a single pulse or blow, typically has none. See diggs:LoadTestIncrementType for what each increment carries, including the two alternative hold criteria: a fixed-duration hold (as in the ASTM quick test) or a hold until the movement rate stabilizes (as in the EN ISO 22477-1 maintained-load method).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractLoadTestProcedureType_maxTestStress"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b> / diggs:maxTestStress</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractLoadTestProcedureType_maxTestStress" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractLoadTestProcedureType_maxTestStress');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractLoadTestProcedureType_maxTestStress" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The maximum stress reached during the test, for tests loaded and</span><span class="tI">
+</span><span class="tT">reported as a stress on a bearing area rather than as a force. May</span><span class="tI">
+</span><span class="tT">be given alongside maxTestLoad; either or both may be present.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractLoadTestProcedureType_maxTestStress" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractLoadTestProcedureType_maxTestStress');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractLoadTestProcedureType_maxTestStress" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_maxTestStress.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_maxTestStress" /><map name="AbstractTypes_xsd_Element_diggs_maxTestStress" id="AbstractTypes_xsd_Element_diggs_maxTestStress"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="186,80,354,106" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="200,197,332,221" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="200,231,292,255" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" coords="175,43,463,65" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.tmp#PressureMeasureType_uom" href="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.html#PressureMeasureType_uom" coords="186,317,258,341" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.tmp#PressureMeasureType" href="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.html#PressureMeasureType" coords="161,3,363,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.html#PressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureMeasureType')">diggs:PressureMeasureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.html#PressureMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureMeasureType')">diggs:PressureMeasureType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractLoadTestProcedureType_maxTestStress" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractLoadTestProcedureType_maxTestStress');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractLoadTestProcedureType_maxTestStress" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractLoadTestProcedureType_maxTestStress" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractLoadTestProcedureType_maxTestStress');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractLoadTestProcedureType_maxTestStress" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_PressureMeasureType.html#PressureMeasureType_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_PressureUomEnumType.html#PressureUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PressureUomEnumType')">diggs:PressureUomEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The unit of measure for pressure, stress, or elastic modulus.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractLoadTestProcedureType_maxTestStress" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractLoadTestProcedureType_maxTestStress');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractLoadTestProcedureType_maxTestStress" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"maxTestStress"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PressureMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The maximum stress reached during the test, for tests loaded and reported as a stress on a bearing area rather than as a force. May be given alongside maxTestLoad; either or both may be present.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractLoadTestProcedureType_deadLoad"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b> / diggs:deadLoad</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractLoadTestProcedureType_deadLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractLoadTestProcedureType_deadLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractLoadTestProcedureType_deadLoad" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The total weight of the loading assembly resting on the element</span><span class="tI">
+</span><span class="tT">before the first increment is applied: bearing plates, jack,</span><span class="tI">
+</span><span class="tT">reaction beams and platform. The weights of the individual items</span><span class="tI">
+</span><span class="tT">belong on the equipment records cited through</span><span class="tI">
+</span><span class="tT">testProcedureEquipment.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractLoadTestProcedureType_deadLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractLoadTestProcedureType_deadLoad');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractLoadTestProcedureType_deadLoad" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_deadLoad.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_deadLoad" /><map name="AbstractTypes_xsd_Element_diggs_deadLoad" id="AbstractTypes_xsd_Element_diggs_deadLoad"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="159,80,327,106" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="173,197,305,221" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="173,231,265,255" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" coords="148,43,436,65" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.tmp#ForceMeasureType_uom" href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType_uom" coords="159,317,231,341" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.tmp#ForceMeasureType" href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" coords="134,3,319,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceMeasureType')">diggs:ForceMeasureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceMeasureType')">diggs:ForceMeasureType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractLoadTestProcedureType_deadLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractLoadTestProcedureType_deadLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractLoadTestProcedureType_deadLoad" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractLoadTestProcedureType_deadLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractLoadTestProcedureType_deadLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractLoadTestProcedureType_deadLoad" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_ForceMeasureType.html#ForceMeasureType_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_ForceUomEnumType.html#ForceUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ForceUomEnumType')">diggs:ForceUomEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The unit of measure for force.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractLoadTestProcedureType_deadLoad" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractLoadTestProcedureType_deadLoad');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractLoadTestProcedureType_deadLoad" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"deadLoad"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ForceMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The total weight of the loading assembly resting on the element before the first increment is applied: bearing plates, jack, reaction beams and platform. The weights of the individual items belong on the equipment records cited through testProcedureEquipment.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractLoadTestProcedureType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:AbstractLoadTestProcedureType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractLoadTestProcedureType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Abstract base type for load test procedures. Carries the reference system, peak load</span><span class="tI">
+</span><span class="tT">and stress, dead load and load increments shared by static, rapid and dynamic load</span><span class="tI">
+</span><span class="tT">tests.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractLoadTestProcedureType" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.jpeg" usemap="#AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType" /><map name="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType" id="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="391,318,472,342" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="554,459,669,483" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="554,549,722,573" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="554,626,656,650" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="554,716,637,740" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="451,418,667,444" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="366,243,627,265" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="352,203,633,225" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="363,950,444,974" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="420,1034,535,1058" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="420,1124,522,1148" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="338,163,650,185" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="427,1251,510,1275" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="427,1341,580,1365" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="427,1418,524,1442" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="427,1508,607,1532" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="427,1585,533,1609" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="427,1675,479,1699" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="427,1765,496,1789" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="324,123,612,145" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.tmp#AbstractProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" coords="310,83,613,105" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureMethod" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" coords="399,1958,545,1982" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureEquipment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" coords="399,2035,562,2059" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testingEnvironment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" coords="399,2112,535,2136" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_otherTestProperty" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" coords="399,2189,528,2213" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" coords="296,43,622,65" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType_testEvent" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" coords="385,2307,465,2331" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" coords="282,3,638,25" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_referenceSystem" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_referenceSystem" coords="371,2434,491,2458" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_maxTestLoad" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestLoad" coords="371,2524,474,2548" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_increment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_increment" coords="371,2614,456,2638" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_maxTestStress" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestStress" coords="371,2704,481,2728" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_deadLoad" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_deadLoad" coords="371,2794,454,2818" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedureType')">diggs:AbstractInsituTestProcedureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProcedureType')">diggs:AbstractProcedureType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractTestProcedureType')">diggs:AbstractTestProcedureType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedureType')">diggs:AbstractInsituTestProcedureType</a></b><ul class="internal">
+                                                                        <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b></li>
+                                                                     </ul>
+                                                                  </li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractLoadTestProcedureType" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">abstract</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_AbstractLoadTestProcedureType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="AbstractTypes_xsd_Element_diggs_AbstractLoadTestProcedure.html#AbstractLoadTestProcedure" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedure')">diggs:AbstractLoadTestProcedure</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Complex Types </td>
+                                    <td><b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractPlateBearingTestProcedureType')">diggs:AbstractPlateBearingTestProcedureType</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_DynamicLoadTestType.html#DynamicLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DynamicLoadTestType')">diggs:DynamicLoadTestType</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_LateralLoadTestType.html#LateralLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LateralLoadTestType')">diggs:LateralLoadTestType</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_RapidLoadTestType.html#RapidLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RapidLoadTestType')">diggs:RapidLoadTestType</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_StaticLoadTestType.html#StaticLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:StaticLoadTestType')">diggs:StaticLoadTestType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractLoadTestProcedureType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod*')">diggs:testProcedureMethod*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment*')">diggs:testProcedureEquipment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment*')">diggs:testingEnvironment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty*')">diggs:otherTestProperty*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testEvent*')">diggs:testEvent*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_referenceSystem" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceSystem{0,1}')">diggs:referenceSystem{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestLoad{0,1}')">diggs:maxTestLoad{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_increment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:increment*')">diggs:increment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestStress" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestStress{0,1}')">diggs:maxTestStress{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_deadLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:deadLoad{0,1}')">diggs:deadLoad{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_deadLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:deadLoad')">diggs:deadLoad</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_increment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:increment')">diggs:increment</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestLoad')">diggs:maxTestLoad</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestStress" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestStress')">diggs:maxTestStress</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty')">diggs:otherTestProperty</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_referenceSystem" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceSystem')">diggs:referenceSystem</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testEvent')">diggs:testEvent</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment')">diggs:testProcedureEquipment</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod')">diggs:testProcedureMethod</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment')">diggs:testingEnvironment</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractLoadTestProcedureType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractLoadTestProcedureType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractLoadTestProcedureType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractLoadTestProcedureType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> abstract=</span><span class="tAV">"true"</span><span class="tAN"> name=</span><span class="tAV">"AbstractLoadTestProcedureType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Abstract base type for load test procedures. Carries the reference system, peak load and stress, dead load and load increments shared by static, rapid and dynamic load tests.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractInsituTestProcedureType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"referenceSystem"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LoadTestReferenceSystemEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">How the movement measured during the test was referenced, for example by an independent reference beam, optical survey or satellite positioning. ASTM D1143 and EN ISO 22477-1 require the reference to be independent of the reaction system and unaffected by ground movement caused by the test; this element records the arrangement used and does not assert that it met that requirement. Values come from the enumerated list, or "Other: xx", where xx is a user-defined term whose meaning differs from every listed value (not a synonym of one).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"maxTestLoad"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ForceMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The maximum load reached during the test. A summary value, independent of the increments: a test recorded without a full increment schedule can still state its peak load.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"increment"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LoadTestIncrementPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A load increment applied during the test; repeat in sequence. A static test recorded with a full loading schedule has several; a rapid or dynamic test, a single pulse or blow, typically has none. See diggs:LoadTestIncrementType for what each increment carries, including the two alternative hold criteria: a fixed-duration hold (as in the ASTM quick test) or a hold until the movement rate stabilizes (as in the EN ISO 22477-1 maintained-load method).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"maxTestStress"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PressureMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The maximum stress reached during the test, for tests loaded and reported as a stress on a bearing area rather than as a force. May be given alongside maxTestLoad; either or both may be present.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"deadLoad"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ForceMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The total weight of the loading assembly resting on the element before the first increment is applied: bearing plates, jack, reaction beams and platform. The weights of the individual items belong on the equipment records cited through testProcedureEquipment.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

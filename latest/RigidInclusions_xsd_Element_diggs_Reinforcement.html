@@ -1,0 +1,547 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:Reinforcement</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_Reinforcement');
+var usedByBoxes= new Array('usedBy_Reinforcement');
+var sourceBoxes= new Array('source_Reinforcement');
+var instanceBoxes= new Array('instance_Reinforcement');
+var diagramBoxes= new Array('diagram_Reinforcement');
+var annotationBoxes= new Array('annotations_Reinforcement');
+var attributesBoxes= new Array('attributes_Reinforcement');
+var modelBoxes= new Array('model_Reinforcement');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="Reinforcement"></a><div class="componentTitle">Element <span class="qname">diggs:Reinforcement</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_Reinforcement" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Steel reinforcement occupying one interval of a rigid inclusion column: a cage over</span><span class="tI">
+</span><span class="tT">the top few metres at an edge column, or full length where bending governs.</span><span class="tI">
+</span><span class="tT">Reinforcement in rigid inclusions is the exception rather than the rule; where</span><span class="tI">
+</span><span class="tT">present it is zoned, so the object carries the interval it occupies rather than a</span><span class="tI">
+</span><span class="tT">bare length. One object serves both the design and the as-built side:</span><span class="tI">
+</span><span class="tT">diggs:DesignRIColumnType carries it as the required reinforcement and</span><span class="tI">
+</span><span class="tT">diggs:RIColumnType as the installed reinforcement, and either host repeats it for a</span><span class="tI">
+</span><span class="tT">column with more than one reinforced zone. intervalLocation is modelled on</span><span class="tI">
+</span><span class="tT">diggs:TaperType/intervalLocation, the depth-interval-scoped property on a linear</span><span class="tI">
+</span><span class="tT">installation.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Reinforcement" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_Reinforcement.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_Reinforcement" /><map name="RigidInclusions_xsd_Element_diggs_Reinforcement" id="RigidInclusions_xsd_Element_diggs_Reinforcement"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="227,198,308,222" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="390,339,505,363" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="390,429,558,453" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="390,506,492,530" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="390,596,473,620" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="287,298,503,324" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="202,123,466,145" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="213,738,294,762" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.tmp#AbstractDiggsType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" coords="188,83,467,105" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="256,885,371,909" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="256,975,358,999" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="174,43,481,65" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_intervalLocation" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_intervalLocation" coords="263,1102,380,1126" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_reinforcementType" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_reinforcementType" coords="263,1179,396,1203" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_reinforcementPurpose" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_reinforcementPurpose" coords="263,1256,414,1280" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_steelRatio" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelRatio" coords="263,1333,346,1357" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_steelArea" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelArea" coords="263,1423,344,1447" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_barSize" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_barSize" coords="263,1500,333,1524" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_barCount" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_barCount" coords="263,1590,345,1614" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_steelGrade" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelGrade" coords="263,1654,351,1678" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_cover" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_cover" coords="263,1744,324,1768" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType_corrosionProtection" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_corrosionProtection" coords="263,1834,402,1858" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.tmp#ReinforcementType" href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType" coords="160,3,348,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReinforcementType')">diggs:ReinforcementType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractDiggsType')">diggs:AbstractDiggsType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReinforcementType')">diggs:ReinforcementType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_Reinforcement" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_Reinforcement" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementPropertyType.html#ReinforcementPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ReinforcementPropertyType')">diggs:ReinforcementPropertyType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_Reinforcement" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_intervalLocation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:intervalLocation')">diggs:intervalLocation</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_reinforcementType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:reinforcementType{0,1}')">diggs:reinforcementType{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_reinforcementPurpose" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:reinforcementPurpose{0,1}')">diggs:reinforcementPurpose{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelRatio" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:steelRatio{0,1}')">diggs:steelRatio{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:steelArea{0,1}')">diggs:steelArea{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_barSize" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:barSize{0,1}')">diggs:barSize{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_barCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:barCount{0,1}')">diggs:barCount{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelGrade" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:steelGrade{0,1}')">diggs:steelGrade{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_cover" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:cover{0,1}')">diggs:cover{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_corrosionProtection" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:corrosionProtection*')">diggs:corrosionProtection*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_barCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:barCount')">diggs:barCount</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_barSize" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:barSize')">diggs:barSize</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_corrosionProtection" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:corrosionProtection')">diggs:corrosionProtection</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_cover" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:cover')">diggs:cover</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_intervalLocation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:intervalLocation')">diggs:intervalLocation</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_reinforcementPurpose" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:reinforcementPurpose')">diggs:reinforcementPurpose</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_reinforcementType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:reinforcementType')">diggs:reinforcementType</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:steelArea')">diggs:steelArea</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelGrade" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:steelGrade')">diggs:steelGrade</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_ReinforcementType.html#ReinforcementType_steelRatio" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:steelRatio')">diggs:steelRatio</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_Reinforcement" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:Reinforcement</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tT"> </span><span class="tAN">xmlns:gml=</span><span class="tAV">"http://www.opengis.net/gml/3.2"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:description</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:description&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;gml:identifier</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/gml:identifier&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:intervalLocation</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:intervalLocation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:reinforcementType</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:reinforcementType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:reinforcementPurpose</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:reinforcementPurpose&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:steelRatio</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:steelRatio&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:steelArea</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:steelArea&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:barSize</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:barSize&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:barCount</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:barCount&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:steelGrade</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:steelGrade&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:cover</span><span class="tT"> </span><span class="tAN">howDetermined=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">qualifier=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uom=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,1}</span><span class="tEl">&lt;/diggs:cover&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:corrosionProtection</span><span class="tT"> </span><span class="tAN">codeSpace=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{0,unbounded}</span><span class="tEl">&lt;/diggs:corrosionProtection&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:Reinforcement&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_Reinforcement" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Reinforcement" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_Reinforcement');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Reinforcement" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"Reinforcement"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ReinforcementType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Steel reinforcement occupying one interval of a rigid inclusion column: a cage over the top few metres at an edge column, or full length where bending governs. Reinforcement in rigid inclusions is the exception rather than the rule; where present it is zoned, so the object carries the interval it occupies rather than a bare length. One object serves both the design and the as-built side: diggs:DesignRIColumnType carries it as the required reinforcement and diggs:RIColumnType as the installed reinforcement, and either host repeats it for a column with more than one reinforced zone. intervalLocation is modelled on diggs:TaperType/intervalLocation, the depth-interval-scoped property on a linear installation.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

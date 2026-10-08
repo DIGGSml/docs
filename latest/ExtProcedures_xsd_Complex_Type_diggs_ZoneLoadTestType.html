@@ -1,0 +1,887 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:loadedFootprint</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_ZoneLoadTestType_loadedFootprint', 
+				'properties_ZoneLoadTestType_testedColumnRef');
+var usedByBoxes= new Array('usedBy_ZoneLoadTestType');
+var sourceBoxes= new Array('source_ZoneLoadTestType_loadedFootprint', 
+				'source_ZoneLoadTestType_testedColumnRef', 
+				'source_ZoneLoadTestType');
+var instanceBoxes= new Array('instance_ZoneLoadTestType_loadedFootprint');
+var diagramBoxes= new Array('diagram_ZoneLoadTestType_loadedFootprint', 
+				'diagram_ZoneLoadTestType_testedColumnRef', 
+				'diagram_ZoneLoadTestType');
+var annotationBoxes= new Array('annotations_ZoneLoadTestType_loadedFootprint', 
+				'annotations_ZoneLoadTestType_testedColumnRef');
+var attributesBoxes= new Array('attributes_ZoneLoadTestType_loadedFootprint', 
+				'attributes_ZoneLoadTestType_testedColumnRef', 
+				'attributes_ZoneLoadTestType');
+var modelBoxes= new Array('model_ZoneLoadTestType_loadedFootprint', 
+				'model_ZoneLoadTestType_testedColumnRef', 
+				'model_ZoneLoadTestType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ZoneLoadTestType_loadedFootprint"></a><div class="componentTitle">Element <span class="qname"><b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ZoneLoadTestType')">diggs:ZoneLoadTestType</a></b> / diggs:loadedFootprint</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ZoneLoadTestType_loadedFootprint" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The plan-view extent of the loaded area, where it does not cover the</span><span class="tI">
+</span><span class="tT">whole of the load transfer platform cited through</span><span class="tI">
+</span><span class="tT">Test/samplingFeatureRef.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ZoneLoadTestType_loadedFootprint" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtProcedures_xsd_Element_diggs_loadedFootprint.jpeg" usemap="#ExtProcedures_xsd_Element_diggs_loadedFootprint" /><map name="ExtProcedures_xsd_Element_diggs_loadedFootprint" id="ExtProcedures_xsd_Element_diggs_loadedFootprint"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="196,81,414,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="196,168,419,194" /><area alt="Core_xsd_Element_diggs_PlanarSurface.tmp#PlanarSurface" href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" coords="250,276,387,300" /><area alt="Core_xsd_Complex_Type_diggs_PlanarSurfacePropertyType.tmp#PlanarSurfacePropertyType" href="Core_xsd_Complex_Type_diggs_PlanarSurfacePropertyType.html#PlanarSurfacePropertyType" coords="168,3,397,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_PlanarSurfacePropertyType.html#PlanarSurfacePropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurfacePropertyType')">diggs:PlanarSurfacePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ZoneLoadTestType_loadedFootprint" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ZoneLoadTestType_loadedFootprint" style="display:block"><b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_ZoneLoadTestType_loadedFootprint" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:loadedFootprint</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:PlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:PlanarSurface&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:loadedFootprint&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ZoneLoadTestType_loadedFootprint" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ZoneLoadTestType_loadedFootprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_ZoneLoadTestType_loadedFootprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ZoneLoadTestType_loadedFootprint" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"loadedFootprint"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlanarSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The plan-view extent of the loaded area, where it does not cover the whole of the load transfer platform cited through Test/samplingFeatureRef.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ZoneLoadTestType_testedColumnRef"></a><div class="componentTitle">Element <span class="qname"><b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ZoneLoadTestType')">diggs:ZoneLoadTestType</a></b> / diggs:testedColumnRef</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_ZoneLoadTestType_testedColumnRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_ZoneLoadTestType_testedColumnRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_ZoneLoadTestType_testedColumnRef" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The diggs:RIColumn features that the loaded footprint bears on,</span><span class="tI">
+</span><span class="tT">where they are a named subset of the platform's columns rather than</span><span class="tI">
+</span><span class="tT">all of them. Given by reference only. Repeat for each column.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ZoneLoadTestType_testedColumnRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_ZoneLoadTestType_testedColumnRef');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ZoneLoadTestType_testedColumnRef" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtProcedures_xsd_Element_diggs_testedColumnRef.jpeg" usemap="#ExtProcedures_xsd_Element_diggs_testedColumnRef" /><map name="ExtProcedures_xsd_Element_diggs_testedColumnRef" id="ExtProcedures_xsd_Element_diggs_testedColumnRef"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="216,121,434,147" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="216,208,439,234" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.tmp#ReferenceType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" coords="188,43,433,65" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType_identifierRef" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" coords="199,442,312,466" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" coords="174,3,377,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:ReferenceType')">gml:ReferenceType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_ZoneLoadTestType_testedColumnRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_ZoneLoadTestType_testedColumnRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_ZoneLoadTestType_testedColumnRef" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ZoneLoadTestType_testedColumnRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_ZoneLoadTestType_testedColumnRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ZoneLoadTestType_testedColumnRef" style="display:block"></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ZoneLoadTestType_testedColumnRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_ZoneLoadTestType_testedColumnRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ZoneLoadTestType_testedColumnRef" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component identifierRef')">identifierRef</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_IdentifierReferenceType.html#IdentifierReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IdentifierReferenceType')">diggs:IdentifierReferenceType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The gml:identifier value of the referenced feature, as a fully qualified</span><span class="tI">
+</span><span class="tT">value. It gives an alternative to the gml:id in xlink:href for finding</span><span class="tI">
+</span><span class="tT">the referenced feature, mainly to reference a feature by a globally</span><span class="tI">
+</span><span class="tT">unique identifier and where naming conflicts occur with gml:id when</span><span class="tI">
+</span><span class="tT">accessing data in external files.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ZoneLoadTestType_testedColumnRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_ZoneLoadTestType_testedColumnRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ZoneLoadTestType_testedColumnRef" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"testedColumnRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:RIColumn</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The diggs:RIColumn features that the loaded footprint bears on, where they are a named subset of the platform's columns rather than all of them. Given by reference only. Repeat for each column.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="ZoneLoadTestType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:ZoneLoadTestType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_ZoneLoadTestType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_ZoneLoadTestType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_ZoneLoadTestType" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.jpeg" usemap="#ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType" /><map name="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType" id="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="325,398,406,422" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="488,539,603,563" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="488,629,656,653" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="488,706,590,730" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="488,796,571,820" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="385,498,601,524" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="300,323,561,345" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="286,283,567,305" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="297,1030,378,1054" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="354,1114,469,1138" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="354,1204,456,1228" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="272,243,584,265" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="361,1331,444,1355" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="361,1421,514,1445" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="361,1498,458,1522" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="361,1588,541,1612" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="361,1665,467,1689" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="361,1755,413,1779" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="361,1845,430,1869" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="258,203,546,225" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.tmp#AbstractProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" coords="244,163,547,185" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureMethod" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" coords="333,2038,479,2062" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testProcedureEquipment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" coords="333,2115,496,2139" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_testingEnvironment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" coords="333,2192,469,2216" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType_otherTestProperty" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" coords="333,2269,462,2293" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.tmp#AbstractTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" coords="230,123,556,145" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType_testEvent" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" coords="319,2387,399,2411" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.tmp#AbstractInsituTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" coords="216,83,572,105" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_referenceSystem" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_referenceSystem" coords="305,2514,425,2538" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_maxTestLoad" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestLoad" coords="305,2604,408,2628" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_increment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_increment" coords="305,2694,390,2718" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_maxTestStress" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestStress" coords="305,2784,415,2808" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType_deadLoad" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_deadLoad" coords="305,2874,388,2898" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.tmp#AbstractLoadTestProcedureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" coords="202,43,554,65" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_plateDiameter" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateDiameter" coords="270,3001,375,3025" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_plateWidth" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateWidth" coords="270,3065,357,3089" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_plateLength" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateLength" coords="270,3155,364,3179" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_plateArea" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateArea" coords="270,3232,352,3256" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_plateStiffness" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateStiffness" coords="270,3322,373,3346" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_seatingLoad" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_seatingLoad" coords="270,3412,366,3436" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_bearingLevel" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_bearingLevel" coords="270,3489,369,3513" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_loadingProcedure" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_loadingProcedure" coords="270,3566,396,3590" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_seatingStress" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_seatingStress" coords="270,3643,373,3667" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType_beddingMaterial" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_beddingMaterial" coords="270,3720,387,3744" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.tmp#AbstractPlateBearingTestProcedureType" href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType" coords="188,3,579,25" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.tmp#ZoneLoadTestType_loadedFootprint" href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType_loadedFootprint" coords="277,3834,394,3858" /><area alt="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.tmp#ZoneLoadTestType_testedColumnRef" href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType_testedColumnRef" coords="277,3924,400,3948" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractPlateBearingTestProcedureType')">diggs:AbstractPlateBearingTestProcedureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractProcedureType.html#AbstractProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractProcedureType')">diggs:AbstractProcedureType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractTestProcedureType')">diggs:AbstractTestProcedureType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractInsituTestProcedureType')">diggs:AbstractInsituTestProcedureType</a></b><ul class="internal">
+                                                                        <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractLoadTestProcedureType')">diggs:AbstractLoadTestProcedureType</a></b><ul class="internal">
+                                                                              <li class="internal"><b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractPlateBearingTestProcedureType')">diggs:AbstractPlateBearingTestProcedureType</a></b><ul class="internal">
+                                                                                    <li class="internal"><b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ZoneLoadTestType')">diggs:ZoneLoadTestType</a></b></li>
+                                                                                 </ul>
+                                                                              </li>
+                                                                           </ul>
+                                                                        </li>
+                                                                     </ul>
+                                                                  </li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_ZoneLoadTestType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_ZoneLoadTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_ZoneLoadTestType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="ExtProcedures_xsd_Element_diggs_ZoneLoadTest.html#ZoneLoadTest" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ZoneLoadTest')">diggs:ZoneLoadTest</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_ZoneLoadTestType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_ZoneLoadTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_ZoneLoadTestType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod*')">diggs:testProcedureMethod*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment*')">diggs:testProcedureEquipment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment*')">diggs:testingEnvironment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty*')">diggs:otherTestProperty*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testEvent*')">diggs:testEvent*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_referenceSystem" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceSystem{0,1}')">diggs:referenceSystem{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestLoad{0,1}')">diggs:maxTestLoad{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_increment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:increment*')">diggs:increment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestStress" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestStress{0,1}')">diggs:maxTestStress{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_deadLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:deadLoad{0,1}')">diggs:deadLoad{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateDiameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateDiameter{0,1}')">diggs:plateDiameter{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateWidth" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateWidth{0,1}')">diggs:plateWidth{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateLength" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateLength{0,1}')">diggs:plateLength{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateArea{0,1}')">diggs:plateArea{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateStiffness" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateStiffness{0,1}')">diggs:plateStiffness{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_seatingLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:seatingLoad{0,1}')">diggs:seatingLoad{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_bearingLevel" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:bearingLevel{0,1}')">diggs:bearingLevel{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_loadingProcedure" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:loadingProcedure{0,1}')">diggs:loadingProcedure{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_seatingStress" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:seatingStress{0,1}')">diggs:seatingStress{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_beddingMaterial" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:beddingMaterial{0,1}')">diggs:beddingMaterial{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType_loadedFootprint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:loadedFootprint{0,1}')">diggs:loadedFootprint{0,1}</a></b> , <b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType_testedColumnRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testedColumnRef*')">diggs:testedColumnRef*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_bearingLevel" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:bearingLevel')">diggs:bearingLevel</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_beddingMaterial" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:beddingMaterial')">diggs:beddingMaterial</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_deadLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:deadLoad')">diggs:deadLoad</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_increment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:increment')">diggs:increment</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType_loadedFootprint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:loadedFootprint')">diggs:loadedFootprint</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_loadingProcedure" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:loadingProcedure')">diggs:loadingProcedure</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestLoad')">diggs:maxTestLoad</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_maxTestStress" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:maxTestStress')">diggs:maxTestStress</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_otherTestProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherTestProperty')">diggs:otherTestProperty</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateArea')">diggs:plateArea</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateDiameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateDiameter')">diggs:plateDiameter</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateLength" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateLength')">diggs:plateLength</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateStiffness" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateStiffness')">diggs:plateStiffness</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_plateWidth" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:plateWidth')">diggs:plateWidth</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractLoadTestProcedureType.html#AbstractLoadTestProcedureType_referenceSystem" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceSystem')">diggs:referenceSystem</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_seatingLoad" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:seatingLoad')">diggs:seatingLoad</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_AbstractPlateBearingTestProcedureType.html#AbstractPlateBearingTestProcedureType_seatingStress" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:seatingStress')">diggs:seatingStress</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractInsituTestProcedureType.html#AbstractInsituTestProcedureType_testEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testEvent')">diggs:testEvent</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureEquipment')">diggs:testProcedureEquipment</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testProcedureMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testProcedureMethod')">diggs:testProcedureMethod</a></b>, <b><a href="ExtProcedures_xsd_Complex_Type_diggs_ZoneLoadTestType.html#ZoneLoadTestType_testedColumnRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testedColumnRef')">diggs:testedColumnRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractTestProcedureType.html#AbstractTestProcedureType_testingEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:testingEnvironment')">diggs:testingEnvironment</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_ZoneLoadTestType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_ZoneLoadTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_ZoneLoadTestType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_ZoneLoadTestType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_ZoneLoadTestType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_ZoneLoadTestType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"ZoneLoadTestType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractPlateBearingTestProcedureType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"loadedFootprint"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlanarSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The plan-view extent of the loaded area, where it does not cover the whole of the load transfer platform cited through Test/samplingFeatureRef.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"testedColumnRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:RIColumn</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The diggs:RIColumn features that the loaded footprint bears on, where they are a named subset of the platform's columns rather than all of them. Given by reference only. Repeat for each column.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

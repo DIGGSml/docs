@@ -1,0 +1,1655 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:zone</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_SampleDesignScopeType_zone', 
+				'properties_SampleDesignScopeType_sourceFeatureRef', 
+				'properties_SampleDesignScopeType_sourceSampleRef', 
+				'properties_SampleDesignScopeType_sampleCount', 
+				'properties_SampleDesignScopeType_samplingInterval', 
+				'properties_SampleDesignScopeType_samplingPosition', 
+				'properties_SampleDesignScopeType_selectionStride');
+var usedByBoxes= new Array('usedBy_SampleDesignScopeType');
+var sourceBoxes= new Array('source_SampleDesignScopeType_zone', 
+				'source_SampleDesignScopeType_sourceFeatureRef', 
+				'source_SampleDesignScopeType_sourceSampleRef', 
+				'source_SampleDesignScopeType_sampleCount', 
+				'source_SampleDesignScopeType_samplingInterval', 
+				'source_SampleDesignScopeType_samplingPosition', 
+				'source_SampleDesignScopeType_selectionStride', 
+				'source_SampleDesignScopeType');
+var instanceBoxes= new Array('instance_SampleDesignScopeType_zone', 
+				'instance_SampleDesignScopeType_samplingInterval', 
+				'instance_SampleDesignScopeType_samplingPosition');
+var diagramBoxes= new Array('diagram_SampleDesignScopeType_zone', 
+				'diagram_SampleDesignScopeType_sourceFeatureRef', 
+				'diagram_SampleDesignScopeType_sourceSampleRef', 
+				'diagram_SampleDesignScopeType_sampleCount', 
+				'diagram_SampleDesignScopeType_samplingInterval', 
+				'diagram_SampleDesignScopeType_samplingPosition', 
+				'diagram_SampleDesignScopeType_selectionStride', 
+				'diagram_SampleDesignScopeType');
+var annotationBoxes= new Array('annotations_SampleDesignScopeType_zone', 
+				'annotations_SampleDesignScopeType_sourceFeatureRef', 
+				'annotations_SampleDesignScopeType_sourceSampleRef', 
+				'annotations_SampleDesignScopeType_sampleCount', 
+				'annotations_SampleDesignScopeType_samplingInterval', 
+				'annotations_SampleDesignScopeType_samplingPosition', 
+				'annotations_SampleDesignScopeType_selectionStride');
+var attributesBoxes= new Array('attributes_SampleDesignScopeType_zone', 
+				'attributes_SampleDesignScopeType_sourceFeatureRef', 
+				'attributes_SampleDesignScopeType_sourceSampleRef', 
+				'attributes_SampleDesignScopeType_samplingInterval', 
+				'attributes_SampleDesignScopeType_samplingPosition', 
+				'attributes_SampleDesignScopeType');
+var modelBoxes= new Array('model_SampleDesignScopeType_zone', 
+				'model_SampleDesignScopeType_sourceFeatureRef', 
+				'model_SampleDesignScopeType_sourceSampleRef', 
+				'model_SampleDesignScopeType_samplingInterval', 
+				'model_SampleDesignScopeType_samplingPosition', 
+				'model_SampleDesignScopeType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="SampleDesignScopeType_zone"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:zone</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_zone" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The area this sample design applies to. A feature fulfils this</span><span class="tI">
+</span><span class="tT">scope if its reference point lies within this zone, the same</span><span class="tI">
+</span><span class="tT">test diggs:SFDesignScopeType/zone applies.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_zone" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_zone.jpeg" usemap="#Common_xsd_Element_diggs_zone" /><map name="Common_xsd_Element_diggs_zone" id="Common_xsd_Element_diggs_zone"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="136,81,354,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="136,168,359,194" /><area alt="Core_xsd_Element_diggs_PlanarSurface.tmp#PlanarSurface" href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" coords="261,272,398,296" /><area alt="Core_xsd_Element_diggs_MultiSurface.tmp#MultiSurface" href="Core_xsd_Element_diggs_MultiSurface.html#MultiSurface" coords="261,349,391,373" /><area alt="Core_xsd_Complex_Type_diggs_PlanarSurfaceOrMultiSurfacePropertyType.tmp#PlanarSurfaceOrMultiSurfacePropertyType" href="Core_xsd_Complex_Type_diggs_PlanarSurfaceOrMultiSurfacePropertyType.html#PlanarSurfaceOrMultiSurfacePropertyType" coords="108,3,417,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_PlanarSurfaceOrMultiSurfacePropertyType.html#PlanarSurfaceOrMultiSurfacePropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurfaceOrMultiSurfacePropertyType')">diggs:PlanarSurfaceOrMultiSurfacePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_zone" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SampleDesignScopeType_zone" style="display:block">(<b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b> | <b><a href="Core_xsd_Element_diggs_MultiSurface.html#MultiSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiSurface')">diggs:MultiSurface</a></b>)</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_MultiSurface.html#MultiSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiSurface')">diggs:MultiSurface</a></b>, <b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SampleDesignScopeType_zone" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:zone</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:PlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:PlanarSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:MultiSurface</span><span class="tT"> </span><span class="tAN">aggregationType=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:MultiSurface&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:zone&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SampleDesignScopeType_zone" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_zone" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_zone');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_zone" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"zone"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlanarSurfaceOrMultiSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The area this sample design applies to. A feature fulfils this scope if its reference point lies within this zone, the same test diggs:SFDesignScopeType/zone applies.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType_sourceFeatureRef"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:sourceFeatureRef</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_sourceFeatureRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_sourceFeatureRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_sourceFeatureRef" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">One or more sampling-feature designs this sample design collects</span><span class="tI">
+</span><span class="tT">from: a collection of boreholes, or a single reference for a</span><span class="tI">
+</span><span class="tT">specific one. This is plan-to-plan: it cites a</span><span class="tI">
+</span><span class="tT">diggs:AbstractSamplingFeatureDesign or a specialization (for</span><span class="tI">
+</span><span class="tT">example diggs:DesignBorehole or diggs:DesignInstallation), an</span><span class="tI">
+</span><span class="tT">antecedent within the plan graph, never a realized sampling</span><span class="tI">
+</span><span class="tT">feature.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_sourceFeatureRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_sourceFeatureRef');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_sourceFeatureRef" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_sourceFeatureRef.jpeg" usemap="#Common_xsd_Element_diggs_sourceFeatureRef" /><map name="Common_xsd_Element_diggs_sourceFeatureRef" id="Common_xsd_Element_diggs_sourceFeatureRef"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="218,121,436,147" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="218,208,441,234" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.tmp#ReferenceType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" coords="190,43,435,65" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType_identifierRef" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" coords="201,442,314,466" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" coords="176,3,379,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:ReferenceType')">gml:ReferenceType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_sourceFeatureRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_sourceFeatureRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_sourceFeatureRef" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SampleDesignScopeType_sourceFeatureRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SampleDesignScopeType_sourceFeatureRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SampleDesignScopeType_sourceFeatureRef" style="display:block"></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SampleDesignScopeType_sourceFeatureRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SampleDesignScopeType_sourceFeatureRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SampleDesignScopeType_sourceFeatureRef" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component identifierRef')">identifierRef</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_IdentifierReferenceType.html#IdentifierReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IdentifierReferenceType')">diggs:IdentifierReferenceType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The gml:identifier value of the referenced feature, as a fully qualified</span><span class="tI">
+</span><span class="tT">value. It gives an alternative to the gml:id in xlink:href for finding</span><span class="tI">
+</span><span class="tT">the referenced feature, mainly to reference a feature by a globally</span><span class="tI">
+</span><span class="tT">unique identifier and where naming conflicts occur with gml:id when</span><span class="tI">
+</span><span class="tT">accessing data in external files.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_sourceFeatureRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_sourceFeatureRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_sourceFeatureRef" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"sourceFeatureRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:AbstractSamplingFeatureDesign</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more sampling-feature designs this sample design collects from: a collection of boreholes, or a single reference for a specific one. This is plan-to-plan: it cites a diggs:AbstractSamplingFeatureDesign or a specialization (for example diggs:DesignBorehole or diggs:DesignInstallation), an antecedent within the plan graph, never a realized sampling feature.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType_sourceSampleRef"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:sourceSampleRef</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_sourceSampleRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_sourceSampleRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_sourceSampleRef" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">One or more sample designs this one is to be subsampled or</span><span class="tI">
+</span><span class="tT">aggregated from: "aggregate all bulk samples from these three</span><span class="tI">
+</span><span class="tT">test pits" cites the sample designs of the source pits, not the</span><span class="tI">
+</span><span class="tT">pits. This is plan-to-plan: it cites a diggs:DesignSample, an</span><span class="tI">
+</span><span class="tT">antecedent within the plan graph, never a realized sample.</span><span class="tI">
+</span><span class="tT">Meaningful only where the activityType of the host design is</span><span class="tI">
+</span><span class="tT">aggregate or subsample; the schema cannot enforce that</span><span class="tI">
+</span><span class="tT">correlation.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_sourceSampleRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_sourceSampleRef');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_sourceSampleRef" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_sourceSampleRef.jpeg" usemap="#Common_xsd_Element_diggs_sourceSampleRef" /><map name="Common_xsd_Element_diggs_sourceSampleRef" id="Common_xsd_Element_diggs_sourceSampleRef"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="230,161,448,187" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="230,248,453,274" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.tmp#ReferenceType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" coords="202,83,447,105" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType_identifierRef" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" coords="213,482,326,506" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" coords="188,43,483,65" /><area alt="Common_xsd_Complex_Type_diggs_FractionalReferenceType.tmp#FractionalReferenceType_percentage" href="Common_xsd_Complex_Type_diggs_FractionalReferenceType.html#FractionalReferenceType_percentage" coords="199,654,307,678" /><area alt="Common_xsd_Complex_Type_diggs_FractionalReferenceType.tmp#FractionalReferenceType" href="Common_xsd_Complex_Type_diggs_FractionalReferenceType.html#FractionalReferenceType" coords="174,3,390,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_FractionalReferenceType.html#FractionalReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractionalReferenceType')">diggs:FractionalReferenceType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:ReferenceType')">gml:ReferenceType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_FractionalReferenceType.html#FractionalReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FractionalReferenceType')">diggs:FractionalReferenceType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_sourceSampleRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_sourceSampleRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_sourceSampleRef" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SampleDesignScopeType_sourceSampleRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SampleDesignScopeType_sourceSampleRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SampleDesignScopeType_sourceSampleRef" style="display:block"></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SampleDesignScopeType_sourceSampleRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SampleDesignScopeType_sourceSampleRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SampleDesignScopeType_sourceSampleRef" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component identifierRef')">identifierRef</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_IdentifierReferenceType.html#IdentifierReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IdentifierReferenceType')">diggs:IdentifierReferenceType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The gml:identifier value of the referenced feature, as a fully qualified</span><span class="tI">
+</span><span class="tT">value. It gives an alternative to the gml:id in xlink:href for finding</span><span class="tI">
+</span><span class="tT">the referenced feature, mainly to reference a feature by a globally</span><span class="tI">
+</span><span class="tT">unique identifier and where naming conflicts occur with gml:id when</span><span class="tI">
+</span><span class="tT">accessing data in external files.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Common_xsd_Complex_Type_diggs_FractionalReferenceType.html#FractionalReferenceType_percentage" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component percentage')">percentage</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_Val0-100Type.html#Val0-100Type" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Val0-100Type')">diggs:Val0-100Type</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The proportion, as a percentage between 0 and 100, that the referenced</span><span class="tI">
+</span><span class="tT">feature contributes. Used to express proportions or composition.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_sourceSampleRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_sourceSampleRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_sourceSampleRef" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"sourceSampleRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FractionalReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:DesignSample</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more sample designs this one is to be subsampled or aggregated from: "aggregate all bulk samples from these three test pits" cites the sample designs of the source pits, not the pits. This is plan-to-plan: it cites a diggs:DesignSample, an antecedent within the plan graph, never a realized sample. Meaningful only where the activityType of the host design is aggregate or subsample; the schema cannot enforce that correlation.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType_sampleCount"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:sampleCount</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_sampleCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_sampleCount');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_sampleCount" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A total count across the population: "50 split-barrel samples</span><span class="tI">
+</span><span class="tT">from this collection of boreholes".</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_sampleCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_sampleCount');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_sampleCount" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_sampleCount.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>positiveInteger</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_sampleCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_sampleCount');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_sampleCount" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_sampleCount" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_sampleCount');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_sampleCount" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"sampleCount"</span><span class="tAN"> type=</span><span class="tAV">"positiveInteger"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A total count across the population: "50 split-barrel samples from this collection of boreholes".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType_samplingInterval"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:samplingInterval</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_samplingInterval" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A regular spacing along each referenced feature, optionally</span><span class="tI">
+</span><span class="tT">bounded: "every 5 ft", or "every 5 ft between 2 m and 20 m".</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_samplingInterval" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_samplingInterval_1.jpeg" usemap="#Common_xsd_Element_diggs_samplingInterval_1" /><map name="Common_xsd_Element_diggs_samplingInterval_1" id="Common_xsd_Element_diggs_samplingInterval_1"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="199,81,422,107" /><area alt="Common_xsd_Element_diggs_SamplingInterval.tmp#SamplingInterval" href="Common_xsd_Element_diggs_SamplingInterval.html#SamplingInterval" coords="253,189,406,213" /><area alt="Common_xsd_Complex_Type_diggs_SamplingIntervalPropertyType.tmp#SamplingIntervalPropertyType" href="Common_xsd_Complex_Type_diggs_SamplingIntervalPropertyType.html#SamplingIntervalPropertyType" coords="171,3,416,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_SamplingIntervalPropertyType.html#SamplingIntervalPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SamplingIntervalPropertyType')">diggs:SamplingIntervalPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_samplingInterval" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SampleDesignScopeType_samplingInterval" style="display:block"><b><a href="Common_xsd_Element_diggs_SamplingInterval.html#SamplingInterval" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SamplingInterval')">diggs:SamplingInterval</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_SamplingInterval.html#SamplingInterval" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SamplingInterval')">diggs:SamplingInterval</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SampleDesignScopeType_samplingInterval" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:samplingInterval</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:SamplingInterval</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:SamplingInterval&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:samplingInterval&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SampleDesignScopeType_samplingInterval" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_samplingInterval" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_samplingInterval');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_samplingInterval" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"samplingInterval"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SamplingIntervalPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A regular spacing along each referenced feature, optionally bounded: "every 5 ft", or "every 5 ft between 2 m and 20 m".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType_samplingPosition"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:samplingPosition</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_samplingPosition" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">One or more specific planned positions, relative to each</span><span class="tI">
+</span><span class="tT">referenced feature: "samples at 5, 10, 25 and 30 ft".</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_samplingPosition" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_samplingPosition.jpeg" usemap="#Common_xsd_Element_diggs_samplingPosition" /><map name="Common_xsd_Element_diggs_samplingPosition" id="Common_xsd_Element_diggs_samplingPosition"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="202,81,425,107" /><area alt="Common_xsd_Element_diggs_RelativeLocation.tmp#RelativeLocation" href="Common_xsd_Element_diggs_RelativeLocation.html#RelativeLocation" coords="256,189,407,213" /><area alt="Common_xsd_Complex_Type_diggs_RelativeLocationPropertyType.tmp#RelativeLocationPropertyType" href="Common_xsd_Complex_Type_diggs_RelativeLocationPropertyType.html#RelativeLocationPropertyType" coords="174,3,417,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_RelativeLocationPropertyType.html#RelativeLocationPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RelativeLocationPropertyType')">diggs:RelativeLocationPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_samplingPosition" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SampleDesignScopeType_samplingPosition" style="display:block"><b><a href="Common_xsd_Element_diggs_RelativeLocation.html#RelativeLocation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RelativeLocation')">diggs:RelativeLocation</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_RelativeLocation.html#RelativeLocation" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RelativeLocation')">diggs:RelativeLocation</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SampleDesignScopeType_samplingPosition" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:samplingPosition</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:RelativeLocation</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:RelativeLocation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:samplingPosition&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SampleDesignScopeType_samplingPosition" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_samplingPosition" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_samplingPosition');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_samplingPosition" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"samplingPosition"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RelativeLocationPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more specific planned positions, relative to each referenced feature: "samples at 5, 10, 25 and 30 ft".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType_selectionStride"></a><div class="componentTitle">Element <span class="qname"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b> / diggs:selectionStride</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SampleDesignScopeType_selectionStride" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SampleDesignScopeType_selectionStride');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SampleDesignScopeType_selectionStride" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Take every Nth member of the population, in whatever order it is</span><span class="tI">
+</span><span class="tT">otherwise enumerated: "subsample every other split-barrel</span><span class="tI">
+</span><span class="tT">sample" is a stride of 2. Meaningful only for a sourceSampleRef</span><span class="tI">
+</span><span class="tT">or sourceFeatureRef population with an inherent order;</span><span class="tI">
+</span><span class="tT">meaningless for zone, which has none.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType_selectionStride" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType_selectionStride');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType_selectionStride" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Element_diggs_selectionStride.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>positiveInteger</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SampleDesignScopeType_selectionStride" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SampleDesignScopeType_selectionStride');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SampleDesignScopeType_selectionStride" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType_selectionStride" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType_selectionStride');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType_selectionStride" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"selectionStride"</span><span class="tAN"> type=</span><span class="tAV">"positiveInteger"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Take every Nth member of the population, in whatever order it is otherwise enumerated: "subsample every other split-barrel sample" is a stride of 2. Meaningful only for a sourceSampleRef or sourceFeatureRef population with an inherent order; meaningless for zone, which has none.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SampleDesignScopeType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:SampleDesignScopeType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SampleDesignScopeType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SampleDesignScopeType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SampleDesignScopeType" style="display:block"><img alt="Diagram" style="border:0" src="img/Common_xsd_Complex_Type_diggs_SampleDesignScopeType.jpeg" usemap="#Common_xsd_Complex_Type_diggs_SampleDesignScopeType" /><map name="Common_xsd_Complex_Type_diggs_SampleDesignScopeType" id="Common_xsd_Complex_Type_diggs_SampleDesignScopeType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="258,118,339,142" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="421,259,536,283" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="421,349,589,373" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="421,426,523,450" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="421,516,504,540" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="318,218,534,244" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="233,43,497,65" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="372,620,487,644" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="372,710,474,734" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.tmp#AbstractComponentObjectBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" coords="219,3,589,25" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_zone" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_zone" coords="379,850,436,874" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_sourceFeatureRef" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sourceFeatureRef" coords="379,940,504,964" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_sourceSampleRef" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sourceSampleRef" coords="379,1030,502,1054" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_sampleCount" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sampleCount" coords="358,1107,460,1131" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_samplingInterval" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_samplingInterval" coords="358,1184,478,1208" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_samplingPosition" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_samplingPosition" coords="358,1261,481,1285" /><area alt="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.tmp#SampleDesignScopeType_selectionStride" href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_selectionStride" coords="358,1338,468,1362" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractComponentObjectBaseType.html#AbstractComponentObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractComponentObjectBaseType')">diggs:AbstractComponentObjectBaseType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScopeType')">diggs:SampleDesignScopeType</a></b></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_SampleDesignScopeType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_SampleDesignScopeType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_SampleDesignScopeType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="Common_xsd_Element_diggs_SampleDesignScope.html#SampleDesignScope" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SampleDesignScope')">diggs:SampleDesignScope</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SampleDesignScopeType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SampleDesignScopeType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SampleDesignScopeType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , (<b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_zone" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:zone')">diggs:zone</a></b> | <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sourceFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sourceFeatureRef+')">diggs:sourceFeatureRef+</a></b> | <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sourceSampleRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sourceSampleRef+')">diggs:sourceSampleRef+</a></b>) , (<b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sampleCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sampleCount')">diggs:sampleCount</a></b> | <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_samplingInterval" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingInterval')">diggs:samplingInterval</a></b> | <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_samplingPosition" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingPosition')">diggs:samplingPosition</a></b> | <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_selectionStride" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:selectionStride')">diggs:selectionStride</a></b>)</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sampleCount" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sampleCount')">diggs:sampleCount</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_samplingInterval" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingInterval')">diggs:samplingInterval</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_samplingPosition" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingPosition')">diggs:samplingPosition</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_selectionStride" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:selectionStride')">diggs:selectionStride</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sourceFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sourceFeatureRef')">diggs:sourceFeatureRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_sourceSampleRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:sourceSampleRef')">diggs:sourceSampleRef</a></b>, <b><a href="Common_xsd_Complex_Type_diggs_SampleDesignScopeType.html#SampleDesignScopeType_zone" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:zone')">diggs:zone</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SampleDesignScopeType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SampleDesignScopeType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SampleDesignScopeType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SampleDesignScopeType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SampleDesignScopeType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SampleDesignScopeType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"SampleDesignScopeType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractComponentObjectBaseType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;choice</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"zone"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlanarSurfaceOrMultiSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The area this sample design applies to. A feature fulfils this scope if its reference point lies within this zone, the same test diggs:SFDesignScopeType/zone applies.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"sourceFeatureRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:AbstractSamplingFeatureDesign</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more sampling-feature designs this sample design collects from: a collection of boreholes, or a single reference for a specific one. This is plan-to-plan: it cites a diggs:AbstractSamplingFeatureDesign or a specialization (for example diggs:DesignBorehole or diggs:DesignInstallation), an antecedent within the plan graph, never a realized sampling feature.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> name=</span><span class="tAV">"sourceSampleRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FractionalReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:DesignSample</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more sample designs this one is to be subsampled or aggregated from: "aggregate all bulk samples from these three test pits" cites the sample designs of the source pits, not the pits. This is plan-to-plan: it cites a diggs:DesignSample, an antecedent within the plan graph, never a realized sample. Meaningful only where the activityType of the host design is aggregate or subsample; the schema cannot enforce that correlation.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/choice&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;choice</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"sampleCount"</span><span class="tAN"> type=</span><span class="tAV">"positiveInteger"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A total count across the population: "50 split-barrel samples from this collection of boreholes".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"samplingInterval"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SamplingIntervalPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A regular spacing along each referenced feature, optionally bounded: "every 5 ft", or "every 5 ft between 2 m and 20 m".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"samplingPosition"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RelativeLocationPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more specific planned positions, relative to each referenced feature: "samples at 5, 10, 25 and 30 ft".</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"selectionStride"</span><span class="tAN"> type=</span><span class="tAV">"positiveInteger"</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+              </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Take every Nth member of the population, in whatever order it is otherwise enumerated: "subsample every other split-barrel sample" is a stride of 2. Meaningful only for a sourceSampleRef or sourceFeatureRef population with an inherent order; meaningless for zone, which has none.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/choice&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

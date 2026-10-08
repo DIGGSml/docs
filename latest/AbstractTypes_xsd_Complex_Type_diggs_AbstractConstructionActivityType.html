@@ -1,0 +1,1718 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:constructionMethod</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_AbstractConstructionActivityType_constructionMethod', 
+				'properties_AbstractConstructionActivityType_constructionEvent', 
+				'properties_AbstractConstructionActivityType_constructionEnvironment', 
+				'properties_AbstractConstructionActivityType_equipment', 
+				'properties_AbstractConstructionActivityType_otherConstructionActivityProperty', 
+				'properties_AbstractConstructionActivityType_activityDateTime', 
+				'properties_AbstractConstructionActivityType_delay', 
+				'properties_AbstractConstructionActivityType');
+var usedByBoxes= new Array('usedBy_AbstractConstructionActivityType');
+var sourceBoxes= new Array('source_AbstractConstructionActivityType_constructionMethod', 
+				'source_AbstractConstructionActivityType_constructionEvent', 
+				'source_AbstractConstructionActivityType_constructionEnvironment', 
+				'source_AbstractConstructionActivityType_equipment', 
+				'source_AbstractConstructionActivityType_otherConstructionActivityProperty', 
+				'source_AbstractConstructionActivityType_activityDateTime', 
+				'source_AbstractConstructionActivityType_delay', 
+				'source_AbstractConstructionActivityType');
+var instanceBoxes= new Array('instance_AbstractConstructionActivityType_constructionMethod', 
+				'instance_AbstractConstructionActivityType_constructionEvent', 
+				'instance_AbstractConstructionActivityType_constructionEnvironment', 
+				'instance_AbstractConstructionActivityType_equipment', 
+				'instance_AbstractConstructionActivityType_otherConstructionActivityProperty', 
+				'instance_AbstractConstructionActivityType_activityDateTime', 
+				'instance_AbstractConstructionActivityType_delay');
+var diagramBoxes= new Array('diagram_AbstractConstructionActivityType_constructionMethod', 
+				'diagram_AbstractConstructionActivityType_constructionEvent', 
+				'diagram_AbstractConstructionActivityType_constructionEnvironment', 
+				'diagram_AbstractConstructionActivityType_equipment', 
+				'diagram_AbstractConstructionActivityType_otherConstructionActivityProperty', 
+				'diagram_AbstractConstructionActivityType_activityDateTime', 
+				'diagram_AbstractConstructionActivityType_delay', 
+				'diagram_AbstractConstructionActivityType');
+var annotationBoxes= new Array('annotations_AbstractConstructionActivityType_constructionMethod', 
+				'annotations_AbstractConstructionActivityType_constructionEvent', 
+				'annotations_AbstractConstructionActivityType_constructionEnvironment', 
+				'annotations_AbstractConstructionActivityType_equipment', 
+				'annotations_AbstractConstructionActivityType_otherConstructionActivityProperty', 
+				'annotations_AbstractConstructionActivityType_activityDateTime', 
+				'annotations_AbstractConstructionActivityType_delay', 
+				'annotations_AbstractConstructionActivityType');
+var attributesBoxes= new Array('attributes_AbstractConstructionActivityType_constructionMethod', 
+				'attributes_AbstractConstructionActivityType_constructionEnvironment', 
+				'attributes_AbstractConstructionActivityType_equipment', 
+				'attributes_AbstractConstructionActivityType');
+var modelBoxes= new Array('model_AbstractConstructionActivityType_constructionMethod', 
+				'model_AbstractConstructionActivityType_constructionEvent', 
+				'model_AbstractConstructionActivityType_constructionEnvironment', 
+				'model_AbstractConstructionActivityType_equipment', 
+				'model_AbstractConstructionActivityType_otherConstructionActivityProperty', 
+				'model_AbstractConstructionActivityType_activityDateTime', 
+				'model_AbstractConstructionActivityType_delay', 
+				'model_AbstractConstructionActivityType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="AbstractConstructionActivityType_constructionMethod"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:constructionMethod</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_constructionMethod" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The method followed in carrying out this construction activity, as a</span><span class="tI">
+</span><span class="tT">diggs:ConstructionActivityMethod. A method may be tied to the part</span><span class="tI">
+</span><span class="tT">of the feature it applies to, for example one method for the base of</span><span class="tI">
+</span><span class="tT">a surface crust and another below it; with no location it applies to</span><span class="tI">
+</span><span class="tT">the whole feature. Repeat for each method used. A reference</span><span class="tI">
+</span><span class="tT">(xlink:href) to a method held elsewhere may be given in place of the</span><span class="tI">
+</span><span class="tT">object. Giving a diggs:Specification directly in this property is</span><span class="tI">
+</span><span class="tT">deprecated.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_constructionMethod" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_constructionMethod.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_constructionMethod" /><map name="AbstractTypes_xsd_Element_diggs_constructionMethod" id="AbstractTypes_xsd_Element_diggs_constructionMethod"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="219,81,442,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="219,181,437,207" /><area alt="Common_xsd_Element_diggs_Specification.tmp#Specification" href="Common_xsd_Element_diggs_Specification.html#Specification" coords="273,272,405,296" /><area alt="Core_xsd_Element_diggs_ConstructionActivityMethod.tmp#ConstructionActivityMethod" href="Core_xsd_Element_diggs_ConstructionActivityMethod.html#ConstructionActivityMethod" coords="273,349,488,373" /><area alt="Common_xsd_Complex_Type_diggs_ConstructionActivityMethodPropertyType.tmp#ConstructionActivityMethodPropertyType" href="Common_xsd_Complex_Type_diggs_ConstructionActivityMethodPropertyType.html#ConstructionActivityMethodPropertyType" coords="191,3,498,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_ConstructionActivityMethodPropertyType.html#ConstructionActivityMethodPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ConstructionActivityMethodPropertyType')">diggs:ConstructionActivityMethodPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_constructionMethod" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_constructionMethod" style="display:block"><b><a href="Common_xsd_Element_diggs_Specification.html#Specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Specification')">diggs:Specification</a></b> | <b><a href="Core_xsd_Element_diggs_ConstructionActivityMethod.html#ConstructionActivityMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ConstructionActivityMethod')">diggs:ConstructionActivityMethod</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_ConstructionActivityMethod.html#ConstructionActivityMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ConstructionActivityMethod')">diggs:ConstructionActivityMethod</a></b>, <b><a href="Common_xsd_Element_diggs_Specification.html#Specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Specification')">diggs:Specification</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_constructionMethod" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:constructionMethod</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Specification</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Specification&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:ConstructionActivityMethod</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:ConstructionActivityMethod&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:constructionMethod&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractConstructionActivityType_constructionMethod" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_constructionMethod" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_constructionMethod');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_constructionMethod" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"constructionMethod"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ConstructionActivityMethodPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The method followed in carrying out this construction activity, as a diggs:ConstructionActivityMethod. A method may be tied to the part of the feature it applies to, for example one method for the base of a surface crust and another below it; with no location it applies to the whole feature. Repeat for each method used. A reference (xlink:href) to a method held elsewhere may be given in place of the object. Giving a diggs:Specification directly in this property is deprecated.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType_constructionEvent"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:constructionEvent</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_constructionEvent" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_constructionEvent');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_constructionEvent" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">An event recorded while this construction activity was carried out,</span><span class="tI">
+</span><span class="tT">such as an obstruction met, a loss of material, a stoppage or a</span><span class="tI">
+</span><span class="tT">refusal. Each is a diggs:InstallationEvent, which can state the</span><span class="tI">
+</span><span class="tT">depth interval and time it occurred over and any associated</span><span class="tI">
+</span><span class="tT">readings. Repeat for each event. Events describe what happened</span><span class="tI">
+</span><span class="tT">during the activity; the method followed is stated by</span><span class="tI">
+</span><span class="tT">constructionMethod.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_constructionEvent" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_constructionEvent');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_constructionEvent" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_constructionEvent.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_constructionEvent" /><map name="AbstractTypes_xsd_Element_diggs_constructionEvent" id="AbstractTypes_xsd_Element_diggs_constructionEvent"><area alt="Core_xsd_Element_diggs_InstallationEvent.tmp#InstallationEvent" href="Core_xsd_Element_diggs_InstallationEvent.html#InstallationEvent" coords="262,44,414,68" /><area alt="Common_xsd_Complex_Type_diggs_InstallationEventPropertyType.tmp#InstallationEventPropertyType" href="Common_xsd_Complex_Type_diggs_InstallationEventPropertyType.html#InstallationEventPropertyType" coords="180,3,424,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_InstallationEventPropertyType.html#InstallationEventPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationEventPropertyType')">diggs:InstallationEventPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_constructionEvent" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_constructionEvent');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_constructionEvent" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_constructionEvent" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_constructionEvent');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_constructionEvent" style="display:block"><b><a href="Core_xsd_Element_diggs_InstallationEvent.html#InstallationEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationEvent')">diggs:InstallationEvent</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_InstallationEvent.html#InstallationEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:InstallationEvent')">diggs:InstallationEvent</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_constructionEvent" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_constructionEvent');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_constructionEvent" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:constructionEvent</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:InstallationEvent</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:InstallationEvent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:constructionEvent&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_constructionEvent" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_constructionEvent');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_constructionEvent" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"constructionEvent"</span><span class="tAN"> type=</span><span class="tAV">"diggs:InstallationEventPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An event recorded while this construction activity was carried out, such as an obstruction met, a loss of material, a stoppage or a refusal. Each is a diggs:InstallationEvent, which can state the depth interval and time it occurred over and any associated readings. Repeat for each event. Events describe what happened during the activity; the method followed is stated by constructionMethod.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType_constructionEnvironment"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:constructionEnvironment</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_constructionEnvironment" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">An environment object holding environmental properties that are</span><span class="tI">
+</span><span class="tT">relevant to the construction activity but external to it.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_constructionEnvironment" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_constructionEnvironment.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_constructionEnvironment" /><map name="AbstractTypes_xsd_Element_diggs_constructionEnvironment" id="AbstractTypes_xsd_Element_diggs_constructionEnvironment"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="247,81,465,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="247,168,470,194" /><area alt="Common_xsd_Element_diggs_Environment.tmp#Environment" href="Common_xsd_Element_diggs_Environment.html#Environment" coords="301,276,433,300" /><area alt="Common_xsd_Complex_Type_diggs_EnvironmentPropertyType.tmp#EnvironmentPropertyType" href="Common_xsd_Complex_Type_diggs_EnvironmentPropertyType.html#EnvironmentPropertyType" coords="219,3,443,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_EnvironmentPropertyType.html#EnvironmentPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EnvironmentPropertyType')">diggs:EnvironmentPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_constructionEnvironment" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_constructionEnvironment" style="display:block"><b><a href="Common_xsd_Element_diggs_Environment.html#Environment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Environment')">diggs:Environment</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_Environment.html#Environment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Environment')">diggs:Environment</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_constructionEnvironment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:constructionEnvironment</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Environment</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Environment&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:constructionEnvironment&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractConstructionActivityType_constructionEnvironment" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_constructionEnvironment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_constructionEnvironment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_constructionEnvironment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"constructionEnvironment"</span><span class="tAN"> type=</span><span class="tAV">"diggs:EnvironmentPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An environment object holding environmental properties that are relevant to the construction activity but external to it.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType_equipment"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:equipment</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_equipment" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The equipment used in the construction activity, cited by reference</span><span class="tI">
+</span><span class="tT">(xlink:href) to an equipment object.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_equipment" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_equipment.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_equipment" /><map name="AbstractTypes_xsd_Element_diggs_equipment" id="AbstractTypes_xsd_Element_diggs_equipment"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="167,81,390,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="167,181,385,207" /><area alt="AbstractTypes_xsd_Element_diggs_AbstractEquipment.tmp#AbstractEquipment" href="AbstractTypes_xsd_Element_diggs_AbstractEquipment.html#AbstractEquipment" coords="221,276,388,300" /><area alt="Common_xsd_Complex_Type_diggs_EquipmentPropertyType.tmp#EquipmentPropertyType" href="Common_xsd_Complex_Type_diggs_EquipmentPropertyType.html#EquipmentPropertyType" coords="139,3,352,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_EquipmentPropertyType.html#EquipmentPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:EquipmentPropertyType')">diggs:EquipmentPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_equipment" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_equipment" style="display:block"><b><a href="AbstractTypes_xsd_Element_diggs_AbstractEquipment.html#AbstractEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractEquipment')">diggs:AbstractEquipment</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Element_diggs_AbstractEquipment.html#AbstractEquipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractEquipment')">diggs:AbstractEquipment</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_equipment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:equipment</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AbstractEquipment</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AbstractEquipment&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:equipment&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractConstructionActivityType_equipment" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_equipment" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_equipment');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_equipment" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"equipment"</span><span class="tAN"> type=</span><span class="tAV">"diggs:EquipmentPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;appinfo</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:AbstractEquipment</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The equipment used in the construction activity, cited by reference (xlink:href) to an equipment object.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType_otherConstructionActivityProperty"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:otherConstructionActivityProperty</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_otherConstructionActivityProperty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_otherConstructionActivityProperty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_otherConstructionActivityProperty" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A parameter recording a property of the construction activity that</span><span class="tI">
+</span><span class="tT">is not otherwise provided for. Repeat for each property.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_otherConstructionActivityProperty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_otherConstructionActivityProperty');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_otherConstructionActivityProperty" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_otherConstructionActivityProperty.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_otherConstructionActivityProperty" /><map name="AbstractTypes_xsd_Element_diggs_otherConstructionActivityProperty" id="AbstractTypes_xsd_Element_diggs_otherConstructionActivityProperty"><area alt="Common_xsd_Element_diggs_Parameter.tmp#Parameter" href="Common_xsd_Element_diggs_Parameter.html#Parameter" coords="350,40,468,64" /><area alt="Common_xsd_Element_diggs_AuthorizedParameter.tmp#AuthorizedParameter" href="Common_xsd_Element_diggs_AuthorizedParameter.html#AuthorizedParameter" coords="350,130,528,154" /><area alt="Common_xsd_Element_diggs_ProvenancedParameter.tmp#ProvenancedParameter" href="Common_xsd_Element_diggs_ProvenancedParameter.html#ProvenancedParameter" coords="350,207,537,231" /><area alt="Common_xsd_Complex_Type_diggs_ParameterPropertyType.tmp#ParameterPropertyType" href="Common_xsd_Complex_Type_diggs_ParameterPropertyType.html#ParameterPropertyType" coords="268,3,478,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_ParameterPropertyType.html#ParameterPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ParameterPropertyType')">diggs:ParameterPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_otherConstructionActivityProperty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_otherConstructionActivityProperty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_otherConstructionActivityProperty" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_otherConstructionActivityProperty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_otherConstructionActivityProperty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_otherConstructionActivityProperty" style="display:block"><b><a href="Common_xsd_Element_diggs_Parameter.html#Parameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Parameter')">diggs:Parameter</a></b> | <b><a href="Common_xsd_Element_diggs_AuthorizedParameter.html#AuthorizedParameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AuthorizedParameter')">diggs:AuthorizedParameter</a></b> | <b><a href="Common_xsd_Element_diggs_ProvenancedParameter.html#ProvenancedParameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ProvenancedParameter')">diggs:ProvenancedParameter</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_AuthorizedParameter.html#AuthorizedParameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AuthorizedParameter')">diggs:AuthorizedParameter</a></b>, <b><a href="Common_xsd_Element_diggs_Parameter.html#Parameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Parameter')">diggs:Parameter</a></b>, <b><a href="Common_xsd_Element_diggs_ProvenancedParameter.html#ProvenancedParameter" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:ProvenancedParameter')">diggs:ProvenancedParameter</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_otherConstructionActivityProperty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_otherConstructionActivityProperty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_otherConstructionActivityProperty" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:otherConstructionActivityProperty</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Parameter</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">index=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Parameter&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:AuthorizedParameter</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">index=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:AuthorizedParameter&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:ProvenancedParameter</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">index=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:ProvenancedParameter&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:otherConstructionActivityProperty&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_otherConstructionActivityProperty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_otherConstructionActivityProperty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_otherConstructionActivityProperty" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"otherConstructionActivityProperty"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ParameterPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A parameter recording a property of the construction activity that is not otherwise provided for. Repeat for each property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType_activityDateTime"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:activityDateTime</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_activityDateTime" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_activityDateTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_activityDateTime" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The date and time interval over which the entire construction</span><span class="tI">
+</span><span class="tT">activity was conducted, delays included.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_activityDateTime" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_activityDateTime');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_activityDateTime" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_activityDateTime.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_activityDateTime" /><map name="AbstractTypes_xsd_Element_diggs_activityDateTime" id="AbstractTypes_xsd_Element_diggs_activityDateTime"><area alt="Common_xsd_Element_diggs_TimeInterval.tmp#TimeInterval" href="Common_xsd_Element_diggs_TimeInterval.html#TimeInterval" coords="252,44,382,68" /><area alt="Common_xsd_Complex_Type_diggs_TimeIntervalPropertyType.tmp#TimeIntervalPropertyType" href="Common_xsd_Complex_Type_diggs_TimeIntervalPropertyType.html#TimeIntervalPropertyType" coords="170,3,392,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_TimeIntervalPropertyType.html#TimeIntervalPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimeIntervalPropertyType')">diggs:TimeIntervalPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_activityDateTime" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_activityDateTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_activityDateTime" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_activityDateTime" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_activityDateTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_activityDateTime" style="display:block"><b><a href="Common_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_TimeInterval.html#TimeInterval" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TimeInterval')">diggs:TimeInterval</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_activityDateTime" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_activityDateTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_activityDateTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:activityDateTime</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:TimeInterval</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:TimeInterval&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:activityDateTime&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_activityDateTime" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_activityDateTime');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_activityDateTime" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"activityDateTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The date and time interval over which the entire construction activity was conducted, delays included.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType_delay"></a><div class="componentTitle">Element <span class="qname"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b> / diggs:delay</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType_delay" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A non-productive interval that occurred during this construction</span><span class="tI">
+</span><span class="tT">activity, such as an equipment breakdown, a standby period or a rig</span><span class="tI">
+</span><span class="tT">move. Repeat for each delay. The delayType of each diggs:DelayEvent</span><span class="tI">
+</span><span class="tT">gives the cause, from a controlled list. This is the structured</span><span class="tI">
+</span><span class="tT">counterpart of a narrative remark and supports production analysis</span><span class="tI">
+</span><span class="tT">such as utilization and non-productive time. Recording a delay here</span><span class="tI">
+</span><span class="tT">does not replace activityDateTime, which covers the whole activity,</span><span class="tI">
+</span><span class="tT">delays included. This is an activity-level delay, distinct from the</span><span class="tI">
+</span><span class="tT">delay property of diggs:DriveSetType (the delay before one drive</span><span class="tI">
+</span><span class="tT">increment started) and of diggs:VaneTestMeasurementDataType (a</span><span class="tI">
+</span><span class="tT">procedurally required waiting period).</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType_delay');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType_delay" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Element_diggs_delay.jpeg" usemap="#AbstractTypes_xsd_Element_diggs_delay" /><map name="AbstractTypes_xsd_Element_diggs_delay" id="AbstractTypes_xsd_Element_diggs_delay"><area alt="CoreProcedures_xsd_Element_diggs_DelayEvent.tmp#DelayEvent" href="CoreProcedures_xsd_Element_diggs_DelayEvent.html#DelayEvent" coords="192,44,314,68" /><area alt="CoreProcedures_xsd_Complex_Type_diggs_DelayEventPropertyType.tmp#DelayEventPropertyType" href="CoreProcedures_xsd_Complex_Type_diggs_DelayEventPropertyType.html#DelayEventPropertyType" coords="110,3,324,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="CoreProcedures_xsd_Complex_Type_diggs_DelayEventPropertyType.html#DelayEventPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DelayEventPropertyType')">diggs:DelayEventPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType_delay" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType_delay" style="display:block"><b><a href="CoreProcedures_xsd_Element_diggs_DelayEvent.html#DelayEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DelayEvent')">diggs:DelayEvent</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="CoreProcedures_xsd_Element_diggs_DelayEvent.html#DelayEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DelayEvent')">diggs:DelayEvent</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_AbstractConstructionActivityType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_AbstractConstructionActivityType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_AbstractConstructionActivityType_delay" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:delay</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:DelayEvent</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:DelayEvent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:delay&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType_delay" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType_delay');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType_delay" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"delay"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DelayEventPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A non-productive interval that occurred during this construction activity, such as an equipment breakdown, a standby period or a rig move. Repeat for each delay. The delayType of each diggs:DelayEvent gives the cause, from a controlled list. This is the structured counterpart of a narrative remark and supports production analysis such as utilization and non-productive time. Recording a delay here does not replace activityDateTime, which covers the whole activity, delays included. This is an activity-level delay, distinct from the delay property of diggs:DriveSetType (the delay before one drive increment started) and of diggs:VaneTestMeasurementDataType (a procedurally required waiting period).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="AbstractConstructionActivityType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:AbstractConstructionActivityType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_AbstractConstructionActivityType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Abstract base type for construction activities, which carry out work that improves</span><span class="tI">
+</span><span class="tT">or alters ground conditions.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_AbstractConstructionActivityType" style="display:block"><img alt="Diagram" style="border:0" src="img/AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.jpeg" usemap="#AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType" /><map name="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType" id="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="356,198,437,222" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="519,339,634,363" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="519,429,687,453" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="519,506,621,530" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="519,596,602,620" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="416,298,632,324" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="331,123,592,145" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="317,83,598,105" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="328,830,409,854" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="385,914,500,938" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="385,1004,487,1028" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="303,43,615,65" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="392,1131,475,1155" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="392,1221,545,1245" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="392,1298,489,1322" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="392,1388,572,1412" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="392,1465,498,1489" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="392,1555,444,1579" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="392,1645,461,1669" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="289,3,577,25" /><area alt="Common_xsd_Element_diggs_investigationTarget.tmp#investigationTarget" href="Common_xsd_Element_diggs_investigationTarget.html#investigationTarget" coords="378,1759,546,1783" /><area alt="Common_xsd_Element_diggs_projectRef.tmp#projectRef" href="Common_xsd_Element_diggs_projectRef.html#projectRef" coords="378,1836,497,1860" /><area alt="Common_xsd_Element_diggs_samplingFeatureRef.tmp#samplingFeatureRef" href="Common_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" coords="378,1913,548,1937" /><area alt="Common_xsd_Element_diggs_programRef.tmp#programRef" href="Common_xsd_Element_diggs_programRef.html#programRef" coords="378,1990,506,2014" /><area alt="Common_xsd_Element_diggs_programDesignRef.tmp#programDesignRef" href="Common_xsd_Element_diggs_programDesignRef.html#programDesignRef" coords="378,2054,543,2078" /><area alt="Common_xsd_Element_diggs_programSpecificationRef.tmp#programSpecificationRef" href="Common_xsd_Element_diggs_programSpecificationRef.html#programSpecificationRef" coords="378,2131,574,2155" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_constructionMethod" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionMethod" coords="378,2208,518,2232" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_constructionEvent" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionEvent" coords="378,2285,507,2309" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_constructionEnvironment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionEnvironment" coords="378,2362,546,2386" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_equipment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_equipment" coords="378,2439,466,2463" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_otherConstructionActivityProperty" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_otherConstructionActivityProperty" coords="378,2516,595,2540" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_activityDateTime" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_activityDateTime" coords="378,2593,497,2617" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.tmp#AbstractConstructionActivityType_delay" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_delay" coords="378,2670,437,2694" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivityType')">diggs:AbstractConstructionActivityType</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_AbstractConstructionActivityType" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">abstract</td>
+                                    <td><b>false</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_AbstractConstructionActivityType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="AbstractTypes_xsd_Element_diggs_AbstractConstructionActivity.html#AbstractConstructionActivity" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractConstructionActivity')">diggs:AbstractConstructionActivity</a></b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">Complex Types </td>
+                                    <td><b><a href="Grouting_xsd_Complex_Type_diggs_LinearGroutingActivityType.html#LinearGroutingActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LinearGroutingActivityType')">diggs:LinearGroutingActivityType</a></b>, <b><a href="DeepFoundation_xsd_Complex_Type_diggs_PileDrivingActivityType.html#PileDrivingActivityType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PileDrivingActivityType')">diggs:PileDrivingActivityType</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RIColumnConstructionType.html#RIColumnConstructionType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RIColumnConstructionType')">diggs:RIColumnConstructionType</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_AbstractConstructionActivityType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Common_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget*')">diggs:investigationTarget*</a></b> , <b><a href="Common_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:projectRef+')">diggs:projectRef+</a></b> , <b><a href="Common_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef')">diggs:samplingFeatureRef</a></b> , <b><a href="Common_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programRef{0,1}')">diggs:programRef{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_programDesignRef.html#programDesignRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programDesignRef*')">diggs:programDesignRef*</a></b> , <b><a href="Common_xsd_Element_diggs_programSpecificationRef.html#programSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programSpecificationRef*')">diggs:programSpecificationRef*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionMethod*')">diggs:constructionMethod*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionEvent*')">diggs:constructionEvent*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionEnvironment*')">diggs:constructionEnvironment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_equipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:equipment*')">diggs:equipment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_otherConstructionActivityProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherConstructionActivityProperty*')">diggs:otherConstructionActivityProperty*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_activityDateTime" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:activityDateTime{0,1}')">diggs:activityDateTime{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_delay" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:delay*')">diggs:delay*</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_activityDateTime" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:activityDateTime')">diggs:activityDateTime</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionEnvironment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionEnvironment')">diggs:constructionEnvironment</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionEvent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionEvent')">diggs:constructionEvent</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_constructionMethod" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:constructionMethod')">diggs:constructionMethod</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_delay" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:delay')">diggs:delay</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_equipment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:equipment')">diggs:equipment</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Common_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget')">diggs:investigationTarget</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractConstructionActivityType.html#AbstractConstructionActivityType_otherConstructionActivityProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherConstructionActivityProperty')">diggs:otherConstructionActivityProperty</a></b>, <b><a href="Common_xsd_Element_diggs_programDesignRef.html#programDesignRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programDesignRef')">diggs:programDesignRef</a></b>, <b><a href="Common_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programRef')">diggs:programRef</a></b>, <b><a href="Common_xsd_Element_diggs_programSpecificationRef.html#programSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programSpecificationRef')">diggs:programSpecificationRef</a></b>, <b><a href="Common_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Common_xsd_Element_diggs_samplingFeatureRef.html#samplingFeatureRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureRef')">diggs:samplingFeatureRef</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_AbstractConstructionActivityType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_AbstractConstructionActivityType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_AbstractConstructionActivityType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_AbstractConstructionActivityType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"AbstractConstructionActivityType"</span><span class="tAN"> abstract=</span><span class="tAV">"false"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Abstract base type for construction activities, which carry out work that improves or alters ground conditions.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractFeatureType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> ref=</span><span class="tAV">"diggs:investigationTarget"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> ref=</span><span class="tAV">"diggs:projectRef"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:samplingFeatureRef"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:programRef"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:programDesignRef"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The program design objects this activity was carried out to realize, for example the diggs:DesignConstructionActivity that planned it.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> ref=</span><span class="tAV">"diggs:programSpecificationRef"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The program specification objects this activity must satisfy. More than one may apply, for example a method specification together with a site-level performance specification.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"constructionMethod"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ConstructionActivityMethodPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The method followed in carrying out this construction activity, as a diggs:ConstructionActivityMethod. A method may be tied to the part of the feature it applies to, for example one method for the base of a surface crust and another below it; with no location it applies to the whole feature. Repeat for each method used. A reference (xlink:href) to a method held elsewhere may be given in place of the object. Giving a diggs:Specification directly in this property is deprecated.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"constructionEvent"</span><span class="tAN"> type=</span><span class="tAV">"diggs:InstallationEventPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An event recorded while this construction activity was carried out, such as an obstruction met, a loss of material, a stoppage or a refusal. Each is a diggs:InstallationEvent, which can state the depth interval and time it occurred over and any associated readings. Repeat for each event. Events describe what happened during the activity; the method followed is stated by constructionMethod.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"constructionEnvironment"</span><span class="tAN"> type=</span><span class="tAV">"diggs:EnvironmentPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">An environment object holding environmental properties that are relevant to the construction activity but external to it.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"equipment"</span><span class="tAN"> type=</span><span class="tAV">"diggs:EquipmentPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;appinfo</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:AbstractEquipment</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The equipment used in the construction activity, cited by reference (xlink:href) to an equipment object.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"otherConstructionActivityProperty"</span><span class="tAN"> type=</span><span class="tAV">"diggs:ParameterPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A parameter recording a property of the construction activity that is not otherwise provided for. Repeat for each property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"activityDateTime"</span><span class="tAN"> type=</span><span class="tAV">"diggs:TimeIntervalPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The date and time interval over which the entire construction activity was conducted, delays included.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"delay"</span><span class="tAN"> type=</span><span class="tAV">"diggs:DelayEventPropertyType"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A non-productive interval that occurred during this construction activity, such as an equipment breakdown, a standby period or a rig move. Repeat for each delay. The delayType of each diggs:DelayEvent gives the cause, from a controlled list. This is the structured counterpart of a narrative remark and supports production analysis such as utilization and non-productive time. Recording a delay here does not replace activityDateTime, which covers the whole activity, delays included. This is an activity-level delay, distinct from the delay property of diggs:DriveSetType (the delay before one drive increment started) and of diggs:VaneTestMeasurementDataType (a procedurally required waiting period).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

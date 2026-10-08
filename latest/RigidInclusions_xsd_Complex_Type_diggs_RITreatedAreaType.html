@@ -1,0 +1,931 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:totalArea</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_RITreatedAreaType_totalArea', 
+				'properties_RITreatedAreaType_workingPlatform', 
+				'properties_RITreatedAreaType_seismicSiteClass');
+var usedByBoxes= new Array('usedBy_RITreatedAreaType');
+var sourceBoxes= new Array('source_RITreatedAreaType_totalArea', 
+				'source_RITreatedAreaType_workingPlatform', 
+				'source_RITreatedAreaType_seismicSiteClass', 
+				'source_RITreatedAreaType');
+var instanceBoxes= new Array('instance_RITreatedAreaType_workingPlatform');
+var diagramBoxes= new Array('diagram_RITreatedAreaType_totalArea', 
+				'diagram_RITreatedAreaType_workingPlatform', 
+				'diagram_RITreatedAreaType_seismicSiteClass', 
+				'diagram_RITreatedAreaType');
+var annotationBoxes= new Array('annotations_RITreatedAreaType_totalArea', 
+				'annotations_RITreatedAreaType_workingPlatform', 
+				'annotations_RITreatedAreaType_seismicSiteClass');
+var attributesBoxes= new Array('attributes_RITreatedAreaType_totalArea', 
+				'attributes_RITreatedAreaType');
+var modelBoxes= new Array('model_RITreatedAreaType_workingPlatform', 
+				'model_RITreatedAreaType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="RITreatedAreaType_totalArea"></a><div class="componentTitle">Element <span class="qname"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RITreatedAreaType')">diggs:RITreatedAreaType</a></b> / diggs:totalArea</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_RITreatedAreaType_totalArea" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_RITreatedAreaType_totalArea');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_RITreatedAreaType_totalArea" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The total area of the treated area: the area encompassing the</span><span class="tI">
+</span><span class="tT">installation of rigid inclusion columns.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RITreatedAreaType_totalArea" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RITreatedAreaType_totalArea');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RITreatedAreaType_totalArea" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_totalArea_1.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_totalArea_1" /><map name="RigidInclusions_xsd_Element_diggs_totalArea_1" id="RigidInclusions_xsd_Element_diggs_totalArea_1"><area alt="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.tmp#AbstractMeasure" href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" coords="156,80,324,106" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_howDetermined" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" coords="170,197,302,221" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType_qualifier" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" coords="170,231,262,255" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.tmp#DescriptorValueType" href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" coords="145,43,433,65" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.tmp#AreaMeasureType_uom" href="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.html#AreaMeasureType_uom" coords="156,317,228,341" /><area alt="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.tmp#AreaMeasureType" href="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.html#AreaMeasureType" coords="131,3,311,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.html#AreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaMeasureType')">diggs:AreaMeasureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b>double</b><ul class="internal">
+                                    <li class="internal"><b><a href="EmlAllObjects_xsd_Simple_Type_eml_AbstractMeasure.html#AbstractMeasure" target="mainFrame" title="http://www.energistics.org/energyml/data/commonv2" onclick="updatePageTitle('Schema documentation for component eml:AbstractMeasure')">eml:AbstractMeasure</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorValueType')">diggs:DescriptorValueType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.html#AreaMeasureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaMeasureType')">diggs:AreaMeasureType</a></b></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_RITreatedAreaType_totalArea" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_RITreatedAreaType_totalArea');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_RITreatedAreaType_totalArea" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_RITreatedAreaType_totalArea" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_RITreatedAreaType_totalArea');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_RITreatedAreaType_totalArea" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_howDetermined" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component howDetermined')">howDetermined</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_DescriptorMethodEnumType.html#DescriptorMethodEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:DescriptorMethodEnumType')">diggs:DescriptorMethodEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_DescriptorValueType.html#DescriptorValueType_qualifier" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component qualifier')">qualifier</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_QualifierEnumExtType.html#QualifierEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:QualifierEnumExtType')">diggs:QualifierEnumExtType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="MeasureTypes_xsd_Complex_Type_diggs_AreaMeasureType.html#AreaMeasureType_uom" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uom')">uom</a></b></td>
+                                    <td><b><a href="MeasureTypes_xsd_Simple_Type_diggs_AreaUomEnumType.html#AreaUomEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AreaUomEnumType')">diggs:AreaUomEnumType</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The unit of measure for area.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RITreatedAreaType_totalArea" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RITreatedAreaType_totalArea');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RITreatedAreaType_totalArea" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"totalArea"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AreaMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The total area of the treated area: the area encompassing the installation of rigid inclusion columns.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RITreatedAreaType_workingPlatform"></a><div class="componentTitle">Element <span class="qname"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RITreatedAreaType')">diggs:RITreatedAreaType</a></b> / diggs:workingPlatform</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_RITreatedAreaType_workingPlatform" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_RITreatedAreaType_workingPlatform');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_RITreatedAreaType_workingPlatform" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A working platform prepared within the treated area. Repeat for each</span><span class="tI">
+</span><span class="tT">platform: one treated area may have been prepared in several stages</span><span class="tI">
+</span><span class="tT">or at several levels.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RITreatedAreaType_workingPlatform" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RITreatedAreaType_workingPlatform');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RITreatedAreaType_workingPlatform" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_workingPlatform.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_workingPlatform" /><map name="RigidInclusions_xsd_Element_diggs_workingPlatform" id="RigidInclusions_xsd_Element_diggs_workingPlatform"><area alt="RigidInclusions_xsd_Element_diggs_WorkingPlatform.tmp#WorkingPlatform" href="RigidInclusions_xsd_Element_diggs_WorkingPlatform.html#WorkingPlatform" coords="252,44,405,68" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_WorkingPlatformPropertyType.tmp#WorkingPlatformPropertyType" href="RigidInclusions_xsd_Complex_Type_diggs_WorkingPlatformPropertyType.html#WorkingPlatformPropertyType" coords="170,3,415,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="RigidInclusions_xsd_Complex_Type_diggs_WorkingPlatformPropertyType.html#WorkingPlatformPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:WorkingPlatformPropertyType')">diggs:WorkingPlatformPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_RITreatedAreaType_workingPlatform" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_RITreatedAreaType_workingPlatform');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_RITreatedAreaType_workingPlatform" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RITreatedAreaType_workingPlatform" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_RITreatedAreaType_workingPlatform');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RITreatedAreaType_workingPlatform" style="display:block"><b><a href="RigidInclusions_xsd_Element_diggs_WorkingPlatform.html#WorkingPlatform" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:WorkingPlatform')">diggs:WorkingPlatform</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="RigidInclusions_xsd_Element_diggs_WorkingPlatform.html#WorkingPlatform" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:WorkingPlatform')">diggs:WorkingPlatform</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_RITreatedAreaType_workingPlatform" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_RITreatedAreaType_workingPlatform');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_RITreatedAreaType_workingPlatform" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:workingPlatform</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:WorkingPlatform</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:WorkingPlatform&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:workingPlatform&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RITreatedAreaType_workingPlatform" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RITreatedAreaType_workingPlatform');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RITreatedAreaType_workingPlatform" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"workingPlatform"</span><span class="tAN"> type=</span><span class="tAV">"diggs:WorkingPlatformPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A working platform prepared within the treated area. Repeat for each platform: one treated area may have been prepared in several stages or at several levels.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RITreatedAreaType_seismicSiteClass"></a><div class="componentTitle">Element <span class="qname"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RITreatedAreaType')">diggs:RITreatedAreaType</a></b> / diggs:seismicSiteClass</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_RITreatedAreaType_seismicSiteClass" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_RITreatedAreaType_seismicSiteClass');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_RITreatedAreaType_seismicSiteClass" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The seismic site classification (IBC/ASCE 7 Site Class A-F) of the</span><span class="tI">
+</span><span class="tT">site after ground improvement, based on the composite properties of</span><span class="tI">
+</span><span class="tT">the treated ground mass. It is a classification, not the measurement</span><span class="tI">
+</span><span class="tT">it is derived from: the composite shear-wave velocity is a separate</span><span class="tI">
+</span><span class="tT">fact, expressible as a measured outcome of diggs:LabVelocityTest or</span><span class="tI">
+</span><span class="tT">diggs:GeophysicalFieldSurvey, or as a diggs:PerformanceCriterion</span><span class="tI">
+</span><span class="tT">where a minimum Vs is a design requirement. It is the achieved</span><span class="tI">
+</span><span class="tT">class, not the intended one; its design-side counterpart is</span><span class="tI">
+</span><span class="tT">diggs:DesignRITreatedAreaType/seismicSiteClass, which carries the</span><span class="tI">
+</span><span class="tT">predicted class, and where the two differ that divergence is the</span><span class="tI">
+</span><span class="tT">finding, so neither value should be edited to match the other.</span><span class="tI">
+</span><span class="tT">Values come from the enumerated list, or "Other: xx", where xx is a</span><span class="tI">
+</span><span class="tT">user-defined term whose meaning differs from every listed value (not</span><span class="tI">
+</span><span class="tT">a synonym of one).</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RITreatedAreaType_seismicSiteClass" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RITreatedAreaType_seismicSiteClass');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RITreatedAreaType_seismicSiteClass" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Element_diggs_seismicSiteClass.jpeg" usemap="#RigidInclusions_xsd_Element_diggs_seismicSiteClass" /><map name="RigidInclusions_xsd_Element_diggs_seismicSiteClass" id="RigidInclusions_xsd_Element_diggs_seismicSiteClass"><area alt="Common_xsd_Simple_Type_diggs_SeismicSiteClassEnumExtType.tmp#SeismicSiteClassEnumExtType" href="Common_xsd_Simple_Type_diggs_SeismicSiteClassEnumExtType.html#SeismicSiteClassEnumExtType" coords="167,0,416,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Simple_Type_diggs_SeismicSiteClassEnumExtType.html#SeismicSiteClassEnumExtType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SeismicSiteClassEnumExtType')">diggs:SeismicSiteClassEnumExtType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_RITreatedAreaType_seismicSiteClass" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_RITreatedAreaType_seismicSiteClass');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_RITreatedAreaType_seismicSiteClass" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RITreatedAreaType_seismicSiteClass" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RITreatedAreaType_seismicSiteClass');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RITreatedAreaType_seismicSiteClass" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"seismicSiteClass"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SeismicSiteClassEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The seismic site classification (IBC/ASCE 7 Site Class A-F) of the site after ground improvement, based on the composite properties of the treated ground mass. It is a classification, not the measurement it is derived from: the composite shear-wave velocity is a separate fact, expressible as a measured outcome of diggs:LabVelocityTest or diggs:GeophysicalFieldSurvey, or as a diggs:PerformanceCriterion where a minimum Vs is a design requirement. It is the achieved class, not the intended one; its design-side counterpart is diggs:DesignRITreatedAreaType/seismicSiteClass, which carries the predicted class, and where the two differ that divergence is the finding, so neither value should be edited to match the other. Values come from the enumerated list, or "Other: xx", where xx is a user-defined term whose meaning differs from every listed value (not a synonym of one).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="RITreatedAreaType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:RITreatedAreaType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_RITreatedAreaType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_RITreatedAreaType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_RITreatedAreaType" style="display:block"><img alt="Diagram" style="border:0" src="img/RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.jpeg" usemap="#RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType" /><map name="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType" id="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="297,318,378,342" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="460,459,575,483" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="460,549,628,573" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="460,626,562,650" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="460,716,543,740" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="357,418,573,444" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="272,243,533,265" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.tmp#AbstractFeatureType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" coords="258,203,539,225" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="269,950,350,974" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="326,1034,441,1058" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="326,1124,428,1148" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.tmp#AbstractFeatureBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" coords="244,163,556,185" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="333,1251,416,1275" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="333,1341,486,1365" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="333,1418,430,1442" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="333,1508,513,1532" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_associatedFile" coords="333,1585,439,1609" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_role" coords="333,1675,385,1699" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType_remark" coords="333,1765,402,1789" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.tmp#http___diggsml.org_schemas_3_AbstractFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" coords="230,123,521,145" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="369,1879,484,1903" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="369,1969,471,1993" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="390,2059,473,2083" /><area alt="Common_xsd_Element_diggs_internalIdentifier.tmp#internalIdentifier" href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" coords="390,2149,543,2173" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="390,2226,487,2250" /><area alt="Common_xsd_Element_diggs_implementationStatus.tmp#implementationStatus" href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" coords="390,2316,570,2340" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_associatedFile" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_associatedFile" coords="390,2393,496,2417" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_role" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_role" coords="390,2483,442,2507" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_remark" coords="390,2573,459,2597" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.tmp#AbstractNamedFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType" coords="216,83,541,105" /><area alt="Common_xsd_Element_diggs_investigationTarget.tmp#investigationTarget" href="Common_xsd_Element_diggs_investigationTarget.html#investigationTarget" coords="305,2687,473,2711" /><area alt="Common_xsd_Element_diggs_projectRef.tmp#projectRef" href="Common_xsd_Element_diggs_projectRef.html#projectRef" coords="305,2764,424,2788" /><area alt="Common_xsd_Element_diggs_originalProjectRef.tmp#originalProjectRef" href="Common_xsd_Element_diggs_originalProjectRef.html#originalProjectRef" coords="305,2841,464,2865" /><area alt="Common_xsd_Element_diggs_associatedProjectRef.tmp#associatedProjectRef" href="Common_xsd_Element_diggs_associatedProjectRef.html#associatedProjectRef" coords="305,2918,480,2942" /><area alt="Common_xsd_Element_diggs_samplingFeatureGroupRef.tmp#samplingFeatureGroupRef" href="Common_xsd_Element_diggs_samplingFeatureGroupRef.html#samplingFeatureGroupRef" coords="305,2995,509,3019" /><area alt="Common_xsd_Element_diggs_programRef.tmp#programRef" href="Common_xsd_Element_diggs_programRef.html#programRef" coords="305,3072,433,3096" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_currentDesign" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_currentDesign" coords="305,3136,413,3160" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_previousDesign" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_previousDesign" coords="305,3213,420,3237" /><area alt="Common_xsd_Element_diggs_programSpecificationRef.tmp#programSpecificationRef" href="Common_xsd_Element_diggs_programSpecificationRef.html#programSpecificationRef" coords="305,3290,501,3314" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_realizesGridIndex" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_realizesGridIndex" coords="305,3367,430,3391" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_environment" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_environment" coords="305,3444,404,3468" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_otherSamplingFeatureProperty" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_otherSamplingFeatureProperty" coords="305,3534,500,3558" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_locality" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_locality" coords="305,3611,374,3635" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_referencePoint" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_referencePoint" coords="305,3688,414,3712" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType_localCoordinates" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_localCoordinates" coords="305,3778,427,3802" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.tmp#AbstractSamplingFeatureType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType" coords="202,43,539,65" /><area alt="ExtSamplingFeatures_xsd_Element_diggs_referenceEdge.tmp#referenceEdge" href="ExtSamplingFeatures_xsd_Element_diggs_referenceEdge.html#referenceEdge" coords="291,3892,432,3916" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.tmp#AbstractPlanarSamplingFeatureType_featureExtent" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.html#AbstractPlanarSamplingFeatureType_featureExtent" coords="291,3982,394,4006" /><area alt="ExtSamplingFeatures_xsd_Element_diggs_relativeFeatureBoundary.tmp#relativeFeatureBoundary" href="ExtSamplingFeatures_xsd_Element_diggs_relativeFeatureBoundary.html#relativeFeatureBoundary" coords="291,4072,485,4096" /><area alt="ExtSamplingFeatures_xsd_Element_diggs_planarReferencing.tmp#planarReferencing" href="ExtSamplingFeatures_xsd_Element_diggs_planarReferencing.html#planarReferencing" coords="291,4149,453,4173" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.tmp#AbstractPlanarSamplingFeatureType" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.html#AbstractPlanarSamplingFeatureType" coords="188,3,558,25" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.tmp#RITreatedAreaType_totalArea" href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_totalArea" coords="277,4263,357,4287" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.tmp#RITreatedAreaType_workingPlatform" href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_workingPlatform" coords="277,4353,396,4377" /><area alt="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.tmp#RITreatedAreaType_seismicSiteClass" href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_seismicSiteClass" coords="277,4443,396,4467" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.html#AbstractPlanarSamplingFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractPlanarSamplingFeatureType')">diggs:AbstractPlanarSamplingFeatureType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractFeatureType.html#AbstractFeatureType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractFeatureType')">gml:AbstractFeatureType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureBaseType.html#AbstractFeatureBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureBaseType')">diggs:AbstractFeatureBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractFeatureType.html#http___diggsml.org_schemas_3_AbstractFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractFeatureType')">diggs:AbstractFeatureType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractNamedFeatureType')">diggs:AbstractNamedFeatureType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractSamplingFeatureType')">diggs:AbstractSamplingFeatureType</a></b><ul class="internal">
+                                                                  <li class="internal"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.html#AbstractPlanarSamplingFeatureType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractPlanarSamplingFeatureType')">diggs:AbstractPlanarSamplingFeatureType</a></b><ul class="internal">
+                                                                        <li class="internal"><b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RITreatedAreaType')">diggs:RITreatedAreaType</a></b></li>
+                                                                     </ul>
+                                                                  </li>
+                                                               </ul>
+                                                            </li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_RITreatedAreaType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_RITreatedAreaType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_RITreatedAreaType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="RigidInclusions_xsd_Element_diggs_RITreatedArea.html#RITreatedArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RITreatedArea')">diggs:RITreatedArea</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_RITreatedAreaType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_RITreatedAreaType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_RITreatedAreaType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name+')">gml:name+</a></b> , <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier{0,1}')">diggs:internalIdentifier{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus{0,1}')">diggs:implementationStatus{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile*')">diggs:associatedFile*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role*')">diggs:role*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="Common_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget*')">diggs:investigationTarget*</a></b> , <b><a href="Common_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:projectRef+')">diggs:projectRef+</a></b> , <b><a href="Common_xsd_Element_diggs_originalProjectRef.html#originalProjectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:originalProjectRef{0,1}')">diggs:originalProjectRef{0,1}</a></b> , <b><a href="Common_xsd_Element_diggs_associatedProjectRef.html#associatedProjectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedProjectRef*')">diggs:associatedProjectRef*</a></b> , <b><a href="Common_xsd_Element_diggs_samplingFeatureGroupRef.html#samplingFeatureGroupRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureGroupRef*')">diggs:samplingFeatureGroupRef*</a></b> , <b><a href="Common_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programRef{0,1}')">diggs:programRef{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_currentDesign" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:currentDesign{0,1}')">diggs:currentDesign{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_previousDesign" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:previousDesign*')">diggs:previousDesign*</a></b> , <b><a href="Common_xsd_Element_diggs_programSpecificationRef.html#programSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programSpecificationRef*')">diggs:programSpecificationRef*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_realizesGridIndex" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:realizesGridIndex{0,1}')">diggs:realizesGridIndex{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_environment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:environment*')">diggs:environment*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_otherSamplingFeatureProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherSamplingFeatureProperty*')">diggs:otherSamplingFeatureProperty*</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_locality" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:locality{0,1}')">diggs:locality{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_referencePoint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referencePoint')">diggs:referencePoint</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_localCoordinates" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:localCoordinates{0,1}')">diggs:localCoordinates{0,1}</a></b> , <b><a href="ExtSamplingFeatures_xsd_Element_diggs_referenceEdge.html#referenceEdge" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceEdge{0,1}')">diggs:referenceEdge{0,1}</a></b> , <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.html#AbstractPlanarSamplingFeatureType_featureExtent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:featureExtent')">diggs:featureExtent</a></b> , <b><a href="ExtSamplingFeatures_xsd_Element_diggs_relativeFeatureBoundary.html#relativeFeatureBoundary" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:relativeFeatureBoundary{0,1}')">diggs:relativeFeatureBoundary{0,1}</a></b> , <b><a href="ExtSamplingFeatures_xsd_Element_diggs_planarReferencing.html#planarReferencing" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:planarReferencing*')">diggs:planarReferencing*</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_totalArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:totalArea{0,1}')">diggs:totalArea{0,1}</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_workingPlatform" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:workingPlatform+')">diggs:workingPlatform+</a></b> , <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_seismicSiteClass" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:seismicSiteClass{0,1}')">diggs:seismicSiteClass{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_associatedFile" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedFile')">diggs:associatedFile</a></b>, <b><a href="Common_xsd_Element_diggs_associatedProjectRef.html#associatedProjectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:associatedProjectRef')">diggs:associatedProjectRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_currentDesign" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:currentDesign')">diggs:currentDesign</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_environment" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:environment')">diggs:environment</a></b>, <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractPlanarSamplingFeatureType.html#AbstractPlanarSamplingFeatureType_featureExtent" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:featureExtent')">diggs:featureExtent</a></b>, <b><a href="Common_xsd_Element_diggs_implementationStatus.html#implementationStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:implementationStatus')">diggs:implementationStatus</a></b>, <b><a href="Common_xsd_Element_diggs_internalIdentifier.html#internalIdentifier" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:internalIdentifier')">diggs:internalIdentifier</a></b>, <b><a href="Common_xsd_Element_diggs_investigationTarget.html#investigationTarget" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:investigationTarget')">diggs:investigationTarget</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_localCoordinates" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:localCoordinates')">diggs:localCoordinates</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_locality" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:locality')">diggs:locality</a></b>, <b><a href="Common_xsd_Element_diggs_originalProjectRef.html#originalProjectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:originalProjectRef')">diggs:originalProjectRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_otherSamplingFeatureProperty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:otherSamplingFeatureProperty')">diggs:otherSamplingFeatureProperty</a></b>, <b><a href="ExtSamplingFeatures_xsd_Element_diggs_planarReferencing.html#planarReferencing" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:planarReferencing')">diggs:planarReferencing</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_previousDesign" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:previousDesign')">diggs:previousDesign</a></b>, <b><a href="Common_xsd_Element_diggs_programRef.html#programRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programRef')">diggs:programRef</a></b>, <b><a href="Common_xsd_Element_diggs_programSpecificationRef.html#programSpecificationRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:programSpecificationRef')">diggs:programSpecificationRef</a></b>, <b><a href="Common_xsd_Element_diggs_projectRef.html#projectRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:projectRef')">diggs:projectRef</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_realizesGridIndex" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:realizesGridIndex')">diggs:realizesGridIndex</a></b>, <b><a href="ExtSamplingFeatures_xsd_Element_diggs_referenceEdge.html#referenceEdge" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referenceEdge')">diggs:referenceEdge</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractSamplingFeatureType.html#AbstractSamplingFeatureType_referencePoint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:referencePoint')">diggs:referencePoint</a></b>, <b><a href="ExtSamplingFeatures_xsd_Element_diggs_relativeFeatureBoundary.html#relativeFeatureBoundary" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:relativeFeatureBoundary')">diggs:relativeFeatureBoundary</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractNamedFeatureType.html#AbstractNamedFeatureType_role" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:role')">diggs:role</a></b>, <b><a href="Common_xsd_Element_diggs_samplingFeatureGroupRef.html#samplingFeatureGroupRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:samplingFeatureGroupRef')">diggs:samplingFeatureGroupRef</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_seismicSiteClass" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:seismicSiteClass')">diggs:seismicSiteClass</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_totalArea" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:totalArea')">diggs:totalArea</a></b>, <b><a href="RigidInclusions_xsd_Complex_Type_diggs_RITreatedAreaType.html#RITreatedAreaType_workingPlatform" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:workingPlatform')">diggs:workingPlatform</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_RITreatedAreaType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_RITreatedAreaType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_RITreatedAreaType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_RITreatedAreaType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_RITreatedAreaType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_RITreatedAreaType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"RITreatedAreaType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractPlanarSamplingFeatureType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"totalArea"</span><span class="tAN"> type=</span><span class="tAV">"diggs:AreaMeasureType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The total area of the treated area: the area encompassing the installation of rigid inclusion columns.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"workingPlatform"</span><span class="tAN"> type=</span><span class="tAV">"diggs:WorkingPlatformPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A working platform prepared within the treated area. Repeat for each platform: one treated area may have been prepared in several stages or at several levels.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"seismicSiteClass"</span><span class="tAN"> type=</span><span class="tAV">"diggs:SeismicSiteClassEnumExtType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The seismic site classification (IBC/ASCE 7 Site Class A-F) of the site after ground improvement, based on the composite properties of the treated ground mass. It is a classification, not the measurement it is derived from: the composite shear-wave velocity is a separate fact, expressible as a measured outcome of diggs:LabVelocityTest or diggs:GeophysicalFieldSurvey, or as a diggs:PerformanceCriterion where a minimum Vs is a design requirement. It is the achieved class, not the intended one; its design-side counterpart is diggs:DesignRITreatedAreaType/seismicSiteClass, which carries the predicted class, and where the two differ that divergence is the finding, so neither value should be edited to match the other. Values come from the enumerated list, or "Other: xx", where xx is a user-defined term whose meaning differs from every listed value (not a synonym of one).</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

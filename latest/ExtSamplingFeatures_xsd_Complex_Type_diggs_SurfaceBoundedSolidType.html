@@ -1,0 +1,1246 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:footprint</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_SurfaceBoundedSolidType_footprint', 
+				'properties_SurfaceBoundedSolidType_topSurface', 
+				'properties_SurfaceBoundedSolidType_bottomSurface', 
+				'properties_SurfaceBoundedSolidType_uncertainty');
+var usedByBoxes= new Array('usedBy_SurfaceBoundedSolidType');
+var sourceBoxes= new Array('source_SurfaceBoundedSolidType_footprint', 
+				'source_SurfaceBoundedSolidType_topSurface', 
+				'source_SurfaceBoundedSolidType_bottomSurface', 
+				'source_SurfaceBoundedSolidType_uncertainty', 
+				'source_SurfaceBoundedSolidType');
+var instanceBoxes= new Array('instance_SurfaceBoundedSolidType_footprint', 
+				'instance_SurfaceBoundedSolidType_topSurface', 
+				'instance_SurfaceBoundedSolidType_bottomSurface', 
+				'instance_SurfaceBoundedSolidType_uncertainty');
+var diagramBoxes= new Array('diagram_SurfaceBoundedSolidType_footprint', 
+				'diagram_SurfaceBoundedSolidType_topSurface', 
+				'diagram_SurfaceBoundedSolidType_bottomSurface', 
+				'diagram_SurfaceBoundedSolidType_uncertainty', 
+				'diagram_SurfaceBoundedSolidType');
+var annotationBoxes= new Array('annotations_SurfaceBoundedSolidType_footprint', 
+				'annotations_SurfaceBoundedSolidType_topSurface', 
+				'annotations_SurfaceBoundedSolidType_bottomSurface', 
+				'annotations_SurfaceBoundedSolidType_uncertainty');
+var attributesBoxes= new Array('attributes_SurfaceBoundedSolidType_footprint', 
+				'attributes_SurfaceBoundedSolidType_topSurface', 
+				'attributes_SurfaceBoundedSolidType_bottomSurface', 
+				'attributes_SurfaceBoundedSolidType');
+var modelBoxes= new Array('model_SurfaceBoundedSolidType_footprint', 
+				'model_SurfaceBoundedSolidType_topSurface', 
+				'model_SurfaceBoundedSolidType_bottomSurface', 
+				'model_SurfaceBoundedSolidType_uncertainty', 
+				'model_SurfaceBoundedSolidType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="SurfaceBoundedSolidType_footprint"></a><div class="componentTitle">Element <span class="qname"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SurfaceBoundedSolidType')">diggs:SurfaceBoundedSolidType</a></b> / diggs:footprint</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SurfaceBoundedSolidType_footprint" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The lateral extent of the volume: one planar polygon</span><span class="tI">
+</span><span class="tT">(diggs:PlanarSurface) whose boundary is the trace of the vertical</span><span class="tI">
+</span><span class="tT">sides, or several disjoint polygons (diggs:MultiSurface, each member</span><span class="tI">
+</span><span class="tT">expected to be a diggs:PlanarSurface) when the plan-view extent is</span><span class="tI">
+</span><span class="tT">itself disconnected, for instance a geologic unit present as</span><span class="tI">
+</span><span class="tT">separate unconnected patches. Unlike topSurface and bottomSurface,</span><span class="tI">
+</span><span class="tT">which are each one continuous surface, the footprint may be a</span><span class="tI">
+</span><span class="tT">diggs:MultiSurface, because each component is one planar region and</span><span class="tI">
+</span><span class="tT">walls are erected on each component's own boundary; a MultiSurface</span><span class="tI">
+</span><span class="tT">footprint over one pair of continuous bounding surfaces yields a</span><span class="tI">
+</span><span class="tT">separate body for each member. Each component's exterior ring is its</span><span class="tI">
+</span><span class="tT">outer wall; each interior ring is a hole through the body and</span><span class="tI">
+</span><span class="tT">generates its own wall. Components shall not overlap in plan view.</span><span class="tI">
+</span><span class="tT">The footprint is normally horizontal and authored as a plan-view</span><span class="tI">
+</span><span class="tT">polygon, but the content model does not require it. Elevation</span><span class="tI">
+</span><span class="tT">carried by the footprint's coordinates is not the volume's top or</span><span class="tI">
+</span><span class="tT">bottom: the footprint supplies (x, y) only, and the bounding</span><span class="tI">
+</span><span class="tT">surfaces supply elevation.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SurfaceBoundedSolidType_footprint" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtSamplingFeatures_xsd_Element_diggs_footprint.jpeg" usemap="#ExtSamplingFeatures_xsd_Element_diggs_footprint" /><map name="ExtSamplingFeatures_xsd_Element_diggs_footprint" id="ExtSamplingFeatures_xsd_Element_diggs_footprint"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="158,81,376,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="158,168,381,194" /><area alt="Core_xsd_Element_diggs_PlanarSurface.tmp#PlanarSurface" href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" coords="283,272,420,296" /><area alt="Core_xsd_Element_diggs_MultiSurface.tmp#MultiSurface" href="Core_xsd_Element_diggs_MultiSurface.html#MultiSurface" coords="283,349,413,373" /><area alt="Core_xsd_Complex_Type_diggs_PlanarSurfaceOrMultiSurfacePropertyType.tmp#PlanarSurfaceOrMultiSurfacePropertyType" href="Core_xsd_Complex_Type_diggs_PlanarSurfaceOrMultiSurfacePropertyType.html#PlanarSurfaceOrMultiSurfacePropertyType" coords="130,3,439,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Core_xsd_Complex_Type_diggs_PlanarSurfaceOrMultiSurfacePropertyType.html#PlanarSurfaceOrMultiSurfacePropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurfaceOrMultiSurfacePropertyType')">diggs:PlanarSurfaceOrMultiSurfacePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SurfaceBoundedSolidType_footprint" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SurfaceBoundedSolidType_footprint" style="display:block">(<b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b> | <b><a href="Core_xsd_Element_diggs_MultiSurface.html#MultiSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiSurface')">diggs:MultiSurface</a></b>)</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_MultiSurface.html#MultiSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiSurface')">diggs:MultiSurface</a></b>, <b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SurfaceBoundedSolidType_footprint" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:footprint</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:PlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:PlanarSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:MultiSurface</span><span class="tT"> </span><span class="tAN">aggregationType=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:MultiSurface&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:footprint&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SurfaceBoundedSolidType_footprint" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SurfaceBoundedSolidType_footprint" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SurfaceBoundedSolidType_footprint');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SurfaceBoundedSolidType_footprint" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"footprint"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlanarSurfaceOrMultiSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The lateral extent of the volume: one planar polygon (diggs:PlanarSurface) whose boundary is the trace of the vertical sides, or several disjoint polygons (diggs:MultiSurface, each member expected to be a diggs:PlanarSurface) when the plan-view extent is itself disconnected, for instance a geologic unit present as separate unconnected patches. Unlike topSurface and bottomSurface, which are each one continuous surface, the footprint may be a diggs:MultiSurface, because each component is one planar region and walls are erected on each component's own boundary; a MultiSurface footprint over one pair of continuous bounding surfaces yields a separate body for each member. Each component's exterior ring is its outer wall; each interior ring is a hole through the body and generates its own wall. Components shall not overlap in plan view. The footprint is normally horizontal and authored as a plan-view polygon, but the content model does not require it. Elevation carried by the footprint's coordinates is not the volume's top or bottom: the footprint supplies (x, y) only, and the bounding surfaces supply elevation.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SurfaceBoundedSolidType_topSurface"></a><div class="componentTitle">Element <span class="qname"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SurfaceBoundedSolidType')">diggs:SurfaceBoundedSolidType</a></b> / diggs:topSurface</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SurfaceBoundedSolidType_topSurface" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The upper bounding surface of the volume; for a geologic body, the</span><span class="tI">
+</span><span class="tT">top of the unit. It is one continuous surface: a</span><span class="tI">
+</span><span class="tT">diggs:PlanarSurface, a multi-patch diggs:MultiPlanarSurface or</span><span class="tI">
+</span><span class="tT">diggs:CompositeSurface (whose patches or members share boundaries, a</span><span class="tI">
+</span><span class="tT">step being a vertical member), or a diggs:TriangulatedSurface mesh;</span><span class="tI">
+</span><span class="tT">not a diggs:MultiSurface. It shall extend to or beyond the footprint</span><span class="tI">
+</span><span class="tT">over the footprint's whole area. The portion outside the footprint</span><span class="tI">
+</span><span class="tT">is not part of the solid, which allows one authored surface to serve</span><span class="tI">
+</span><span class="tT">several adjacent bodies.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SurfaceBoundedSolidType_topSurface" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtSamplingFeatures_xsd_Element_diggs_topSurface.jpeg" usemap="#ExtSamplingFeatures_xsd_Element_diggs_topSurface" /><map name="ExtSamplingFeatures_xsd_Element_diggs_topSurface" id="ExtSamplingFeatures_xsd_Element_diggs_topSurface"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="168,81,386,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="168,168,391,194" /><area alt="Core_xsd_Element_diggs_PlanarSurface.tmp#PlanarSurface" href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" coords="293,272,430,296" /><area alt="Core_xsd_Element_diggs_CompositeSurface.tmp#CompositeSurface" href="Core_xsd_Element_diggs_CompositeSurface.html#CompositeSurface" coords="293,349,455,373" /><area alt="Core_xsd_Element_diggs_MultiPlanarSurface.tmp#MultiPlanarSurface" href="Core_xsd_Element_diggs_MultiPlanarSurface.html#MultiPlanarSurface" coords="293,426,456,450" /><area alt="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.tmp#TriangulatedSurface" href="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.html#TriangulatedSurface" coords="293,503,465,527" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_BoundingSurfacePropertyType.tmp#BoundingSurfacePropertyType" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_BoundingSurfacePropertyType.html#BoundingSurfacePropertyType" coords="140,3,387,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_BoundingSurfacePropertyType.html#BoundingSurfacePropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:BoundingSurfacePropertyType')">diggs:BoundingSurfacePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SurfaceBoundedSolidType_topSurface" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SurfaceBoundedSolidType_topSurface" style="display:block">(<b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b> | <b><a href="Core_xsd_Element_diggs_CompositeSurface.html#CompositeSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeSurface')">diggs:CompositeSurface</a></b> | <b><a href="Core_xsd_Element_diggs_MultiPlanarSurface.html#MultiPlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiPlanarSurface')">diggs:MultiPlanarSurface</a></b> | <b><a href="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.html#TriangulatedSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TriangulatedSurface')">diggs:TriangulatedSurface</a></b>)</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_CompositeSurface.html#CompositeSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeSurface')">diggs:CompositeSurface</a></b>, <b><a href="Core_xsd_Element_diggs_MultiPlanarSurface.html#MultiPlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiPlanarSurface')">diggs:MultiPlanarSurface</a></b>, <b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b>, <b><a href="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.html#TriangulatedSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TriangulatedSurface')">diggs:TriangulatedSurface</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SurfaceBoundedSolidType_topSurface" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:topSurface</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:PlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:PlanarSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:CompositeSurface</span><span class="tT"> </span><span class="tAN">aggregationType=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:CompositeSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:MultiPlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:MultiPlanarSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:TriangulatedSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:TriangulatedSurface&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:topSurface&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SurfaceBoundedSolidType_topSurface" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SurfaceBoundedSolidType_topSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SurfaceBoundedSolidType_topSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SurfaceBoundedSolidType_topSurface" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"topSurface"</span><span class="tAN"> type=</span><span class="tAV">"diggs:BoundingSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The upper bounding surface of the volume; for a geologic body, the top of the unit. It is one continuous surface: a diggs:PlanarSurface, a multi-patch diggs:MultiPlanarSurface or diggs:CompositeSurface (whose patches or members share boundaries, a step being a vertical member), or a diggs:TriangulatedSurface mesh; not a diggs:MultiSurface. It shall extend to or beyond the footprint over the footprint's whole area. The portion outside the footprint is not part of the solid, which allows one authored surface to serve several adjacent bodies.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SurfaceBoundedSolidType_bottomSurface"></a><div class="componentTitle">Element <span class="qname"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SurfaceBoundedSolidType')">diggs:SurfaceBoundedSolidType</a></b> / diggs:bottomSurface</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SurfaceBoundedSolidType_bottomSurface" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The lower bounding surface of the volume; for a geologic body, the</span><span class="tI">
+</span><span class="tT">base of the unit, which is commonly the top of the unit below and</span><span class="tI">
+</span><span class="tT">may be the same surface object cited twice by reference. It admits</span><span class="tI">
+</span><span class="tT">the same surfaces as topSurface and is subject to the same coverage</span><span class="tI">
+</span><span class="tT">requirement. It may touch or cross topSurface: where it lies at or</span><span class="tI">
+</span><span class="tT">above the top the body pinches out and that part of the footprint is</span><span class="tI">
+</span><span class="tT">empty; see diggs:SurfaceBoundedSolid.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SurfaceBoundedSolidType_bottomSurface" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtSamplingFeatures_xsd_Element_diggs_bottomSurface.jpeg" usemap="#ExtSamplingFeatures_xsd_Element_diggs_bottomSurface" /><map name="ExtSamplingFeatures_xsd_Element_diggs_bottomSurface" id="ExtSamplingFeatures_xsd_Element_diggs_bottomSurface"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="189,81,407,107" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="189,168,412,194" /><area alt="Core_xsd_Element_diggs_PlanarSurface.tmp#PlanarSurface" href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" coords="314,272,451,296" /><area alt="Core_xsd_Element_diggs_CompositeSurface.tmp#CompositeSurface" href="Core_xsd_Element_diggs_CompositeSurface.html#CompositeSurface" coords="314,349,476,373" /><area alt="Core_xsd_Element_diggs_MultiPlanarSurface.tmp#MultiPlanarSurface" href="Core_xsd_Element_diggs_MultiPlanarSurface.html#MultiPlanarSurface" coords="314,426,477,450" /><area alt="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.tmp#TriangulatedSurface" href="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.html#TriangulatedSurface" coords="314,503,486,527" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_BoundingSurfacePropertyType.tmp#BoundingSurfacePropertyType" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_BoundingSurfacePropertyType.html#BoundingSurfacePropertyType" coords="161,3,408,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_BoundingSurfacePropertyType.html#BoundingSurfacePropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:BoundingSurfacePropertyType')">diggs:BoundingSurfacePropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SurfaceBoundedSolidType_bottomSurface" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SurfaceBoundedSolidType_bottomSurface" style="display:block">(<b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b> | <b><a href="Core_xsd_Element_diggs_CompositeSurface.html#CompositeSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeSurface')">diggs:CompositeSurface</a></b> | <b><a href="Core_xsd_Element_diggs_MultiPlanarSurface.html#MultiPlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiPlanarSurface')">diggs:MultiPlanarSurface</a></b> | <b><a href="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.html#TriangulatedSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TriangulatedSurface')">diggs:TriangulatedSurface</a></b>)</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Core_xsd_Element_diggs_CompositeSurface.html#CompositeSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:CompositeSurface')">diggs:CompositeSurface</a></b>, <b><a href="Core_xsd_Element_diggs_MultiPlanarSurface.html#MultiPlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:MultiPlanarSurface')">diggs:MultiPlanarSurface</a></b>, <b><a href="Core_xsd_Element_diggs_PlanarSurface.html#PlanarSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:PlanarSurface')">diggs:PlanarSurface</a></b>, <b><a href="ExtSamplingFeatures_xsd_Element_diggs_TriangulatedSurface.html#TriangulatedSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:TriangulatedSurface')">diggs:TriangulatedSurface</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SurfaceBoundedSolidType_bottomSurface" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:bottomSurface</span><span class="tT"> </span><span class="tAN">xlink:href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">nilReason=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:PlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:PlanarSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:CompositeSurface</span><span class="tT"> </span><span class="tAN">aggregationType=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:CompositeSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:MultiPlanarSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:MultiPlanarSurface&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:TriangulatedSurface</span><span class="tT"> </span><span class="tAN">axisLabels=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsDimension=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">srsName=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">uomLabels=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:TriangulatedSurface&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:bottomSurface&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SurfaceBoundedSolidType_bottomSurface" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SurfaceBoundedSolidType_bottomSurface" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SurfaceBoundedSolidType_bottomSurface');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SurfaceBoundedSolidType_bottomSurface" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"bottomSurface"</span><span class="tAN"> type=</span><span class="tAV">"diggs:BoundingSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The lower bounding surface of the volume; for a geologic body, the base of the unit, which is commonly the top of the unit below and may be the same surface object cited twice by reference. It admits the same surfaces as topSurface and is subject to the same coverage requirement. It may touch or cross topSurface: where it lies at or above the top the body pinches out and that part of the footprint is empty; see diggs:SurfaceBoundedSolid.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SurfaceBoundedSolidType_uncertainty"></a><div class="componentTitle">Element <span class="qname"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SurfaceBoundedSolidType')">diggs:SurfaceBoundedSolidType</a></b> / diggs:uncertainty</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SurfaceBoundedSolidType_uncertainty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SurfaceBoundedSolidType_uncertainty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SurfaceBoundedSolidType_uncertainty" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The positional uncertainty of the volume as a whole. Uncertainty</span><span class="tI">
+</span><span class="tT">specific to one bounding surface belongs on that surface's own</span><span class="tI">
+</span><span class="tT">uncertainty property.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SurfaceBoundedSolidType_uncertainty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SurfaceBoundedSolidType_uncertainty');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SurfaceBoundedSolidType_uncertainty" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtSamplingFeatures_xsd_Element_diggs_uncertainty_3.jpeg" usemap="#ExtSamplingFeatures_xsd_Element_diggs_uncertainty_3" /><map name="ExtSamplingFeatures_xsd_Element_diggs_uncertainty_3" id="ExtSamplingFeatures_xsd_Element_diggs_uncertainty_3"><area alt="Common_xsd_Element_diggs_LocationUncertainty.tmp#LocationUncertainty" href="Common_xsd_Element_diggs_LocationUncertainty.html#LocationUncertainty" coords="225,44,397,68" /><area alt="Common_xsd_Complex_Type_diggs_LocationUncertaintyPropertyType.tmp#LocationUncertaintyPropertyType" href="Common_xsd_Complex_Type_diggs_LocationUncertaintyPropertyType.html#LocationUncertaintyPropertyType" coords="143,3,407,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_LocationUncertaintyPropertyType.html#LocationUncertaintyPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LocationUncertaintyPropertyType')">diggs:LocationUncertaintyPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SurfaceBoundedSolidType_uncertainty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SurfaceBoundedSolidType_uncertainty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SurfaceBoundedSolidType_uncertainty" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SurfaceBoundedSolidType_uncertainty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SurfaceBoundedSolidType_uncertainty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SurfaceBoundedSolidType_uncertainty" style="display:block"><b><a href="Common_xsd_Element_diggs_LocationUncertainty.html#LocationUncertainty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LocationUncertainty')">diggs:LocationUncertainty</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_LocationUncertainty.html#LocationUncertainty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:LocationUncertainty')">diggs:LocationUncertainty</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SurfaceBoundedSolidType_uncertainty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SurfaceBoundedSolidType_uncertainty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SurfaceBoundedSolidType_uncertainty" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:uncertainty</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:LocationUncertainty</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:LocationUncertainty&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:uncertainty&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SurfaceBoundedSolidType_uncertainty" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SurfaceBoundedSolidType_uncertainty');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SurfaceBoundedSolidType_uncertainty" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"uncertainty"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LocationUncertaintyPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The positional uncertainty of the volume as a whole. Uncertainty specific to one bounding surface belongs on that surface's own uncertainty property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SurfaceBoundedSolidType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:SurfaceBoundedSolidType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SurfaceBoundedSolidType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SurfaceBoundedSolidType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SurfaceBoundedSolidType" style="display:block"><img alt="Diagram" style="border:0" src="img/ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.jpeg" usemap="#ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType" /><map name="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType" id="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="306,238,387,262" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="469,379,584,403" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="469,469,637,493" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="469,546,571,570" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="469,636,552,660" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="366,338,582,364" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="281,163,542,185" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_SRSReferenceGroup.tmp#SRSReferenceGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_SRSReferenceGroup.html#SRSReferenceGroup" coords="295,781,479,807" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGeometryType.tmp#AbstractGeometryType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGeometryType.html#AbstractGeometryType" coords="267,123,557,145" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGeometricPrimitiveType.tmp#http___www.opengis.net_gml_3.2_AbstractGeometricPrimitiveType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGeometricPrimitiveType.html#http___www.opengis.net_gml_3.2_AbstractGeometricPrimitiveType" coords="253,83,592,105" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractSolidType.tmp#AbstractSolidType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractSolidType.html#AbstractSolidType" coords="239,43,503,65" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractVolumeType.tmp#AbstractVolumeType" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractVolumeType.html#AbstractVolumeType" coords="225,3,513,25" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.tmp#SurfaceBoundedSolidType_footprint" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_footprint" coords="293,1046,372,1070" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.tmp#SurfaceBoundedSolidType_topSurface" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_topSurface" coords="293,1136,382,1160" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.tmp#SurfaceBoundedSolidType_bottomSurface" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_bottomSurface" coords="293,1226,403,1250" /><area alt="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.tmp#SurfaceBoundedSolidType_uncertainty" href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_uncertainty" coords="293,1316,385,1340" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractVolumeType.html#AbstractVolumeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractVolumeType')">diggs:AbstractVolumeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGeometryType.html#AbstractGeometryType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGeometryType')">gml:AbstractGeometryType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGeometricPrimitiveType.html#http___www.opengis.net_gml_3.2_AbstractGeometricPrimitiveType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGeometricPrimitiveType')">gml:AbstractGeometricPrimitiveType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractSolidType.html#AbstractSolidType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractSolidType')">gml:AbstractSolidType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_AbstractVolumeType.html#AbstractVolumeType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractVolumeType')">diggs:AbstractVolumeType</a></b><ul class="internal">
+                                                            <li class="internal"><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SurfaceBoundedSolidType')">diggs:SurfaceBoundedSolidType</a></b></li>
+                                                         </ul>
+                                                      </li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_SurfaceBoundedSolidType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_SurfaceBoundedSolidType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_SurfaceBoundedSolidType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="ExtSamplingFeatures_xsd_Element_diggs_SurfaceBoundedSolid.html#SurfaceBoundedSolid" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SurfaceBoundedSolid')">diggs:SurfaceBoundedSolid</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SurfaceBoundedSolidType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SurfaceBoundedSolidType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SurfaceBoundedSolidType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:descriptionReference{0,1}')">gml:descriptionReference{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_footprint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:footprint')">diggs:footprint</a></b> , <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_topSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:topSurface')">diggs:topSurface</a></b> , <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_bottomSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:bottomSurface')">diggs:bottomSurface</a></b> , <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_uncertainty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:uncertainty{0,1}')">diggs:uncertainty{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_bottomSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:bottomSurface')">diggs:bottomSurface</a></b>, <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_footprint" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:footprint')">diggs:footprint</a></b>, <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_topSurface" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:topSurface')">diggs:topSurface</a></b>, <b><a href="ExtSamplingFeatures_xsd_Complex_Type_diggs_SurfaceBoundedSolidType.html#SurfaceBoundedSolidType_uncertainty" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:uncertainty')">diggs:uncertainty</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:descriptionReference')">gml:descriptionReference</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SurfaceBoundedSolidType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SurfaceBoundedSolidType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SurfaceBoundedSolidType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_SRSInformationGroup.html#SRSInformationGroup_axisLabels" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component axisLabels')">axisLabels</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NCNameList.html#NCNameList" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NCNameList')">gml:NCNameList</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_SRSReferenceGroup.html#SRSReferenceGroup_srsDimension" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component srsDimension')">srsDimension</a></b></td>
+                                    <td><b>positiveInteger</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_SRSReferenceGroup.html#SRSReferenceGroup_srsName" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component srsName')">srsName</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_SRSInformationGroup.html#SRSInformationGroup_uomLabels" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component uomLabels')">uomLabels</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NCNameList.html#NCNameList" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NCNameList')">gml:NCNameList</a></b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SurfaceBoundedSolidType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SurfaceBoundedSolidType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SurfaceBoundedSolidType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"SurfaceBoundedSolidType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractVolumeType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"footprint"</span><span class="tAN"> type=</span><span class="tAV">"diggs:PlanarSurfaceOrMultiSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The lateral extent of the volume: one planar polygon (diggs:PlanarSurface) whose boundary is the trace of the vertical sides, or several disjoint polygons (diggs:MultiSurface, each member expected to be a diggs:PlanarSurface) when the plan-view extent is itself disconnected, for instance a geologic unit present as separate unconnected patches. Unlike topSurface and bottomSurface, which are each one continuous surface, the footprint may be a diggs:MultiSurface, because each component is one planar region and walls are erected on each component's own boundary; a MultiSurface footprint over one pair of continuous bounding surfaces yields a separate body for each member. Each component's exterior ring is its outer wall; each interior ring is a hole through the body and generates its own wall. Components shall not overlap in plan view. The footprint is normally horizontal and authored as a plan-view polygon, but the content model does not require it. Elevation carried by the footprint's coordinates is not the volume's top or bottom: the footprint supplies (x, y) only, and the bounding surfaces supply elevation.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"topSurface"</span><span class="tAN"> type=</span><span class="tAV">"diggs:BoundingSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The upper bounding surface of the volume; for a geologic body, the top of the unit. It is one continuous surface: a diggs:PlanarSurface, a multi-patch diggs:MultiPlanarSurface or diggs:CompositeSurface (whose patches or members share boundaries, a step being a vertical member), or a diggs:TriangulatedSurface mesh; not a diggs:MultiSurface. It shall extend to or beyond the footprint over the footprint's whole area. The portion outside the footprint is not part of the solid, which allows one authored surface to serve several adjacent bodies.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> name=</span><span class="tAV">"bottomSurface"</span><span class="tAN"> type=</span><span class="tAV">"diggs:BoundingSurfacePropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The lower bounding surface of the volume; for a geologic body, the base of the unit, which is commonly the top of the unit below and may be the same surface object cited twice by reference. It admits the same surfaces as topSurface and is subject to the same coverage requirement. It may touch or cross topSurface: where it lies at or above the top the body pinches out and that part of the footprint is empty; see diggs:SurfaceBoundedSolid.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"uncertainty"</span><span class="tAN"> type=</span><span class="tAV">"diggs:LocationUncertaintyPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The positional uncertainty of the volume as a whole. Uncertainty specific to one bounding surface belongs on that surface's own uncertainty property.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

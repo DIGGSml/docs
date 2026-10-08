@@ -1,0 +1,1634 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for component diggs:specification</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript"><!--
+        var propertiesBoxes= new Array('properties_SpecificationRegistryEntryType_specification', 
+				'properties_SpecificationRegistryEntryType_domain', 
+				'properties_SpecificationRegistryEntryType_authority', 
+				'properties_SpecificationRegistryEntryType_reference', 
+				'properties_SpecificationRegistryEntryType_registryStatus', 
+				'properties_SpecificationRegistryEntryType_supersededByRef', 
+				'properties_SpecificationRegistryEntryType_occurrences');
+var facetsBoxes= new Array('facets_SpecificationRegistryEntryType_registryStatus');
+var usedByBoxes= new Array('usedBy_SpecificationRegistryEntryType');
+var sourceBoxes= new Array('source_SpecificationRegistryEntryType_specification', 
+				'source_SpecificationRegistryEntryType_domain', 
+				'source_SpecificationRegistryEntryType_authority', 
+				'source_SpecificationRegistryEntryType_reference', 
+				'source_SpecificationRegistryEntryType_registryStatus', 
+				'source_SpecificationRegistryEntryType_supersededByRef', 
+				'source_SpecificationRegistryEntryType_occurrences', 
+				'source_SpecificationRegistryEntryType');
+var instanceBoxes= new Array('instance_SpecificationRegistryEntryType_specification', 
+				'instance_SpecificationRegistryEntryType_occurrences');
+var diagramBoxes= new Array('diagram_SpecificationRegistryEntryType_specification', 
+				'diagram_SpecificationRegistryEntryType_domain', 
+				'diagram_SpecificationRegistryEntryType_authority', 
+				'diagram_SpecificationRegistryEntryType_reference', 
+				'diagram_SpecificationRegistryEntryType_registryStatus', 
+				'diagram_SpecificationRegistryEntryType_supersededByRef', 
+				'diagram_SpecificationRegistryEntryType_occurrences', 
+				'diagram_SpecificationRegistryEntryType');
+var annotationBoxes= new Array('annotations_SpecificationRegistryEntryType_specification', 
+				'annotations_SpecificationRegistryEntryType_domain', 
+				'annotations_SpecificationRegistryEntryType_authority', 
+				'annotations_SpecificationRegistryEntryType_reference', 
+				'annotations_SpecificationRegistryEntryType_registryStatus', 
+				'annotations_SpecificationRegistryEntryType_supersededByRef', 
+				'annotations_SpecificationRegistryEntryType_occurrences', 
+				'annotations_SpecificationRegistryEntryType');
+var attributesBoxes= new Array('attributes_SpecificationRegistryEntryType_specification', 
+				'attributes_SpecificationRegistryEntryType_domain', 
+				'attributes_SpecificationRegistryEntryType_supersededByRef', 
+				'attributes_SpecificationRegistryEntryType');
+var modelBoxes= new Array('model_SpecificationRegistryEntryType_specification', 
+				'model_SpecificationRegistryEntryType_supersededByRef', 
+				'model_SpecificationRegistryEntryType_occurrences', 
+				'model_SpecificationRegistryEntryType');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div style="text-align:center"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="SpecificationRegistryEntryType_specification"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:specification</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_specification" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">The registered standard, as a plain diggs:Specification.</span><span class="tI">
+</span><span class="tT">This is the object an xlink:href into the registry resolves to, and</span><span class="tI">
+</span><span class="tT">it is bit-for-bit the same kind of object an instance document would</span><span class="tI">
+</span><span class="tT">otherwise have carried inline - which is the whole point of holding</span><span class="tI">
+</span><span class="tT">it here rather than subtyping it.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_specification" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_specification.jpeg" usemap="#SpecificationRegistry_xsd_Element_diggs_specification" /><map name="SpecificationRegistry_xsd_Element_diggs_specification" id="SpecificationRegistry_xsd_Element_diggs_specification"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="178,81,396,107" /><area alt="Common_xsd_Element_diggs_Specification.tmp#Specification" href="Common_xsd_Element_diggs_Specification.html#Specification" coords="232,176,364,200" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_RegisteredSpecificationPropertyType.tmp#RegisteredSpecificationPropertyType" href="SpecificationRegistry_xsd_Complex_Type_diggs_RegisteredSpecificationPropertyType.html#RegisteredSpecificationPropertyType" coords="150,3,431,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_RegisteredSpecificationPropertyType.html#RegisteredSpecificationPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RegisteredSpecificationPropertyType')">diggs:RegisteredSpecificationPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_specification" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SpecificationRegistryEntryType_specification" style="display:block"><b><a href="Common_xsd_Element_diggs_Specification.html#Specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Specification')">diggs:Specification</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Common_xsd_Element_diggs_Specification.html#Specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Specification')">diggs:Specification</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SpecificationRegistryEntryType_specification" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:specification</span><span class="tT"> </span><span class="tAN">owns=</span><span class="tAV">"false"</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Specification</span><span class="tT"> </span><span class="tAN">gml:id=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Specification&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:specification&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SpecificationRegistryEntryType_specification" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_specification" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_specification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_specification" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"specification"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RegisteredSpecificationPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The registered standard, as a plain diggs:Specification. This is the object an xlink:href into the registry resolves to, and it is bit-for-bit the same kind of object an instance document would otherwise have carried inline - which is the whole point of holding it here rather than subtyping it.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType_domain"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:domain</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_domain" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_domain');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_domain" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">One or more classifications of which domain(s) of</span><span class="tI">
+</span><span class="tT">                                practice cite this standard - rigid inclusions, laboratory testing,</span><span class="tI">
+</span><span class="tT">                                in-situ testing, sampling, construction, and so on. Coded against</span><span class="tI">
+</span><span class="tT">                                def/docs/codes/DIGGS/0.1/specificationDomain.xml.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                THIS IS WHY ONE REGISTRY CAN SERVE EVERY DOMAIN. A standard cited by</span><span class="tI">
+</span><span class="tT">                                more than one domain - ISO 22476-4, say, cited by both rigid</span><span class="tI">
+</span><span class="tT">                                inclusion design and in-situ testing - carries one domain element per</span><span class="tI">
+</span><span class="tT">                                domain rather than being registered a second time under a different</span><span class="tI">
+</span><span class="tT">                                gml:id: the registry holds exactly one canonical entry per real-world</span><span class="tI">
+</span><span class="tT">                                standard, never two ids for the same document. domain is what a</span><span class="tI">
+</span><span class="tT">                                consumer or a rendering stylesheet filters and browses by, so a</span><span class="tI">
+</span><span class="tT">                                registry spanning every domain stays as easy to search as a</span><span class="tI">
+</span><span class="tT">                                single-domain one would have been.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                Mandatory, unlike every other metadata property on this type: an</span><span class="tI">
+</span><span class="tT">                                entry with no declared domain cannot be found by a domain-scoped</span><span class="tI">
+</span><span class="tT">                                consumer, which defeats the reason domain exists.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_domain" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_domain');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_domain" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_domain.jpeg" usemap="#SpecificationRegistry_xsd_Element_diggs_domain" /><map name="SpecificationRegistry_xsd_Element_diggs_domain" id="SpecificationRegistry_xsd_Element_diggs_domain"><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType_codeSpace" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" coords="147,157,252,181" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.tmp#CodeType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" coords="122,3,250,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:CodeType')">gml:CodeType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_domain" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_domain');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_domain" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>unbounded</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SpecificationRegistryEntryType_domain" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SpecificationRegistryEntryType_domain');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SpecificationRegistryEntryType_domain" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_CodeType.html#CodeType_codeSpace" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component codeSpace')">codeSpace</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_domain" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_domain');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_domain" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"domain"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more classifications of which domain(s) of practice cite this standard - rigid inclusions, laboratory testing, in-situ testing, sampling, construction, and so on. Coded against def/docs/codes/DIGGS/0.1/specificationDomain.xml. THIS IS WHY ONE REGISTRY CAN SERVE EVERY DOMAIN. A standard cited by more than one domain - ISO 22476-4, say, cited by both rigid inclusion design and in-situ testing - carries one domain element per domain rather than being registered a second time under a different gml:id: the registry holds exactly one canonical entry per real-world standard, never two ids for the same document. domain is what a consumer or a rendering stylesheet filters and browses by, so a registry spanning every domain stays as easy to search as a single-domain one would have been. Mandatory, unlike every other metadata property on this type: an entry with no declared domain cannot be found by a domain-scoped consumer, which defeats the reason domain exists.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType_authority"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:authority</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_authority" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_authority');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_authority" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Name of the organization that controls the registry entry</span><span class="tI">
+</span><span class="tT">- normally DIGGS. Distinct from the Specification's own</span><span class="tI">
+</span><span class="tT">accreditingBody, which names the body that publishes the STANDARD</span><span class="tI">
+</span><span class="tT">(ASTM International, BSI, CEN). Mirrors</span><span class="tI">
+</span><span class="tT">diggs:DefinitionType/authority.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_authority" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_authority');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_authority" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_authority.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_authority" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_authority');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_authority" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_authority" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_authority');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_authority" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"authority"</span><span class="tAN"> type=</span><span class="tAV">"string"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Name of the organization that controls the registry entry - normally DIGGS. Distinct from the Specification's own accreditingBody, which names the body that publishes the STANDARD (ASTM International, BSI, CEN). Mirrors diggs:DefinitionType/authority.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType_reference"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:reference</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_reference" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_reference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_reference" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">A URI for the standard itself - the publisher's landing</span><span class="tI">
+</span><span class="tT">page or DOI - so a reader can reach the source document. Mirrors</span><span class="tI">
+</span><span class="tT">diggs:DefinitionType/reference. This is where the standard LIVES,</span><span class="tI">
+</span><span class="tT">not where the entry lives; the latter is the registry's own</span><span class="tI">
+</span><span class="tT">gml:identifier plus the Specification's gml:id.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_reference" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_reference');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_reference" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_reference.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>anyURI</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_reference" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_reference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_reference" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_reference" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_reference');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_reference" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"reference"</span><span class="tAN"> type=</span><span class="tAV">"anyURI"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A URI for the standard itself - the publisher's landing page or DOI - so a reader can reach the source document. Mirrors diggs:DefinitionType/reference. This is where the standard LIVES, not where the entry lives; the latter is the registry's own gml:identifier plus the Specification's gml:id.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType_registryStatus"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:registryStatus</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_registryStatus" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_registryStatus');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_registryStatus" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Lifecycle state of the registered standard. A registry</span><span class="tI">
+</span><span class="tT">                                must be able to say that a standard has been withdrawn or superseded</span><span class="tI">
+</span><span class="tT">                                WITHOUT deleting its entry, because instances published while it was</span><span class="tI">
+</span><span class="tT">                                current still cite it and those citations must keep resolving. ASTM</span><span class="tI">
+</span><span class="tT">                                D1194 is the worked example: withdrawn, but present in the</span><span class="tI">
+</span><span class="tT">                                historical record of plate load testing.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                Absent means active; state it explicitly for anything that is</span><span class="tI">
+</span><span class="tT">                                not.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_registryStatus" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_registryStatus');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_registryStatus" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_registryStatus.jpeg" usemap="#SpecificationRegistry_xsd_Element_diggs_registryStatus" /><map name="SpecificationRegistry_xsd_Element_diggs_registryStatus" id="SpecificationRegistry_xsd_Element_diggs_registryStatus"><area alt="SpecificationRegistry_xsd_Simple_Type_diggs_RegistryStatusEnumType.tmp#RegistryStatusEnumType" href="SpecificationRegistry_xsd_Simple_Type_diggs_RegistryStatusEnumType.html#RegistryStatusEnumType" coords="154,0,375,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="SpecificationRegistry_xsd_Simple_Type_diggs_RegistryStatusEnumType.html#RegistryStatusEnumType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:RegistryStatusEnumType')">diggs:RegistryStatusEnumType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_registryStatus" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_registryStatus');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_registryStatus" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_SpecificationRegistryEntryType_registryStatus" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('facets_SpecificationRegistryEntryType_registryStatus');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_SpecificationRegistryEntryType_registryStatus" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>active</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Current and in force. The default reading when registryStatus is</span><span class="tI">
+</span><span class="tT">absent.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>superseded</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Replaced by a later standard, which should be named in</span><span class="tI">
+</span><span class="tT">supersededByRef. The entry is retained so existing citations keep</span><span class="tI">
+</span><span class="tT">resolving.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td style="width:30%"><b>withdrawn</b></td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Withdrawn by its publisher without a direct replacement. Retained</span><span class="tI">
+</span><span class="tT">for the same reason: instances published while it was current still cite</span><span class="tI">
+</span><span class="tT">it.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_registryStatus" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_registryStatus');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_registryStatus" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"registryStatus"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RegistryStatusEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Lifecycle state of the registered standard. A registry must be able to say that a standard has been withdrawn or superseded WITHOUT deleting its entry, because instances published while it was current still cite it and those citations must keep resolving. ASTM D1194 is the worked example: withdrawn, but present in the historical record of plate load testing. Absent means active; state it explicitly for anything that is not.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType_supersededByRef"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:supersededByRef</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_supersededByRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_supersededByRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_supersededByRef" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">For an entry whose registryStatus is superseded or</span><span class="tI">
+</span><span class="tT">                                withdrawn, a reference to the Specification that replaces it -</span><span class="tI">
+</span><span class="tT">                                normally one registered elsewhere in the same registry. Lets a</span><span class="tI">
+</span><span class="tT">                                consumer follow a historical citation forward to the current</span><span class="tI">
+</span><span class="tT">                                standard.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                Points at the replacement diggs:Specification, not at its</span><span class="tI">
+</span><span class="tT">                                SpecificationRegistryEntry, so that following this reference yields</span><span class="tI">
+</span><span class="tT">                                the same kind of object as following a governingStandard. The</span><span class="tI">
+</span><span class="tT">                                superseding entry must appear EARLIER in the registry than the entry</span><span class="tI">
+</span><span class="tT">                                that cites it; DIGGS forbids forward references.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_supersededByRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_supersededByRef');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_supersededByRef" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_supersededByRef.jpeg" usemap="#SpecificationRegistry_xsd_Element_diggs_supersededByRef" /><map name="SpecificationRegistry_xsd_Element_diggs_supersededByRef" id="SpecificationRegistry_xsd_Element_diggs_supersededByRef"><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.tmp#OwnershipAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup" coords="216,121,434,147" /><area alt="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.tmp#AssociationAttributeGroup" href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup" coords="216,208,439,234" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.tmp#ReferenceType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" coords="188,43,433,65" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType_identifierRef" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" coords="199,442,312,466" /><area alt="Common_xsd_Complex_Type_diggs_FeatureReferenceType.tmp#FeatureReferenceType" href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" coords="174,3,377,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_ReferenceType.html#ReferenceType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:ReferenceType')">gml:ReferenceType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:FeatureReferenceType')">diggs:FeatureReferenceType</a></b></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_supersededByRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_supersededByRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_supersededByRef" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SpecificationRegistryEntryType_supersededByRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SpecificationRegistryEntryType_supersededByRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SpecificationRegistryEntryType_supersededByRef" style="display:block"></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SpecificationRegistryEntryType_supersededByRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SpecificationRegistryEntryType_supersededByRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SpecificationRegistryEntryType_supersededByRef" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Default</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="Common_xsd_Complex_Type_diggs_FeatureReferenceType.html#FeatureReferenceType_identifierRef" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component identifierRef')">identifierRef</a></b></td>
+                                    <td><b><a href="Common_xsd_Simple_Type_diggs_IdentifierReferenceType.html#IdentifierReferenceType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:IdentifierReferenceType')">diggs:IdentifierReferenceType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">The gml:identifier value of the referenced feature, as a fully qualified</span><span class="tI">
+</span><span class="tT">value. It gives an alternative to the gml:id in xlink:href for finding</span><span class="tI">
+</span><span class="tT">the referenced feature, mainly to reference a feature by a globally</span><span class="tI">
+</span><span class="tT">unique identifier and where naming conflicts occur with gml:id when</span><span class="tI">
+</span><span class="tT">accessing data in external files.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_AssociationAttributeGroup.html#AssociationAttributeGroup_nilReason" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component nilReason')">nilReason</a></b></td>
+                                    <td><b><a href="gml3_2Profile_diggs_xsd_Simple_Type_gml_NilReasonType.html#NilReasonType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:NilReasonType')">gml:NilReasonType</a></b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_Group_gml_OwnershipAttributeGroup.html#OwnershipAttributeGroup_owns" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for component owns')">owns</a></b></td>
+                                    <td><b>boolean</b></td>
+                                    <td>false</td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xlinks_xsd_Attribute_xlink_href.html#href" target="mainFrame" title="http://www.w3.org/1999/xlink" onclick="updatePageTitle('Schema documentation for component xlink:href')">xlink:href</a></b></td>
+                                    <td><b>anyURI</b></td>
+                                    <td></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_supersededByRef" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_supersededByRef');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_supersededByRef" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"supersededByRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:Specification</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">For an entry whose registryStatus is superseded or withdrawn, a reference to the Specification that replaces it - normally one registered elsewhere in the same registry. Lets a consumer follow a historical citation forward to the current standard. Points at the replacement diggs:Specification, not at its SpecificationRegistryEntry, so that following this reference yields the same kind of object as following a governingStandard. The superseding entry must appear EARLIER in the registry than the entry that cites it; DIGGS forbids forward references.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType_occurrences"></a><div class="componentTitle">Element <span class="qname"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b> / diggs:occurrences</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType_occurrences" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType_occurrences');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType_occurrences" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">One or more diggs:Occurrence objects declaring where the</span><span class="tI">
+</span><span class="tT">                                registered Specification may legitimately be cited:</span><span class="tI">
+</span><span class="tT">                                sourceElementXpath gives the element that may hold a reference to</span><span class="tI">
+</span><span class="tT">                                it, and the optional conditionalElementXpath gives an element (and</span><span class="tI">
+</span><span class="tT">                                optionally a value) that must be present for the citation to be</span><span class="tI">
+</span><span class="tT">                                valid.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                THIS IS THE DOMAIN CHECK. Resolving an xlink:href proves only that</span><span class="tI">
+</span><span class="tT">                                the target exists and is a diggs:Specification; it cannot tell a</span><span class="tI">
+</span><span class="tT">                                rigid inclusion design basis from a laboratory sample preparation</span><span class="tI">
+</span><span class="tT">                                method, since both are Specifications. These declarations are what</span><span class="tI">
+</span><span class="tT">                                make the distinction machine-checkable, and they are read from the</span><span class="tI">
+</span><span class="tT">                                target's entry rather than configured into the validator - so the</span><span class="tI">
+</span><span class="tT">                                validator stays generic and vocabulary-independent, exactly as</span><span class="tI">
+</span><span class="tT">                                dictionary-validation.xsl already is for code lists.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                A validator that has resolved an href to a Specification inside a</span><span class="tI">
+</span><span class="tT">                                registry reaches these by one step up:</span><span class="tI">
+</span><span class="tT">                                ancestor::diggs:SpecificationRegistryEntry/diggs:occurrences.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                An entry with no occurrences declares no restriction, and its</span><span class="tI">
+</span><span class="tT">                                Specification may be cited anywhere one is permitted. Prefer stating</span><span class="tI">
+</span><span class="tT">                                them: an unbounded entry is the registry equivalent of an</span><span class="tI">
+</span><span class="tT">                                unconditioned dictionary Occurrence, and those have been a recurring</span><span class="tI">
+</span><span class="tT">                                source of misuse.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                                Reuses diggs:OccurrenceArrayPropertyType from Dictionary_diggs.xsd</span><span class="tI">
+</span><span class="tT">                                without modification. The shape is not dictionary-specific - it is a</span><span class="tI">
+</span><span class="tT">                                general "this term is permitted here, conditionally on that" - and</span><span class="tI">
+</span><span class="tT">                                reusing it rather than inventing a parallel form is what lets one</span><span class="tI">
+</span><span class="tT">                                validator serve both mechanisms.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType_occurrences" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType_occurrences');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType_occurrences" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Element_diggs_occurrences.jpeg" usemap="#SpecificationRegistry_xsd_Element_diggs_occurrences" /><map name="SpecificationRegistry_xsd_Element_diggs_occurrences" id="SpecificationRegistry_xsd_Element_diggs_occurrences"><area alt="Dictionary_diggs_xsd_Element_diggs_Occurrence.tmp#Occurrence" href="Dictionary_diggs_xsd_Element_diggs_Occurrence.html#Occurrence" coords="252,44,379,68" /><area alt="Dictionary_diggs_xsd_Complex_Type_diggs_OccurrenceArrayPropertyType.tmp#OccurrenceArrayPropertyType" href="Dictionary_diggs_xsd_Complex_Type_diggs_OccurrenceArrayPropertyType.html#OccurrenceArrayPropertyType" coords="170,3,419,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="Dictionary_diggs_xsd_Complex_Type_diggs_OccurrenceArrayPropertyType.html#OccurrenceArrayPropertyType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:OccurrenceArrayPropertyType')">diggs:OccurrenceArrayPropertyType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_SpecificationRegistryEntryType_occurrences" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('properties_SpecificationRegistryEntryType_occurrences');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_SpecificationRegistryEntryType_occurrences" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">minOccurs</td>
+                                    <td><b>0</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">maxOccurs</td>
+                                    <td><b>1</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SpecificationRegistryEntryType_occurrences" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SpecificationRegistryEntryType_occurrences');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SpecificationRegistryEntryType_occurrences" style="display:block"><b><a href="Dictionary_diggs_xsd_Element_diggs_Occurrence.html#Occurrence" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Occurrence')">diggs:Occurrence</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="Dictionary_diggs_xsd_Element_diggs_Occurrence.html#Occurrence" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:Occurrence')">diggs:Occurrence</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_SpecificationRegistryEntryType_occurrences" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('instance_SpecificationRegistryEntryType_occurrences');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_SpecificationRegistryEntryType_occurrences" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;diggs:occurrences</span><span class="tT"> </span><span class="tAN">xmlns:diggs=</span><span class="tAV">"http://diggsml.org/schemas/3"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;diggs:Occurrence</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/diggs:Occurrence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/diggs:occurrences&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType_occurrences" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType_occurrences');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType_occurrences" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"occurrences"</span><span class="tAN"> type=</span><span class="tAV">"diggs:OccurrenceArrayPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more diggs:Occurrence objects declaring where the registered Specification may legitimately be cited: sourceElementXpath gives the element that may hold a reference to it, and the optional conditionalElementXpath gives an element (and optionally a value) that must be present for the citation to be valid. THIS IS THE DOMAIN CHECK. Resolving an xlink:href proves only that the target exists and is a diggs:Specification; it cannot tell a rigid inclusion design basis from a laboratory sample preparation method, since both are Specifications. These declarations are what make the distinction machine-checkable, and they are read from the target's entry rather than configured into the validator - so the validator stays generic and vocabulary-independent, exactly as dictionary-validation.xsl already is for code lists. A validator that has resolved an href to a Specification inside a registry reaches these by one step up: ancestor::diggs:SpecificationRegistryEntry/diggs:occurrences. An entry with no occurrences declares no restriction, and its Specification may be cited anywhere one is permitted. Prefer stating them: an unbounded entry is the registry equivalent of an unconditioned dictionary Occurrence, and those have been a recurring source of misuse. Reuses diggs:OccurrenceArrayPropertyType from Dictionary_diggs.xsd without modification. The shape is not dictionary-specific - it is a general "this term is permitted here, conditionally on that" - and reusing it rather than inventing a parallel form is what lets one validator serve both mechanisms.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/element&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="SpecificationRegistryEntryType"></a><div class="componentTitle">Complex Type <span class="qname">diggs:SpecificationRegistryEntryType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://diggsml.org/schemas/3</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_SpecificationRegistryEntryType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('annotations_SpecificationRegistryEntryType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_SpecificationRegistryEntryType" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td style="width:100%">
+                                          <pre><span class="tT">Type for one registration. Extends diggs:AbstractObjectType, the standard</span><span class="tI">
+</span><span class="tT">                base for DIGGS component objects, since an entry has no independent existence</span><span class="tI">
+</span><span class="tT">                outside the registry that contains it.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">                Holds the registered diggs:Specification by value, followed by the registration</span><span class="tI">
+</span><span class="tT">                metadata. Every metadata property is optional except the Specification itself and</span><span class="tI">
+</span><span class="tT">                its domain classification: an entry that registers nothing is meaningless, an entry</span><span class="tI">
+</span><span class="tT">                with no declared domain cannot be found by a domain-scoped consumer and defeats the</span><span class="tI">
+</span><span class="tT">                reason domain exists, but an entry that declares no lifecycle, authority or scope</span><span class="tI">
+</span><span class="tT">                beyond that is merely unrestricted.</span></pre>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_SpecificationRegistryEntryType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('diagram_SpecificationRegistryEntryType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_SpecificationRegistryEntryType" style="display:block"><img alt="Diagram" style="border:0" src="img/SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.jpeg" usemap="#SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType" /><map name="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType" id="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType"><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="339,198,420,222" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="502,339,617,363" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.tmp#descriptionReference" href="gml3_2Profile_diggs_xsd_Element_gml_descriptionReference.html#descriptionReference" coords="502,429,670,453" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="502,506,604,530" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="502,596,585,620" /><area alt="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.tmp#StandardObjectProperties" href="gml3_2Profile_diggs_xsd_Element_Group_gml_StandardObjectProperties.html#StandardObjectProperties" coords="399,298,615,324" /><area alt="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.tmp#AbstractGMLType" href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" coords="314,123,578,145" /><area alt="gml3_2Profile_diggs_xsd_Attribute_gml_id.tmp#id" href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" coords="325,738,406,762" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.tmp#AbstractDiggsType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" coords="300,83,579,105" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_description.tmp#description" href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" coords="368,885,483,909" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_identifier.tmp#identifier" href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" coords="368,975,470,999" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.tmp#AbstractObjectBaseType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" coords="286,43,593,65" /><area alt="gml3_2Profile_diggs_xsd_Element_gml_name.tmp#name" href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" coords="375,1102,458,1126" /><area alt="Common_xsd_Element_diggs_status.tmp#status" href="Common_xsd_Element_diggs_status.html#status" coords="375,1192,472,1216" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType_remark" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" coords="375,1282,444,1306" /><area alt="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.tmp#AbstractObjectType" href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" coords="272,3,555,25" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_specification" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_specification" coords="361,1409,460,1433" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_domain" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_domain" coords="361,1499,432,1523" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_authority" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_authority" coords="361,1589,441,1613" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_reference" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_reference" coords="361,1679,443,1703" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_registryStatus" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_registryStatus" coords="361,1769,467,1793" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_supersededByRef" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_supersededByRef" coords="361,1859,484,1883" /><area alt="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.tmp#SpecificationRegistryEntryType_occurrences" href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_occurrences" coords="361,1949,459,1973" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type hierarchy</b></td>
+                        <td>
+                           <ul class="internal">
+                              <li class="internal"><b><a href="gml3_2Profile_diggs_xsd_Complex_Type_gml_AbstractGMLType.html#AbstractGMLType" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:AbstractGMLType')">gml:AbstractGMLType</a></b><ul class="internal">
+                                    <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractDiggsType.html#AbstractDiggsType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractDiggsType')">diggs:AbstractDiggsType</a></b><ul class="internal">
+                                          <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectBaseType.html#AbstractObjectBaseType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectBaseType')">diggs:AbstractObjectBaseType</a></b><ul class="internal">
+                                                <li class="internal"><b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:AbstractObjectType')">diggs:AbstractObjectType</a></b><ul class="internal">
+                                                      <li class="internal"><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntryType')">diggs:SpecificationRegistryEntryType</a></b></li>
+                                                   </ul>
+                                                </li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_SpecificationRegistryEntryType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('usedBy_SpecificationRegistryEntryType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_SpecificationRegistryEntryType" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="SpecificationRegistry_xsd_Element_diggs_SpecificationRegistryEntry.html#SpecificationRegistryEntry" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:SpecificationRegistryEntry')">diggs:SpecificationRegistryEntry</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_SpecificationRegistryEntryType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('model_SpecificationRegistryEntryType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_SpecificationRegistryEntryType" style="display:block"><b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description{0,1}')">gml:description{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier{0,1}')">gml:identifier{0,1}</a></b> , <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name*')">gml:name*</a></b> , <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status{0,1}')">diggs:status{0,1}</a></b> , <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark*')">diggs:remark*</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:specification')">diggs:specification</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_domain" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:domain+')">diggs:domain+</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_authority" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:authority{0,1}')">diggs:authority{0,1}</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_reference" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:reference{0,1}')">diggs:reference{0,1}</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_registryStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:registryStatus{0,1}')">diggs:registryStatus{0,1}</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_supersededByRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:supersededByRef{0,1}')">diggs:supersededByRef{0,1}</a></b> , <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_occurrences" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:occurrences{0,1}')">diggs:occurrences{0,1}</a></b></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_authority" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:authority')">diggs:authority</a></b>, <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_domain" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:domain')">diggs:domain</a></b>, <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_occurrences" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:occurrences')">diggs:occurrences</a></b>, <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_reference" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:reference')">diggs:reference</a></b>, <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_registryStatus" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:registryStatus')">diggs:registryStatus</a></b>, <b><a href="AbstractTypes_xsd_Complex_Type_diggs_AbstractObjectType.html#AbstractObjectType_remark" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:remark')">diggs:remark</a></b>, <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_specification" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:specification')">diggs:specification</a></b>, <b><a href="Common_xsd_Element_diggs_status.html#status" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:status')">diggs:status</a></b>, <b><a href="SpecificationRegistry_xsd_Complex_Type_diggs_SpecificationRegistryEntryType.html#SpecificationRegistryEntryType_supersededByRef" target="mainFrame" title="http://diggsml.org/schemas/3" onclick="updatePageTitle('Schema documentation for component diggs:supersededByRef')">diggs:supersededByRef</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_description.html#description" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:description')">gml:description</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_identifier.html#identifier" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:identifier')">gml:identifier</a></b>, <b><a href="gml3_2Profile_diggs_xsd_Element_gml_name.html#name" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:name')">gml:name</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_SpecificationRegistryEntryType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('attributes_SpecificationRegistryEntryType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_SpecificationRegistryEntryType" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th style="width:10%">Type</th>
+                                       <th style="width:10%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="gml3_2Profile_diggs_xsd_Attribute_gml_id.html#id" target="mainFrame" title="http://www.opengis.net/gml/3.2" onclick="updatePageTitle('Schema documentation for component gml:id')">gml:id</a></b></td>
+                                    <td><b>ID</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td style="width:100%">
+                                                   <pre><span class="tT">Database handle for the object. It is of XML type ID, so is constrained to be</span><span class="tI">
+</span><span class="tT">unique in the XML document within which it occurs. An external identifier for the object in</span><span class="tI">
+</span><span class="tT">the form of a URI may be constructed using standard XML and XPointer methods. This is done</span><span class="tI">
+</span><span class="tT">by concatenating the URI for the document, a fragment separator, and the value of the id</span><span class="tI">
+</span><span class="tT">attribute.</span></pre>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_SpecificationRegistryEntryType" type="image" src="img/btM.gif" alt="expand/collapse" onclick="switchState('source_SpecificationRegistryEntryType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_SpecificationRegistryEntryType" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td style="width:100%">
+                                       <pre><span class="tEl">&lt;complexType</span><span class="tAN"> name=</span><span class="tAV">"SpecificationRegistryEntryType"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Type for one registration. Extends diggs:AbstractObjectType, the standard base for DIGGS component objects, since an entry has no independent existence outside the registry that contains it. Holds the registered diggs:Specification by value, followed by the registration metadata. Every metadata property is optional except the Specification itself and its domain classification: an entry that registers nothing is meaningless, an entry with no declared domain cannot be found by a domain-scoped consumer and defeats the reason domain exists, but an entry that declares no lifecycle, authority or scope beyond that is merely unrestricted.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;complexContent</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;extension</span><span class="tAN"> base=</span><span class="tAV">"diggs:AbstractObjectType"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;sequence</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"specification"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RegisteredSpecificationPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">The registered standard, as a plain diggs:Specification. This is the object an xlink:href into the registry resolves to, and it is bit-for-bit the same kind of object an instance document would otherwise have carried inline - which is the whole point of holding it here rather than subtyping it.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tAN"> minOccurs=</span><span class="tAV">"1"</span><span class="tAN"> name=</span><span class="tAV">"domain"</span><span class="tAN"> type=</span><span class="tAV">"gml:CodeType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more classifications of which domain(s) of practice cite this standard - rigid inclusions, laboratory testing, in-situ testing, sampling, construction, and so on. Coded against def/docs/codes/DIGGS/0.1/specificationDomain.xml. THIS IS WHY ONE REGISTRY CAN SERVE EVERY DOMAIN. A standard cited by more than one domain - ISO 22476-4, say, cited by both rigid inclusion design and in-situ testing - carries one domain element per domain rather than being registered a second time under a different gml:id: the registry holds exactly one canonical entry per real-world standard, never two ids for the same document. domain is what a consumer or a rendering stylesheet filters and browses by, so a registry spanning every domain stays as easy to search as a single-domain one would have been. Mandatory, unlike every other metadata property on this type: an entry with no declared domain cannot be found by a domain-scoped consumer, which defeats the reason domain exists.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"authority"</span><span class="tAN"> type=</span><span class="tAV">"string"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Name of the organization that controls the registry entry - normally DIGGS. Distinct from the Specification's own accreditingBody, which names the body that publishes the STANDARD (ASTM International, BSI, CEN). Mirrors diggs:DefinitionType/authority.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"reference"</span><span class="tAN"> type=</span><span class="tAV">"anyURI"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">A URI for the standard itself - the publisher's landing page or DOI - so a reader can reach the source document. Mirrors diggs:DefinitionType/reference. This is where the standard LIVES, not where the entry lives; the latter is the registry's own gml:identifier plus the Specification's gml:id.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"registryStatus"</span><span class="tAN"> type=</span><span class="tAV">"diggs:RegistryStatusEnumType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">Lifecycle state of the registered standard. A registry must be able to say that a standard has been withdrawn or superseded WITHOUT deleting its entry, because instances published while it was current still cite it and those citations must keep resolving. ASTM D1194 is the worked example: withdrawn, but present in the historical record of plate load testing. Absent means active; state it explicitly for anything that is not.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"supersededByRef"</span><span class="tAN"> type=</span><span class="tAV">"diggs:FeatureReferenceType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;appinfo</span><span class="tAN"> source=</span><span class="tAV">"urn:x-gml:targetElement"</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">diggs:Specification</span><span class="tEl">&lt;/appinfo&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">For an entry whose registryStatus is superseded or withdrawn, a reference to the Specification that replaces it - normally one registered elsewhere in the same registry. Lets a consumer follow a historical citation forward to the current standard. Points at the replacement diggs:Specification, not at its SpecificationRegistryEntry, so that following this reference yields the same kind of object as following a governingStandard. The superseding entry must appear EARLIER in the registry than the entry that cites it; DIGGS forbids forward references.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;element</span><span class="tAN"> maxOccurs=</span><span class="tAV">"1"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> name=</span><span class="tAV">"occurrences"</span><span class="tAN"> type=</span><span class="tAV">"diggs:OccurrenceArrayPropertyType"</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;annotation</span><span class="tEl">&gt;</span><span class="tI">
+            </span><span class="tEl">&lt;documentation</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">One or more diggs:Occurrence objects declaring where the registered Specification may legitimately be cited: sourceElementXpath gives the element that may hold a reference to it, and the optional conditionalElementXpath gives an element (and optionally a value) that must be present for the citation to be valid. THIS IS THE DOMAIN CHECK. Resolving an xlink:href proves only that the target exists and is a diggs:Specification; it cannot tell a rigid inclusion design basis from a laboratory sample preparation method, since both are Specifications. These declarations are what make the distinction machine-checkable, and they are read from the target's entry rather than configured into the validator - so the validator stays generic and vocabulary-independent, exactly as dictionary-validation.xsl already is for code lists. A validator that has resolved an href to a Specification inside a registry reaches these by one step up: ancestor::diggs:SpecificationRegistryEntry/diggs:occurrences. An entry with no occurrences declares no restriction, and its Specification may be cited anywhere one is permitted. Prefer stating them: an unbounded entry is the registry equivalent of an unconditioned dictionary Occurrence, and those have been a recurring source of misuse. Reuses diggs:OccurrenceArrayPropertyType from Dictionary_diggs.xsd without modification. The shape is not dictionary-specific - it is a general "this term is permitted here, conditionally on that" - and reusing it rather than inventing a parallel form is what lets one validator serve both mechanisms.</span><span class="tEl">&lt;/documentation&gt;</span><span class="tI">
+          </span><span class="tEl">&lt;/annotation&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/element&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/sequence&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/extension&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/complexContent&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/complexType&gt;</span></pre>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div style="text-align:center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.</div>
+      </div><script type="text/javascript"><!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
